@@ -16,22 +16,34 @@ MonoBehaviour:
   - groupType: UnityEngine.ArticulationBody, UnityEngine.PhysicsModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     collapsed: 0
-  - groupType: UnityEngine.HingeJoint, UnityEngine.PhysicsModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    collapsed: 0
-  - groupType: UnityEngine.ConfigurableJoint, UnityEngine.PhysicsModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    collapsed: 0
   - groupType: UnityEngine.BoxCollider, UnityEngine.PhysicsModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     collapsed: 0
-  - groupType: UnityEngine.CapsuleCollider, UnityEngine.PhysicsModule, Version=0.0.0.0,
+  - groupType: UnityEngine.HingeJoint, UnityEngine.PhysicsModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     collapsed: 0
   - groupType: UnityEngine.SphereCollider, UnityEngine.PhysicsModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     collapsed: 0
+  - groupType: UnityEngine.CapsuleCollider, UnityEngine.PhysicsModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    collapsed: 0
+  - groupType: UnityEngine.ConfigurableJoint, UnityEngine.PhysicsModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    collapsed: 0
   - groupType: UnityEngine.CharacterJoint, UnityEngine.PhysicsModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    collapsed: 0
+  - groupType: UnityEngine.CapsuleCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    collapsed: 0
+  - groupType: UnityEngine.PolygonCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    collapsed: 0
+  - groupType: UnityEngine.BoxCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    collapsed: 0
+  - groupType: UnityEngine.EdgeCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     collapsed: 0
   - groupType: UnityEngine.CircleCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
@@ -40,22 +52,7 @@ MonoBehaviour:
   - groupType: UnityEngine.HingeJoint2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     collapsed: 0
-  - groupType: UnityEngine.BoxCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    collapsed: 0
-  - groupType: UnityEngine.PolygonCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    collapsed: 0
-  - groupType: UnityEngine.EdgeCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    collapsed: 0
-  - groupType: UnityEngine.CapsuleCollider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    collapsed: 0
-  - groupType: UnityEngine.LightProbeProxyVolume, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    collapsed: 0
-  - groupType: UnityEngine.TrailRenderer, UnityEngine.CoreModule, Version=0.0.0.0,
+  - groupType: UnityEngine.LightProbeGroup, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     collapsed: 0
   - groupType: UnityEngine.LineRenderer, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -64,7 +61,10 @@ MonoBehaviour:
   - groupType: UnityEngine.ParticleSystem, UnityEngine.ParticleSystemModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     collapsed: 0
-  - groupType: UnityEngine.LightProbeGroup, UnityEngine.CoreModule, Version=0.0.0.0,
+  - groupType: UnityEngine.LightProbeProxyVolume, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    collapsed: 0
+  - groupType: UnityEngine.TrailRenderer, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     collapsed: 0
   m_LastPivotModeTypeString: UnityEditor.CenterPivotMode, UnityEditor.CoreModule,
