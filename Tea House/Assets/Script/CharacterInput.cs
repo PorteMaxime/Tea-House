@@ -2,33 +2,44 @@ using UnityEngine;
 
 public class CharacterInput : MonoBehaviour
 {
-    private PlayerMovement _input;
+    private Input_PlayerMovement mInput;
+    [SerializeField] private GameObject mCamera;
 
     [SerializeField] private float mSpeed = 15f;
 
-    void Awake() => _input = new PlayerMovement();
-    void OnEnable() => _input.Enable();
-    void OnDisable() => _input.Disable();
+    void Awake() => mInput = new Input_PlayerMovement();
+    void OnEnable() => mInput.Enable();
+    void OnDisable() => mInput.Disable();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if(mCamera != null) transform.rotation = mCamera.transform.parent.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
+        if(mInput != null)
+        {
+            HandleRotation();
+            MovePlayer();
+        }
     }
 
     void MovePlayer()
     {
-        if(_input.Character.Move.IsPressed())
+        if(mInput.Character.Move.IsPressed())
         {
-            Vector2 dir2 = _input.Character.Move.ReadValue<Vector2>();
+            Vector2 dir2 = mInput.Character.Move.ReadValue<Vector2>();
             Vector3 dir3 = new Vector3(dir2.x, 0f, dir2.y);
-            transform.Translate(dir3 * mSpeed * Time.deltaTime);
+            transform.Translate(dir3 * mSpeed * Time.deltaTime, Space.Self);
         }
+    }
+
+    void HandleRotation()
+    {
+        if (mCamera == null) return;
+        transform.rotation = mCamera.transform.parent.rotation;
     }
 }
