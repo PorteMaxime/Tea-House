@@ -613,13 +613,13 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 39912
+    - m_Data: 36494
     m_LastClickedID:
-      m_Data: 39912
+      m_Data: 36494
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 39764
-    - m_Data: 39850
+    - m_Data: 36378
+    - m_Data: 36464
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -654,7 +654,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 39764
+    - m_Data: 36378
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -681,10 +681,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs:
-    - m_Data: 39678
-    m_LastClickedInstanceID: 39678
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: []
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -807,13 +806,11 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs:
-      - m_Data: 39678
+      m_SelectedIDs: []
       m_LastClickedID:
-        m_Data: 39678
+        m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -21594
-      - m_Data: 39678
+      - m_Data: -1344
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1288,7 +1285,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.21941842, y: 0.605415, z: -0.17856237, w: -0.7439394}
     speed: 2
-    m_Value: {x: -0.21941818, y: 0.60541433, z: -0.17856218, w: -0.7439386}
+    m_Value: {x: -0.21941842, y: 0.605415, z: -0.17856237, w: -0.74393934}
   m_Size:
     m_Target: 4.2796483
     speed: 2
