@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 62
+  controlID: 38
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GameView
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -273,12 +273,12 @@ MonoBehaviour:
     height: 552
   m_MinSize: {x: 202, y: 226}
   m_MaxSize: {x: 4002, y: 4026}
-  m_ActualView: {fileID: 17}
+  m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -343,8 +343,8 @@ MonoBehaviour:
       sizeOverridden: 0
     - dockPosition: 0
       containerId: overlay-toolbar__top
-      displayed: 0
-      id: Unsupported User Elements
+      displayed: 1
+      id: Services/Collab
       index: 2
       contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
@@ -371,8 +371,8 @@ MonoBehaviour:
       sizeOverridden: 0
     - dockPosition: 0
       containerId: overlay-toolbar__top
-      displayed: 1
-      id: Services/Collab
+      displayed: 0
+      id: Unsupported User Elements
       index: 4
       contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
@@ -606,19 +606,21 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/InputAction
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\hponthieu\source\repos\Tea-House\Tea House
+  m_LastProjectPath: C:\Users\sberthome\Documents\GitHub\Tea-House\Tea House
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 36442
+    - m_Data: 39862
     m_LastClickedID:
-      m_Data: 36442
+      m_Data: 39862
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 36378
+    - m_Data: 39758
+    - m_Data: 39866
+    - m_Data: 1000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -651,7 +653,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 36378
+    - m_Data: 39758
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -679,8 +681,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: -14746
-    m_LastClickedInstanceID: -14746
+    - m_Data: 42740
+    m_LastClickedInstanceID: 42740
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -804,11 +806,14 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: []
+      m_SelectedIDs:
+      - m_Data: -27524
       m_LastClickedID:
-        m_Data: 0
+        m_Data: -27524
       m_ExpandedIDs:
-      - m_Data: -1330
+      - m_Data: -22526
+      - m_Data: -21558
+      - m_Data: 39672
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1233,9 +1238,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 7.5365043, y: 5.945417, z: -0.35616487}
+    m_Target: {x: -1.7364652, y: 2.2659624, z: -0.39675993}
     speed: 2
-    m_Value: {x: 7.5365043, y: 5.945417, z: -0.35616487}
+    m_Value: {x: -1.7364652, y: 2.2659624, z: -0.39675993}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1281,13 +1286,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.21941842, y: 0.605415, z: -0.17856237, w: -0.7439394}
+    m_Target: {x: -0.24963968, y: 0.003482009, z: -0.00089849625, w: -0.96833086}
     speed: 2
-    m_Value: {x: -0.21941842, y: 0.605415, z: -0.17856237, w: -0.74393934}
+    m_Value: {x: -0.24963999, y: 0.0034820135, z: -0.00089849735, w: -0.96833205}
   m_Size:
-    m_Target: 2.3108943
+    m_Target: 4.5716534
     speed: 2
-    m_Value: 2.3108943
+    m_Value: 4.5716534
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1392,7 +1397,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
