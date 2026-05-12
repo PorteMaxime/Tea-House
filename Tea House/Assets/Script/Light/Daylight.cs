@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Daylight : MonoBehaviour
 {
-    [SerializeField] float mPhaseDuration = 100f;
+    [SerializeField] float mPhaseDuration;
     float mCurrentDuration = 0f;
-    [SerializeField] Phase mPhase = 0;
+    [SerializeField] Phase mPhase;
+    private Dictionary<Phase, float> mPhases = new Dictionary<Phase, float>();
 
-    private Light mLight;
     enum Phase
     {
         Morning,
@@ -19,7 +20,9 @@ public class Daylight : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GetLight();
+        mPhases[Phase.Morning] = 10f;
+        mPhases[Phase.Midday] = 2.5f;
+        mPhases[Phase.Noon] = 10f;
     }
 
     // Update is called once per frame
@@ -29,26 +32,23 @@ public class Daylight : MonoBehaviour
         {
             mCurrentDuration = 0f;
             mPhase += 1;
-            if (mPhase == Phase.Count) mPhase = Phase.Morning;
-
-            SwitchPhase();
+            if (mPhase == Phase.Count)
+            {
+                mPhase = 0;
+                transform.parent.rotation = Quaternion.Euler(new Vector3(0f, -45f, 0f));
+            }
+            
+            mPhaseDuration = mPhases[mPhase];
         }
         else
             mCurrentDuration += Time.deltaTime;
+        FollowOrigin();
     }
 
-    void SwitchPhase()
+    void FollowOrigin()
     {
-        GetLight();
-
-        if (mPhase == Phase.Morning) mLight.color = new Color(1f, 0.95f, 0.84f);
-        if (mPhase == Phase.Midday) mLight.color = new Color(1f, 1f, 1f);
-        if (mPhase == Phase.Noon) mLight.color = new Color(1f, 0.55f, 0.26f);
-    }
-
-    void GetLight()
-    {
-        if(mLight == null)
-            mLight = GetComponent<Light>();
+        Debug.Log("Current: " + mCurrentDuration + " / Max: " + mPhaseDuration);
+        transform.parent.rotation = Quaternion.Euler(0f, -45f, 60f * (mCurrentDuration / mPhaseDuration) + (int)mPhase * 60f);
+        transform.LookAt(transform.parent.position);
     }
 }
