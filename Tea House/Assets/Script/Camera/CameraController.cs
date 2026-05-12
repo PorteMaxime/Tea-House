@@ -6,7 +6,6 @@ public class CameraController : MonoBehaviour
     private Input_PlayerMovement mInput;
 
     [SerializeField] private float mRotationSpeed;
-    private float mCurrrentRotation = 0f;
 
     void Awake() => mInput = new Input_PlayerMovement();
     void OnEnable() => mInput.Enable();

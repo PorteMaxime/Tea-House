@@ -3,7 +3,6 @@ using UnityEngine;
 public class CharacterInput : MonoBehaviour
 {
     private Input_PlayerMovement mInput;
-    [SerializeField] private GameObject mCamera;
 
     [SerializeField] private float mSpeed = 15f;
 
@@ -14,7 +13,7 @@ public class CharacterInput : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(mCamera != null) transform.rotation = mCamera.transform.parent.rotation;
+        
     }
 
     // Update is called once per frame
@@ -22,7 +21,6 @@ public class CharacterInput : MonoBehaviour
     {
         if(mInput != null)
         {
-            HandleRotation();
             MovePlayer();
         }
     }
@@ -33,13 +31,11 @@ public class CharacterInput : MonoBehaviour
         {
             Vector2 dir2 = mInput.Character.Move.ReadValue<Vector2>();
             Vector3 dir3 = new Vector3(dir2.x, 0f, dir2.y);
-            transform.Translate(dir3 * mSpeed * Time.deltaTime, Space.Self);
-        }
-    }
 
-    void HandleRotation()
-    {
-        if (mCamera == null) return;
-        transform.rotation = mCamera.transform.parent.rotation;
+            Quaternion tmpRot = transform.rotation;
+            transform.rotation = transform.parent.rotation;
+            transform.Translate(dir3 * mSpeed * Time.deltaTime);
+            transform.rotation = tmpRot;
+        }
     }
 }

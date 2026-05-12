@@ -430,7 +430,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.15f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/InputAction/Input_PlayerMovement.cs"
 "Assets/Script/Camera/CameraController.cs"
-"Assets/Script/CharacterInput.cs"
+"Assets/Script/Character/CharacterInput.cs"
 "Assets/Script/Light/Daylight.cs"
 -langversion:9.0
 /deterministic
