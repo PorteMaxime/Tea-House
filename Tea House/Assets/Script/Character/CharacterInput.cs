@@ -3,7 +3,7 @@ using UnityEngine;
 public class CharacterInput : MonoBehaviour
 {
     private Input_PlayerMovement mInput;
-
+    [SerializeField] private GameObject mCameraOrigin;
     [SerializeField] private float mSpeed = 15f;
 
     void Awake() => mInput = new Input_PlayerMovement();
@@ -13,7 +13,7 @@ public class CharacterInput : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class CharacterInput : MonoBehaviour
             Vector3 dir3 = new Vector3(dir2.x, 0f, dir2.y);
 
             Quaternion tmpRot = transform.rotation;
-            transform.rotation = transform.parent.rotation;
+            transform.rotation = mCameraOrigin.transform.rotation;
             transform.Translate(dir3 * mSpeed * Time.deltaTime);
             transform.rotation = tmpRot;
         }

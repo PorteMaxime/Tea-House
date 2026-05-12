@@ -16,19 +16,17 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float mRotationSpeed;
     private float mTargetRotation = 0f;
 
-    private enum CameraStates
+    public enum CameraStates
     {
         orbitale,
         zoom
     }
-    private CameraStates mState = CameraStates.orbitale;
+    public CameraStates mState = CameraStates.orbitale;
 
     void Awake()
     {
         mInputPlayerMovement = new Input_PlayerMovement();
         mInputPlayerInteract = new Input_PlayerInteract();
-
-        mTargetRotation = transform.parent.rotation.eulerAngles.y;
     }
     void OnEnable()
     {
@@ -42,6 +40,8 @@ public class CameraController : MonoBehaviour
     }
     void Start()
     {
+        mTargetRotation = transform.parent.rotation.eulerAngles.y;
+
         mCurrentPos = transform.position;
         mCurrentRot = transform.rotation;
 
@@ -49,19 +49,20 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
-        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
-
         if (mState == CameraStates.zoom && mInputPlayerInteract.Player.Interact.triggered)
         {
             return;//
         }
+
+        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
+
         if (mInputPlayerMovement.Camera.Rotation.triggered)
         {
             float axis = mInputPlayerMovement.Camera.Rotation.ReadValue<float>();
             mTargetRotation += axis * mRotationAmount;
-
-            mCurrentPos = transform.position;
-            mCurrentRot = transform.rotation;
+            //Debug.Log("TargetRot: " + mTargetRotation);
+            //mCurrentPos = transform.position;
+            //mCurrentRot = transform.rotation;
         }
     }
 
@@ -76,5 +77,9 @@ public class CameraController : MonoBehaviour
         transform.position = mCurrentPos;
         transform.rotation = mCurrentRot;
         mState = CameraStates.orbitale;
+    }
+    public CameraStates GetState()
+    {
+        return mState;
     }
 }

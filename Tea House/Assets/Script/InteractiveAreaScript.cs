@@ -38,7 +38,7 @@ public class InteractiveAreaScript : MonoBehaviour
         {
             mCameraController.SetCameraZoomState(gameObject);
         }
-        else
+        else if(mCameraController.mState == CameraController.CameraStates.zoom)
         {
             mCameraController.SetCameraOrbitaleState();
         }
