@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 43
+    y: 0
     width: 1920
     height: 36
   m_SerializedDataModeController:
@@ -618,9 +618,7 @@ MonoBehaviour:
       m_Data: 36508
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 36422
-    - m_Data: 36506
-    - m_Data: 1000000000
+    - m_Data: 36484
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -653,7 +651,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 36422
+    - m_Data: 36484
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -735,8 +733,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1466
-    y: 79
+    x: 1467
+    y: 24
     width: 453
     height: 907
   m_SerializedDataModeController:
@@ -787,7 +785,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79
+    y: 24
     width: 362
     height: 526
   m_SerializedDataModeController:
@@ -858,8 +856,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 363
-    y: 79
+    x: 364
+    y: 24
     width: 1101
     height: 526
   m_SerializedDataModeController:
@@ -1286,7 +1284,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.24382323, y: -0.0052410914, z: 0.0013168369, w: -0.96980345}
     speed: 2
-    m_Value: {x: -0.24382351, y: -0.0052410974, z: 0.0013168384, w: -0.9698045}
+    m_Value: {x: -0.24382325, y: -0.0052410914, z: 0.0013168369, w: -0.96980345}
   m_Size:
     m_Target: 10.385899
     speed: 2
@@ -1449,7 +1447,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 631
+    y: 576
     width: 1465
     height: 355
   m_SerializedDataModeController:
