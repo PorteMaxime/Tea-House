@@ -3,15 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\assets\\script\\camera\\cameracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\camera\\cameracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\assets\\script\\characterinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\characterinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|c:\\users\\hponthieu\\source\\repos\\tea-house\\tea house\\assets\\script\\light\\daylight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\assets\\script\\light\\daylight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\light\\daylight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,45 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Daylight.cs",
               "DocumentMoniker": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\Light\\Daylight.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Light\\Daylight.cs",
               "ToolTip": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\Light\\Daylight.cs",
               "RelativeToolTip": "Assets\\Script\\Light\\Daylight.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwCQAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-11T14:13:30.525Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CameraController.cs",
-              "DocumentMoniker": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\Camera\\CameraController.cs",
-              "RelativeDocumentMoniker": "Assets\\Script\\Camera\\CameraController.cs",
-              "ToolTip": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\Camera\\CameraController.cs",
-              "RelativeToolTip": "Assets\\Script\\Camera\\CameraController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-11T12:53:11.473Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CharacterInput.cs",
-              "DocumentMoniker": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\CharacterInput.cs",
-              "RelativeDocumentMoniker": "Assets\\Script\\CharacterInput.cs",
-              "ToolTip": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\CharacterInput.cs",
-              "RelativeToolTip": "Assets\\Script\\CharacterInput.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-11T12:18:21.845Z",
               "EditorCaption": ""
             }
           ]
