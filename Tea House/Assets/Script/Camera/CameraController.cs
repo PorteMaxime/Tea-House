@@ -49,7 +49,7 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
-        if (mState == CameraStates.zoom && mInputPlayerInteract.Player.Interact.triggered)
+        if (mState == CameraStates.zoom)
         {
             return;//
         }
