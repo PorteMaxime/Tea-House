@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\",
+  "WorkspaceRootPath": "C:\\Users\\Maxime\\Desktop\\progr\\Tea-House\\Tea House\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\assets\\script\\camera\\cameracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|c:\\users\\maxime\\desktop\\progr\\tea-house\\tea house\\assets\\script\\camera\\cameracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\camera\\cameracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\assets\\script\\characterinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|C:\\Users\\Maxime\\Desktop\\progr\\Tea-House\\Tea House\\assets\\script\\characterinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\characterinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|c:\\users\\hponthieu\\source\\repos\\tea-house\\tea house\\assets\\script\\light\\daylight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|C:\\Users\\Maxime\\Desktop\\progr\\Tea-House\\Tea House\\assets\\script\\light\\daylight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C3BE200-B016-0DC4-D656-D6E41994A160}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\light\\daylight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,30 +22,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Daylight.cs",
-              "DocumentMoniker": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\Light\\Daylight.cs",
+              "DocumentMoniker": "C:\\Users\\Maxime\\Desktop\\progr\\Tea-House\\Tea House\\Assets\\Script\\Light\\Daylight.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Light\\Daylight.cs",
-              "ToolTip": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\Light\\Daylight.cs",
+              "ToolTip": "C:\\Users\\Maxime\\Desktop\\progr\\Tea-House\\Tea House\\Assets\\Script\\Light\\Daylight.cs",
               "RelativeToolTip": "Assets\\Script\\Light\\Daylight.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAgwCQAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-11T14:13:30.525Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-11T14:13:30.525Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "CameraController.cs",
-              "DocumentMoniker": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\Camera\\CameraController.cs",
+              "DocumentMoniker": "C:\\Users\\Maxime\\Desktop\\progr\\Tea-House\\Tea House\\Assets\\Script\\Camera\\CameraController.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\Camera\\CameraController.cs",
-              "ToolTip": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\Camera\\CameraController.cs",
+              "ToolTip": "C:\\Users\\Maxime\\Desktop\\progr\\Tea-House\\Tea House\\Assets\\Script\\Camera\\CameraController.cs",
               "RelativeToolTip": "Assets\\Script\\Camera\\CameraController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAcwCYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-11T12:53:11.473Z",
               "EditorCaption": ""
@@ -54,14 +61,13 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "CharacterInput.cs",
-              "DocumentMoniker": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\CharacterInput.cs",
+              "DocumentMoniker": "C:\\Users\\Maxime\\Desktop\\progr\\Tea-House\\Tea House\\Assets\\Script\\CharacterInput.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\CharacterInput.cs",
-              "ToolTip": "C:\\Users\\hponthieu\\source\\repos\\Tea-House\\Tea House\\Assets\\Script\\CharacterInput.cs",
+              "ToolTip": "C:\\Users\\Maxime\\Desktop\\progr\\Tea-House\\Tea House\\Assets\\Script\\CharacterInput.cs",
               "RelativeToolTip": "Assets\\Script\\CharacterInput.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-11T12:18:21.845Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-11T12:18:21.845Z"
             }
           ]
         }

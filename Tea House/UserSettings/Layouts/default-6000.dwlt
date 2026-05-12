@@ -69,8 +69,8 @@ MonoBehaviour:
     y: 0
     width: 454
     height: 933
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -95,8 +95,8 @@ MonoBehaviour:
     y: 0
     width: 363
     height: 552
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 226}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -271,8 +271,8 @@ MonoBehaviour:
     y: 0
     width: 1103
     height: 552
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 226}
+  m_MaxSize: {x: 4002, y: 4026}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
@@ -300,8 +300,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "UnityEditor.MainToolbarWindow\u200B"
   m_Pos:
     serializedVersion: 2
-    x: -32000
-    y: -32000
+    x: 0
+    y: 43
     width: 1920
     height: 36
   m_SerializedDataModeController:
@@ -594,7 +594,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script/Camera
+    - Assets/Script/Character
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -604,22 +604,24 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Script/Camera
+  - Assets/Script/Character
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Maxime\Desktop\progr\Tea-House\Tea House
+  m_LastProjectPath: C:\Users\hponthieu\source\repos\Tea-House\Tea House
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 39848
+    - m_Data: 39912
     m_LastClickedID:
-      m_Data: 39848
+      m_Data: 39912
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 39758
-    - m_Data: 39846
+    - m_Data: 39764
+    - m_Data: 39850
+    - m_Data: 1000000000
+    - m_Data: 2147483647
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -652,7 +654,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 39758
+    - m_Data: 39764
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -680,8 +682,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: 39684
-    m_LastClickedInstanceID: 39684
+    - m_Data: 39678
+    m_LastClickedInstanceID: 39678
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -806,16 +808,16 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs:
-      - m_Data: 39684
+      - m_Data: 39678
       m_LastClickedID:
-        m_Data: 39684
+        m_Data: 39678
       m_ExpandedIDs:
-      - m_Data: -21558
-      - m_Data: 39672
+      - m_Data: -21594
+      - m_Data: 39678
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: CameraOrigin
-        m_OriginalName: CameraOrigin
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
@@ -823,10 +825,10 @@ MonoBehaviour:
           width: 0
           height: 0
         m_UserData:
-          m_Data: 39672
+          m_Data: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 4}
@@ -1288,9 +1290,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.21941818, y: 0.60541433, z: -0.17856218, w: -0.7439386}
   m_Size:
-    m_Target: 2.3108943
+    m_Target: 4.2796483
     speed: 2
-    m_Value: 2.3108943
+    m_Value: 4.2796483
   m_Ortho:
     m_Target: 0
     speed: 2
