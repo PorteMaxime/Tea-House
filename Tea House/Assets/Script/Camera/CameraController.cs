@@ -3,9 +3,6 @@ using UnityEngine.Windows;
 
 public class CameraController : MonoBehaviour
 {
-    private Vector3 mInitialPos = new Vector3(-7.5f, 7.5f, -7.5f);
-    private Vector3 mInitialRot = new Vector3(25f, 45f, 0f);
-
     private Vector3 mCurrentPos = Vector3.zero;
     private Quaternion mCurrentRot = Quaternion.identity;
 
@@ -45,11 +42,8 @@ public class CameraController : MonoBehaviour
     }
     void Start()
     {
-        transform.position = mInitialPos;
-        transform.rotation = Quaternion.Euler(mInitialRot);
-
-        mCurrentPos = mInitialPos;
-        mCurrentRot = Quaternion.Euler(mInitialRot);
+        mCurrentPos = transform.position;
+        mCurrentRot = transform.rotation;
 
         mPlayer = GameObject.FindGameObjectWithTag("Player");
     }

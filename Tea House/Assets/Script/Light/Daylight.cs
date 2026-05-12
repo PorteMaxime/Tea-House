@@ -47,7 +47,6 @@ public class Daylight : MonoBehaviour
 
     void FollowOrigin()
     {
-        Debug.Log("Current: " + mCurrentDuration + " / Max: " + mPhaseDuration);
         transform.parent.rotation = Quaternion.Euler(0f, -45f, 60f * (mCurrentDuration / mPhaseDuration) + (int)mPhase * 60f);
         transform.LookAt(transform.parent.position);
     }
