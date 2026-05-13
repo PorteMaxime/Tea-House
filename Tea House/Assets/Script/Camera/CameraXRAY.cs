@@ -39,7 +39,6 @@ public class CameraXRAY : MonoBehaviour
             foreach (RaycastHit hit in hits)
             {
                 MeshRenderer mesh = hit.collider.GetComponentInChildren<MeshRenderer>();
-                Debug.Log(mesh == null);
                 if (mesh != null)
                     mesh.enabled = false;
                 mCollided.Add(hit.collider.gameObject);
@@ -50,7 +49,7 @@ public class CameraXRAY : MonoBehaviour
 
     void UpdateCollided()
     {
-        
+        List<GameObject> toRemove = new List<GameObject>();
         foreach(GameObject collided in mLastCollided)
         {
             if(mCollided.Contains(collided) == false)
@@ -58,9 +57,11 @@ public class CameraXRAY : MonoBehaviour
                 MeshRenderer mesh = collided.GetComponentInChildren<MeshRenderer>();
                 if (mesh != null)
                     mesh.enabled = true;
-                mLastCollided.Remove(collided);
+                toRemove.Add(collided);
             }
         }
+        foreach(GameObject remove in toRemove)
+            mLastCollided.Remove(remove);
         foreach (GameObject collided in mCollided)
         {
             if (mLastCollided.Contains(collided) == false)
