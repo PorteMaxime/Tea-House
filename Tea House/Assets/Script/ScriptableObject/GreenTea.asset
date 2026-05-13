@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
+  m_Name: GreenTea
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientData
+  Name: GreenTea
+  Model: {fileID: 919132149155446097, guid: ea154cbc4da25734ca51bacdee358c67, type: 3}
+  Warmth: 0
+  Freshness: 2
+  Relaxation: 1
+  Energy: 1
+  Prestige: 0
+  Ingredients:
+  - {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
+  - {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
+  - {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
