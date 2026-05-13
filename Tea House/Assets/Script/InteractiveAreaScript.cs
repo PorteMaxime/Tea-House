@@ -31,7 +31,7 @@ public class InteractiveAreaScript : MonoBehaviour
         {
             if (inputInteract.Player.Interact.triggered)
             {
-                isUsing = !isUsing;
+                isUsing = !isUsing && mCameraController.CanInteractWith(gameObject);
                 if (isUsing)
                 {
                     mCameraController.SetCameraZoomState(transform.parent.gameObject);
@@ -40,6 +40,7 @@ public class InteractiveAreaScript : MonoBehaviour
                 {
                     mCameraController.SetCameraOrbitaleState();
                 }
+
             }
         }
 
@@ -50,6 +51,7 @@ public class InteractiveAreaScript : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Debug.Log("Press F to interact");
+            mCameraController.AddInteractionTarget(gameObject);
             canIntercat = true;
         }
     }
@@ -57,5 +59,6 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         canIntercat = false;
         isUsing = false;
+        mCameraController.RemoveInteractionTarget(gameObject);
     }
 }
