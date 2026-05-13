@@ -49,33 +49,40 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
+        InputHandler();
+    }
+    void InputHandler()
+    {
         if (mState == CameraStates.zoom)
         {
             return;//
         }
-
-        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
-
-        if (mInputPlayerMovement.Camera.Rotation.triggered)
+        else if (mState == CameraStates.orbitale)
         {
-            float axis = mInputPlayerMovement.Camera.Rotation.ReadValue<float>();
-            mTargetRotation += axis * mRotationAmount;
-            //Debug.Log("TargetRot: " + mTargetRotation);
-            //mCurrentPos = transform.position;
-            //mCurrentRot = transform.rotation;
+            if (mInputPlayerMovement.Camera.Rotation.triggered)//A,E
+            {
+                float axis = mInputPlayerMovement.Camera.Rotation.ReadValue<float>();
+                mTargetRotation += axis * mRotationAmount;
+            }
+
+            transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
         }
     }
-
     public void SetCameraZoomState(GameObject target)
     {
+        mCurrentPos = transform.position;
+        mCurrentRot = transform.rotation;
+
         transform.position = mPlayer.transform.position + zoomOffset;
         transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+
         mState = CameraStates.zoom;
     }
     public void SetCameraOrbitaleState()
     {
         transform.position = mCurrentPos;
         transform.rotation = mCurrentRot;
+
         mState = CameraStates.orbitale;
     }
     public CameraStates GetState()
