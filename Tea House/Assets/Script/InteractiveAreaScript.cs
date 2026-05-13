@@ -49,7 +49,7 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            mCameraController.SetZoomTarget(gameObject);
+            mCameraController.AddInteractionTarget(gameObject);
             Debug.Log("Press E to interact");
             canIntercat = true;
         }
@@ -58,6 +58,6 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         canIntercat = false;
         isUsing = false;
-        mCameraController.HideInteractionImage(gameObject);
+        mCameraController.RemoveInteractionTarget(gameObject);
     }
 }

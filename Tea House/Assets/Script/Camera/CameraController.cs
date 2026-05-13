@@ -61,8 +61,20 @@ public class CameraController : MonoBehaviour
         {
             return;//
         }
+        else if (mState == CameraStates.orbitale)
+        {
+            if (zoomTargetOrder.Count > 0)
+            {
+                SetInteractionImagePosition(zoomTargetOrder[zoomTargetOrder.Count - 1]);
+            }
+            else
+            {
+                mInteractionPopup.SetActive(false);
+            }
+        }
 
-        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
+
+            transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
 
         if (mInputPlayerMovement.Camera.Rotation.triggered)
         {
@@ -83,48 +95,30 @@ public class CameraController : MonoBehaviour
         mInteractionPopup.SetActive(false);
     }
 
-    public void SetZoomTarget(GameObject target)
+    public void AddInteractionTarget(GameObject target)
     {
-        if (mState == CameraStates.orbitale)
-        {
-            zoomTargetOrder.Add(target);
-            SetInteractionImagePosition(target);
-        }
+        zoomTargetOrder.Add(target);
+
     }
-    public void SetInteractionImagePosition(GameObject target)
-    {
-        mInteractionPopup.SetActive(true);
-        mInteractionPopup.transform.position =  Camera.main.WorldToScreenPoint(target.transform.position) + zoomOffset * 30;
-    }
-    public void HideInteractionImage(GameObject target)
+    public void RemoveInteractionTarget(GameObject target)
     {
         zoomTargetOrder.Remove(target);
-        if (zoomTargetOrder.Count > 0)
-        {
-            SetInteractionImagePosition(zoomTargetOrder[zoomTargetOrder.Count - 1]);
-        }
-        else
-        {
-            mInteractionPopup.SetActive(false);
-
-        }
     }
     public bool CanInteractWith(GameObject target)
     {
         return zoomTargetOrder[zoomTargetOrder.Count - 1] == target;
     }
-
+    public void SetInteractionImagePosition(GameObject target)
+    {
+        mInteractionPopup.SetActive(true);
+        mInteractionPopup.transform.position = Camera.main.WorldToScreenPoint(target.transform.position) + zoomOffset * 30;
+    }
 
     public void SetCameraOrbitaleState()
     {
         transform.position = mCurrentPos;
         transform.rotation = mCurrentRot;
         mState = CameraStates.orbitale;
-        
-        if (zoomTargetOrder.Count > 0)
-        {
-            SetInteractionImagePosition(zoomTargetOrder[zoomTargetOrder.Count - 1]);
-        }
     }
     public CameraStates GetState()
     {
