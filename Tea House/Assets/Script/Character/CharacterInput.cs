@@ -3,6 +3,9 @@ using UnityEngine;
 public class CharacterInput : MonoBehaviour
 {
     private Input_PlayerMovement mInput;
+
+    private Rigidbody mRigidbody;
+
     [SerializeField] private GameObject mCameraOrigin;
     [SerializeField] private float mSpeed = 15f;
 
@@ -13,13 +16,18 @@ public class CharacterInput : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        mRigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(mInput != null)
+        
+    }
+
+    void FixedUpdate()
+    {
+        if (mInput != null)
         {
             MovePlayer();
         }
@@ -30,12 +38,13 @@ public class CharacterInput : MonoBehaviour
         if(mInput.Character.Move.IsPressed())
         {
             Vector2 dir2 = mInput.Character.Move.ReadValue<Vector2>();
-            Vector3 dir3 = new Vector3(dir2.x, 0f, dir2.y);
+            Vector3 camDir = mCameraOrigin.transform.forward;
 
-            Quaternion tmpRot = transform.rotation;
-            transform.rotation = mCameraOrigin.transform.rotation;
-            transform.Translate(dir3 * mSpeed * Time.deltaTime);
-            transform.rotation = tmpRot;
+            Vector3 moveDirection = (mCameraOrigin.transform.forward * dir2.y + mCameraOrigin.transform.right * dir2.x).normalized;
+
+            mRigidbody.linearVelocity = moveDirection * mSpeed;
         }
+        else
+            mRigidbody.linearVelocity = Vector3.zero;
     }
 }
