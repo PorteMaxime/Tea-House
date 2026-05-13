@@ -75,19 +75,15 @@ public class CameraController : MonoBehaviour
             {
                 mInteractionPopup.SetActive(false);
             }
-        }
 
-
-            transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
-
-        if (mInputPlayerMovement.Camera.Rotation.triggered)
-        {
-            if (mInputPlayerMovement.Camera.Rotation.triggered)//A,E
+            if (mInputPlayerMovement.Camera.Rotation.triggered)
             {
-                float axis = mInputPlayerMovement.Camera.Rotation.ReadValue<float>();
-                mTargetRotation += axis * mRotationAmount;
+                if (mInputPlayerMovement.Camera.Rotation.triggered)//A,E
+                {
+                    float axis = mInputPlayerMovement.Camera.Rotation.ReadValue<float>();
+                    mTargetRotation += axis * mRotationAmount;
+                }
             }
-
             transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
         }
     }
@@ -120,7 +116,7 @@ public class CameraController : MonoBehaviour
     public void SetInteractionImagePosition(GameObject target)
     {
         mInteractionPopup.SetActive(true);
-        mInteractionPopup.transform.position = Camera.main.WorldToScreenPoint(target.transform.position) + zoomOffset * 30;
+        mInteractionPopup.transform.position = Camera.main.WorldToScreenPoint(target.transform.parent.position) + zoomOffset * 30;
     }
 
     public void SetCameraOrbitaleState()
