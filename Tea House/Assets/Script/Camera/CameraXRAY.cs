@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
+using UnityEngine.UIElements;
 
 public class CameraXRAY : MonoBehaviour
 {
@@ -38,10 +39,17 @@ public class CameraXRAY : MonoBehaviour
 
             foreach (RaycastHit hit in hits)
             {
-                MeshRenderer mesh = hit.collider.GetComponentInChildren<MeshRenderer>();
-                if (mesh != null)
-                    mesh.enabled = false;
-                mCollided.Add(hit.collider.gameObject);
+                if (hit.collider.GetComponent<Camera>() == null)
+                {
+                    MeshRenderer mesh = GetRender(hit.collider.gameObject);
+                    if (mesh != null)
+                        mesh.enabled = false;
+                    ParentingXRAY parentingXRAY = GetParentingXRAY(hit.collider.gameObject);
+                    if (parentingXRAY != null)
+                        parentingXRAY.Show(false);
+
+                    mCollided.Add(hit.collider.gameObject);
+                }
             }
             UpdateCollided();
         }
@@ -54,9 +62,13 @@ public class CameraXRAY : MonoBehaviour
         {
             if(mCollided.Contains(collided) == false)
             {
-                MeshRenderer mesh = collided.GetComponentInChildren<MeshRenderer>();
+                MeshRenderer mesh = GetRender(collided);
                 if (mesh != null)
                     mesh.enabled = true;
+                ParentingXRAY parentingXRAY = GetParentingXRAY(collided);
+                if (parentingXRAY != null)
+                    parentingXRAY.Show(true);
+
                 toRemove.Add(collided);
             }
         }
@@ -68,5 +80,18 @@ public class CameraXRAY : MonoBehaviour
                 mLastCollided.Add(collided);
         }
         mCollided.Clear();
+    }
+
+    MeshRenderer GetRender(GameObject collided)
+    {
+        MeshRenderer mesh = collided.GetComponent<MeshRenderer>();
+        if (mesh != null) return mesh;
+        return collided.GetComponentInChildren<MeshRenderer>();
+    }
+    ParentingXRAY GetParentingXRAY(GameObject collided)
+    {
+        ParentingXRAY mesh = collided.GetComponent<ParentingXRAY>();
+        if (mesh != null) return mesh;
+        return collided.GetComponentInChildren<ParentingXRAY>();
     }
 }
