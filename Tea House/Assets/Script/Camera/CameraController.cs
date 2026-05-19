@@ -108,6 +108,9 @@ public class CameraController : MonoBehaviour
     public void RemoveInteractionTarget(GameObject target)
     {
         zoomTargetOrder.Remove(target);
+
+        if (zoomTargetOrder.Count <= 0)
+            SetCameraOrbitaleState();
     }
     public bool CanInteractWith(GameObject target)
     {
