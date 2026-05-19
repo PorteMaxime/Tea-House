@@ -5,10 +5,10 @@ public class Daylight : MonoBehaviour
 {
     [SerializeField] float mPhaseDuration;
     float mCurrentDuration = 0f;
-    [SerializeField] Phase mPhase;
+    [SerializeField] public Phase mPhase;
     private Dictionary<Phase, float> mPhases = new Dictionary<Phase, float>();
 
-    enum Phase
+    public enum Phase
     {
         Morning,
         Midday,
@@ -20,9 +20,9 @@ public class Daylight : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        mPhases[Phase.Morning] = 10f;
-        mPhases[Phase.Midday] = 2.5f;
-        mPhases[Phase.Noon] = 10f;
+        mPhases[Phase.Morning] = 5f;
+        mPhases[Phase.Midday] = 2f;
+        mPhases[Phase.Noon] = 5f;
     }
 
     // Update is called once per frame

@@ -1,3 +1,4 @@
+using NUnit.Framework.Interfaces;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -5,13 +6,28 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Game", menuName = "Game/ingredientData")]
 public class IngredientData : ScriptableObject
 {
-    public string Name;
-    public GameObject Model;
-    public int Warmth;
-    public int Freshness;
-    public int Relaxation;
-    public int Energy;
-    public int Prestige;
+    public string mName;
+    public GameObject mModel;
+    public int mWarmth;
+    public int mFreshness;
+    public int mRelaxation;
+    public int mEnergy;
+    public int mPrestige;
 
-    public List<IngredientData> Ingredients;
+    public bool mIsBase;
+
+    public List<IngredientData> mIngredients;
+
+    public IngredientData GetTorrefied()
+    {
+        IngredientData torrefied = ScriptableObject.CreateInstance<IngredientData>();
+
+        mWarmth +=          1;
+        mFreshness +=       0;
+        mEnergy +=          0;
+        mRelaxation +=     -1;
+        mPrestige +=        1;
+
+        return torrefied;
+    }
 }

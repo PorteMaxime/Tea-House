@@ -1,23 +1,25 @@
 using UnityEngine;
 
+[RequireComponent(typeof(MeshFilter))]
+[RequireComponent(typeof(MeshRenderer))]
 public class IngredientScript : MonoBehaviour
 {
-    public IngredientData ingredientData;
-    public MeshRenderer mr;
-    public MeshFilter mf;
+    public IngredientData mIngredientData;
+    public bool mIsTorrefied;
+    
+    public MeshRenderer mMeshRenderer;
+    public MeshFilter mMeshFilter;
+
+
     void Start()
     {
-        mr = GetComponent<MeshRenderer>();
-        mr.material = ingredientData.Model.GetComponent<MeshRenderer>().sharedMaterial;
-        mf = GetComponent<MeshFilter>();
-        mf.mesh = ingredientData.Model.GetComponent<MeshFilter>().sharedMesh;
+        mMeshRenderer = GetComponent<MeshRenderer>();
+        mMeshRenderer.material = mIngredientData.mModel.GetComponent<MeshRenderer>().sharedMaterial;
+        mMeshFilter = GetComponent<MeshFilter>();
+        mMeshFilter.mesh = mIngredientData.mModel.GetComponent<MeshFilter>().sharedMesh;
 
         transform.localScale = new Vector3(100f, 100f ,100f);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        mIsTorrefied = false;
     }
 }
