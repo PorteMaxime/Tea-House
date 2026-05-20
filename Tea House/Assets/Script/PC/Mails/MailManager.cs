@@ -24,17 +24,17 @@ public class MailManager : MonoBehaviour
 
 
     public List<IngredientData> mIngredients = new List<IngredientData>();
+    public (int, int) mTorrefiedProbability = (1, 50);
     public List<IngredientData> mBases = new List<IngredientData>();
     public List<Image> mPictures = new List<Image>();
     public List<string> mNames = new List<string>();
-    public float mMinDuration = 1f;
-    public float mMaxDuration = 3f;
+    public (float, float) mDurationSize = (5, 7);
 
     public List<Mail> mMails = new List<Mail>();
     private List<Mail>[] mCalendar = new List<Mail>[7];
     private int mCurrentDay = 0;
     private bool mHasSend = false;
-    private int mToSend = 7;
+    private (int, int) mToSendNumber = (5, 8);
 
     void Start()
     {
@@ -56,10 +56,10 @@ public class MailManager : MonoBehaviour
 
         Image pic = mPictures[Random.Range(0, mPictures.Count)];
         string name = mNames[Random.Range(0, mNames.Count)];
-        float duration = Random.Range(mMinDuration, mMaxDuration);
+        float duration = Random.Range(mDurationSize.Item1, mDurationSize.Item2);
 
         int day = Random.Range(0, 7);
-        mCalendar[day].Add(new Mail(order, pic, name, "null", mCurrentDay, duration));
+        mCalendar[day].Add(new Mail(order, pic, name, "null", day, duration));
     }
 
     public Order CreateOrder()
@@ -78,7 +78,7 @@ public class MailManager : MonoBehaviour
             IngredientData pIngredient = mIngredients[Random.Range(0, mIngredients.Count)];
 
             // A VERIFIER
-            if(Random.Range(0, 101) <= 50)
+            if(Random.Range(mTorrefiedProbability.Item1, mTorrefiedProbability.Item2) <= 50)
                 pIngredient = pIngredient.GetTorrefied();
 
             order.mOrderData.mWarmth += pBase.mWarmth;
@@ -87,6 +87,12 @@ public class MailManager : MonoBehaviour
             order.mOrderData.mRelaxation += pBase.mRelaxation;
             order.mOrderData.mPrestige += pBase.mPrestige;
         }
+
+        order.mIsLowerLimitWarmth = UnityEngine.Random.value < 0.5f;
+        order.mIsLowerLimitFreshness = UnityEngine.Random.value < 0.5f;
+        order.mIsLowerLimitRelaxation = UnityEngine.Random.value < 0.5f;
+        order.mIsLowerLimitEnergy = UnityEngine.Random.value < 0.5f;
+        order.mIsLowerLimitPrestige = UnityEngine.Random.value < 0.5f;
 
         return order;
     }
@@ -118,7 +124,7 @@ public class MailManager : MonoBehaviour
         AddDayList();
 
         // For next days
-        for (int i = 0; i < mToSend; i++)
+        for (int i = 0; i < Random.Range(mToSendNumber.Item1, mToSendNumber.Item2); i++)
             CreateMail();
         
         mHasSend = true;

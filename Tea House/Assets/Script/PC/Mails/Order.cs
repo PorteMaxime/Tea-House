@@ -17,9 +17,9 @@ public class Order
     public IngredientData mOrderData = ScriptableObject.CreateInstance<IngredientData>();
 
     // Objectif de la commande
-    [SerializeField] private bool mIsLowerLimitWarmth       = false;
-    [SerializeField] private bool mIsLowerLimitFreshness    = false;
-    [SerializeField] private bool mIsLowerLimitRelaxation   = false;
-    [SerializeField] private bool mIsLowerLimitEnergy       = false;
-    [SerializeField] private bool mIsLowerLimitPrestige     = false;
+    [SerializeField] public bool mIsLowerLimitWarmth       = false;
+    [SerializeField] public bool mIsLowerLimitFreshness    = false;
+    [SerializeField] public bool mIsLowerLimitRelaxation   = false;
+    [SerializeField] public bool mIsLowerLimitEnergy       = false;
+    [SerializeField] public bool mIsLowerLimitPrestige     = false;
 }
