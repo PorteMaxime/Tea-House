@@ -3,20 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Game", menuName = "Game/ingredientData")]
-public class IngredientData : ScriptableObject
+[CreateAssetMenu(fileName = "Game", menuName = "Scriptable Objects/ingredientData")]
+public class IngredientData : ItemData
 {
-    public string mName;
-    public GameObject mModel;
-    public int mWarmth;
-    public int mFreshness;
-    public int mRelaxation;
-    public int mEnergy;
-    public int mPrestige;
-
     public bool mIsBase;
-
-    public List<IngredientData> mIngredients;
 
     public IngredientData GetTorrefied()
     {

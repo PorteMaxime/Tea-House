@@ -177,6 +177,10 @@ PrefabInstance:
       value: Character
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0a6e0b35e1d37794d8f384bbaf56f98d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0a6e0b35e1d37794d8f384bbaf56f98d, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -668,8 +672,6 @@ MonoBehaviour:
   - {fileID: 0}
   mNames:
   - test
-  mMinDuration: 10
-  mMaxDuration: 100
 --- !u!1001 &1281055941
 PrefabInstance:
   m_ObjectHideFlags: 0
