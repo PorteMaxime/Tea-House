@@ -6,11 +6,13 @@ public class IngredientScript : MonoBehaviour
 {
     Input_PlayerInteract input;
 
+    public MeshRenderer mMeshRenderer;
+    public MeshFilter mMeshFilter;
+
     public IngredientData mIngredientData;
     public bool mIsTorrefied;
     
-    public MeshRenderer mMeshRenderer;
-    public MeshFilter mMeshFilter;
+
 
     private void Awake()
     {
@@ -40,7 +42,12 @@ public class IngredientScript : MonoBehaviour
     {
         if (input.Debug.GetFragmentIngredient.triggered)
         {
-            
+            mMeshRenderer.enabled = false;
+            Instantiate(mIngredientData.mFragIngredient, transform.position + new Vector3(0.1f, 0f, 0f), Quaternion.identity);
+            Instantiate(mIngredientData.mFragIngredient, transform.position + new Vector3(-0.1f, 0f, 0f), Quaternion.identity);
+            Instantiate(mIngredientData.mFragIngredient, transform.position, Quaternion.identity);
+            Instantiate(mIngredientData.mFragIngredient, transform.position + new Vector3(0f, 0f, 0.1f), Quaternion.identity);
+            Instantiate(mIngredientData.mFragIngredient, transform.position + new Vector3(0f, 0f, -0.1f), Quaternion.identity);
         }
     }
 }

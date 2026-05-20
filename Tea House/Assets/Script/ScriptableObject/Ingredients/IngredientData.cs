@@ -8,7 +8,7 @@ public class IngredientData : ItemData
 {
     public bool mIsBase;
     
-    public List<GameObject> mFragIngredients;
+    public GameObject mFragIngredient;
     public IngredientData GetTorrefied()
     {
         IngredientData torrefied = ScriptableObject.CreateInstance<IngredientData>();

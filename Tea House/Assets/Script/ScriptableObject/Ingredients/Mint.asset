@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: 
   mModel: {fileID: 919132149155446097, guid: ea154cbc4da25734ca51bacdee358c67, type: 3}
-  mWarmth: 3
+  mWarmth: 6
   mFreshness: 0
-  mRelaxation: -3
+  mRelaxation: -6
   mEnergy: 0
-  mPrestige: 3
+  mPrestige: 6
   mIsBase: 0
-  mFragIngredients:
-  - {fileID: 0}
+  mFragIngredient: {fileID: 744280317938301970, guid: a3c2b152675f6914983b69bab59beb1d, type: 3}
