@@ -7,9 +7,18 @@
             "id": "7364e572-40b6-4924-993e-f3b682fb1a96",
             "actions": [
                 {
-                    "name": "Interact",
+                    "name": "Open",
                     "type": "Button",
                     "id": "444c916a-f786-4409-935c-f0fa8de25293",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "2c0c2467-ca24-4e0a-a549-5203d6b44965",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -24,7 +33,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interact",
+                    "action": "Open",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "53087cec-ad69-4370-bc15-3d3294849131",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

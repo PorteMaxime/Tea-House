@@ -1,17 +1,20 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
+using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEngine.GraphicsBuffer;
 
 public class CameraController : MonoBehaviour
 {
+    private Input_PlayerMovement mInputPlayerMovement;
+    private Input_PlayerInteract mInputPlayerInteract;
+    private Camera mCamera;
+
     private Vector3 mCurrentPos = Vector3.zero;
     private Quaternion mCurrentRot = Quaternion.identity;
 
     private GameObject mPlayer;
-
-    private Input_PlayerMovement mInputPlayerMovement;
-    private Input_PlayerInteract mInputPlayerInteract;
 
     private GameObject mInteractionPopup;
 
@@ -21,7 +24,12 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float mRotationSpeed;
     private float mTargetRotation = 0f;
 
-    public enum CameraStates
+    // Interaction Raycast => For minigames
+    private List<GameObject> mHits = new List<GameObject>();
+    private RaycastHit[] mRaycastHits = new RaycastHit[50];
+
+
+public enum CameraStates
     {
         orbitale,
         zoom
@@ -32,6 +40,7 @@ public class CameraController : MonoBehaviour
     {
         mInputPlayerMovement = new Input_PlayerMovement();
         mInputPlayerInteract = new Input_PlayerInteract();
+        mCamera = GetComponent<Camera>();
     }
     void OnEnable()
     {
@@ -63,7 +72,17 @@ public class CameraController : MonoBehaviour
     {
         if (mState == CameraStates.zoom)
         {
-            return;//
+            mHits.Clear();
+            if (mInputPlayerInteract.Player.Select.IsPressed())
+            {
+                Ray ray = mCamera.ScreenPointToRay(UnityEngine.InputSystem.Mouse.current.position.ReadValue());
+
+                int hitCount = Physics.RaycastNonAlloc(ray, mRaycastHits, Mathf.Infinity, Physics.AllLayers);
+                
+                for(int i = 0; i < hitCount; i++)
+                    mHits.Add(mRaycastHits[i].collider.gameObject);
+            }
+            return;
         }
         else if (mState == CameraStates.orbitale)
         {
@@ -138,5 +157,59 @@ public class CameraController : MonoBehaviour
     public CameraStates GetState()
     {
         return mState;
+    }
+
+    public List<GameObject> GetRaycastHit(LayerMask[] layers, string[] tags)
+    {
+        List<GameObject> gOs = new List<GameObject>();
+        int totalLayers = 0;
+
+        if(layers != null)
+        {
+            foreach (LayerMask layer in layers)
+                totalLayers |= layer.value; 
+        }
+
+        bool hasLayerFilter = layers != null && layers.Length > 0;
+        bool hasTagFilter = tags != null && tags.Length > 0;
+
+        foreach (GameObject go in mHits)
+        {
+            if (!hasLayerFilter || ((1 << go.layer) & totalLayers) != 0)
+            {
+                if (hasTagFilter == false)
+                {
+                    gOs.Add(go);
+                }
+                else
+                {
+                    for (int i = 0; i < tags.Length; i++)
+                    {
+                        if (go.CompareTag(tags[i]))
+                        {
+                            gOs.Add(go);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return gOs;
+    }
+
+    public List<GameObject> GetRaycastHit(LayerMask layer, string tag)
+    {
+        return GetRaycastHit(new LayerMask[1] { layer }, new string[1] { tag });
+    }
+
+    public List<GameObject> GetRaycastHit(LayerMask layer, string[] tags)
+    {
+        return GetRaycastHit(new LayerMask[1] { layer }, tags);
+    }
+
+    public List<GameObject> GetRaycastHit(LayerMask[] layers, string tag = "")
+    {
+        return GetRaycastHit(layers, new string[1] { tag });
     }
 }

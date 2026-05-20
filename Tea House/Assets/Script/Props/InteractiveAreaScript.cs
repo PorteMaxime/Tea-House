@@ -29,7 +29,7 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         if (canIntercat)
         {
-            if (inputInteract.Player.Interact.triggered)
+            if (inputInteract.Player.Open.triggered)
             {
                 isUsing = !isUsing && mCameraController.CanInteractWith(gameObject);
                 if (isUsing)

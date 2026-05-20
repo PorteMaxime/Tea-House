@@ -180,9 +180,9 @@ GameObject:
   - component: {fileID: 779660455}
   - component: {fileID: 779660454}
   - component: {fileID: 779660453}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pack3
-  m_TagString: Untagged
+  m_TagString: Package
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,9 +292,9 @@ GameObject:
   - component: {fileID: 1029568161}
   - component: {fileID: 1029568160}
   - component: {fileID: 1029568159}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pack2
-  m_TagString: Untagged
+  m_TagString: Package
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -502,9 +502,9 @@ GameObject:
   - component: {fileID: 1289273858}
   - component: {fileID: 1289273857}
   - component: {fileID: 1289273860}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Printer
-  m_TagString: Untagged
+  m_TagString: Printer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -626,9 +626,9 @@ GameObject:
   - component: {fileID: 1910059339}
   - component: {fileID: 1910059338}
   - component: {fileID: 1910059337}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pack1
-  m_TagString: Untagged
+  m_TagString: Package
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

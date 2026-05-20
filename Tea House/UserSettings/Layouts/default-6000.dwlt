@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Inspector
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -594,7 +594,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script/Minigames/Packaging
+    - Assets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -604,25 +604,23 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Script/Minigames/Packaging
+  - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\hponthieu\source\repos\Tea-House\Tea House
+  m_LastProjectPath: C:\Users\jeage\source\repos\Tea-House\Tea House
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 33}
+    scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 46000
+    - m_Data: 37204
     m_LastClickedID:
-      m_Data: 46000
+      m_Data: 37204
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 36976
-    - m_Data: 37084
-    - m_Data: 45996
+    - m_Data: 37218
+    - m_Data: 37228
     - m_Data: 1000000000
-    - m_Data: 2147483647
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -655,7 +653,6 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 36976
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -682,8 +679,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs:
+    - m_Data: 434
+    m_LastClickedInstanceID: 434
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -807,25 +805,19 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: []
+      m_SelectedIDs:
+      - m_Data: 434
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -50864
-      - m_Data: -1804
-      - m_Data: -1794
-      - m_Data: -1754
-      - m_Data: -1736
-      - m_Data: -1718
-      - m_Data: -1700
-      - m_Data: -1696
-      - m_Data: -1684
-      - m_Data: -1626
-      - m_Data: -1570
+      - m_Data: -2030
+      - m_Data: -1886
+      - m_Data: 36672
+      - m_Data: 36676
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Pack2
+        m_OriginalName: Pack2
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
@@ -833,10 +825,10 @@ MonoBehaviour:
           width: 0
           height: 0
         m_UserData:
-          m_Data: 0
+          m_Data: 36692
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 4}
@@ -1246,9 +1238,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -4.6180983, y: 1.5771788, z: 3.4624946}
+    m_Target: {x: -2.4642136, y: 1.8318778, z: -2.189956}
     speed: 2
-    m_Value: {x: -4.6180983, y: 1.5771788, z: 3.4624946}
+    m_Value: {x: -2.4642136, y: 1.8318778, z: -2.189956}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1294,13 +1286,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.21561435, y: 0.75926924, z: -0.3080854, w: 0.53120506}
+    m_Target: {x: -0.09962964, y: 0.88499796, z: -0.39681205, w: -0.22221306}
     speed: 2
-    m_Value: {x: 0.2156063, y: 0.7592409, z: -0.3080739, w: 0.5311852}
+    m_Value: {x: -0.09963034, y: 0.88500416, z: -0.39681485, w: -0.22221462}
   m_Size:
-    m_Target: 0.9770901
+    m_Target: 7.710587
     speed: 2
-    m_Value: 0.9770901
+    m_Value: 7.710587
   m_Ortho:
     m_Target: 0
     speed: 2
