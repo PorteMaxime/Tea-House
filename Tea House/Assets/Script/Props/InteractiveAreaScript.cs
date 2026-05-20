@@ -4,7 +4,7 @@ public class InteractiveAreaScript : MonoBehaviour
 {
     private Input_PlayerInteract inputInteract;
     [SerializeField] private bool canIntercat = false;
-    [SerializeField] private bool isUsing = false;
+    [SerializeField] public bool isUsing = false;
 
     private GameObject mCamera;
     private CameraController mCameraController;
@@ -34,7 +34,7 @@ public class InteractiveAreaScript : MonoBehaviour
                 isUsing = !isUsing && mCameraController.CanInteractWith(gameObject);
                 if (isUsing)
                 {
-                    mCameraController.SetCameraZoomState(transform.GetChild(0).gameObject);
+                    mCameraController.SetCameraZoomState(transform.Find("CameraMovePoint").gameObject, transform.Find("CameraLookPoint").gameObject);
                 }
                 else if (mCameraController.GetState() == CameraController.CameraStates.zoom)
                 {

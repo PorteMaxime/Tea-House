@@ -8,6 +8,7 @@ public class CharacterInput : MonoBehaviour
 
     [SerializeField] private GameObject mCameraOrigin;
     [SerializeField] private float mSpeed = 15f;
+    public bool mCanMove = true;
 
     void Awake() => mInput = new Input_PlayerMovement();
     void OnEnable() => mInput.Enable();
@@ -35,7 +36,7 @@ public class CharacterInput : MonoBehaviour
 
     void MovePlayer()
     {
-        if(mInput.Character.Move.IsPressed())
+        if(mInput.Character.Move.IsPressed() && mCanMove)
         {
             Vector2 dir2 = mInput.Character.Move.ReadValue<Vector2>();
             Vector3 camDir = mCameraOrigin.transform.forward;

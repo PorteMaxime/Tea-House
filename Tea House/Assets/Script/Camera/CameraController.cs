@@ -87,17 +87,20 @@ public class CameraController : MonoBehaviour
             transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
         }
     }
-    public void SetCameraZoomState(GameObject target)
+    public void SetCameraZoomState(GameObject targetPosition, GameObject lookDirection)
     {
         mCurrentPos = transform.position;
         mCurrentRot = transform.rotation;
 
-        transform.position = mPlayer.transform.position + zoomOffset;
-        transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+        transform.position = targetPosition.transform.position;
+        transform.rotation = Quaternion.LookRotation(lookDirection.transform.position - transform.position);
 
         mState = CameraStates.zoom;
 
         mInteractionPopup.SetActive(false);
+
+        mPlayer.GetComponent<CharacterInput>().mCanMove = false;
+        mPlayer.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void AddInteractionTarget(GameObject target)
@@ -128,6 +131,9 @@ public class CameraController : MonoBehaviour
         transform.rotation = mCurrentRot;
 
         mState = CameraStates.orbitale;
+
+        mPlayer.GetComponent<CharacterInput>().mCanMove = true;
+        mPlayer.GetComponent<MeshRenderer>().enabled = true;
     }
     public CameraStates GetState()
     {
