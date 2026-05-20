@@ -29,6 +29,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Debug",
+            "id": "c7a2542d-662c-4ecc-b5db-3a96bf11940f",
+            "actions": [
+                {
+                    "name": "GetFragmentIngredient",
+                    "type": "Button",
+                    "id": "bb1b5e47-6ca9-437a-8bf7-78b708cfd8b4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "532073f9-af0a-4ee4-a946-982ff2062e42",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetFragmentIngredient",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

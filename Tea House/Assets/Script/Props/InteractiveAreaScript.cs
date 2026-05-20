@@ -34,7 +34,7 @@ public class InteractiveAreaScript : MonoBehaviour
                 isUsing = !isUsing && mCameraController.CanInteractWith(gameObject);
                 if (isUsing)
                 {
-                    mCameraController.SetCameraZoomState(transform.parent.gameObject);
+                    mCameraController.SetCameraZoomState(transform.GetChild(0).gameObject);
                 }
                 else if (mCameraController.GetState() == CameraController.CameraStates.zoom)
                 {

@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
   m_Name: Mint
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  Name: Mint
-  model: {fileID: 0}
-  Warmth: 0
-  Freshness: 2
-  Relaxation: 0
-  Energy: 0
-  Prestige: 0
+  mName: 
+  mModel: {fileID: 919132149155446097, guid: ea154cbc4da25734ca51bacdee358c67, type: 3}
+  mWarmth: 3
+  mFreshness: 0
+  mRelaxation: -3
+  mEnergy: 0
+  mPrestige: 3
+  mIsBase: 0
+  mFragIngredients:
+  - {fileID: 0}
