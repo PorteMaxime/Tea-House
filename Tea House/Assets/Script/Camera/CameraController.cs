@@ -28,8 +28,12 @@ public class CameraController : MonoBehaviour
     private List<GameObject> mHits = new List<GameObject>();
     private RaycastHit[] mRaycastHits = new RaycastHit[50];
 
+    // Drag & Drop
+    public GameObject mHolding = null;      // GameObject holded
+    private float mCameraDistance;          // Distance between camera and gameobject
 
-public enum CameraStates
+
+    public enum CameraStates
     {
         orbitale,
         zoom
@@ -66,46 +70,75 @@ public enum CameraStates
     }
     void Update()
     {
-        InputHandler();
+        if (mState == CameraStates.zoom) ZoomedUpdate();
+        else if (mState == CameraStates.orbitale) OrbitalUpdate();
     }
-    void InputHandler()
-    {
-        if (mState == CameraStates.zoom)
-        {
-            mHits.Clear();
-            if (mInputPlayerInteract.Player.Select.IsPressed())
-            {
-                Ray ray = mCamera.ScreenPointToRay(UnityEngine.InputSystem.Mouse.current.position.ReadValue());
 
-                int hitCount = Physics.RaycastNonAlloc(ray, mRaycastHits, Mathf.Infinity, Physics.AllLayers);
-                
-                for(int i = 0; i < hitCount; i++)
-                    mHits.Add(mRaycastHits[i].collider.gameObject);
-            }
-            return;
-        }
-        else if (mState == CameraStates.orbitale)
+    private void ZoomedUpdate()
+    {
+        mHits.Clear();
+
+        if (mInputPlayerInteract.Player.Select.IsPressed())
         {
-            if (zoomTargetOrder.Count > 0)
-            {
-                SetInteractionImagePosition(zoomTargetOrder[zoomTargetOrder.Count - 1]);
-            }
+            Ray ray = mCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            int hitCount = Physics.RaycastNonAlloc(ray, mRaycastHits, Mathf.Infinity, Physics.AllLayers);
+
+            for (int i = 0; i < hitCount; i++)
+                mHits.Add(mRaycastHits[i].collider.gameObject);
+        }
+
+        if (mHolding != null)
+        {
+            if (!mInputPlayerInteract.Player.Select.IsPressed())
+                StopDragging();
             else
             {
-                mInteractionPopup.SetActive(false);
-            }
+                Vector3 mousePos = Mouse.current.position.ReadValue();
+                mousePos.z = mCameraDistance;
+                Vector3 worldPos = mCamera.ScreenToWorldPoint(mousePos);
 
-            if (mInputPlayerMovement.Camera.Rotation.triggered)
-            {
-                if (mInputPlayerMovement.Camera.Rotation.triggered)//A,E
-                {
-                    float axis = mInputPlayerMovement.Camera.Rotation.ReadValue<float>();
-                    mTargetRotation += axis * mRotationAmount;
-                }
+                mHolding.transform.position = worldPos;                   
             }
-            transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
         }
     }
+    void OrbitalUpdate()
+    {
+        if (zoomTargetOrder.Count > 0)
+        {
+            SetInteractionImagePosition(zoomTargetOrder[zoomTargetOrder.Count - 1]);
+        }
+        else
+        {
+            mInteractionPopup.SetActive(false);
+        }
+
+        if (mInputPlayerMovement.Camera.Rotation.triggered)
+        {
+            float axis = mInputPlayerMovement.Camera.Rotation.ReadValue<float>();
+            mTargetRotation += axis * mRotationAmount;
+        }
+        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
+    }
+
+    public void StartDragging(GameObject target)
+    {
+        if (target == null) return;
+
+        mHolding = target;
+
+        mCameraDistance = mCamera.WorldToScreenPoint(mHolding.transform.position).z;
+
+        Rigidbody rb = target.GetComponent<Rigidbody>();
+        if (rb != null) rb.useGravity = false;
+    }
+    public void StopDragging()
+    {
+        Rigidbody rb = mHolding.GetComponent<Rigidbody>();
+        if (rb != null) rb.useGravity = true;
+
+        mHolding = null;
+    }
+
     public void SetCameraZoomState(GameObject targetPosition, GameObject lookDirection)
     {
         mCurrentPos = transform.position;
@@ -125,7 +158,6 @@ public enum CameraStates
     public void AddInteractionTarget(GameObject target)
     {
         zoomTargetOrder.Add(target);
-
     }
     public void RemoveInteractionTarget(GameObject target)
     {
@@ -146,6 +178,9 @@ public enum CameraStates
 
     public void SetCameraOrbitaleState()
     {
+        // Sécurité : On lâche l'objet si on quitte le mode zoom
+        StopDragging();
+
         transform.position = mCurrentPos;
         transform.rotation = mCurrentRot;
 
@@ -164,10 +199,10 @@ public enum CameraStates
         List<GameObject> gOs = new List<GameObject>();
         int totalLayers = 0;
 
-        if(layers != null)
+        if (layers != null)
         {
             foreach (LayerMask layer in layers)
-                totalLayers |= layer.value; 
+                totalLayers |= layer.value;
         }
 
         bool hasLayerFilter = layers != null && layers.Length > 0;
@@ -197,17 +232,14 @@ public enum CameraStates
 
         return gOs;
     }
-
     public List<GameObject> GetRaycastHit(LayerMask layer, string tag)
     {
         return GetRaycastHit(new LayerMask[1] { layer }, new string[1] { tag });
     }
-
     public List<GameObject> GetRaycastHit(LayerMask layer, string[] tags)
     {
         return GetRaycastHit(new LayerMask[1] { layer }, tags);
     }
-
     public List<GameObject> GetRaycastHit(LayerMask[] layers, string tag = "")
     {
         return GetRaycastHit(layers, new string[1] { tag });
