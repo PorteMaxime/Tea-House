@@ -7,8 +7,17 @@ public class workBenchStorageScript : MonoBehaviour
     public int amount;
 
     public Inventory inventory;
-    public WorkBenchScript workBenchScript;
+    private WorkBenchScript workBenchScript;
 
+    void Awake()
+    {
+        workBenchScript = transform.parent.GetComponent<WorkBenchScript>();
+    }
+    void Start()
+    {
+        inventory.AddItem(ingredient, 5);
+        CheckIngredient();
+    }
     public void CheckIngredient()
     {
         amount = inventory.mIngredients[ingredient];
@@ -28,11 +37,10 @@ public class workBenchStorageScript : MonoBehaviour
             {
                 Debug.Log("Objet cliqué : " + hit.collider.name);
 
-                if(amount > 0)
-                {
-                    workBenchScript.currentItem = ingredient;
-                    amount--;
-                }
+                workBenchScript.SelectItem(ingredient);
+                inventory.RemoveItem(ingredient, 1);
+                CheckIngredient();
+
             }
         }
     }

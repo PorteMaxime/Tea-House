@@ -3,17 +3,26 @@ using static UnityEngine.LowLevelPhysics2D.PhysicsShape;
 
 public class WorkBenchScript : MonoBehaviour
 {
-    Packaging_MainScript packaging;
+    private Packaging_MainScript mPackaging;
 
-    public IngredientData currentItem = null;
-    public IngredientData mTotalIngredient;
+    private IngredientData currentItem = null;
+    private GameObject currentItemG = null;
+    private GameObject mMortar;
+
+    private Vector3 posOffset = new Vector3(0f,0.1f,0f);
+    private IngredientData mTotalIngredient;
     private void Awake()
     {
         mTotalIngredient = ScriptableObject.CreateInstance<IngredientData>();
-    }
-    public void SelectItem()
-    {
+        mMortar = transform.Find("SM_Mortar_bowl").gameObject;
 
+    }
+    public void SelectItem(IngredientData ingredient)
+    {
+        currentItem = ingredient;
+        currentItemG = ingredient.mModel;
+
+        Instantiate(currentItemG, mMortar.transform.position + posOffset, Quaternion.identity, mMortar.transform);
     }
     public void AddIngredient()
     {
@@ -40,7 +49,7 @@ public class WorkBenchScript : MonoBehaviour
     }
     public void SetIngredientData()
     {
-        packaging.SetIngredientData(mTotalIngredient);
+        mPackaging.SetIngredientData(mTotalIngredient);
     }
 }
 

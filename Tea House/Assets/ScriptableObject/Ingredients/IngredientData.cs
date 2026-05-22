@@ -7,7 +7,6 @@ using UnityEngine;
 public class IngredientData : ItemData
 {
     public bool mIsBase;
-    
     public GameObject mFragIngredient;
     public IngredientData GetTorrefied()
     {

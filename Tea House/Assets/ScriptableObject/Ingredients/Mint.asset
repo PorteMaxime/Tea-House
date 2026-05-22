@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Mint
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: 
-  mModel: {fileID: 919132149155446097, guid: ea154cbc4da25734ca51bacdee358c67, type: 3}
-  mWarmth: 6
+  mModel: {fileID: 1631138707095015537, guid: 5952c965a6e087f41b546cb8f54f50bd, type: 3}
+  mWarmth: 85
   mFreshness: 0
-  mRelaxation: -6
+  mRelaxation: -85
   mEnergy: 0
-  mPrestige: 6
+  mPrestige: 85
   mIsBase: 0
+  mGameObject: {fileID: 0}
   mFragIngredient: {fileID: 744280317938301970, guid: a3c2b152675f6914983b69bab59beb1d, type: 3}
