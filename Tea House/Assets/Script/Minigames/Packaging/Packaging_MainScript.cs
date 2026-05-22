@@ -97,6 +97,13 @@ public class Packaging_MainScript : MonoBehaviour
             mCameraController.StartDragging(hitDraggables[0]);
         }
 
+        if(mCameraController.mHolding != null && mWorkingPointCollider.mCollider)
+        {
+            float dist = Vector3.Distance(mWorkingPoint.transform.position, mCameraController.mHolding.transform.position);
+
+            mCameraController.mHolding.transform.Rotate(new Vector3(0f, 0f, 0f));
+        }
+
         if(mWorkingPointCollider.mCollider != null && mWorkingPointCollider.mCollider.tag == "Ingredient")
         {
             mOutput.mIngredient = mData;
