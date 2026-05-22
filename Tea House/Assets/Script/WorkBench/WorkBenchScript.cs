@@ -52,8 +52,3 @@ public class WorkBenchScript : MonoBehaviour
         mPackaging.SetIngredientData(mTotalIngredient);
     }
 }
-
-class Packaging_MainScript {
-
-    public void SetIngredientData(IngredientData ingredientData) { }
-};

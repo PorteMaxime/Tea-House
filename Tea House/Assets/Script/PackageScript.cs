@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PackageScript : MonoBehaviour
 {
-    public IngredientData mOrderData = ScriptableObject.CreateInstance<IngredientData>();
+    public IngredientData mIngredient;
     public PackageData mPackageData;
 
     public void SetTexture(Texture2D tex)
