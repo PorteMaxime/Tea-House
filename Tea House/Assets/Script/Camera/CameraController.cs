@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -30,6 +31,7 @@ public class CameraController : MonoBehaviour
 
     // Drag & Drop
     public GameObject mHolding = null;      // GameObject holded
+    public bool mHasReleasedDrag = false;   // Gameobject is released last frame ?
     private float mCameraDistance;          // Distance between camera and gameobject
 
 
@@ -89,16 +91,22 @@ public class CameraController : MonoBehaviour
 
         if (mHolding != null)
         {
-            if (!mInputPlayerInteract.Player.Select.IsPressed())
+            if (mHasReleasedDrag == true)
                 StopDragging();
+            if (!mInputPlayerInteract.Player.Select.IsPressed() && mHolding != null)
+                mHasReleasedDrag = true;
             else
             {
-                Vector3 mousePos = Mouse.current.position.ReadValue();
-                mousePos.z = mCameraDistance;
-                Vector3 worldPos = mCamera.ScreenToWorldPoint(mousePos);
+                if(mHolding != null)
+                {
+                    Vector3 mousePos = Mouse.current.position.ReadValue();
+                    mousePos.z = mCameraDistance;
+                    Vector3 worldPos = mCamera.ScreenToWorldPoint(mousePos);
 
-                mHolding.transform.position = worldPos;                   
+                    mHolding.transform.position = worldPos;
+                }
             }
+            
         }
     }
     void OrbitalUpdate()
@@ -137,6 +145,7 @@ public class CameraController : MonoBehaviour
         if (rb != null) rb.useGravity = true;
 
         mHolding = null;
+        mHasReleasedDrag = false;
     }
 
     public void SetCameraZoomState(GameObject targetPosition, GameObject lookDirection)

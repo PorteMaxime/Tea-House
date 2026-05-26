@@ -27,6 +27,11 @@ public class Packaging_MainScript : MonoBehaviour
     private GameObject mWorkingPoint = null;
     private WorkingPointCollider mWorkingPointCollider = null;
 
+    private GameObject mLastHolded = null;            // Bowl reference
+    private Vector3 mBowlOrigin = Vector3.zero; // Bowl Origin position
+    private float mTimeToOrigin = 0.5f;          // Time in which the Bowl need to be at his Origin
+    private Vector3 mBowlSpeed = Vector3.zero;  // Bowl Speed during movement to Origin
+
     // OUTPUT
     private PackageScript mOutput = null;
 
@@ -40,6 +45,8 @@ public class Packaging_MainScript : MonoBehaviour
         mPackagePrefab = Resources.Load<GameObject>("Items/Package");
         mWorkingPoint = transform.Find("WorkingPoint").gameObject;
         mWorkingPointCollider = mWorkingPoint.GetComponent<WorkingPointCollider>();
+
+        mBowlOrigin = transform.Find("MixtureBowl").transform.position;
 
         // Temporary for waiting Workbench
         SetIngredientData(new IngredientData());
@@ -93,11 +100,15 @@ public class Packaging_MainScript : MonoBehaviour
         List<GameObject> hitDraggables = mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Ingredient");
 
         if (hitDraggables.Count > 0 && mCameraController.mHolding == null)
-        {
             mCameraController.StartDragging(hitDraggables[0]);
-        }
 
-        if(mCameraController.mHolding != null && mWorkingPointCollider.mCollider)
+        if (mCameraController.mHasReleasedDrag == true)
+            mLastHolded = mCameraController.mHolding;
+        Debug.Log(mBowlOrigin);
+        if (mLastHolded != null)
+            mLastHolded.transform.position = Vector3.SmoothDamp(mLastHolded.transform.position, mBowlOrigin, ref mBowlSpeed, mTimeToOrigin);
+
+        if (mCameraController.mHolding != null && mWorkingPointCollider.mCollider)
         {
             float dist = Vector3.Distance(mWorkingPoint.transform.position, mCameraController.mHolding.transform.position);
 
