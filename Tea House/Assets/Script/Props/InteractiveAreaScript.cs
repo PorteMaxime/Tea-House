@@ -4,7 +4,7 @@ public class InteractiveAreaScript : MonoBehaviour
 {
     private Input_PlayerInteract inputInteract;
     [SerializeField] private bool canIntercat = false;
-    [SerializeField] private bool isUsing = false;
+    [SerializeField] public bool isUsing = false;
 
     private GameObject mCamera;
     private CameraController mCameraController;
