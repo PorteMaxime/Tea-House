@@ -28,7 +28,7 @@ public class WorkBenchScript : MonoBehaviour
         if(currentItem == null)
         {
             List<GameObject> hitDraggables = mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Storage");
-            Debug.Log(hitDraggables.Count);
+
             if (hitDraggables.Count > 0)
             {
                 if (hitDraggables[0].TryGetComponent(out WorkBenchStorageScript workBenchStorageScript))
