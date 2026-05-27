@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class InteractiveAreaScript : MonoBehaviour
 {
@@ -34,13 +35,18 @@ public class InteractiveAreaScript : MonoBehaviour
                 isUsing = !isUsing && mCameraController.CanInteractWith(gameObject);
                 if (isUsing)
                 {
-                    mCameraController.SetCameraZoomState(transform.Find("CameraMovePoint").gameObject, transform.Find("CameraLookPoint").gameObject);
+                    mCameraController.GoTo(transform.Find("CameraMovePoint").transform);
+                    mCameraController.SetState(CameraController.CameraStates.zoom);
+                    mCameraController.mInteractionPopup.SetActive(false);
                 }
                 else if (mCameraController.GetState() == CameraController.CameraStates.zoom)
                 {
-                    mCameraController.SetCameraOrbitaleState();
+                    mCameraController.Back();
+                    mCameraController.SetState(CameraController.CameraStates.orbitale);
+                    mCameraController.StopDragging();
                 }
-
+                mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = !isUsing;
+                mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = !isUsing;
             }
         }
 

@@ -1,12 +1,14 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using TreeEditor;
+using Unity.Hierarchy;
 using UnityEngine;
 
 public class Packaging_MainScript : MonoBehaviour
 {
     [SerializeField] private GameObject mCamera = null;
     private CameraController mCameraController = null;
+    Input_PlayerInteract mPlayerInput;
 
     private enum State
     {
@@ -27,10 +29,11 @@ public class Packaging_MainScript : MonoBehaviour
     private GameObject mWorkingPoint = null;
     private WorkingPointCollider mWorkingPointCollider = null;
 
-    private GameObject mLastHolded = null;            // Bowl reference
-    private Vector3 mBowlOrigin = Vector3.zero; // Bowl Origin position
-    private float mTimeToOrigin = 0.5f;          // Time in which the Bowl need to be at his Origin
-    private Vector3 mBowlSpeed = Vector3.zero;  // Bowl Speed during movement to Origin
+    private GameObject mBowl = null;              // Bowl reference
+    private Vector3 mBowlOrigin = Vector3.zero;         // Bowl Origin position
+    private float mBowlOriginDistance = 0f;             // Bowl Origin distance from WorkingPoint
+    private float mTimeToOrigin = 0.5f;                 // Time in which the Bowl need to be at his Origin
+    private Vector3 mBowlSpeed = Vector3.zero;          // Bowl Speed during movement to Origin
 
     // OUTPUT
     private PackageScript mOutput = null;
@@ -47,6 +50,7 @@ public class Packaging_MainScript : MonoBehaviour
         mWorkingPointCollider = mWorkingPoint.GetComponent<WorkingPointCollider>();
 
         mBowlOrigin = transform.Find("MixtureBowl").transform.position;
+        mBowlOriginDistance = Vector3.Distance(mBowlOrigin, mWorkingPoint.transform.position);
 
         // Temporary for waiting Workbench
         SetIngredientData(new IngredientData());
@@ -91,35 +95,44 @@ public class Packaging_MainScript : MonoBehaviour
     private void SelectLabel()
     {
         // Screen + Drag&drop label + glue
+        if (mIsLabelled == true) return;
+
+        List<GameObject> hitDraggables = mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Printer");
+
+        if(hitDraggables.Count > 0)
+        {
+            Transform viewPoint = hitDraggables[0].transform.Find("ViewPoint").transform;
+            mCameraController.GoTo(hitDraggables[0].transform.Find("ViewPoint").transform);
+            //mCamera.transform.SetPositionAndRotation(viewPoint.position, viewPoint.rotation);
+        }
     }
     private void FillPackage()
     {
+        if(mBowl != null)
+        {
+            float dist = Vector3.Distance(mWorkingPoint.transform.position, mBowl.transform.position);
+            float currentAngle = 360f * Mathf.InverseLerp(-mBowlOriginDistance, 0f, -dist);
+
+            mBowl.transform.rotation = Quaternion.Euler(currentAngle, 0f, 0f);
+        }
         if (mIsFilled == true) return;
 
         // Drag&drop bowl
         List<GameObject> hitDraggables = mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Ingredient");
 
         if (hitDraggables.Count > 0 && mCameraController.mHolding == null)
-            mCameraController.StartDragging(hitDraggables[0]);
-
-        if (mCameraController.mHasReleasedDrag == true)
-            mLastHolded = mCameraController.mHolding;
-        Debug.Log(mBowlOrigin);
-        if (mLastHolded != null)
-            mLastHolded.transform.position = Vector3.SmoothDamp(mLastHolded.transform.position, mBowlOrigin, ref mBowlSpeed, mTimeToOrigin);
-
-        if (mCameraController.mHolding != null && mWorkingPointCollider.mCollider)
         {
-            float dist = Vector3.Distance(mWorkingPoint.transform.position, mCameraController.mHolding.transform.position);
-
-            mCameraController.mHolding.transform.Rotate(new Vector3(0f, 0f, 0f));
+            mBowl = hitDraggables[0];
+            mCameraController.StartDragging(hitDraggables[0]);
         }
+        if (mBowl != null && mCameraController.mHolding == null)
+            mBowl.transform.position = Vector3.SmoothDamp(mBowl.transform.position, mBowlOrigin, ref mBowlSpeed, mTimeToOrigin);
 
-        if(mWorkingPointCollider.mCollider != null && mWorkingPointCollider.mCollider.tag == "Ingredient")
+        if (mWorkingPointCollider.mCollider != null && mWorkingPointCollider.mCollider.tag == "Ingredient")
         {
             mOutput.mIngredient = mData;
             mIsFilled = true;
-            Destroy(mWorkingPointCollider.mCollider);
+            //Destroy(mWorkingPointCollider.mCollider);
             mOutput.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
         }
     }

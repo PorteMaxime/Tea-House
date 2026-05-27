@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -69,8 +69,8 @@ MonoBehaviour:
     y: 0
     width: 454
     height: 933
-  m_MinSize: {x: 276, y: 76}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -594,7 +594,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Tools
+    - Assets/Prefabs/Scene
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -604,24 +604,24 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/Tools
+  - Assets/Prefabs/Scene
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\hponthieu\source\repos\Tea-House\Tea House
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
+    scrollPos: {x: 0, y: 69}
     m_SelectedIDs:
-    - m_Data: 37194
+    - m_Data: 37182
     m_LastClickedID:
-      m_Data: 37194
+      m_Data: 37182
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 37004
-    - m_Data: 37006
-    - m_Data: 37008
-    - m_Data: 37140
+    - m_Data: 36992
+    - m_Data: 36994
+    - m_Data: 36996
+    - m_Data: 37128
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -656,9 +656,9 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 37004
-    - m_Data: 37006
-    - m_Data: 37008
+    - m_Data: 36992
+    - m_Data: 36994
+    - m_Data: 36996
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -685,9 +685,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs:
-    - m_Data: -1348
-    m_LastClickedInstanceID: -1348
+    m_SelectedInstanceIDs: []
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs:
     - m_Data: 37540
@@ -814,21 +813,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs:
-      - m_Data: -1348
+      m_SelectedIDs: []
       m_LastClickedID:
-        m_Data: -1348
+        m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -1624
-      - m_Data: -1564
-      - m_Data: -1526
-      - m_Data: -1348
+      - m_Data: -1588
+      - m_Data: -1572
+      - m_Data: -1560
+      - m_Data: -1484
       - m_Data: -1334
       - m_Data: 36418
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: save of CameraMovePoint
+        m_OriginalName: save of CameraMovePoint
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
@@ -836,10 +834,10 @@ MonoBehaviour:
           width: 0
           height: 0
         m_UserData:
-          m_Data: 0
+          m_Data: -85702
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 4}
@@ -1249,9 +1247,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -2.7502575, y: -5.4664197, z: -4.281906}
+    m_Target: {x: 0.51154506, y: -7.9330187, z: 6.329231}
     speed: 2
-    m_Value: {x: -2.7502575, y: -5.4664197, z: -4.281906}
+    m_Value: {x: 0.51154506, y: -7.9330187, z: 6.329231}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1297,13 +1295,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.058444187, y: -0.9257588, z: 0.33741206, w: 0.16044651}
+    m_Target: {x: 0.45190552, y: 0.001337235, z: -0.0006768709, w: 0.892068}
     speed: 2
-    m_Value: {x: 0.05743069, y: -0.9262198, z: 0.33758, w: 0.15766577}
+    m_Value: {x: 0.45190412, y: 0.0013372308, z: -0.00067686883, w: 0.8920653}
   m_Size:
-    m_Target: 9.396382
+    m_Target: 11.655497
     speed: 2
-    m_Value: 9.396382
+    m_Value: 11.655497
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1420,7 +1418,7 @@ MonoBehaviour:
       width: 1101
       height: 505
     m_Scale: {x: 1.092727, y: 1.092727}
-    m_Translation: {x: 570.02264, y: 229.08646}
+    m_Translation: {x: 570.02264, y: 229.59647}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
@@ -1428,7 +1426,7 @@ MonoBehaviour:
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
       x: -521.6515
-      y: -209.64658
+      y: -210.1133
       width: 1007.57104
       height: 462.14658
     m_MinimalGUI: 1
