@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using TreeEditor;
 using Unity.Hierarchy;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Packaging_MainScript : MonoBehaviour
 {
     [SerializeField] private GameObject mCamera = null;
     private CameraController mCameraController = null;
-    Input_PlayerInteract mPlayerInput;
+    private Input_PlayerInteract mInputPlayerInteract = null;
 
     private enum State
     {
@@ -29,19 +30,16 @@ public class Packaging_MainScript : MonoBehaviour
     private GameObject mWorkingPoint = null;
     private WorkingPointCollider mWorkingPointCollider = null;
 
-    private GameObject mBowl = null;              // Bowl reference
-    private Vector3 mBowlOrigin = Vector3.zero;         // Bowl Origin position
-    private float mBowlOriginDistance = 0f;             // Bowl Origin distance from WorkingPoint
-    private float mTimeToOrigin = 0.5f;                 // Time in which the Bowl need to be at his Origin
-    private Vector3 mBowlSpeed = Vector3.zero;          // Bowl Speed during movement to Origin
-
     // OUTPUT
     private PackageScript mOutput = null;
 
     // RESOURCES
     private GameObject mPackagePrefab = null;
 
-
+    private void Awake()
+    {
+        mInputPlayerInteract = InputManager.Get().mPlayerInteract;
+    }
     private void Start()
     {
         mCameraController = mCamera.GetComponent<CameraController>();
@@ -92,6 +90,10 @@ public class Packaging_MainScript : MonoBehaviour
             mState = State.Completing;
         }
     }
+
+    #region Label
+    private bool mIsOnPrinter = false;
+
     private void SelectLabel()
     {
         // Screen + Drag&drop label + glue
@@ -99,13 +101,28 @@ public class Packaging_MainScript : MonoBehaviour
 
         List<GameObject> hitDraggables = mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Printer");
 
-        if(hitDraggables.Count > 0)
+        if(hitDraggables.Count > 0 && mIsOnPrinter == false)
         {
-            Transform viewPoint = hitDraggables[0].transform.Find("ViewPoint").transform;
             mCameraController.GoTo(hitDraggables[0].transform.Find("ViewPoint").transform);
-            //mCamera.transform.SetPositionAndRotation(viewPoint.position, viewPoint.rotation);
+            mInputPlayerInteract.Player.Open.Disable();
+            mIsOnPrinter = true;
+        }
+        if(mIsOnPrinter == true && mInputPlayerInteract.Player.Close.triggered == true)
+        {
+            mCameraController.Back();
+            mInputPlayerInteract.Player.Open.Enable();
+            mIsOnPrinter = false;
         }
     }
+    #endregion
+
+    #region Package
+    private GameObject mBowl = null;              // Bowl reference
+    private Vector3 mBowlOrigin = Vector3.zero;         // Bowl Origin position
+    private float mBowlOriginDistance = 0f;             // Bowl Origin distance from WorkingPoint
+    private float mTimeToOrigin = 0.5f;                 // Time in which the Bowl need to be at his Origin
+    private Vector3 mBowlSpeed = Vector3.zero;          // Bowl Speed during movement to Origin
+
     private void FillPackage()
     {
         if(mBowl != null)
@@ -136,4 +153,5 @@ public class Packaging_MainScript : MonoBehaviour
             mOutput.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
         }
     }
+    #endregion
 }

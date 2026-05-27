@@ -102,6 +102,15 @@ public partial class @Input_PlayerInteract: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""b979bcb6-6089-4d95-918a-48daaa6c59b9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Select"",
                     ""type"": ""Button"",
                     ""id"": ""2c0c2467-ca24-4e0a-a549-5203d6b44965"",
@@ -131,6 +140,17 @@ public partial class @Input_PlayerInteract: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a609e9ed-d404-4cdc-b2fb-a44edc0567f2"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Close"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -170,6 +190,7 @@ public partial class @Input_PlayerInteract: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Open = m_Player.FindAction("Open", throwIfNotFound: true);
+        m_Player_Close = m_Player.FindAction("Close", throwIfNotFound: true);
         m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
@@ -256,6 +277,7 @@ public partial class @Input_PlayerInteract: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Open;
+    private readonly InputAction m_Player_Close;
     private readonly InputAction m_Player_Select;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -272,6 +294,10 @@ public partial class @Input_PlayerInteract: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Open".
         /// </summary>
         public InputAction @Open => m_Wrapper.m_Player_Open;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Close".
+        /// </summary>
+        public InputAction @Close => m_Wrapper.m_Player_Close;
         /// <summary>
         /// Provides access to the underlying input action "Player/Select".
         /// </summary>
@@ -305,6 +331,9 @@ public partial class @Input_PlayerInteract: IInputActionCollection2, IDisposable
             @Open.started += instance.OnOpen;
             @Open.performed += instance.OnOpen;
             @Open.canceled += instance.OnOpen;
+            @Close.started += instance.OnClose;
+            @Close.performed += instance.OnClose;
+            @Close.canceled += instance.OnClose;
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
@@ -322,6 +351,9 @@ public partial class @Input_PlayerInteract: IInputActionCollection2, IDisposable
             @Open.started -= instance.OnOpen;
             @Open.performed -= instance.OnOpen;
             @Open.canceled -= instance.OnOpen;
+            @Close.started -= instance.OnClose;
+            @Close.performed -= instance.OnClose;
+            @Close.canceled -= instance.OnClose;
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
@@ -468,6 +500,13 @@ public partial class @Input_PlayerInteract: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOpen(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Close" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnClose(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Select" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

@@ -24,8 +24,8 @@ public class CameraController : MonoBehaviour
 
     // Camera Slerp
     private List<Transform> mDepths = new List<Transform>();
-    private float mMoveSpeed = 10f;
-    private float mRotationSpeed = 10f;
+    private float mMoveSpeed = 5f;
+    private float mRotationSpeed = 5f;
     private float mTargetRotation = 0f;
     private float mRotationAmount = 90f;
 
@@ -158,8 +158,8 @@ public class CameraController : MonoBehaviour
 
     void Awake()
     {
-        mInputPlayerMovement = new Input_PlayerMovement();
-        mInputPlayerInteract = new Input_PlayerInteract();
+        mInputPlayerMovement = InputManager.Get().mPlayerMovement;
+        mInputPlayerInteract = InputManager.Get().mPlayerInteract;
         mCamera = GetComponent<Camera>();
     }
     void OnEnable()

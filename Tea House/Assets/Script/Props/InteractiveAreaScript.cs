@@ -11,15 +11,15 @@ public class InteractiveAreaScript : MonoBehaviour
     private CameraController mCameraController;
     private void Awake()
     {
-        inputInteract = new Input_PlayerInteract();
+        inputInteract = InputManager.Get().mPlayerInteract;
     }
     private void OnEnable()
     {
-        inputInteract.Enable();
+        inputInteract.Player.Open.Enable();
     }
     private void OnDisable()
     {
-        inputInteract.Disable();
+        inputInteract.Player.Open.Disable();
     }
     void Start()
     {
