@@ -1,28 +1,65 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.LowLevelPhysics2D.PhysicsShape;
 
 public class WorkBenchScript : MonoBehaviour
 {
     private Packaging_MainScript mPackaging;
+    public CameraController mCameraController;
 
-    private IngredientData currentItem = null;
+    public Inventory inventory;
+
+    public List<GameObject> mJars = new List<GameObject>();
+    public IngredientData currentItem = null;
+
     private GameObject currentItemG = null;
-    private GameObject mMortar;
+    private GameObject mBowl;
 
     private Vector3 posOffset = new Vector3(0f,0.1f,0f);
     private IngredientData mTotalIngredient;
     private void Awake()
     {
         mTotalIngredient = ScriptableObject.CreateInstance<IngredientData>();
-        mMortar = transform.Find("SM_Mortar_bowl").gameObject;
-
+        mBowl = transform.Find("SM_Mortar_bowl").gameObject;
     }
-    public void SelectItem(IngredientData ingredient)
+
+    private void Update()
     {
+        if(currentItem == null)
+        {
+            List<GameObject> hitDraggables = mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Storage");
+            Debug.Log(hitDraggables.Count);
+            if (hitDraggables.Count > 0)
+            {
+                if (hitDraggables[0].TryGetComponent(out WorkBenchStorageScript workBenchStorageScript))
+                {
+                    GameObject gO = SelectItem(workBenchStorageScript.ingredient);
+                    inventory.RemoveItem(currentItem, 1);
+                    workBenchStorageScript.CheckIngredient();
+
+                    mCameraController.StartDragging(gO);
+                }
+            }
+        }
+        else
+        {
+            List<GameObject> hitDraggables = mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Ingredient");
+
+            if (hitDraggables.Count > 0)
+            {
+                GameObject gO = hitDraggables[0];
+                mCameraController.StartDragging(gO);
+            }
+        }
+    }
+
+    public GameObject SelectItem(IngredientData ingredient)
+    {
+        Debug.Log("Mint");
         currentItem = ingredient;
         currentItemG = ingredient.mModel;
 
-        Instantiate(currentItemG, mMortar.transform.position + posOffset, Quaternion.identity, mMortar.transform);
+        return Instantiate(currentItemG, mBowl.transform.position, Quaternion.identity, mBowl.transform);
     }
     public void AddIngredient()
     {

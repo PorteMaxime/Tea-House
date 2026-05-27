@@ -1,12 +1,15 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class workBenchStorageScript : MonoBehaviour
+public class WorkBenchStorageScript : MonoBehaviour
 {
     public IngredientData ingredient;
+    public CameraController mCameraController;
+    public Inventory inventory;
     public int amount;
 
-    public Inventory inventory;
     private WorkBenchScript workBenchScript;
 
     void Awake()
@@ -22,26 +25,12 @@ public class workBenchStorageScript : MonoBehaviour
     {
         amount = inventory.mIngredients[ingredient];
     }
-
     private void OnMouseDown()
     {
         Debug.Log("TestMouseEnter");
     }
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                Debug.Log("Objet cliqué : " + hit.collider.name);
-
-                workBenchScript.SelectItem(ingredient);
-                inventory.RemoveItem(ingredient, 1);
-                CheckIngredient();
-
-            }
-        }
+        
     }
 }

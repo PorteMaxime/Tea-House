@@ -35,17 +35,4 @@ public class IngredientScript : MonoBehaviour
 
         mIsTorrefied = false;
     }
-
-    private void Update()
-    {
-        if (input.Debug.GetFragmentIngredient.triggered)
-        {
-            mMeshRenderer.enabled = false;
-            Instantiate(mIngredientData.mFragIngredient, transform.position + new Vector3(0.1f, 0f, 0f), Quaternion.identity);
-            Instantiate(mIngredientData.mFragIngredient, transform.position + new Vector3(-0.1f, 0f, 0f), Quaternion.identity);
-            Instantiate(mIngredientData.mFragIngredient, transform.position, Quaternion.identity);
-            Instantiate(mIngredientData.mFragIngredient, transform.position + new Vector3(0f, 0f, 0.1f), Quaternion.identity);
-            Instantiate(mIngredientData.mFragIngredient, transform.position + new Vector3(0f, 0f, -0.1f), Quaternion.identity);
-        }
-    }
 }

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1806575828489847068}
   - component: {fileID: 4126860860411975028}
   - component: {fileID: 7976558308363450478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: workBenchStorage
-  m_TagString: Untagged
+  m_TagString: Storage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,10 +111,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.92379004
-  m_Height: 5.7798715
+  m_Radius: 0.5000001
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.42378992, y: 0.39769113, z: -0.000000074505806}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &7976558308363450478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
+  mCameraController: {fileID: 0}
   amount: 0
   inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
-  workBenchScript: {fileID: 0}
