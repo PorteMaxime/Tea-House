@@ -14,6 +14,16 @@ using static UnityEngine.GraphicsBuffer;
 
 public class CameraController : MonoBehaviour
 {
+    //#region Singleton
+    //private static CameraController mInstance = null;
+    //public static CameraController Get()
+    //{
+    //    if(mInstance == null)
+    //        mInstance = new CameraController();
+    //    return mInstance;
+    //}
+    //#endregion
+
     private Input_PlayerMovement mInputPlayerMovement;
     private Input_PlayerInteract mInputPlayerInteract;
     private Camera mCamera;
@@ -70,6 +80,10 @@ public class CameraController : MonoBehaviour
 
         mHolding = null;
         mHasReleasedDrag = false;
+    }
+    public bool IsDragging()
+    {
+        return mHolding != null;
     }
 
     #endregion
@@ -217,7 +231,7 @@ public class CameraController : MonoBehaviour
         {
             if (mHasReleasedDrag == true)
                 StopDragging();
-            if (!mInputPlayerInteract.Player.Select.IsPressed() && mHolding != null)
+            if (mInputPlayerInteract.Player.Select.IsPressed() == false && mHolding != null)
                 mHasReleasedDrag = true;
             else
             {
@@ -228,18 +242,6 @@ public class CameraController : MonoBehaviour
                     Vector3 worldPos = mCamera.ScreenToWorldPoint(mousePos);
                     worldPos.x = mHolding.transform.position.x;
                     mHolding.transform.position = worldPos;
-
-                    //if (mHoldingsRigidbody == null)
-                    //    mHoldingsRigidbody = mHolding.GetComponent<Rigidbody>();
-
-                    //if (mHoldingsRigidbody == null)
-                    //else
-                    //{
-                    //    Vector3 dir3 = worldPos - mHolding.transform.position;
-                    //    dir3.Normalize();
-
-                    //    mHoldingsRigidbody.linearVelocity = dir3 * mDragSpeed;
-                    //}
                 }
             }
         }

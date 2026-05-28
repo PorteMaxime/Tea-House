@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TreeEditor;
 using Unity.Hierarchy;
+using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Packaging_MainScript : MonoBehaviour
 {
@@ -130,6 +130,7 @@ public class Packaging_MainScript : MonoBehaviour
     {
         if(mBowl != null)
         {
+            if (mBowl.transform.rotation == new Quaternion(0, 1, 0, 0)) mBowl.GetComponent<MeshRenderer>().material.color = Color.black;
             Vector3 angle = new Vector3();
             if (mBowl.transform.position.y >= mWorkingPointCollider.bounds.min.y) angle.x += 15f;
             if (mBowl.transform.position.y >= mWorkingPointGo.transform.position.y) angle.x += 15f;
