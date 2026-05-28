@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BruisingState : IWorkbench
 {
-    WorkbenchSystem mWorkbench;
+    WorkbenchScript mWorkbench;
     Vector3 initBowlPos = Vector3.zero;
     Quaternion initBowlRot = Quaternion.identity;
     Vector3 initMortarPos = Vector3.zero;
@@ -14,7 +14,7 @@ public class BruisingState : IWorkbench
 
     bool isEmpty = true;
     bool mItemBruised = false;
-    public BruisingState(WorkbenchSystem system)
+    public BruisingState(WorkbenchScript system)
     {
         mWorkbench = system;
     }

@@ -5,8 +5,8 @@ using UnityEngine.Rendering.VirtualTexturing;
 
 public class SelectItemState : IWorkbench
 {
-    private WorkbenchSystem mWorkbench;
-    public SelectItemState(WorkbenchSystem system)
+    private WorkbenchScript mWorkbench;
+    public SelectItemState(WorkbenchScript system)
     {
         mWorkbench = system;
     }

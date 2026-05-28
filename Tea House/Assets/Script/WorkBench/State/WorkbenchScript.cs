@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WorkbenchSystem : MonoBehaviour
+public class WorkbenchScript : MonoBehaviour
 {
     public CameraController mCameraController;
     public Packaging_MainScript mPackaging;
