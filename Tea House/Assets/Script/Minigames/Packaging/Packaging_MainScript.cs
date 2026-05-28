@@ -1,7 +1,9 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TreeEditor;
 using Unity.Hierarchy;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,8 +29,9 @@ public class Packaging_MainScript : MonoBehaviour
 
     private IngredientData mData = null;
 
-    private GameObject mWorkingPoint = null;
-    private WorkingPointCollider mWorkingPointCollider = null;
+    private GameObject mWorkingPointGo = null;
+    private WorkingPoint mWorkingPoint = null;
+    private Collider mWorkingPointCollider = null;
 
     // OUTPUT
     private PackageScript mOutput = null;
@@ -44,11 +47,11 @@ public class Packaging_MainScript : MonoBehaviour
     {
         mCameraController = mCamera.GetComponent<CameraController>();
         mPackagePrefab = Resources.Load<GameObject>("Items/Package");
-        mWorkingPoint = transform.Find("WorkingPoint").gameObject;
-        mWorkingPointCollider = mWorkingPoint.GetComponent<WorkingPointCollider>();
+        mWorkingPointGo = transform.Find("WorkingPoint").gameObject;
+        mWorkingPoint = mWorkingPointGo.GetComponent<WorkingPoint>();
+        mWorkingPointCollider = mWorkingPointGo.GetComponent<Collider>();
 
         mBowlOrigin = transform.Find("MixtureBowl").transform.position;
-        mBowlOriginDistance = Vector3.Distance(mBowlOrigin, mWorkingPoint.transform.position);
 
         // Temporary for waiting Workbench
         SetIngredientData(new IngredientData());
@@ -56,15 +59,15 @@ public class Packaging_MainScript : MonoBehaviour
 
     private void Update()
     {
-        if (mData == null || mCamera == null) return;
+        //if (mData == null || mCamera == null) return;
         if (mState == State.PacketChoosing) SelectPackage();
         if (mState == State.Completing) CompletingUpdate();
     }
-    
+
     private void CompletingUpdate()
     {
-        if (mIsLabelled == false) SelectLabel();
-        if (mIsFilled == false) FillPackage();
+        SelectLabel();
+        FillPackage();
     }
 
     public void SetIngredientData(IngredientData _ingredientData)
@@ -76,7 +79,7 @@ public class Packaging_MainScript : MonoBehaviour
     private void SelectPackage()
     {
         List<GameObject> packages = mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Package");
-        if(packages.Count > 0)
+        if (packages.Count > 0)
         {
             GameObject package = Instantiate(mPackagePrefab, mWorkingPoint.transform.position, Quaternion.identity);
 
@@ -101,13 +104,13 @@ public class Packaging_MainScript : MonoBehaviour
 
         List<GameObject> hitDraggables = mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Printer");
 
-        if(hitDraggables.Count > 0 && mIsOnPrinter == false)
+        if (hitDraggables.Count > 0 && mIsOnPrinter == false && mCameraController.mHolding == null)
         {
             mCameraController.GoTo(hitDraggables[0].transform.Find("ViewPoint").transform);
             mInputPlayerInteract.Player.Open.Disable();
             mIsOnPrinter = true;
         }
-        if(mIsOnPrinter == true && mInputPlayerInteract.Player.Close.triggered == true)
+        if (mIsOnPrinter == true && mInputPlayerInteract.Player.Close.triggered == true)
         {
             mCameraController.Back();
             mInputPlayerInteract.Player.Open.Enable();
@@ -117,9 +120,9 @@ public class Packaging_MainScript : MonoBehaviour
     #endregion
 
     #region Package
-    private GameObject mBowl = null;              // Bowl reference
+    private GameObject mBowl = null;                    // Bowl reference
+    private Collider mBowlCollider = null;              // Bowl Collider
     private Vector3 mBowlOrigin = Vector3.zero;         // Bowl Origin position
-    private float mBowlOriginDistance = 0f;             // Bowl Origin distance from WorkingPoint
     private float mTimeToOrigin = 0.5f;                 // Time in which the Bowl need to be at his Origin
     private Vector3 mBowlSpeed = Vector3.zero;          // Bowl Speed during movement to Origin
 
@@ -127,11 +130,22 @@ public class Packaging_MainScript : MonoBehaviour
     {
         if(mBowl != null)
         {
-            float dist = Vector3.Distance(mWorkingPoint.transform.position, mBowl.transform.position);
-            float currentAngle = 360f * Mathf.InverseLerp(-mBowlOriginDistance, 0f, -dist);
+            Vector3 angle = new Vector3();
+            if (mBowl.transform.position.y >= mWorkingPointCollider.bounds.min.y) angle.x += 15f;
+            if (mBowl.transform.position.y >= mWorkingPointGo.transform.position.y) angle.x += 15f;
+            if (mBowl.transform.position.y >= mWorkingPointCollider.bounds.max.y) angle.x += 15f;
 
-            mBowl.transform.rotation = Quaternion.Euler(currentAngle, 0f, 0f);
+            if ((mBowlCollider.bounds.max.z >= mWorkingPointCollider.bounds.min.z && mBowlCollider.bounds.max.z <= mWorkingPointCollider.bounds.max.z) ||
+                (mBowlCollider.bounds.min.z <= mWorkingPointCollider.bounds.max.z && mBowlCollider.bounds.min.z >= mWorkingPointCollider.bounds.min.z)) angle.x += 25f;
+
+            if (mBowlCollider.bounds.max.z > mWorkingPointCollider.bounds.max.z && mBowlCollider.bounds.min.z < mWorkingPointCollider.bounds.min.z) angle.x = 0f;
+            else if (mBowlCollider.bounds.max.z > mWorkingPointCollider.bounds.max.z) angle.x = -angle.x;
+
+            mBowl.transform.rotation = Quaternion.RotateTowards(mBowl.transform.rotation, Quaternion.Euler(angle), 90f * Time.deltaTime);
         }
+        if (mBowl != null && mCameraController.mHolding == null)
+            mBowl.transform.position = Vector3.SmoothDamp(mBowl.transform.position, mBowlOrigin, ref mBowlSpeed, mTimeToOrigin);
+
         if (mIsFilled == true) return;
 
         // Drag&drop bowl
@@ -140,12 +154,12 @@ public class Packaging_MainScript : MonoBehaviour
         if (hitDraggables.Count > 0 && mCameraController.mHolding == null)
         {
             mBowl = hitDraggables[0];
+            mBowlCollider = mBowl.GetComponent<Collider>();
             mCameraController.StartDragging(hitDraggables[0]);
         }
-        if (mBowl != null && mCameraController.mHolding == null)
-            mBowl.transform.position = Vector3.SmoothDamp(mBowl.transform.position, mBowlOrigin, ref mBowlSpeed, mTimeToOrigin);
+        
 
-        if (mWorkingPointCollider.mCollider != null && mWorkingPointCollider.mCollider.tag == "Ingredient")
+        if (mWorkingPoint.mCollider != null && mWorkingPoint.mCollider.tag == "Ingredient" && mWorkingPoint.mCollider == mCameraController.mHolding)
         {
             mOutput.mIngredient = mData;
             mIsFilled = true;

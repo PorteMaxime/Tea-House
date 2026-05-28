@@ -56,7 +56,6 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Press F to interact");
             mCameraController.AddInteractionTarget(gameObject);
             canIntercat = true;
         }
