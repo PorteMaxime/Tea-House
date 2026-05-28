@@ -64,7 +64,7 @@ public class MailsPageScript : MonoBehaviour
 
         // Mise à jour informations mail
         temp = mCanvasMailContent.transform.Find("ImageMailTitle/ImageProfile");
-        if (temp != null)
+        //if (temp != null)
             //temp.GetComponent<Image>(); // changer image
         temp = mCanvasMailContent.transform.Find("ImageMailTitle/TextSubject");
         if (temp != null)
@@ -108,7 +108,8 @@ public class MailsPageScript : MonoBehaviour
 
         // Ajout action
         Button prefabButton = prefab.GetComponent<Transform>().Find("ButtonShowMail").GetComponent<Button>();
-        prefabButton.onClick.AddListener(() => SelectMail(prefab));
+        if (prefabButton != null)
+            prefabButton.onClick.AddListener(() => SelectMail(prefab));
 
         mMailsDictionary.Add(mail, prefab);
     }
@@ -127,7 +128,7 @@ public class MailsPageScript : MonoBehaviour
     }
 }
 
-/* À faire :
+/* A faire :
  * - suppression prefabs quand les mails n'existent plus (appeler fonction via le MailManager.cs ?)
  * - mettre à jour les infos sur l'interface par rapport au mail sélectionné -> SelectMail()
  * - modifier arrière plan prefab quand il est sélectionné (afficher arrière plan différent ?) -> SelectMail() DeSelectMail()
