@@ -477,6 +477,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2036718183}
   m_SourcePrefab: {fileID: 100100000, guid: 63f55eb0eaad8184dafd7693cebcb248, type: 3}
+--- !u!114 &370079248 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1450007365970391126, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+  m_PrefabInstance: {fileID: 5340898438851890592}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00596e861fc218f4f85e8d0a6849a753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Packaging_MainScript
 --- !u!1001 &392441368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -621,14 +632,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkbenchSystem
   mCameraController: {fileID: 1103913568}
-  mPackaging: {fileID: 0}
+  mPackaging: {fileID: 370079248}
   inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
   mBowl: {fileID: 1364703772}
   mMortar: {fileID: 1007461541}
   mMixtureBowl: {fileID: 1455198945}
-  currentItem: {fileID: 0}
+  mCurrentItem: {fileID: 0}
   currentItemG: {fileID: 0}
   mMixture: {fileID: 0}
+  mBruiseIngrdient: {fileID: 0}
 --- !u!65 &665678379
 BoxCollider:
   m_ObjectHideFlags: 0
