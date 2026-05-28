@@ -5,6 +5,7 @@ using UnityEngine.InputSystem.DualShock.LowLevel;
 using System;
 using Random = UnityEngine.Random;
 using System.Collections;
+using System.Linq;
 
 public class MailManager : MonoBehaviour
 {
@@ -133,5 +134,23 @@ public class MailManager : MonoBehaviour
     IEnumerator SendMail()
     {
         yield return new WaitForSeconds(3);
+    }
+
+    public List<Mail> GetMailsOfState(Order.State[] state)
+    {
+        List<Mail> returnedMails = new List<Mail>();
+
+        foreach (Mail mail in mMails)
+        {
+            if (state.Contains(mail.mOrder.mState))
+                returnedMails.Add(mail);
+        }
+
+        return returnedMails;
+    }
+
+    public List<Mail> GetMailsOfState(Order.State state)
+    {
+        return GetMailsOfState(new Order.State[1] { state });
     }
 }

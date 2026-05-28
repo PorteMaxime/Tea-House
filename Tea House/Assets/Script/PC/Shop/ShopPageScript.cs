@@ -5,13 +5,20 @@ using UnityEngine;
 public class ShopPageScript : MonoBehaviour
 {
     //public List<> mShopItems;
+    //public Dictionary<IngredientData, int> mShoppingCart;
 
-    public Dictionary<IngredientData, int> mShoppingCart;
+    private GameObject mCanvasCart;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
-        
+        Transform temp = transform.Find("CanvasCart");
+        if (temp != null)
+            mCanvasCart = temp.gameObject;
+    }
+
+    private void OnDisable()
+    {
+        ToggleCart(false);
     }
 
     // Update is called once per frame
@@ -22,11 +29,16 @@ public class ShopPageScript : MonoBehaviour
 
     private void CreateItems()
     {
+        // créer items shop
+    }
 
+    public void ToggleCart(bool active)
+    {
+        mCanvasCart.SetActive(active);
     }
 
     bool CanBuyCartContent()
     {
-        return true;
+        return true; // modifier
     }
 }
