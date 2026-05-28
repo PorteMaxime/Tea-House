@@ -10,12 +10,6 @@ public class WorkBenchStorageScript : MonoBehaviour
     public Inventory inventory;
     public int amount;
 
-    private WorkBenchScript workBenchScript;
-
-    void Awake()
-    {
-        workBenchScript = transform.parent.GetComponent<WorkBenchScript>();
-    }
     void Start()
     {
         inventory.AddItem(ingredient, 5);
@@ -24,13 +18,5 @@ public class WorkBenchStorageScript : MonoBehaviour
     public void CheckIngredient()
     {
         amount = inventory.mIngredients[ingredient];
-    }
-    private void OnMouseDown()
-    {
-        Debug.Log("TestMouseEnter");
-    }
-    void Update()
-    {
-        
     }
 }

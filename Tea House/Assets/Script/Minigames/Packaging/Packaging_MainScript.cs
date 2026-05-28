@@ -24,7 +24,7 @@ public class Packaging_MainScript : MonoBehaviour
     private bool mIsLabelled = false;
     private bool mIsFilled = false;
 
-    private IngredientData mData = null;
+    [SerializeField]private IngredientData mData = null;
 
     private GameObject mWorkingPoint = null;
     private WorkingPointCollider mWorkingPointCollider = null;
@@ -51,9 +51,6 @@ public class Packaging_MainScript : MonoBehaviour
 
         mBowlOrigin = transform.Find("MixtureBowl").transform.position;
         mBowlOriginDistance = Vector3.Distance(mBowlOrigin, mWorkingPoint.transform.position);
-
-        // Temporary for waiting Workbench
-        SetIngredientData(new IngredientData());
     }
 
     private void Update()
