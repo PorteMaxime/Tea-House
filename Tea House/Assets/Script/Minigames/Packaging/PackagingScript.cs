@@ -1,19 +1,23 @@
 using Unity.Android.Gradle.Manifest;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PackagingScript : MonoBehaviour
 {
+    #region StateMachine
     public PackagingStateMachine mStateMachine;
 
     public PacketChoosingState mChoosing = null;
     public PacketCompleting mCompleting = null;
     public PacketFilling mFilling = null;
     public PacketLabelling mLabelling = null;
+    #endregion
 
     public CameraController mCameraController = null;
     public WorkingPoint mWorkingPoint = null;
 
     public PackageScript mOutput = null;
+    public GameObject mOutputGO = null;
     void Start()
     {
         mCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
