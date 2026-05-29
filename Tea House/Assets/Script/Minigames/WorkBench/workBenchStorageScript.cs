@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class WorkBenchStorageScript : MonoBehaviour
 {
     public IngredientData ingredient;
-    public CameraController mCameraController;
     public Inventory inventory;
     public int amount;
 

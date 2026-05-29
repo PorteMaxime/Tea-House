@@ -55,6 +55,8 @@ public class SelectItemState : IWorkbench
         mWorkbench.inventory.RemoveItem(mWorkbench.mCurrentItem, 1);
         mWorkbench.mCameraController.StopDragging();
     }
+
+
     void InitIngredient(IngredientData _ingredient)
     {
         mWorkbench.mCurrentItem = _ingredient;
