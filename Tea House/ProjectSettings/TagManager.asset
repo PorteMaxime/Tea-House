@@ -8,6 +8,10 @@ TagManager:
   - Package
   - Printer
   - Ingredient
+  - Storage
+  - WorkingPoint
+  - Bowl
+  - Mortar
   layers:
   - Default
   - TransparentFX
