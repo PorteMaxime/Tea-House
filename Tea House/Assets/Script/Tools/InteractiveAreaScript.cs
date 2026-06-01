@@ -35,21 +35,37 @@ public class InteractiveAreaScript : MonoBehaviour
                 isUsing = !isUsing && mCameraController.CanInteractWith(gameObject);
                 if (isUsing)
                 {
-                    mCameraController.GoTo(transform.Find("CameraMovePoint").transform);
-                    mCameraController.SetState(CameraController.CameraStates.zoom);
-                    mCameraController.mInteractionPopup.SetActive(false);
+                    Enter();
                 }
                 else if (mCameraController.GetState() == CameraController.CameraStates.zoom)
                 {
-                    mCameraController.Back();
-                    mCameraController.SetState(CameraController.CameraStates.orbitale);
-                    mCameraController.StopDragging();
+                    Quit();
                 }
-                mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = !isUsing;
-                mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = !isUsing;
             }
         }
 
+    }
+
+    public void Enter()
+    {
+        mCameraController.GoTo(transform.Find("CameraMovePoint").transform);
+        mCameraController.SetState(CameraController.CameraStates.zoom);
+        mCameraController.mInteractionPopup.SetActive(false);
+
+        mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = false;
+        mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = false;
+        isUsing = true;
+    }
+
+    public void Quit()
+    {
+        mCameraController.Back();
+        mCameraController.SetState(CameraController.CameraStates.orbitale);
+        mCameraController.StopDragging();
+
+        mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = true;
+        mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = true;
+        isUsing = false;
     }
 
     private void OnTriggerEnter(Collider other)

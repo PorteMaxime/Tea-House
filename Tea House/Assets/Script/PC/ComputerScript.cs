@@ -62,7 +62,6 @@ public class ComputerScript : MonoBehaviour
     {
         mActiveCanvas.SetActive(false);
 
-        mCameraController.SetCameraOrbitaleState();
-        interactionScript.isUsing = false;
+        interactionScript.Quit();
     }
 }
