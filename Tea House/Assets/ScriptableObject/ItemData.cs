@@ -9,4 +9,6 @@ public class ItemData : ScriptableObject
     public int mRelaxation;
     public int mEnergy;
     public int mPrestige;
+
+    public int mPrice;
 }

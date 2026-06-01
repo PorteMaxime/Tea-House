@@ -7,6 +7,7 @@ public class Order
         Waiting,
 
         Accepted,
+        Rejected,
 
         Completed,
         Expired
