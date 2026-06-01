@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7209797304831986028}
   - component: {fileID: 759531501476178173}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: TextAddToCart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 6015581150768655246}
   - component: {fileID: 5823659990597511167}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: TextAdd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 162715451337795852}
   - component: {fileID: 6775419612527291717}
   m_Layer: 5
-  m_Name: ShopItem
+  m_Name: CanvasShopItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 2909454809622840847}
   - component: {fileID: 5974615028534396624}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: ButtonAddToCart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 8723122642613652269}
   - component: {fileID: 3703908585241140299}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: TextRemove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,7 +772,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4024953889250607153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -881,7 +881,7 @@ GameObject:
   - component: {fileID: 2757766326280158739}
   - component: {fileID: 8904826777027578494}
   m_Layer: 5
-  m_Name: TextCurrentQuantity
+  m_Name: TextAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
