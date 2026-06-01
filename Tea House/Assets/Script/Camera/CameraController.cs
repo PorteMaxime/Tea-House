@@ -5,13 +5,25 @@ using System.Reflection;
 using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using UnityEngine.Windows;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.GraphicsBuffer;
 
 public class CameraController : MonoBehaviour
 {
+    //#region Singleton
+    //private static CameraController mInstance = null;
+    //public static CameraController Get()
+    //{
+    //    if(mInstance == null)
+    //        mInstance = new CameraController();
+    //    return mInstance;
+    //}
+    //#endregion
+
     private Input_PlayerMovement mInputPlayerMovement;
     private Input_PlayerInteract mInputPlayerInteract;
     private Camera mCamera;
@@ -39,9 +51,10 @@ public class CameraController : MonoBehaviour
 
     #region DragAndDrop
     // Drag & Drop
-    public GameObject mHolding = null;      // GameObject holded
-    public bool mHasReleasedDrag = false;   // Gameobject is released last frame ?
-    private float mCameraDistance;          // Distance between camera and gameobject
+    public GameObject mHolding = null;              // GameObject holded
+    private bool mHoldingWasGravity = false;        // Before dragging, mHolding was submit to gravity ?
+    public bool mHasReleasedDrag = false;           // Gameobject is released last frame ?
+    private float mCameraDistance;                  // Distance between camera and gameobject
 
     public void StartDragging(GameObject target)
     {
@@ -52,17 +65,25 @@ public class CameraController : MonoBehaviour
         mCameraDistance = mCamera.WorldToScreenPoint(mHolding.transform.position).z;
 
         Rigidbody rb = target.GetComponent<Rigidbody>();
-        if (rb != null) rb.useGravity = false;
+        if (rb != null) 
+        {
+            mHoldingWasGravity = rb.useGravity;
+            rb.useGravity = false; 
+        }
     }
     public void StopDragging()
     {
         if (mHolding == null) return;
 
         Rigidbody rb = mHolding.GetComponent<Rigidbody>();
-        if (rb != null) rb.useGravity = true;
+        if (rb != null) rb.useGravity = mHoldingWasGravity;
 
         mHolding = null;
         mHasReleasedDrag = false;
+    }
+    public bool IsDragging()
+    {
+        return mHolding != null;
     }
 
     #endregion
@@ -118,7 +139,7 @@ public class CameraController : MonoBehaviour
     {
         return GetRaycastHit(new LayerMask[1] { layer }, tags);
     }
-    public List<GameObject> GetRaycastHit(LayerMask[] layers, string tag = "")
+    public List<GameObject> GetRaycastHit(LayerMask[] layers, string tag)
     {
         return GetRaycastHit(layers, new string[1] { tag });
     }
@@ -182,8 +203,8 @@ public class CameraController : MonoBehaviour
         mInteractionPopup.SetActive(false);
     }
     void Update()
-    {        
-        if(mDepths.Count > 0)
+    {
+        if (mDepths.Count > 0)
         {
             transform.position = Vector3.Slerp(transform.position, mDepths[mDepths.Count - 1].position, mMoveSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, mDepths[mDepths.Count - 1].rotation, mRotationSpeed * Time.deltaTime);
@@ -210,7 +231,7 @@ public class CameraController : MonoBehaviour
         {
             if (mHasReleasedDrag == true)
                 StopDragging();
-            if (!mInputPlayerInteract.Player.Select.IsPressed() && mHolding != null)
+            if (mInputPlayerInteract.Player.Select.IsPressed() == false && mHolding != null)
                 mHasReleasedDrag = true;
             else
             {
@@ -219,11 +240,10 @@ public class CameraController : MonoBehaviour
                     Vector3 mousePos = Mouse.current.position.ReadValue();
                     mousePos.z = mCameraDistance;
                     Vector3 worldPos = mCamera.ScreenToWorldPoint(mousePos);
-
+                    worldPos.x = mHolding.transform.position.x;
                     mHolding.transform.position = worldPos;
                 }
             }
-
         }
     }
     void OrbitalUpdate()
