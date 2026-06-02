@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7212437231784533800}
   - component: {fileID: 5198996499045840672}
-  - component: {fileID: 7180291686851739324}
+  - component: {fileID: 8594215288454670127}
   m_Layer: 9
   m_Name: WorkingPoint
   m_TagString: Untagged
@@ -232,7 +232,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7180291686851739324
+--- !u!114 &8594215288454670127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,9 +241,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7244665683651039728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 390acd695cda35443b127dda80f9214a, type: 3}
+  m_Script: {fileID: 11500000, guid: 49071b30c88fbd342ba85675938d0bbf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorkingPointCollider
+  m_EditorClassIdentifier: Assembly-CSharp::WorkingPoint
   mCollider: {fileID: 0}
 --- !u!1 &7996184662912848925
 GameObject:
