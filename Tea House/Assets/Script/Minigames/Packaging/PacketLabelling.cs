@@ -11,11 +11,13 @@ public class PacketLabelling : IPackaging
     }
     #endregion
 
+    private GameObject mPrinterScreenUI = null;
     private GameObject mPrinterViewPoint = null;
 
     private void Init()
     {
         mPrinterViewPoint = mMain.transform.Find("Printer").transform.Find("ViewPoint").gameObject;
+        mPrinterScreenUI = mPrinterViewPoint.transform.parent.Find("PrinterScreen").gameObject;
     }
     public void OnEnter()
     {
@@ -27,10 +29,14 @@ public class PacketLabelling : IPackaging
     {
         mMain.mCameraController.Back();
         InputManager.Get().mPlayerInteract.Player.Open.Enable();
+        mPrinterScreenUI.SetActive(false);
     }
 
     public void OnUpdate()
     {
+        if (mMain.mCameraController.IsMoving(0.001f) == false && mMain.mCameraController.IsRotating(0.001f) == false)
+            mPrinterScreenUI.SetActive(true);
+
         if(InputManager.Get().mPlayerInteract.Player.Close.triggered == true)
         {
             mMain.mStateMachine.SwitchState(mMain.mCompleting);

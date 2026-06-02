@@ -207,7 +207,9 @@ public class CameraController : MonoBehaviour
         if (mDepths.Count > 0)
         {
             transform.position = Vector3.Slerp(transform.position, mDepths[mDepths.Count - 1].position, mMoveSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, mDepths[mDepths.Count - 1].position) < 0.00001f) transform.position = mDepths[mDepths.Count - 1].position;
             transform.rotation = Quaternion.Slerp(transform.rotation, mDepths[mDepths.Count - 1].rotation, mRotationSpeed * Time.deltaTime);
+            if (Quaternion.Angle(transform.rotation, mDepths[mDepths.Count - 1].rotation) < 0.00001f) transform.rotation = mDepths[mDepths.Count - 1].rotation;
         }
 
         if (mState == CameraStates.zoom) ZoomedUpdate();
@@ -290,6 +292,14 @@ public class CameraController : MonoBehaviour
             return;
         Destroy(mDepths[mDepths.Count - 1].gameObject);
         mDepths.RemoveAt(mDepths.Count - 1);
+    }
+    public bool IsMoving(float precision)
+    {
+        return mDepths.Count > 0 ? Vector3.Distance(transform.position, mDepths[mDepths.Count - 1].position) > precision : false;
+    }
+    public bool IsRotating(float precision)
+    {
+        return mDepths.Count > 0 ? Quaternion.Angle(transform.rotation, mDepths[mDepths.Count - 1].rotation) > precision : false;
     }
 
     public void SetState(CameraStates state) => mState = state;

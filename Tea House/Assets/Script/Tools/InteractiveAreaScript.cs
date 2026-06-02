@@ -43,7 +43,6 @@ public class InteractiveAreaScript : MonoBehaviour
                 }
             }
         }
-
     }
 
     public void Enter()
