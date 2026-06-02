@@ -13,6 +13,8 @@ public class CameraXRAY : MonoBehaviour
     private Camera mCamera;
 
     [SerializeField] private GameObject mTarget;
+    public float mRaycastThickness = 1f;
+
     private List<GameObject> mLastCollided = new List<GameObject>();
     private List<GameObject> mCollided = new List<GameObject>();
 
@@ -28,14 +30,14 @@ public class CameraXRAY : MonoBehaviour
         Vector3 pos = mCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
 
         Vector3 dir = mTarget.transform.position - pos;
+        float dist = Vector3.Distance(pos, dir);
         dir.Normalize();
 
-        float dist = Vector3.Distance(pos, dir);
 
         if(dist > 0f)
         {
             int layers = LayerMask.GetMask(mLayerNameToXRAY);            
-            RaycastHit[] hits = Physics.RaycastAll(pos, dir, dist, layers);
+            RaycastHit[] hits = Physics.SphereCastAll(pos, mRaycastThickness, dir, dist, layers);
 
             foreach (RaycastHit hit in hits)
             {
