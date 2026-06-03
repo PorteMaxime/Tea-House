@@ -36,6 +36,9 @@ public class MailsPageScript : MonoBehaviour
 
     private void OnEnable()
     {
+        if (MailManager.msInstance == null)
+            return;
+
         List<Mail> mailsToDisplay = MailManager.msInstance.GetMailsOfState(Order.State.Waiting);
 
         foreach (Mail mail in mailsToDisplay)
@@ -45,15 +48,16 @@ public class MailsPageScript : MonoBehaviour
         }
     }
 
-    public void SelectMail(GameObject prefabShortMail)
+    public void SelectMail(Mail mail)
     {
-        if (!mMailsDictionary.ContainsValue(prefabShortMail))
+        if (!mMailsDictionary.ContainsKey(mail))
             return;
 
-        if (mSelectedMail != null && prefabShortMail == mMailsDictionary[mSelectedMail.Item1])
+        // Si le mail est déjà sélectionné
+        if (mSelectedMail != null && mail == mSelectedMail.Item1)
             return;
 
-        mSelectedMail = new Tuple<Mail, GameObject>(mMailsDictionary.FirstOrDefault(x => x.Value == prefabShortMail).Key, prefabShortMail);
+        mSelectedMail = new Tuple<Mail, GameObject>(mail, mMailsDictionary[mail]);
 
         ToggleMailContent(true);
 
@@ -107,9 +111,9 @@ public class MailsPageScript : MonoBehaviour
         GameObject prefab = Instantiate(mMailPrefab, mScrollViewContent.transform, false);
 
         // Ajout action
-        Button prefabButton = prefab.GetComponent<Transform>().Find("ButtonShowMail").GetComponent<Button>();
+        Button prefabButton = prefab.transform.Find("ButtonShowMail").GetComponent<Button>();
         if (prefabButton != null)
-            prefabButton.onClick.AddListener(() => SelectMail(prefab));
+            prefabButton.onClick.AddListener(() => SelectMail(mail));
 
         mMailsDictionary.Add(mail, prefab);
     }
@@ -132,5 +136,6 @@ public class MailsPageScript : MonoBehaviour
  * - suppression prefabs quand les mails n'existent plus (appeler fonction via le MailManager.cs ?)
  * - mettre à jour les infos sur l'interface par rapport au mail sélectionné -> SelectMail()
  * - modifier arrière plan prefab quand il est sélectionné (afficher arrière plan différent ?) -> SelectMail() DeSelectMail()
+ * - ajouter des mails en cours de journée si les commandes peuvent être crées en pleine journée -> MailManager.cs
  * - ...
 */

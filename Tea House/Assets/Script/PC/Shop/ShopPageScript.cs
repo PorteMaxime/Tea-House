@@ -48,7 +48,9 @@ public class ShopPageScript : MonoBehaviour
 		mCartItemPrefab = Resources.Load<GameObject>("Shop/CanvasCartItem");
 
 		CreateItems();
-	}
+
+        ToggleCart(false);
+    }
 
 	private void OnDisable()
 	{
@@ -83,8 +85,8 @@ public class ShopPageScript : MonoBehaviour
 				mShopPages.Add(creationPage);
 
 				// Setup boutons page suivante et page precedente
-				Button buttonLeft = creationPage.GetComponent<Transform>().Find("ButtonLeft").GetComponent<Button>();
-                Button buttonRight = creationPage.GetComponent<Transform>().Find("ButtonRight").GetComponent<Button>();
+				Button buttonLeft = creationPage.transform.Find("ButtonLeft").GetComponent<Button>();
+                Button buttonRight = creationPage.transform.Find("ButtonRight").GetComponent<Button>();
 
 				if (buttonLeft == null || buttonRight == null)
 					break;
@@ -95,7 +97,7 @@ public class ShopPageScript : MonoBehaviour
 				{
                     buttonLeft.onClick.AddListener(() => ChangePage(-1));
 
-                    Button lastButtonRight = mShopPages[mShopPages.Count - 2].GetComponent<Transform>().Find("ButtonRight").GetComponent<Button>();
+                    Button lastButtonRight = mShopPages[mShopPages.Count - 2].transform.Find("ButtonRight").GetComponent<Button>();
 
 					if (lastButtonRight != null)
 					{
@@ -109,7 +111,7 @@ public class ShopPageScript : MonoBehaviour
 			// Nouvelle ligne dans la page
 			if (itemNumber % mShopPageSize.x == 0)
             {
-				Canvas canvasContent = creationPage.GetComponent<Transform>().Find("CanvasContent").GetComponent<Canvas>();
+				Canvas canvasContent = creationPage.transform.Find("CanvasContent").GetComponent<Canvas>();
 
 				if (canvasContent != null)
                     creationRow = Instantiate(mItemsRowPrefab, canvasContent.transform, false);
@@ -120,13 +122,13 @@ public class ShopPageScript : MonoBehaviour
             creationItem = Instantiate(mShopItemPrefab, creationRow.transform, false);
 			mShopItems.Add(item, (creationItem, null, 0));
 
-            Button changeAmount = creationItem.GetComponent<Transform>().Find("CanvasAddToCart/ButtonAddToCart").GetComponent<Button>();
+            Button changeAmount = creationItem.transform.Find("CanvasAddToCart/ButtonAddToCart").GetComponent<Button>();
             changeAmount.onClick.AddListener(() => ChangeItemAmount(item, 1));
 
-            changeAmount = creationItem.GetComponent<Transform>().Find("CanvasAddRemove/ButtonRemove").GetComponent<Button>();
+            changeAmount = creationItem.transform.Find("CanvasAddRemove/ButtonRemove").GetComponent<Button>();
             changeAmount.onClick.AddListener(() => ChangeItemAmount(item, -1));
 
-            changeAmount = creationItem.GetComponent<Transform>().Find("CanvasAddRemove/ButtonAdd").GetComponent<Button>();
+            changeAmount = creationItem.transform.Find("CanvasAddRemove/ButtonAdd").GetComponent<Button>();
             changeAmount.onClick.AddListener(() => ChangeItemAmount(item, 1));
 
             itemNumber += 1;
@@ -178,16 +180,16 @@ public class ShopPageScript : MonoBehaviour
 			{
                 tempItem.cartItem = Instantiate(mCartItemPrefab, mCanvasCartItems.transform, false);
 
-                Button changeAmount = tempItem.cartItem.GetComponent<Transform>().Find("ButtonRemove").GetComponent<Button>();
+                Button changeAmount = tempItem.cartItem.transform.Find("ButtonRemove").GetComponent<Button>();
                 changeAmount.onClick.AddListener(() => ChangeItemAmount(item, -1));
 
-                changeAmount = tempItem.cartItem.GetComponent<Transform>().Find("ButtonAdd").GetComponent<Button>();
+                changeAmount = tempItem.cartItem.transform.Find("ButtonAdd").GetComponent<Button>();
                 changeAmount.onClick.AddListener(() => ChangeItemAmount(item, 1));
             }
             else
 				tempItem.cartItem.SetActive(true);
 
-            amountText = tempItem.cartItem.GetComponent<Transform>().Find("TextAmount").GetComponent<Text>();
+            amountText = tempItem.cartItem.transform.Find("TextAmount").GetComponent<Text>();
 
             amountText.text = tempItem.mAmount.ToString();
         }
