@@ -1,4 +1,3 @@
-using NUnit.Framework.Internal;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,6 +36,8 @@ public class PacketChoosingState : IPackaging
 
     public void OnUpdate()
     {
+        if (mInitialized == false) Init(); 
+
         List<GameObject> packages = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Package");
         if (packages.Count > 0)
         {

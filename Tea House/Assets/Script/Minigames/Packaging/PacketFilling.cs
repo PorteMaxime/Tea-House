@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PacketFilling : IPackaging
@@ -62,7 +61,7 @@ public class PacketFilling : IPackaging
 
             mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.Euler(targetRotation, 0f, 0f), mRotationSpeed * Time.deltaTime);
         }
-        
+
     }
 
     private IEnumerator HomeSweetHome() // Bring back Bowl

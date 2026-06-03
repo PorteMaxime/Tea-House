@@ -10,7 +10,7 @@ public class IngredientScript : MonoBehaviour
     public MeshFilter mMeshFilter;
 
     public IngredientData mIngredientData;
-    public bool mIsTorrefied;    
+    public bool mIsTorrefied;
 
 
     private void Awake()

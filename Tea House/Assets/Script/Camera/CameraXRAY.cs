@@ -1,11 +1,5 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.HID;
-using UnityEngine.UIElements;
 
 public class CameraXRAY : MonoBehaviour
 {
@@ -34,9 +28,9 @@ public class CameraXRAY : MonoBehaviour
         dir.Normalize();
 
 
-        if(dist > 0f)
+        if (dist > 0f)
         {
-            int layers = LayerMask.GetMask(mLayerNameToXRAY);            
+            int layers = LayerMask.GetMask(mLayerNameToXRAY);
             RaycastHit[] hits = Physics.SphereCastAll(pos, mRaycastThickness, dir, dist, layers);
 
             foreach (RaycastHit hit in hits)
@@ -60,9 +54,9 @@ public class CameraXRAY : MonoBehaviour
     void UpdateCollided()
     {
         List<GameObject> toRemove = new List<GameObject>();
-        foreach(GameObject collided in mLastCollided)
+        foreach (GameObject collided in mLastCollided)
         {
-            if(mCollided.Contains(collided) == false)
+            if (mCollided.Contains(collided) == false)
             {
                 MeshRenderer mesh = GetRender(collided);
                 if (mesh != null)
@@ -74,7 +68,7 @@ public class CameraXRAY : MonoBehaviour
                 toRemove.Add(collided);
             }
         }
-        foreach(GameObject remove in toRemove)
+        foreach (GameObject remove in toRemove)
             mLastCollided.Remove(remove);
         foreach (GameObject collided in mCollided)
         {

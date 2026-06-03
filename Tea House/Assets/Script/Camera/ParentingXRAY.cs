@@ -7,19 +7,19 @@ public class ParentingXRAY : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Show(bool isShown)
     {
         MeshRenderer mesh = GetComponent<MeshRenderer>();
-        if(mesh != null) 
+        if (mesh != null)
             mesh.enabled = isShown;
 
         foreach (GameObject child in mChilds)

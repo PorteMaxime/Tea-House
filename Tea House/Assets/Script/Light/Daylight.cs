@@ -50,7 +50,7 @@ public class Daylight : MonoBehaviour
 
                 currentTime = TimeSpan.Parse("08:00");
             }
-            
+
             mPhaseDuration = mPhases[mPhase];
         }
         else

@@ -1,16 +1,6 @@
-using NUnit.Framework;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using TreeEditor;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using UnityEngine.Windows;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.GraphicsBuffer;
 
 public class CameraController : MonoBehaviour
 {
@@ -32,7 +22,7 @@ public class CameraController : MonoBehaviour
     public GameObject mInteractionPopup;
 
     private List<GameObject> zoomTargetOrder = new List<GameObject>();
-    private Vector3 zoomOffset = new Vector3(0f, 2f, 0f);    
+    private Vector3 zoomOffset = new Vector3(0f, 2f, 0f);
 
     // Camera Slerp
     private List<Transform> mDepths = new List<Transform>();
@@ -65,10 +55,10 @@ public class CameraController : MonoBehaviour
         mCameraDistance = mCamera.WorldToScreenPoint(mHolding.transform.position).z;
 
         Rigidbody rb = target.GetComponent<Rigidbody>();
-        if (rb != null) 
+        if (rb != null)
         {
             mHoldingWasGravity = rb.useGravity;
-            rb.useGravity = false; 
+            rb.useGravity = false;
         }
     }
     public void StopDragging()
@@ -206,10 +196,15 @@ public class CameraController : MonoBehaviour
     {
         if (mDepths.Count > 0)
         {
-            transform.position = Vector3.Slerp(transform.position, mDepths[mDepths.Count - 1].position, mMoveSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, mDepths[mDepths.Count - 1].position) < 0.00001f) transform.position = mDepths[mDepths.Count - 1].position;
-            transform.rotation = Quaternion.Slerp(transform.rotation, mDepths[mDepths.Count - 1].rotation, mRotationSpeed * Time.deltaTime);
-            if (Quaternion.Angle(transform.rotation, mDepths[mDepths.Count - 1].rotation) < 0.00001f) transform.rotation = mDepths[mDepths.Count - 1].rotation;
+            if (IsMoving(0.00001f) == false)
+                transform.position = mDepths[mDepths.Count - 1].position;
+            else
+                transform.position = Vector3.Slerp(transform.position, mDepths[mDepths.Count - 1].position, mMoveSpeed * Time.deltaTime);
+
+            if (IsRotating(0.00001f) == false)
+                transform.rotation = mDepths[mDepths.Count - 1].rotation;
+            else
+                transform.rotation = Quaternion.Slerp(transform.rotation, mDepths[mDepths.Count - 1].rotation, mRotationSpeed * Time.deltaTime);
         }
 
         if (mState == CameraStates.zoom) ZoomedUpdate();
@@ -288,7 +283,7 @@ public class CameraController : MonoBehaviour
     }
     public void Back()
     {
-        if (mDepths.Count <= 1) 
+        if (mDepths.Count <= 1)
             return;
         Destroy(mDepths[mDepths.Count - 1].gameObject);
         mDepths.RemoveAt(mDepths.Count - 1);

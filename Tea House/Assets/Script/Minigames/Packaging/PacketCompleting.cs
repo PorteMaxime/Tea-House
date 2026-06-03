@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +34,7 @@ public class PacketCompleting : IPackaging
             if (hits.Count > 0)
             {
                 mMain.mFilling.mBowl = hits[0];
-                mMain.mStateMachine.SwitchState(mMain.mFilling); 
+                mMain.mStateMachine.SwitchState(mMain.mFilling);
             }
         }
 

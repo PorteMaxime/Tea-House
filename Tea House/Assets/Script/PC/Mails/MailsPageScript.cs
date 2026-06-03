@@ -65,7 +65,7 @@ public class MailsPageScript : MonoBehaviour
         // Mise à jour informations mail
         temp = mCanvasMailContent.transform.Find("ImageMailTitle/ImageProfile");
         //if (temp != null)
-            //temp.GetComponent<Image>(); // changer image
+        //temp.GetComponent<Image>(); // changer image
         temp = mCanvasMailContent.transform.Find("ImageMailTitle/TextSubject");
         if (temp != null)
             temp.GetComponent<Text>().text = "SUJET";

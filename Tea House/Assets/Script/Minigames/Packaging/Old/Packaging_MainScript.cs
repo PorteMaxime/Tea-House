@@ -1,10 +1,4 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using TreeEditor;
-using Unity.Hierarchy;
-using UnityEngine.InputSystem;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Packaging_MainScript : MonoBehaviour
@@ -128,7 +122,7 @@ public class Packaging_MainScript : MonoBehaviour
 
     private void FillPackage()
     {
-        if(mBowl != null)
+        if (mBowl != null)
         {
             if (mBowl.transform.rotation == new Quaternion(0, 1, 0, 0)) mBowl.GetComponent<MeshRenderer>().material.color = Color.black;
             Vector3 angle = new Vector3();
@@ -158,7 +152,7 @@ public class Packaging_MainScript : MonoBehaviour
             mBowlCollider = mBowl.GetComponent<Collider>();
             mCameraController.StartDragging(hitDraggables[0]);
         }
-        
+
 
         if (mWorkingPoint.mCollider != null && mWorkingPoint.mCollider.tag == "Ingredient" && mWorkingPoint.mCollider == mCameraController.mHolding)
         {

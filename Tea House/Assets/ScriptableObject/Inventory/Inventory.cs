@@ -1,6 +1,4 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Inventory", menuName = "Scriptable Objects/Inventory")]
@@ -54,5 +52,5 @@ public class Inventory : ScriptableObject
             return true;
         }
         return false;
-    }    
+    }
 }
