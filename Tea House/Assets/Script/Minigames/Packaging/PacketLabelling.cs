@@ -15,6 +15,11 @@ public class PacketLabelling : IPackaging
     public GameObject mPrinterScreenUI = null;
     private GameObject mPrinterViewPoint = null;
 
+    private GameObject mLabelPrefab = null;
+
+    public GameObject mDebug = null;
+    public IngredientData mDebugData = null;
+
     private Dictionary<Mail, GameObject> mOrders = new Dictionary<Mail, GameObject>();
 
     private Printer_SelectOrder mPrinterScript = null;
@@ -26,6 +31,9 @@ public class PacketLabelling : IPackaging
         mPrinterScreenUI = mPrinterViewPoint.transform.parent.Find("PrinterScreen").gameObject;
 
         mPrinterScript = mMain.transform.Find("Printer").GetComponent<Printer_SelectOrder>();
+
+        mLabelPrefab = GameObject.Find("DynamicTextureGenerator").transform.Find("LabelTexture_Canva").gameObject;
+        DynamicTextureManager.AddGenerator<LabelTextureGenerator>(DynamicTextureManager.DynamicTexture.Label, mLabelPrefab);
     }
     public void OnEnter()
     {
@@ -84,6 +92,27 @@ public class PacketLabelling : IPackaging
         if (mSelectedGo == null) return;
 
         // Generate Texture + Label
+        Mail targetMail = null;
+        foreach(Mail mail in mOrders.Keys)
+        {
+            if (mOrders[mail] == mSelectedGo)
+            {
+                targetMail = mail;
+                break;
+            }
+        }
+
+        RenderTexture texture = DynamicTextureManager.Generate(DynamicTextureManager.DynamicTexture.Label,
+            targetMail.mPicture,
+            "targetMail.mName",
+            mDebugData,
+            mDebugData,
+            mDebugData,
+            mDebugData
+            );
+
+        //Generate GameObject of the Label
+        mDebug.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
         Debug.Log("Print");
     }
     #endregion

@@ -189,6 +189,7 @@ public class CameraController : MonoBehaviour
 
         mPlayer = GameObject.FindGameObjectWithTag("Player");
 
+        mInteractionPopup.SetActive(true);
         mInteractionPopup = GameObject.FindGameObjectWithTag("InteractionImage");
         mInteractionPopup.SetActive(false);
     }

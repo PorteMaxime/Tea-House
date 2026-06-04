@@ -11,6 +11,9 @@ public class PackagingScript : MonoBehaviour
     public PacketLabelling mLabelling = null;
     #endregion
 
+    public GameObject mDebug = null;
+    public IngredientData mDebugData = null;
+
     public CameraController mCameraController = null;
     public WorkingPoint mWorkingPoint = null;
 
@@ -27,6 +30,8 @@ public class PackagingScript : MonoBehaviour
         mCompleting = new PacketCompleting(this);
         mFilling = new PacketFilling(this);
         mLabelling = new PacketLabelling(this);
+        mLabelling.mDebug = mDebug;
+        mLabelling.mDebugData = mDebugData;
 
         mStateMachine.SwitchState(mChoosing);
     }

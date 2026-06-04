@@ -26,7 +26,7 @@ public class MailManager : MonoBehaviour
     public List<IngredientData> mIngredients = new List<IngredientData>();
     public (int, int) mTorrefiedProbability = (1, 50);
     public List<IngredientData> mBases = new List<IngredientData>();
-    public List<Image> mPictures = new List<Image>();
+    public List<Sprite> mPictures = new List<Sprite>();
     public List<string> mNames = new List<string>();
     public (float, float) mDurationSize = (5, 7);
 
@@ -54,7 +54,7 @@ public class MailManager : MonoBehaviour
     {
         Order order = CreateOrder();
 
-        Image pic = mPictures[Random.Range(0, mPictures.Count)];
+        Sprite pic = mPictures[Random.Range(0, mPictures.Count)];
         string name = mNames[Random.Range(0, mNames.Count)];
         float duration = Random.Range(mDurationSize.Item1, mDurationSize.Item2);
 
@@ -73,7 +73,7 @@ public class MailManager : MonoBehaviour
         order.mOrderData.mRelaxation += pBase.mRelaxation;
         order.mOrderData.mPrestige += pBase.mPrestige;
 
-        for (int i = 0; i < Random.Range(1, 3); i++)
+        for (int i = 0; i < Random.Range(1, 30); i++)
         {
             IngredientData pIngredient = mIngredients[Random.Range(0, mIngredients.Count)];
 
