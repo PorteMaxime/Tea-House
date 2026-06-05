@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
   m_Name: BlackTea
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  Name: Black Tea
-  model: {fileID: 0}
-  Warmth: 2
-  Freshness: 0
-  Relaxation: 0
-  Energy: 1
-  Prestige: 1
+  mName: "Th\xE9 noir"
+  mModel: {fileID: 0}
+  mWarmth: 2
+  mFreshness: 0
+  mRelaxation: 0
+  mEnergy: 1
+  mPrestige: 1
+  mPrice: 1
+  mIsBase: 0
+  mFragIngredient: {fileID: 0}

@@ -12,11 +12,11 @@ public class IngredientData : ItemData
     {
         IngredientData torrefied = ScriptableObject.CreateInstance<IngredientData>();
 
-        mWarmth +=          1;
-        mFreshness +=       0;
-        mEnergy +=          0;
-        mRelaxation +=     -1;
-        mPrestige +=        1;
+        torrefied.mWarmth +=          1;
+        torrefied.mFreshness +=       0;
+        torrefied.mEnergy +=          0;
+        torrefied.mRelaxation +=     -1;
+        torrefied.mPrestige +=        1;
 
         return torrefied;
     }

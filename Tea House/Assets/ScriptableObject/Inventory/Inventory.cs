@@ -1,56 +1,48 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Inventory", menuName = "Scriptable Objects/Inventory")]
-public class Inventory : ScriptableObject
+public class Inventory : MonoBehaviour
 {
-    //public IngredientData GreenTea;
-    //public IngredientData BlackTea;
+    [SerializeField] private List<ItemData> mUnlockedItems = new List<ItemData>();
+    [SerializeField] private int mItemStartingAmount = 5;
 
-    //public IngredientData Mint;
-    //public IngredientData Chamomille;
-    //public IngredientData Cinnamon;
-    //public IngredientData DriedBerries;
-    //public IngredientData DriedOrange;
-    //public IngredientData Ginger;
-    //public IngredientData Jasmine;
-    //public IngredientData Lavender;
+    [SerializeField] public Dictionary<ItemData, int> mItems = new Dictionary<ItemData, int>();
 
-    public Dictionary<ItemData, int> mIngredients = new Dictionary<ItemData, int>();
+    public int mMoneyAmount;
 
-    public void Clear()
+    #region Singleton
+    public static Inventory msInstance;
+    void Awake()
     {
-        //mIngredients.Add(GreenTea, 0);
-        //mIngredients.Add(BlackTea, 0);
+        msInstance = this;
 
-        //mIngredients.Add(Mint, 5);
-        //mIngredients.Add(Chamomille, 0);
-        //mIngredients.Add(Cinnamon, 0);
-        //mIngredients.Add(DriedBerries, 0);
-        //mIngredients.Add(DriedOrange, 0);
-        //mIngredients.Add(Ginger, 0);
-        //mIngredients.Add(Jasmine, 0);
-        //mIngredients.Add(Lavender, 0);
+        foreach (var item in mUnlockedItems)
+            mItems.Add(item, mItemStartingAmount);
+    }
+    #endregion
+
+    public void ClearInventory()
+    {
+        foreach (ItemData key in mItems.Keys)
+            mItems[key] = 0;
     }
 
     public void AddItem(ItemData _item, int _amount)
     {
-        if (mIngredients.ContainsKey(_item))
-            mIngredients[_item] += _amount;
+        if (mItems.ContainsKey(_item))
+            mItems[_item] += _amount;
         else
-            mIngredients[_item] = _amount;
+            mItems[_item] = _amount;
     }
 
     public bool RemoveItem(ItemData _item, int _amount)
     {
-        if (mIngredients.ContainsKey(_item))
+        if (mItems.ContainsKey(_item))
         {
-            if (mIngredients[_item] < _amount)
+            if (mItems[_item] < _amount)
                 return false;
 
-            mIngredients[_item] -= _amount;
+            mItems[_item] -= _amount;
             return true;
         }
         return false;

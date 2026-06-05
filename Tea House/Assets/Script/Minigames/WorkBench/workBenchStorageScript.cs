@@ -6,16 +6,18 @@ using UnityEngine.InputSystem;
 public class WorkBenchStorageScript : MonoBehaviour
 {
     public IngredientData ingredient;
-    public Inventory inventory;
+    private Inventory inventory;
     public int amount;
 
     void Start()
     {
+        inventory = Inventory.msInstance;
+
         inventory.AddItem(ingredient, 5);
         CheckIngredient();
     }
     public void CheckIngredient()
     {
-        amount = inventory.mIngredients[ingredient];
+        amount = inventory.mItems[ingredient];
     }
 }

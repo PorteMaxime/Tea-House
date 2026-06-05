@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
   m_Name: Cinnamon
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  Name: Cinnamon
-  model: {fileID: 0}
-  Warmth: 2
-  Freshness: 0
-  Relaxation: 0
-  Energy: 0
-  Prestige: 1
+  mName: Cannelle
+  mModel: {fileID: 0}
+  mWarmth: 2
+  mFreshness: 0
+  mRelaxation: 0
+  mEnergy: 0
+  mPrestige: 1
+  mPrice: 3
+  mIsBase: 0
+  mFragIngredient: {fileID: 0}
