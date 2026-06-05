@@ -89,12 +89,12 @@ public class ShopPageScript : MonoBehaviour
 		if (Inventory.msInstance == null)
 			return;
 
-		int itemNumber = mShopItems.Count;
+        int itemNumber = mShopItems.Count;
 		GameObject creationPage = null;
 		GameObject creationRow = null;
 		GameObject creationItem = null;
 
-		foreach (ItemData item in Inventory.msInstance.mItems.Keys)
+        foreach (ItemData item in Inventory.msInstance.mItems.Keys)
 		{
 			if (mShopItems.ContainsKey(item))
 			{
@@ -104,7 +104,7 @@ public class ShopPageScript : MonoBehaviour
 
 			// Nouvelle page
 			if (itemNumber % (mPageSize.x * mPageSize.y) == 0)
-			{
+            {
                 creationPage = Instantiate(mPagePrefab, mCanvasShopItems.transform, false);
 
                 if (mCurrentPage == null)
@@ -142,7 +142,7 @@ public class ShopPageScript : MonoBehaviour
             {
 				Canvas canvasContent = creationPage.transform.Find("CanvasContent").GetComponent<Canvas>();
 
-				if (canvasContent != null)
+                if (canvasContent != null)
                     creationRow = Instantiate(mRowPrefab, canvasContent.transform, false);
             }
 

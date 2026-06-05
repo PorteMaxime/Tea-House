@@ -7,7 +7,7 @@ public class ComputerScript : MonoBehaviour
     public Dictionary<string, GameObject> mCanvas = new Dictionary<string, GameObject>();
     public GameObject mActiveCanvas;
 
-    public InteractiveAreaScript interactionScript;
+    [SerializeField] public InteractiveAreaScript interactionScript;
     public bool isComputerOn = false;
 
     private CameraController mCameraController;

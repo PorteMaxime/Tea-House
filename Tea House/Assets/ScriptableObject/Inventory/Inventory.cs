@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class Inventory : MonoBehaviour
     public int mMoneyAmount;
 
     #region Singleton
+    public static event Action<Inventory> mOnInventoryCreated;
+
     public static Inventory msInstance;
     void Awake()
     {
@@ -18,6 +21,9 @@ public class Inventory : MonoBehaviour
 
         foreach (var item in mUnlockedItems)
             mItems.Add(item, mItemStartingAmount);
+
+        mOnInventoryCreated?.Invoke(this);
+
     }
     #endregion
 
