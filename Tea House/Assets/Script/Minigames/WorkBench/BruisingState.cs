@@ -8,7 +8,7 @@ public class BruisingState : IWorkbench
     Quaternion initBowlRot = Quaternion.identity;
     Vector3 initMortarPos = Vector3.zero;
     Quaternion initMortarRot = Quaternion.identity;
-    Vector3 posOffset = new Vector3 (0, 0.1f, 0);
+    Vector3 posOffset = new Vector3(0, 0.1f, 0);
 
     GameObject fragIngredient;
 
@@ -54,7 +54,7 @@ public class BruisingState : IWorkbench
             }
         }
 
-        if(isEmpty == false && mItemBruised == true)
+        if (isEmpty == false && mItemBruised == true)
         {
             List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Bowl");
 
@@ -63,7 +63,7 @@ public class BruisingState : IWorkbench
                 mWorkbench.mCameraController.StartDragging(mWorkbench.mBowl);
             }
 
-            if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPointCollider>().mCollider == mWorkbench.mBowl)
+            if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().mCollider == mWorkbench.mBowl)
             {
                 mWorkbench.mBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0);
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);

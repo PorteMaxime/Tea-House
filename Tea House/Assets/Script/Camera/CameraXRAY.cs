@@ -1,11 +1,5 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.HID;
-using UnityEngine.UIElements;
 
 public class CameraXRAY : MonoBehaviour
 {
@@ -13,6 +7,8 @@ public class CameraXRAY : MonoBehaviour
     private Camera mCamera;
 
     [SerializeField] private GameObject mTarget;
+    public float mRaycastThickness = 1f;
+
     private List<GameObject> mLastCollided = new List<GameObject>();
     private List<GameObject> mCollided = new List<GameObject>();
 
@@ -28,14 +24,14 @@ public class CameraXRAY : MonoBehaviour
         Vector3 pos = mCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
 
         Vector3 dir = mTarget.transform.position - pos;
+        float dist = Vector3.Distance(pos, dir);
         dir.Normalize();
 
-        float dist = Vector3.Distance(pos, dir);
 
-        if(dist > 0f)
+        if (dist > 0f)
         {
-            int layers = LayerMask.GetMask(mLayerNameToXRAY);            
-            RaycastHit[] hits = Physics.RaycastAll(pos, dir, dist, layers);
+            int layers = LayerMask.GetMask(mLayerNameToXRAY);
+            RaycastHit[] hits = Physics.SphereCastAll(pos, mRaycastThickness, dir, dist, layers);
 
             foreach (RaycastHit hit in hits)
             {
@@ -58,9 +54,9 @@ public class CameraXRAY : MonoBehaviour
     void UpdateCollided()
     {
         List<GameObject> toRemove = new List<GameObject>();
-        foreach(GameObject collided in mLastCollided)
+        foreach (GameObject collided in mLastCollided)
         {
-            if(mCollided.Contains(collided) == false)
+            if (mCollided.Contains(collided) == false)
             {
                 MeshRenderer mesh = GetRender(collided);
                 if (mesh != null)
@@ -72,7 +68,7 @@ public class CameraXRAY : MonoBehaviour
                 toRemove.Add(collided);
             }
         }
-        foreach(GameObject remove in toRemove)
+        foreach (GameObject remove in toRemove)
             mLastCollided.Remove(remove);
         foreach (GameObject collided in mCollided)
         {

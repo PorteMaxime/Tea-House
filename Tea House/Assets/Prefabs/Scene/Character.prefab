@@ -48,6 +48,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0a6e0b35e1d37794d8f384bbaf56f98d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d2a96b2df60885b44994bfa36fa85c1a, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 0a6e0b35e1d37794d8f384bbaf56f98d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 7383950914746164887, guid: 37f4bf5990913cf47876f15f3c6804f8, type: 3}
     - target: {fileID: 919132149155446097, guid: 0a6e0b35e1d37794d8f384bbaf56f98d, type: 3}
       propertyPath: m_Name
       value: Character
@@ -93,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterInput
   mCameraOrigin: {fileID: 0}
   mSpeed: 5
+  mCanMove: 1
 --- !u!54 &3402249792524673905
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -139,7 +148,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.0031504706
-  m_Height: 0.0151397735
+  m_Radius: 0.017083857
+  m_Height: 0.058951166
   m_Direction: 1
-  m_Center: {x: 0, y: -0.00076370616, z: 5.4264587e-18}
+  m_Center: {x: 0, y: 0.029463606, z: -0.0020235148}

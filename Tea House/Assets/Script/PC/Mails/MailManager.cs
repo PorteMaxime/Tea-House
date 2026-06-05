@@ -1,11 +1,10 @@
-using System.Collections.Generic;
-using UnityEngine.UI;
-using UnityEngine;
-using UnityEngine.InputSystem.DualShock.LowLevel;
 using System;
-using Random = UnityEngine.Random;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class MailManager : MonoBehaviour
 {
@@ -27,7 +26,7 @@ public class MailManager : MonoBehaviour
     public List<IngredientData> mIngredients = new List<IngredientData>();
     public (int, int) mTorrefiedProbability = (1, 50);
     public List<IngredientData> mBases = new List<IngredientData>();
-    public List<Image> mPictures = new List<Image>();
+    public List<Sprite> mPictures = new List<Sprite>();
     public List<string> mNames = new List<string>();
     public (float, float) mDurationSize = (5, 7);
 
@@ -48,14 +47,14 @@ public class MailManager : MonoBehaviour
     {
         if (mDaylight.mPhase == Daylight.Phase.Morning && mHasSend == false)
             StartDay();
-        if(mDaylight.mPhase == Daylight.Phase.Midday && mHasSend == true) mHasSend = false;
+        if (mDaylight.mPhase == Daylight.Phase.Midday && mHasSend == true) mHasSend = false;
     }
 
     public void CreateMail()
     {
         Order order = CreateOrder();
 
-        Image pic = mPictures[Random.Range(0, mPictures.Count)];
+        Sprite pic = mPictures[Random.Range(0, mPictures.Count)];
         string name = mNames[Random.Range(0, mNames.Count)];
         float duration = Random.Range(mDurationSize.Item1, mDurationSize.Item2);
 
@@ -74,12 +73,12 @@ public class MailManager : MonoBehaviour
         order.mOrderData.mRelaxation += pBase.mRelaxation;
         order.mOrderData.mPrestige += pBase.mPrestige;
 
-        for(int i = 0; i < Random.Range(1, 3); i++)
+        for (int i = 0; i < Random.Range(1, 30); i++)
         {
             IngredientData pIngredient = mIngredients[Random.Range(0, mIngredients.Count)];
 
             // A VERIFIER
-            if(Random.Range(mTorrefiedProbability.Item1, mTorrefiedProbability.Item2) <= 50)
+            if (Random.Range(mTorrefiedProbability.Item1, mTorrefiedProbability.Item2) <= 50)
                 pIngredient = pIngredient.GetTorrefied();
 
             order.mOrderData.mWarmth += pBase.mWarmth;
@@ -100,9 +99,9 @@ public class MailManager : MonoBehaviour
 
     void CheckList()
     {
-        for(int i = 0; i < mMails.Count; i++)
+        for (int i = 0; i < mMails.Count; i++)
         {
-            if(mMails[i].mSendDay + mMails[i].mDuration < mCurrentDay)
+            if (mMails[i].mSendDay + mMails[i].mDuration < mCurrentDay)
             {
                 mMails.RemoveAt(i);
                 continue;
@@ -127,7 +126,7 @@ public class MailManager : MonoBehaviour
         // For next days
         for (int i = 0; i < Random.Range(mToSendNumber.Item1, mToSendNumber.Item2); i++)
             CreateMail();
-        
+
         mHasSend = true;
     }
 

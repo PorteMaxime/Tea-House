@@ -1,12 +1,10 @@
-using UnityEngine;
-
 public class InputManager
 {
     #region Singleton
     private static InputManager Instance;
     static public InputManager Get()
     {
-        if(Instance == null)
+        if (Instance == null)
             Instance = new InputManager();
         return Instance;
     }

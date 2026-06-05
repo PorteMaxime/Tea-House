@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class InteractiveAreaScript : MonoBehaviour
 {
@@ -43,7 +42,6 @@ public class InteractiveAreaScript : MonoBehaviour
                 }
             }
         }
-
     }
 
     public void Enter()
@@ -72,7 +70,6 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Press F to interact");
             mCameraController.AddInteractionTarget(gameObject);
             canIntercat = true;
         }

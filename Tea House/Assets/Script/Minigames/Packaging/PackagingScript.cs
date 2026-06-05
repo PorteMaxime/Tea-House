@@ -1,0 +1,60 @@
+using UnityEngine;
+
+public class PackagingScript : MonoBehaviour
+{
+    #region StateMachine
+    public PackagingStateMachine mStateMachine;
+
+    public PacketChoosingState mChoosing = null;
+    public PacketCompleting mCompleting = null;
+    public PacketFilling mFilling = null;
+    public PacketLabelling mLabelling = null;
+    #endregion
+
+    public GameObject mDebug = null;
+    public IngredientData mDebugData = null;
+
+    public CameraController mCameraController = null;
+    public WorkingPoint mWorkingPoint = null;
+
+    public PackageScript mOutput = null;
+    public GameObject mOutputGO = null;
+    void Start()
+    {
+        mCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        mWorkingPoint = transform.Find("WorkingPoint").GetComponent<WorkingPoint>();
+
+        mStateMachine = new PackagingStateMachine();
+
+        mChoosing = new PacketChoosingState(this);
+        mCompleting = new PacketCompleting(this);
+        mFilling = new PacketFilling(this);
+        mLabelling = new PacketLabelling(this);
+        mLabelling.mDebug = mDebug;
+        mLabelling.mDebugData = mDebugData;
+
+        mStateMachine.SwitchState(mChoosing);
+    }
+    void Update()
+    {
+        mStateMachine.Update();
+    }
+
+    public GameObject Instantiate(GameObject prefab, Vector3 pos, Quaternion rot)
+    {
+        return GameObject.Instantiate(prefab, pos, rot);
+    }
+    public void Destroy(GameObject toDestroy)
+    {
+        GameObject.Destroy(toDestroy);
+    }
+
+    public void ShareRender(GameObject origin, GameObject target)
+    {
+        MeshFilter mesh = target.AddComponent<MeshFilter>();
+        mesh.sharedMesh = origin.GetComponent<MeshFilter>().mesh;
+
+        MeshRenderer meshRenderer = target.AddComponent<MeshRenderer>();
+        meshRenderer.sharedMaterials = origin.GetComponent<MeshRenderer>().materials;
+    }
+}

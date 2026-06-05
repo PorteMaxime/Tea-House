@@ -1,17 +1,19 @@
-using NUnit.Framework;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using TreeEditor;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.GraphicsBuffer;
 
 public class CameraController : MonoBehaviour
 {
+    //#region Singleton
+    //private static CameraController mInstance = null;
+    //public static CameraController Get()
+    //{
+    //    if(mInstance == null)
+    //        mInstance = new CameraController();
+    //    return mInstance;
+    //}
+    //#endregion
+
     private Input_PlayerMovement mInputPlayerMovement;
     private Input_PlayerInteract mInputPlayerInteract;
     private Camera mCamera;
@@ -20,7 +22,7 @@ public class CameraController : MonoBehaviour
     public GameObject mInteractionPopup;
 
     private List<GameObject> zoomTargetOrder = new List<GameObject>();
-    private Vector3 zoomOffset = new Vector3(0f, 2f, 0f);    
+    private Vector3 zoomOffset = new Vector3(0f, 2f, 0f);
 
     // Camera Slerp
     private List<Transform> mDepths = new List<Transform>();
@@ -39,9 +41,10 @@ public class CameraController : MonoBehaviour
 
     #region DragAndDrop
     // Drag & Drop
-    public GameObject mHolding = null;      // GameObject holded
-    public bool mHasReleasedDrag = false;   // Gameobject is released last frame ?
-    private float mCameraDistance;          // Distance between camera and gameobject
+    public GameObject mHolding = null;              // GameObject holded
+    private bool mHoldingWasGravity = false;        // Before dragging, mHolding was submit to gravity ?
+    public bool mHasReleasedDrag = false;           // Gameobject is released last frame ?
+    private float mCameraDistance;                  // Distance between camera and gameobject
 
     public void StartDragging(GameObject target)
     {
@@ -52,17 +55,25 @@ public class CameraController : MonoBehaviour
         mCameraDistance = mCamera.WorldToScreenPoint(mHolding.transform.position).z;
 
         Rigidbody rb = target.GetComponent<Rigidbody>();
-        if (rb != null) rb.useGravity = false;
+        if (rb != null)
+        {
+            mHoldingWasGravity = rb.useGravity;
+            rb.useGravity = false;
+        }
     }
     public void StopDragging()
     {
         if (mHolding == null) return;
 
         Rigidbody rb = mHolding.GetComponent<Rigidbody>();
-        if (rb != null) rb.useGravity = true;
+        if (rb != null) rb.useGravity = mHoldingWasGravity;
 
         mHolding = null;
         mHasReleasedDrag = false;
+    }
+    public bool IsDragging()
+    {
+        return mHolding != null;
     }
 
     #endregion
@@ -118,7 +129,7 @@ public class CameraController : MonoBehaviour
     {
         return GetRaycastHit(new LayerMask[1] { layer }, tags);
     }
-    public List<GameObject> GetRaycastHit(LayerMask[] layers, string tag = "")
+    public List<GameObject> GetRaycastHit(LayerMask[] layers, string tag)
     {
         return GetRaycastHit(layers, new string[1] { tag });
     }
@@ -178,15 +189,23 @@ public class CameraController : MonoBehaviour
 
         mPlayer = GameObject.FindGameObjectWithTag("Player");
 
+        mInteractionPopup.SetActive(true);
         mInteractionPopup = GameObject.FindGameObjectWithTag("InteractionImage");
         mInteractionPopup.SetActive(false);
     }
     void Update()
-    {        
-        if(mDepths.Count > 0)
+    {
+        if (mDepths.Count > 0)
         {
-            transform.position = Vector3.Slerp(transform.position, mDepths[mDepths.Count - 1].position, mMoveSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.Slerp(transform.rotation, mDepths[mDepths.Count - 1].rotation, mRotationSpeed * Time.deltaTime);
+            if (IsMoving(0.00001f) == false)
+                transform.position = mDepths[mDepths.Count - 1].position;
+            else
+                transform.position = Vector3.Slerp(transform.position, mDepths[mDepths.Count - 1].position, mMoveSpeed * Time.deltaTime);
+
+            if (IsRotating(0.00001f) == false)
+                transform.rotation = mDepths[mDepths.Count - 1].rotation;
+            else
+                transform.rotation = Quaternion.Slerp(transform.rotation, mDepths[mDepths.Count - 1].rotation, mRotationSpeed * Time.deltaTime);
         }
 
         if (mState == CameraStates.zoom) ZoomedUpdate();
@@ -210,7 +229,7 @@ public class CameraController : MonoBehaviour
         {
             if (mHasReleasedDrag == true)
                 StopDragging();
-            if (!mInputPlayerInteract.Player.Select.IsPressed() && mHolding != null)
+            if (mInputPlayerInteract.Player.Select.IsPressed() == false && mHolding != null)
                 mHasReleasedDrag = true;
             else
             {
@@ -219,11 +238,10 @@ public class CameraController : MonoBehaviour
                     Vector3 mousePos = Mouse.current.position.ReadValue();
                     mousePos.z = mCameraDistance;
                     Vector3 worldPos = mCamera.ScreenToWorldPoint(mousePos);
-
+                    worldPos.x = mHolding.transform.position.x;
                     mHolding.transform.position = worldPos;
                 }
             }
-
         }
     }
     void OrbitalUpdate()
@@ -266,10 +284,18 @@ public class CameraController : MonoBehaviour
     }
     public void Back()
     {
-        if (mDepths.Count <= 1) 
+        if (mDepths.Count <= 1)
             return;
         Destroy(mDepths[mDepths.Count - 1].gameObject);
         mDepths.RemoveAt(mDepths.Count - 1);
+    }
+    public bool IsMoving(float precision)
+    {
+        return mDepths.Count > 0 ? Vector3.Distance(transform.position, mDepths[mDepths.Count - 1].position) > precision : false;
+    }
+    public bool IsRotating(float precision)
+    {
+        return mDepths.Count > 0 ? Quaternion.Angle(transform.rotation, mDepths[mDepths.Count - 1].rotation) > precision : false;
     }
 
     public void SetState(CameraStates state) => mState = state;

@@ -23,7 +23,7 @@ public class CharacterInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void FixedUpdate()
@@ -36,7 +36,7 @@ public class CharacterInput : MonoBehaviour
 
     void MovePlayer()
     {
-        if(mInput.Character.Move.IsPressed() && mCanMove)
+        if (mInput.Character.Move.IsPressed() && mCanMove)
         {
             Vector2 dir2 = mInput.Character.Move.ReadValue<Vector2>();
             Vector3 camDir = mCameraOrigin.transform.forward;
