@@ -17,7 +17,7 @@ public class MailsPageScript : MonoBehaviour
 
     private void Awake()
     {
-        mMailPrefab = Resources.Load<GameObject>("Mail/CanvasMailShort");
+        mMailPrefab = Resources.Load<GameObject>("PC/Mail/CanvasMailShort");
 
         Transform temp = transform.Find("ScrollView");
         if (temp != null)

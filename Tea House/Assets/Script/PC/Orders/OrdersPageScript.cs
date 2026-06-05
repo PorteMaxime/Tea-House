@@ -26,7 +26,7 @@ public class OrdersPageScript : MonoBehaviour
 
     private void Awake()
     {
-        mOrderPrefab = Resources.Load<GameObject>("Order/CanvasOrderShort");
+        mOrderPrefab = Resources.Load<GameObject>("PC/Order/CanvasOrderShort");
 
         Transform temp = transform.Find("ScrollView");
         if (temp != null)
@@ -52,7 +52,7 @@ public class OrdersPageScript : MonoBehaviour
         if (temp != null)
             mCanvasFiltersContent = temp.gameObject;
 
-        mFilterPrefab = Resources.Load<GameObject>("Order/CanvasFilter");
+        mFilterPrefab = Resources.Load<GameObject>("PC/Order/CanvasFilter");
 
         foreach (Order.State state in mAvailableFilters)
         {
@@ -81,7 +81,8 @@ public class OrdersPageScript : MonoBehaviour
 
         UpdateMailsVisibility();
 
-        mCanvasPopup.SetActive(false);
+        if (mCanvasPopup != null)
+            mCanvasPopup.SetActive(false);
     }
 
     public void CreateOrderPrefab(Mail mail)
@@ -203,8 +204,6 @@ public class OrdersPageScript : MonoBehaviour
 
     public void SendOrder()
     {
-        Debug.Log("envoyer commande");
-
         mSelectedMail.Item1.mOrder.mState = Order.State.Completed;
         UpdateOrderState(mSelectedMail.Item1);
 

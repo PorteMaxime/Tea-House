@@ -1,88 +1,117 @@
-using NUnit.Framework;
-using NUnit.Framework.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class ShopPageScript : MonoBehaviour
 {
-	[SerializeField] public List<ItemData> mHardCodedItems = new List<ItemData>();
-	[SerializeField] public Vector2 mShopPageSize = new Vector2(4, 2);
+	[SerializeField] private Vector2 mPageSize = new Vector2(4, 2);
 
-	public Dictionary<ItemData, (GameObject ShopItem, GameObject cartItem, int mAmount)> mShopItems = new Dictionary<ItemData, (GameObject, GameObject, int)>();
+	private Dictionary<ItemData, (GameObject ShopItem, GameObject cartItem, int mAmount)> mShopItems = new Dictionary<ItemData, (GameObject, GameObject, int)>();
 
-	public List<GameObject> mShopPages = new List<GameObject>();
-	public GameObject mCurrentPage = null;
+    private GameObject mCanvasShopItems;
+	private GameObject mCurrentPage = null;
+    private List<GameObject> mPages = new List<GameObject>();
+    private Text mCurrentMoney;
 
-	private GameObject mCanvasCart;
-	private GameObject mCanvasCartItems;
-	private GameObject mCanvasShopItems;
-
-	private GameObject mShopPagePrefab = null;
-	private GameObject mItemsRowPrefab = null;
+    private GameObject mPagePrefab = null;
+	private GameObject mRowPrefab = null;
 	private GameObject mShopItemPrefab = null;
 
-	private GameObject mCartItemPrefab = null;
+    private GameObject mCanvasCart;
+    private GameObject mCanvasCartItems;
+    private Text mCartMoneyNeeded;
+    private GameObject mTextNotEnoughMoney;
 
-	private void Awake()
-	{
-		Transform temp = transform.Find("CanvasCart");
-		if (temp != null)
-			mCanvasCart = temp.gameObject;
+    private GameObject mCartItemPrefab = null;
 
-		temp = transform.Find("CanvasCart/Popup/ScrollView/Viewport/ContentCartItems");
-		if (temp != null)
-            mCanvasCartItems = temp.gameObject;
+	private int mCartCost;
 
-		temp = transform.Find("CanvasShopContent/CanvasShopItems");
-		if (temp != null)
+    private void Awake()
+    {
+        Transform temp = transform.Find("CanvasShopContent/CanvasShopItems");
+        if (temp != null)
             mCanvasShopItems = temp.gameObject;
 
-		mShopPagePrefab = Resources.Load<GameObject>("Shop/CanvasShopPage");
-		mItemsRowPrefab = Resources.Load<GameObject>("Shop/CanvasRowContent");
-		mShopItemPrefab = Resources.Load<GameObject>("Shop/CanvasShopItem");
-	
-		mCartItemPrefab = Resources.Load<GameObject>("Shop/CanvasCartItem");
+        temp = transform.Find("CanvasShopContent/TextMoney");
+        if (temp != null)
+            mCurrentMoney = temp.gameObject.GetComponent<Text>();
 
-		CreateItems();
+        mPagePrefab = Resources.Load<GameObject>("PC/CanvasPage");
+        mRowPrefab = Resources.Load<GameObject>("PC/CanvasRow");
+        mShopItemPrefab = Resources.Load<GameObject>("PC/Shop/CanvasShopItem");
+
+        temp = transform.Find("CanvasCart");
+        if (temp != null)
+            mCanvasCart = temp.gameObject;
+
+        temp = transform.Find("CanvasCart/Popup/ScrollView/Viewport/ContentCartItems");
+        if (temp != null)
+            mCanvasCartItems = temp.gameObject;
+
+        temp = transform.Find("CanvasCart/Popup/TextMoney");
+        if (temp != null)
+            mCartMoneyNeeded = temp.gameObject.GetComponent<Text>();
+
+        temp = transform.Find("CanvasCart/Popup/TextNotEnoughMoney");
+        if (temp != null)
+            mTextNotEnoughMoney = temp.gameObject;
+
+        mCartItemPrefab = Resources.Load<GameObject>("PC/Shop/CanvasCartItem");
 
         ToggleCart(false);
+
+        CreateMissingItems();
     }
 
-	private void OnDisable()
+    private void OnEnable()
+    {
+        CreateMissingItems();
+
+		UpdateMoneyTexts();
+    }
+
+    private void OnDisable()
 	{
 		ToggleCart(false);
 
-		if (mShopPages.Count > 0)
+		if (mPages.Count > 0 && mCurrentPage != mPages[0])
 		{
 			mCurrentPage.gameObject.SetActive(false);
-			mCurrentPage = mShopPages[0];
+			mCurrentPage = mPages[0];
 			mCurrentPage.gameObject.SetActive(true);
 		}
 	}
 
-	private void CreateItems()
+	private void CreateMissingItems()
 	{
-		int itemNumber = 0;
+		if (Inventory.msInstance == null)
+			return;
+
+		int itemNumber = mShopItems.Count;
 		GameObject creationPage = null;
 		GameObject creationRow = null;
 		GameObject creationItem = null;
 
-		foreach (var item in mHardCodedItems)
+		foreach (ItemData item in Inventory.msInstance.mItems.Keys)
 		{
-			// Nouvelle page
-			if (itemNumber % (mShopPageSize.x * mShopPageSize.y) == 0)
+			if (mShopItems.ContainsKey(item))
 			{
-                creationPage = Instantiate(mShopPagePrefab, mCanvasShopItems.transform, false);
+				itemNumber += 1;
+				continue;
+			}
+
+			// Nouvelle page
+			if (itemNumber % (mPageSize.x * mPageSize.y) == 0)
+			{
+                creationPage = Instantiate(mPagePrefab, mCanvasShopItems.transform, false);
 
                 if (mCurrentPage == null)
 					mCurrentPage = creationPage;
 				else
                     creationPage.SetActive(false);
-				mShopPages.Add(creationPage);
+				mPages.Add(creationPage);
 
 				// Setup boutons page suivante et page precedente
 				Button buttonLeft = creationPage.transform.Find("ButtonLeft").GetComponent<Button>();
@@ -91,13 +120,13 @@ public class ShopPageScript : MonoBehaviour
 				if (buttonLeft == null || buttonRight == null)
 					break;
 
-                if (mShopPages.Count == 1)
+                if (mPages.Count == 1)
 					buttonLeft.gameObject.SetActive(false);
                 else
 				{
                     buttonLeft.onClick.AddListener(() => ChangePage(-1));
 
-                    Button lastButtonRight = mShopPages[mShopPages.Count - 2].transform.Find("ButtonRight").GetComponent<Button>();
+                    Button lastButtonRight = mPages[mPages.Count - 2].transform.Find("ButtonRight").GetComponent<Button>();
 
 					if (lastButtonRight != null)
 					{
@@ -109,27 +138,30 @@ public class ShopPageScript : MonoBehaviour
                 buttonRight.gameObject.SetActive(false);
             }
 			// Nouvelle ligne dans la page
-			if (itemNumber % mShopPageSize.x == 0)
+			if (itemNumber % mPageSize.x == 0)
             {
 				Canvas canvasContent = creationPage.transform.Find("CanvasContent").GetComponent<Canvas>();
 
 				if (canvasContent != null)
-                    creationRow = Instantiate(mItemsRowPrefab, canvasContent.transform, false);
+                    creationRow = Instantiate(mRowPrefab, canvasContent.transform, false);
             }
 
             // Ajout d'un item à la ligne actuelle
-
             creationItem = Instantiate(mShopItemPrefab, creationRow.transform, false);
 			mShopItems.Add(item, (creationItem, null, 0));
 
+			Text priceText = creationItem.transform.Find("TextPrice").GetComponent<Text>();
+			if (priceText != null)
+				priceText.text = item.mPrice + " $";
+
             Button changeAmount = creationItem.transform.Find("CanvasAddToCart/ButtonAddToCart").GetComponent<Button>();
-            changeAmount.onClick.AddListener(() => ChangeItemAmount(item, 1));
+            changeAmount.onClick.AddListener(() => ChangeCartItemAmount(item, 1));
 
             changeAmount = creationItem.transform.Find("CanvasAddRemove/ButtonRemove").GetComponent<Button>();
-            changeAmount.onClick.AddListener(() => ChangeItemAmount(item, -1));
+            changeAmount.onClick.AddListener(() => ChangeCartItemAmount(item, -1));
 
             changeAmount = creationItem.transform.Find("CanvasAddRemove/ButtonAdd").GetComponent<Button>();
-            changeAmount.onClick.AddListener(() => ChangeItemAmount(item, 1));
+            changeAmount.onClick.AddListener(() => ChangeCartItemAmount(item, 1));
 
             itemNumber += 1;
 		}
@@ -137,18 +169,17 @@ public class ShopPageScript : MonoBehaviour
 
 	public void ChangePage(int amount)
 	{
-		if (mShopPages.Count <= 1)
+		if (mPages.Count <= 1)
 			return;
 
 		mCurrentPage.gameObject.SetActive(false);
 
-		mCurrentPage = mShopPages[Math.Max(0, Math.Min(mShopPages.Count - 1, mShopPages.IndexOf(mCurrentPage) + amount))];
+		mCurrentPage = mPages[Math.Max(0, Math.Min(mPages.Count - 1, mPages.IndexOf(mCurrentPage) + amount))];
 
 		mCurrentPage.gameObject.SetActive(true);
 	}
 
-
-	public void ChangeItemAmount(ItemData item, int amount)
+	public void ChangeCartItemAmount(ItemData item, int amount)
 	{
 		if (!mShopItems.ContainsKey(item))
 			return;
@@ -181,10 +212,10 @@ public class ShopPageScript : MonoBehaviour
                 tempItem.cartItem = Instantiate(mCartItemPrefab, mCanvasCartItems.transform, false);
 
                 Button changeAmount = tempItem.cartItem.transform.Find("ButtonRemove").GetComponent<Button>();
-                changeAmount.onClick.AddListener(() => ChangeItemAmount(item, -1));
+                changeAmount.onClick.AddListener(() => ChangeCartItemAmount(item, -1));
 
                 changeAmount = tempItem.cartItem.transform.Find("ButtonAdd").GetComponent<Button>();
-                changeAmount.onClick.AddListener(() => ChangeItemAmount(item, 1));
+                changeAmount.onClick.AddListener(() => ChangeCartItemAmount(item, 1));
             }
             else
 				tempItem.cartItem.SetActive(true);
@@ -209,27 +240,54 @@ public class ShopPageScript : MonoBehaviour
 	            tempItem.cartItem.SetActive(false);
         }
 
+		mCartCost += (tempItem.mAmount - mShopItems[item].mAmount) * item.mPrice;
+
+		UpdateMoneyTexts();
+
         mShopItems[item] = tempItem;
     }
-    public void SetItemAmount(ItemData item, int amount)
+
+    public void SetCartItemAmount(ItemData item, int amount)
 	{
 		if (!mShopItems.ContainsKey(item) || amount < 0)
 			return;
 
-		ChangeItemAmount(item, amount - mShopItems[item].mAmount);
+        ChangeCartItemAmount(item, amount - mShopItems[item].mAmount);
 	}
+
+	private void UpdateMoneyTexts()
+    {
+        if (mTextNotEnoughMoney != null && mTextNotEnoughMoney.activeSelf == true)
+            mTextNotEnoughMoney.SetActive(false);
+
+		if (Inventory.msInstance == null)
+			return;
+
+        if (mCartMoneyNeeded != null)
+	        mCartMoneyNeeded.text = Inventory.msInstance.mMoneyAmount + "$ / " + mCartCost + "$";
+
+		if (mCurrentMoney != null)
+            mCurrentMoney.text = Inventory.msInstance.mMoneyAmount + "$";
+
+    }
 
     public void ToggleCart(bool active)
 	{
-		mCanvasCart.SetActive(active);
+		UpdateMoneyTexts();
+
+        mCanvasCart.SetActive(active);
 	}
 
 	public void BuyCart()
 	{
 		if (CanBuyCartContent() == true)
 		{
-			// modifier argent
-			// ajouter cart à inventaire
+			Inventory.msInstance.mMoneyAmount -= mCartCost;
+
+			foreach (ItemData item in mShopItems.Keys)
+			{
+				Inventory.msInstance.AddItem(item, mShopItems[item].mAmount);
+            }
 
 			EmptyCart();
 
@@ -237,26 +295,25 @@ public class ShopPageScript : MonoBehaviour
         }
 		else
 		{
-			// popup "pas assez d'argent"
-		}
+			if (mTextNotEnoughMoney  != null)
+                mTextNotEnoughMoney.SetActive(true);
+
+        }
 	}
 
 	private void EmptyCart()
 	{
         foreach (ItemData itemData in mShopItems.Keys.Reverse())
-            SetItemAmount(itemData, 0);
+            SetCartItemAmount(itemData, 0);
     }
 
 	bool CanBuyCartContent()
 	{
-		return true;
+		return mCartCost <= Inventory.msInstance.mMoneyAmount;
 	}
 }
 
 /* A faire :
- * - mettre liste d'items dans inventaire ? -> mHardCodedItems
- * - ajouter contenu cart à l'inventaire -> BuyCart()
- * - condition possibilité d'acheter -> CanBuyCartContent()
- * - Mettre l'image de l'item dans le shop et le panier -> CreateItems() + ChangeItemAmount()
+ * - Mettre l'image de l'item dans le shop et le panier -> CreateItems() + ChangeCartItemAmount()
  * - ...
 */
