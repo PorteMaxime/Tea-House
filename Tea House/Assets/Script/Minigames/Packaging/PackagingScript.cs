@@ -23,13 +23,14 @@ public class PackagingScript : MonoBehaviour
     {
         mCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         mWorkingPoint = transform.Find("WorkingPoint").GetComponent<WorkingPoint>();
-
+        
         mStateMachine = new PackagingStateMachine();
-
+        
         mChoosing = new PacketChoosingState(this);
         mCompleting = new PacketCompleting(this);
         mFilling = new PacketFilling(this);
         mLabelling = new PacketLabelling(this);
+        // TODO : Remove Debug
         mLabelling.mDebug = mDebug;
         mLabelling.mDebugData = mDebugData;
 

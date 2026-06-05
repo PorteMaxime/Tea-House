@@ -1,11 +1,15 @@
+using UnityEngine;
+
 public class PackagingStateMachine
 {
     private IPackaging mCurrentState;
 
-
     public void Update()
     {
+        if (mCurrentState == null) return;
+
         mCurrentState.OnUpdate();
+        Debug.Log(mCurrentState);
     }
 
     public void SwitchState(IPackaging newState)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -85,6 +86,8 @@ public class CameraController : MonoBehaviour
 
     public List<GameObject> GetRaycastHit(LayerMask[] layers, string[] tags)
     {
+        if(IsDragging() == true ) return new List<GameObject>(); // Can't raycast if dragging an object
+
         List<GameObject> gOs = new List<GameObject>();
         int totalLayers = 0;
 

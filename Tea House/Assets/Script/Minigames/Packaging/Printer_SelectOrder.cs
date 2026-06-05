@@ -31,7 +31,7 @@ public class Printer_SelectOrder : MonoBehaviour
     public void Print()
     {
         if (mLabellingScript == null) Init();
-        mLabellingScript.Print();
+        mLabellingScript.CreateLabel();
     }
 
     public GameObject CreateButton()

@@ -50,9 +50,7 @@ public class PacketFilling : IPackaging
             mMain.mStateMachine.SwitchState(mMain.mCompleting);
 
         if (mBowl.transform.position.y < mRotationStartPos.y || mBowl.transform.position.z < mMain.mOutputGO.GetComponent<MeshRenderer>().bounds.min.z)
-        {
             mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.identity, mRotationSpeed * Time.deltaTime);
-        }
         else if (mBowl.transform.position.z <= mRotationStartPos.z && mBowl.transform.position.z >= mRotationEndPos.z &&
             mBowl.transform.position.y >= mRotationStartPos.y)
         {
@@ -66,6 +64,7 @@ public class PacketFilling : IPackaging
 
     private IEnumerator HomeSweetHome() // Bring back Bowl
     {
+        // TODO : Bring back the bowl to its original position and rotation
         yield return 0f;
     }
 }

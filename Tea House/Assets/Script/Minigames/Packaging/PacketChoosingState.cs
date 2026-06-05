@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public class PacketChoosingState : IPackaging
 {
@@ -14,13 +17,10 @@ public class PacketChoosingState : IPackaging
     private bool mInitialized = false;
     #endregion
 
-
-    private GameObject mPackagePrefab = null;
     private Transform mWorkingPoint = null;
 
     private void Init()
     {
-        mPackagePrefab = Resources.Load<GameObject>("Items/Package");
         mWorkingPoint = mMain.transform.Find("WorkingPoint").transform;
 
         mInitialized = true;
@@ -41,10 +41,11 @@ public class PacketChoosingState : IPackaging
         List<GameObject> packages = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Package");
         if (packages.Count > 0)
         {
-            GameObject package = mMain.Instantiate(mPackagePrefab, mWorkingPoint.position, Quaternion.identity);
+            GameObject package = mMain.Instantiate(packages[0].transform.parent.gameObject, mWorkingPoint.position, Quaternion.identity);
 
-            mMain.ShareRender(packages[0], package);
+            //mMain.ShareRender(packages[0], package);
             package.transform.parent = mMain.transform;
+            package.transform.localScale = Vector3.one;
             mMain.mOutputGO = package;
 
             BoxCollider collider = package.AddComponent<BoxCollider>();
