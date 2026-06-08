@@ -14,7 +14,6 @@ public class BruisingState : IWorkbench
 
     bool isEmpty = true;
     bool mItemBruised = false;
-    bool isHolding = true;
     public BruisingState(WorkbenchScript system)
     {
         mWorkbench = system;
@@ -42,7 +41,9 @@ public class BruisingState : IWorkbench
                 mWorkbench.mCameraController.StartDragging(mWorkbench.mMortar);
                 mWorkbench.mMortar.transform.rotation = Quaternion.Euler(-90,0,0);
             }
-            if (mWorkbench.mMortar.transform.position.y <= mWorkbench.mBowl.transform.position.y + posOffset.y && mItemBruised == false)
+            if (mWorkbench.mMortar.transform.position.y <= mWorkbench.mBowl.transform.position.y + posOffset.y && mItemBruised == false
+                && mWorkbench.mMortar.GetComponent<MeshFilter>().mesh.bounds.max.x <= mWorkbench.mBowl.GetComponent<MeshFilter>().mesh.bounds.max.x
+                && mWorkbench.mMortar.GetComponent<MeshFilter>().mesh.bounds.min.x >= mWorkbench.mBowl.GetComponent<MeshFilter>().mesh.bounds.min.x)
             {
                 fragIngredient = mWorkbench.InstantiateGameObject(mWorkbench.mCurrentItem.mFragIngredient, mWorkbench.mBowl.transform.position + posOffset, mWorkbench.mBowl);
                 mWorkbench.mBruiseIngrdient = mWorkbench.mCurrentItem;
@@ -57,23 +58,20 @@ public class BruisingState : IWorkbench
 
         if (isEmpty == false && mItemBruised == true)
         {
-            if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == false)
-                isHolding = false;
-            if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() && isHolding == false)
+
+            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Bowl");
+
+            if (hitDraggables.Count > 0)
             {
-                List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Bowl");
-
-                if (hitDraggables.Count > 0)
-                {
-                    mWorkbench.mCameraController.StartDragging(mWorkbench.mBowl);
-                }
-
-                if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().mCollider == mWorkbench.mBowl)
-                {
-                    mWorkbench.mBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0);
-                    mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
-                }
+                mWorkbench.mCameraController.StartDragging(mWorkbench.mBowl);
             }
+
+            if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().mCollider == mWorkbench.mBowl && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
+            {
+                mWorkbench.mBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0);
+                mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
+            }
+
         }
     }
     public void OnExit()
@@ -92,7 +90,6 @@ public class BruisingState : IWorkbench
 
         isEmpty = true;
         mItemBruised = false;
-        isHolding = true;
 
         mWorkbench.AddItemToMixture(mWorkbench.mBruiseIngrdient);
         mWorkbench.mBruiseIngrdient = null;

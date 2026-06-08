@@ -1219,6 +1219,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 20c7424f4ef9c5d46ade1b91b36282cc, type: 2}
+    - target: {fileID: 1678245158959414364, guid: 6b507079284bf3f44b565104e5a8ddaa, type: 3}
+      propertyPath: m_TagString
+      value: MixtureBowl
+      objectReference: {fileID: 0}
     - target: {fileID: 1820014210630921909, guid: 6b507079284bf3f44b565104e5a8ddaa, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1918,6 +1922,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c0f50b1231986264ca71435c3384c35d, type: 2}
+    - target: {fileID: 7996184662912848925, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+      propertyPath: m_TagString
+      value: MixtureBowl
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -15,36 +15,9 @@ public class SelectItemState : IWorkbench
     }
     public void OnUpdate()
     {
-        /*
-                 if(InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
+        if (mWorkbench.mCurrentItem == null)
         {
-            Debug.Log("Pressed");
-            if(mWorkbench.mCurrentItem == null)
-            {
-                List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Storage");
-                Debug.Log("mCurrentItem == null");
-                if (hitDraggables.Count > 0)
-                {
-                    Debug.Log("hitDraggables > 0");
-                    if (hitDraggables[0].TryGetComponent(out WorkBenchStorageScript workBenchStorageScript))
-                    {
-                        InitIngredient(workBenchStorageScript.ingredient);// ?
-                        workBenchStorageScript.CheckIngredient();
-                        mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
-                    }
-                    else if (hitDraggables[0].tag == "Ingredient")
-                    {
-                        mWorkbench.mCameraController.StartDragging(hitDraggables[0]);
-                    }
-
-                }
-            }
-        }
-         */
-        if (mWorkbench.mCurrentItem == null /*&& InputManager.Get().mPlayerInteract.Player.Select.triggered == true*/)
-        {
-            Debug.Log("test");
-            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Storage");
+            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), new string[2] { "Storage", "MixtureBowl"});
 
             if (hitDraggables.Count > 0)
             {
@@ -54,6 +27,10 @@ public class SelectItemState : IWorkbench
                     workBenchStorageScript.CheckIngredient();
                     mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
                 }
+                else if (hitDraggables[0] = mWorkbench.mMixtureBowl)
+                {
+                    mWorkbench.mCameraController.StartDragging(mWorkbench.mMixtureBowl);
+                }
             }
         }
         else
@@ -62,14 +39,15 @@ public class SelectItemState : IWorkbench
 
             if (hitDraggables.Count > 0)
             {
-                mWorkbench.mCameraController.StartDragging(hitDraggables[0]);
+                if (hitDraggables[0] == mWorkbench.currentItemG)
+                mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
             }
         }
 
         if (mWorkbench.currentItemG == null)
             return;
 
-        if (mWorkbench.mBowl.transform.GetChild(0).GetComponent<WorkingPoint>().mCollider == mWorkbench.currentItemG)
+        if (mWorkbench.mBowl.transform.GetChild(0).GetComponent<WorkingPoint>().mCollider == mWorkbench.currentItemG && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
         {
             mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
         }

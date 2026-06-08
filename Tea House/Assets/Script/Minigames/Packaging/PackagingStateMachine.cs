@@ -9,7 +9,7 @@ public class PackagingStateMachine
         if (mCurrentState == null) return;
 
         mCurrentState.OnUpdate();
-        Debug.Log(mCurrentState);
+        //Debug.Log(mCurrentState);
     }
 
     public void SwitchState(IPackaging newState)
