@@ -62,5 +62,6 @@ public class PacketOpening : IPackaging
                 mMain.mCameraController.StopDragging();
             }
         }
+        // TODO : Find place to switch to state of completing
     }
 }
