@@ -15,8 +15,35 @@ public class SelectItemState : IWorkbench
     }
     public void OnUpdate()
     {
-        if (mWorkbench.mCurrentItem == null)
+        /*
+                 if(InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
         {
+            Debug.Log("Pressed");
+            if(mWorkbench.mCurrentItem == null)
+            {
+                List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Storage");
+                Debug.Log("mCurrentItem == null");
+                if (hitDraggables.Count > 0)
+                {
+                    Debug.Log("hitDraggables > 0");
+                    if (hitDraggables[0].TryGetComponent(out WorkBenchStorageScript workBenchStorageScript))
+                    {
+                        InitIngredient(workBenchStorageScript.ingredient);// ?
+                        workBenchStorageScript.CheckIngredient();
+                        mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
+                    }
+                    else if (hitDraggables[0].tag == "Ingredient")
+                    {
+                        mWorkbench.mCameraController.StartDragging(hitDraggables[0]);
+                    }
+
+                }
+            }
+        }
+         */
+        if (mWorkbench.mCurrentItem == null /*&& InputManager.Get().mPlayerInteract.Player.Select.triggered == true*/)
+        {
+            Debug.Log("test");
             List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Storage");
 
             if (hitDraggables.Count > 0)

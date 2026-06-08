@@ -1,16 +1,18 @@
+using UnityEngine;
+
 public class WorkbenchStateMachine
 {
-    IWorkbench currentState;
+    IWorkbench mCurrentState;
     public void Update()
     {
-        currentState.OnUpdate();
+        mCurrentState.OnUpdate();
     }
     public void ChangeState(IWorkbench newState)
     {
-        currentState?.OnExit();
+        mCurrentState?.OnExit();
 
-        currentState = newState;
-
-        currentState.OnEnter();
+        mCurrentState = newState;
+        Debug.Log(mCurrentState);
+        mCurrentState.OnEnter();
     }
 }

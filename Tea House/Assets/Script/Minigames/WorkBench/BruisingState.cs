@@ -40,7 +40,7 @@ public class BruisingState : IWorkbench
             if (hitDraggables.Count > 0)
             {
                 mWorkbench.mCameraController.StartDragging(mWorkbench.mMortar);
-                mWorkbench.mMortar.transform.rotation = Quaternion.identity;
+                mWorkbench.mMortar.transform.rotation = Quaternion.Euler(-90,0,0);
             }
             if (mWorkbench.mMortar.transform.position.y <= mWorkbench.mBowl.transform.position.y + posOffset.y && mItemBruised == false)
             {
@@ -57,23 +57,24 @@ public class BruisingState : IWorkbench
 
         if (isEmpty == false && mItemBruised == true)
         {
-            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Bowl");
-
-            if (hitDraggables.Count > 0)
+            if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == false)
+                isHolding = false;
+            if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() && isHolding == false)
             {
-                mWorkbench.mCameraController.StartDragging(mWorkbench.mBowl);
-            }
+                List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Bowl");
 
-            if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().mCollider == mWorkbench.mBowl)
-            {
-                mWorkbench.mBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0);
-                mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
+                if (hitDraggables.Count > 0)
+                {
+                    mWorkbench.mCameraController.StartDragging(mWorkbench.mBowl);
+                }
+
+                if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().mCollider == mWorkbench.mBowl)
+                {
+                    mWorkbench.mBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0);
+                    mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
+                }
             }
         }
-
-
-
-
     }
     public void OnExit()
     {
@@ -91,10 +92,11 @@ public class BruisingState : IWorkbench
 
         isEmpty = true;
         mItemBruised = false;
+        isHolding = true;
 
         mWorkbench.AddItemToMixture(mWorkbench.mBruiseIngrdient);
         mWorkbench.mBruiseIngrdient = null;
 
-        mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
+        //mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
     }
 }
