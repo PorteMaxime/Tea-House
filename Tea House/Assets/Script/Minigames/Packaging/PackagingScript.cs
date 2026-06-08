@@ -9,6 +9,7 @@ public class PackagingScript : MonoBehaviour
     public PacketCompleting mCompleting = null;
     public PacketFilling mFilling = null;
     public PacketLabelling mLabelling = null;
+    public PacketLabelPrinting mPrinting = null;
     #endregion
 
     public GameObject mDebug = null;
@@ -30,9 +31,11 @@ public class PackagingScript : MonoBehaviour
         mCompleting = new PacketCompleting(this);
         mFilling = new PacketFilling(this);
         mLabelling = new PacketLabelling(this);
+        mPrinting = new PacketLabelPrinting(this);
+
         // TODO : Remove Debug
-        mLabelling.mDebug = mDebug;
-        mLabelling.mDebugData = mDebugData;
+        mPrinting.mDebug = mDebug;
+        mPrinting.mDebugData = mDebugData;
 
         mStateMachine.SwitchState(mChoosing);
     }

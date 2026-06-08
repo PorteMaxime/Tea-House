@@ -13,6 +13,7 @@ public class PacketCompleting : IPackaging
     #endregion
 
     public bool mIsFilled = false;
+    public bool mLabelPrinted = false;
     public bool mIsLabelled = false;
 
     private void Init()
@@ -38,25 +39,18 @@ public class PacketCompleting : IPackaging
             }
         }
 
-        Debug.Log(mIsLabelled);
-        Debug.Log(mMain.mLabelling.mLabelPrinted);
-        if (mIsLabelled == false)
+        if(mLabelPrinted == false)
         {
-            // If the player click on the printer
-            if(mMain.mLabelling.mLabelPrinted == false)
-            {
-                List<GameObject> hits = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Printer");
-                if (hits.Count > 0)
-                    mMain.mStateMachine.SwitchState(mMain.mLabelling);
-            }
-            // If the player click on the label
-            else
-            {
-                List<GameObject> hits = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Label");
-                Debug.Log(hits.Count);
-                if (hits.Count > 0)
-                    mMain.mStateMachine.SwitchState(mMain.mLabelling);
-            }
+            List<GameObject> hits = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Printer");
+            if (hits.Count > 0)
+                mMain.mStateMachine.SwitchState(mMain.mPrinting);
+        }
+        else if(mLabelPrinted == true && mIsLabelled == false)
+        {
+            List<GameObject> hits = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Label");
+            Debug.Log(hits.Count);
+            if (hits.Count > 0)
+                mMain.mStateMachine.SwitchState(mMain.mLabelling);
         }
     }
 }

@@ -2,18 +2,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PacketLabelling : IPackaging
+public class PacketLabelPrinting : IPackaging
 {
     #region Main
     private PackagingScript mMain;
-    public PacketLabelling(PackagingScript main)
+    public PacketLabelPrinting(PackagingScript main)
     {
         mMain = main;
         Init();
     }
     #endregion
 
-    public bool mLabelPrinted = false;
+    private bool mIsPrinted = false;
 
     public GameObject mPrinterScreenUI = null;
     private GameObject mPrinterViewPoint = null;
@@ -26,9 +26,6 @@ public class PacketLabelling : IPackaging
     private Printer_SelectOrder mPrinterScript = null;
     private GameObject mSelectedOrderGo = null;
 
-    private GameObject mLabelGo = null;
-
-    // TODO : Remove Debug
     public GameObject mDebug = null;
     public IngredientData mDebugData = null;
 
@@ -44,72 +41,45 @@ public class PacketLabelling : IPackaging
         mLabelTextureGenerator = GameObject.Find("DynamicTextureGenerator").transform.Find("LabelTexture_Canva").gameObject;
         DynamicTextureManager.AddGenerator<LabelTextureGenerator>(DynamicTextureManager.DynamicTexture.Label, mLabelTextureGenerator);
     }
+
     public void OnEnter()
     {
-        // If label is not printed, go to printer
-        if(mLabelPrinted == false)
+        mMain.mCameraController.GoTo(mPrinterViewPoint.transform);
+        InputManager.Get().mPlayerInteract.Player.Open.Disable();
+
+        foreach (Mail mail in mOrders.Keys)
         {
-            mMain.mCameraController.GoTo(mPrinterViewPoint.transform);
-            InputManager.Get().mPlayerInteract.Player.Open.Disable();
-
-            foreach (Mail mail in mOrders.Keys)
+            if (mail.mOrder.mState != Order.State.Accepted)
             {
-                if (mail.mOrder.mState != Order.State.Accepted)
-                {
-                    GameObject.Destroy(mOrders[mail]);
-                    mOrders.Remove(mail);
-                }
-            }
-
-            List<Mail> mails = MailManager.msInstance.GetMailsOfState(Order.State.Accepted);
-            foreach (Mail mail in mails)
-            {
-                if (mOrders.ContainsKey(mail) == false)
-                    mOrders.Add(mail, mPrinterScript.CreateButton());
+                GameObject.Destroy(mOrders[mail]);
+                mOrders.Remove(mail);
             }
         }
-        else
-            mMain.mCameraController.StartDragging(mLabelGo);
+
+        List<Mail> mails = MailManager.msInstance.GetMailsOfState(Order.State.Accepted);
+        foreach (Mail mail in mails)
+        {
+            if (mOrders.ContainsKey(mail) == false)
+                mOrders.Add(mail, mPrinterScript.CreateButton());
+        }
     }
 
     public void OnExit()
     {
-        mMain.mCameraController.Back();
         InputManager.Get().mPlayerInteract.Player.Open.Enable();
         mPrinterScreenUI.SetActive(false);
-
-        if (mSelectedOrderGo != null)
-            mSelectedOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(false);
-        mSelectedOrderGo = null;
+        
+        mMain.mCameraController.Back();
     }
 
     public void OnUpdate()
     {
-        // Activate Printer UI
-        if (mMain.mCameraController.IsMoving(0.001f) == false && mMain.mCameraController.IsRotating(0.001f) == false && mLabelPrinted == false)
+        if (mMain.mCameraController.IsMoving(0.001f) == false && mMain.mCameraController.IsRotating(0.001f) == false)
             mPrinterScreenUI.SetActive(true);
 
-        // Leave if the player press Exit key
         if (InputManager.Get().mPlayerInteract.Player.Close.triggered == true)
             mMain.mStateMachine.SwitchState(mMain.mCompleting);
-
-        // Labelling Logic
-        if(mLabelGo == null) CreateLabel();
-        if(mLabelGo != null)
-        {
-            mLabelGo.transform.rotation = mMain.mCameraController.gameObject.transform.rotation * Quaternion.Euler(90, 0, 180);
-
-            if(mMain.mWorkingPoint.mCollider == mLabelGo)
-            {
-                mLabelGo.transform.parent = mMain.mOutputGO.transform;
-                mLabelGo.transform.rotation = Quaternion.Euler(45, 0, 0);
-                mMain.mCameraController.StopDragging();
-                mMain.mCompleting.mIsLabelled = true;
-                mMain.mStateMachine.SwitchState(mMain.mCompleting);
-            }
-        }
-    }
-
+    }  
 
     #region Printer Button Link
     public void SelectOrder(GameObject newOrderGo)
@@ -144,11 +114,11 @@ public class PacketLabelling : IPackaging
             mDebugData
             );
     }
-    #endregion
+    #endregion  
 
     public void CreateLabel()
     {
-        if(mLabelPrinted == true) return;
+        if(mIsPrinted == true) return;
 
         RenderTexture labelTexture = PrintLabel();
         if(labelTexture == null) return;
@@ -161,7 +131,57 @@ public class PacketLabelling : IPackaging
         //label.transform.localScale *= 100f;                             // TODO : Find a better way to set the scale of the label
 
         label.GetComponent<MeshRenderer>().material.mainTexture = labelTexture;
-        mLabelGo = label;
-        mLabelPrinted = true;
+        mMain.mLabelling.mLabelGo = label;
+        mIsPrinted = true;
+        mMain.mCompleting.mLabelPrinted = true;
+        mMain.mStateMachine.SwitchState(mMain.mCompleting);
+    }
+}
+
+public class PacketLabelling : IPackaging
+{
+    #region Main
+    private PackagingScript mMain;
+    public PacketLabelling(PackagingScript main)
+    {
+        mMain = main;
+        Init();
+    }
+    #endregion
+
+    private Dictionary<Mail, GameObject> mOrders = new Dictionary<Mail, GameObject>();
+
+    public GameObject mLabelGo = null;
+
+    private void Init()
+    {
+        
+    }
+    public void OnEnter()
+    {
+        mMain.mCameraController.StartDragging(mLabelGo);
+    }
+
+    public void OnExit()
+    {
+        mMain.mCameraController.Back();
+    }
+
+    public void OnUpdate()
+    {
+        // Leave state if the player release the label
+        if(mMain.mCameraController.IsDragging() == false)
+            mMain.mStateMachine.SwitchState(mMain.mCompleting);
+
+        mLabelGo.transform.rotation = mMain.mCameraController.gameObject.transform.rotation * Quaternion.Euler(90, 0, 180);
+        Debug.Log(mMain.mWorkingPoint.mCollider == null);
+        if(mMain.mWorkingPoint.mCollider == mLabelGo)
+        {
+            mLabelGo.transform.parent = mMain.mOutputGO.transform;
+            mLabelGo.transform.rotation = Quaternion.Euler(45, 0, 0);
+            mMain.mCameraController.StopDragging();
+            mMain.mCompleting.mIsLabelled = true;
+            mMain.mStateMachine.SwitchState(mMain.mCompleting);
+        }
     }
 }
