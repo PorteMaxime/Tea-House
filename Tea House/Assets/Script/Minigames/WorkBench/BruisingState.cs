@@ -14,6 +14,7 @@ public class BruisingState : IWorkbench
 
     bool isEmpty = true;
     bool mItemBruised = false;
+    bool isHolding = true;
     public BruisingState(WorkbenchScript system)
     {
         mWorkbench = system;
@@ -89,6 +90,7 @@ public class BruisingState : IWorkbench
         mWorkbench.mBowl.transform.rotation = initBowlRot;
 
         isEmpty = true;
+        mItemBruised = false;
 
         mWorkbench.AddItemToMixture(mWorkbench.mBruiseIngrdient);
         mWorkbench.mBruiseIngrdient = null;
