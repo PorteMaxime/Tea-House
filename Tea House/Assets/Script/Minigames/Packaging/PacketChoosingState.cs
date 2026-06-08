@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Numerics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -48,22 +49,19 @@ public class PacketChoosingState : IPackaging
             package.transform.localScale = Vector3.one;
             mMain.mOutputGO = package;
 
-            BoxCollider collider = package.AddComponent<BoxCollider>();
+            GameObject packageLid = package.transform.Find("Lid").gameObject;
+            if(packageLid != null && packageLid.GetComponent<Rigidbody>() == null)
+            {
+                Rigidbody rb = packageLid.AddComponent<Rigidbody>();
+                rb.useGravity = true;
+                rb.isKinematic = true;
+            }
 
-            Physics.SyncTransforms();
-
-            GameObject debug1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            debug1.GetComponent<MeshRenderer>().material.color = Color.red;
-            debug1.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-            debug1.transform.position = collider.bounds.min;
-            GameObject debug2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            debug2.GetComponent<MeshRenderer>().material.color = Color.cyan;
-            debug2.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-            debug2.transform.position = collider.bounds.max;
-            collider.enabled = false;
+            if (packageLid != null && packageLid.GetComponent<WorkingPoint>() == null)
+                packageLid.AddComponent<WorkingPoint>();
 
             //mMain.mOutput = package.GetComponent<PackageScript>();
-            mMain.mStateMachine.SwitchState(mMain.mCompleting);
+            mMain.mStateMachine.SwitchState(mMain.mOpening);
         }
     }
 }

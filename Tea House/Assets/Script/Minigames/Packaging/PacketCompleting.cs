@@ -29,7 +29,7 @@ public class PacketCompleting : IPackaging
 
     public void OnUpdate()
     {
-        if (mIsFilled == false)
+        if (mMain.mOpening.mIsOpened == true && mIsFilled == false)
         {
             List<GameObject> hits = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Ingredient");
             if (hits.Count > 0)
@@ -48,7 +48,6 @@ public class PacketCompleting : IPackaging
         else if(mLabelPrinted == true && mIsLabelled == false)
         {
             List<GameObject> hits = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Label");
-            Debug.Log(hits.Count);
             if (hits.Count > 0)
                 mMain.mStateMachine.SwitchState(mMain.mLabelling);
         }

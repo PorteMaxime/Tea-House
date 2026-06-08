@@ -42,7 +42,7 @@ public class SelectItemState : IWorkbench
         if (mWorkbench.currentItemG == null)
             return;
 
-        if (mWorkbench.mBowl.transform.GetChild(0).GetComponent<WorkingPoint>().mCollider == mWorkbench.currentItemG)
+        if (mWorkbench.mBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
         {
             mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
         }

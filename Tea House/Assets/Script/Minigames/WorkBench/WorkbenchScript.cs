@@ -3,7 +3,7 @@ using UnityEngine;
 public class WorkbenchScript : MonoBehaviour
 {
     public CameraController mCameraController;
-    public Packaging_MainScript mPackaging;
+    public PackagingScript mPackaging;
     public Inventory inventory;
 
     public GameObject mBowl;

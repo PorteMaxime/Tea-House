@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class PackagingScript : MonoBehaviour
@@ -6,6 +7,7 @@ public class PackagingScript : MonoBehaviour
     public PackagingStateMachine mStateMachine;
 
     public PacketChoosingState mChoosing = null;
+    public PacketOpening mOpening = null;
     public PacketCompleting mCompleting = null;
     public PacketFilling mFilling = null;
     public PacketLabelling mLabelling = null;
@@ -28,6 +30,7 @@ public class PackagingScript : MonoBehaviour
         mStateMachine = new PackagingStateMachine();
         
         mChoosing = new PacketChoosingState(this);
+        mOpening = new PacketOpening(this);
         mCompleting = new PacketCompleting(this);
         mFilling = new PacketFilling(this);
         mLabelling = new PacketLabelling(this);
@@ -60,5 +63,10 @@ public class PackagingScript : MonoBehaviour
 
         MeshRenderer meshRenderer = target.AddComponent<MeshRenderer>();
         meshRenderer.sharedMaterials = origin.GetComponent<MeshRenderer>().materials;
+    }
+
+    public void SetIngredientData(IngredientData data)
+    {
+        // TODO : Take the ingredient data from Workbench
     }
 }

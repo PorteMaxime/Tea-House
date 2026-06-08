@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
     #region DragAndDrop
     // Drag & Drop
     public GameObject mHolding = null;              // GameObject holded
-    private bool mHoldingWasGravity = false;        // Before dragging, mHolding was submit to gravity ?
+    private bool mHoldingWasKinematic = false;      // Before dragging, mHolding was kinematic ?
     public bool mHasReleasedDrag = false;           // Gameobject is released last frame ?
     private float mCameraDistance;                  // Distance between camera and gameobject
 
@@ -58,8 +58,8 @@ public class CameraController : MonoBehaviour
         Rigidbody rb = target.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            mHoldingWasGravity = rb.useGravity;
-            rb.useGravity = false;
+            mHoldingWasKinematic = rb.useGravity;
+            rb.isKinematic = false;
         }
     }
     public void StopDragging()
@@ -67,7 +67,7 @@ public class CameraController : MonoBehaviour
         if (mHolding == null) return;
 
         Rigidbody rb = mHolding.GetComponent<Rigidbody>();
-        if (rb != null) rb.useGravity = mHoldingWasGravity;
+        if (rb != null) rb.isKinematic = mHoldingWasKinematic;
 
         mHolding = null;
         mHasReleasedDrag = false;

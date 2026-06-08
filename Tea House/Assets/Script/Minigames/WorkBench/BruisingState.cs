@@ -63,7 +63,7 @@ public class BruisingState : IWorkbench
                 mWorkbench.mCameraController.StartDragging(mWorkbench.mBowl);
             }
 
-            if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().mCollider == mWorkbench.mBowl)
+            if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.mBowl))
             {
                 mWorkbench.mBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0);
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
