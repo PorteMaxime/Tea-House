@@ -1,15 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WorkingPoint : MonoBehaviour
 {
-    public GameObject mCollider = null;
+    private List<GameObject> mCollider = new List<GameObject>();
 
     private void OnTriggerEnter(Collider other)
     {
-        mCollider = other.gameObject;
+        mCollider.Add(other.gameObject);
     }
     private void OnTriggerExit(Collider other)
     {
-        mCollider = null;
+        mCollider.Remove(other.gameObject);
+    }
+
+    public bool IsColliding(GameObject other)
+    {
+        return mCollider.Contains(other);
     }
 }

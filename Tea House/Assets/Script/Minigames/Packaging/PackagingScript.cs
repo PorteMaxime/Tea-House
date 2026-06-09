@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class PackagingScript : MonoBehaviour
@@ -6,9 +7,11 @@ public class PackagingScript : MonoBehaviour
     public PackagingStateMachine mStateMachine;
 
     public PacketChoosingState mChoosing = null;
+    public PacketOpening mOpening = null;
     public PacketCompleting mCompleting = null;
     public PacketFilling mFilling = null;
     public PacketLabelling mLabelling = null;
+    public PacketLabelPrinting mPrinting = null;
     #endregion
 
     public GameObject mDebug = null;
@@ -23,15 +26,19 @@ public class PackagingScript : MonoBehaviour
     {
         mCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         mWorkingPoint = transform.Find("WorkingPoint").GetComponent<WorkingPoint>();
-
+        
         mStateMachine = new PackagingStateMachine();
-
+        
         mChoosing = new PacketChoosingState(this);
+        mOpening = new PacketOpening(this);
         mCompleting = new PacketCompleting(this);
         mFilling = new PacketFilling(this);
         mLabelling = new PacketLabelling(this);
-        mLabelling.mDebug = mDebug;
-        mLabelling.mDebugData = mDebugData;
+        mPrinting = new PacketLabelPrinting(this);
+
+        // TODO : Remove Debug
+        mPrinting.mDebug = mDebug;
+        mPrinting.mDebugData = mDebugData;
 
         mStateMachine.SwitchState(mChoosing);
     }
@@ -56,5 +63,10 @@ public class PackagingScript : MonoBehaviour
 
         MeshRenderer meshRenderer = target.AddComponent<MeshRenderer>();
         meshRenderer.sharedMaterials = origin.GetComponent<MeshRenderer>().materials;
+    }
+
+    public void SetIngredientData(IngredientData data)
+    {
+        // TODO : Take the ingredient data from Workbench
     }
 }

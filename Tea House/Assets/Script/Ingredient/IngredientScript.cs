@@ -28,10 +28,10 @@ public class IngredientScript : MonoBehaviour
     void Start()
     {
         mMeshFilter = GetComponent<MeshFilter>();
-        mMeshFilter.mesh = mIngredientData.mModel.GetComponent<MeshFilter>().sharedMesh;
+        mMeshFilter.mesh = mIngredientData.mPrefab.GetComponent<MeshFilter>().sharedMesh;
 
         mMeshRenderer = GetComponent<MeshRenderer>();
-        mMeshRenderer.material = mIngredientData.mModel.GetComponent<MeshRenderer>().sharedMaterial;
+        mMeshRenderer.material = mIngredientData.mPrefab.GetComponent<MeshRenderer>().sharedMaterial;
 
         mIsTorrefied = false;
     }

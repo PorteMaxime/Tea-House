@@ -13,6 +13,9 @@ TagManager:
   - Bowl
   - Mortar
   - SunLight
+  - Label
+  - PackageLid
+  - MixtureBowl
   layers:
   - Default
   - TransparentFX

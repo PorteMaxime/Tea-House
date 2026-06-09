@@ -17,7 +17,7 @@ public class SelectItemState : IWorkbench
     {
         if (mWorkbench.mCurrentItem == null)
         {
-            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Storage");
+            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), new string[2] { "Storage", "MixtureBowl"});
 
             if (hitDraggables.Count > 0)
             {
@@ -27,6 +27,10 @@ public class SelectItemState : IWorkbench
                     workBenchStorageScript.CheckIngredient();
                     mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
                 }
+                else if (hitDraggables[0] = mWorkbench.mMixtureBowl)
+                {
+                    mWorkbench.mCameraController.StartDragging(mWorkbench.mMixtureBowl);
+                }
             }
         }
         else
@@ -35,14 +39,15 @@ public class SelectItemState : IWorkbench
 
             if (hitDraggables.Count > 0)
             {
-                mWorkbench.mCameraController.StartDragging(hitDraggables[0]);
+                if (hitDraggables[0] == mWorkbench.currentItemG)
+                mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
             }
         }
 
         if (mWorkbench.currentItemG == null)
             return;
 
-        if (mWorkbench.mBowl.transform.GetChild(0).GetComponent<WorkingPoint>().mCollider == mWorkbench.currentItemG)
+        if (mWorkbench.mBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
         {
             mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
         }
@@ -58,6 +63,6 @@ public class SelectItemState : IWorkbench
     void InitIngredient(IngredientData _ingredient)
     {
         mWorkbench.mCurrentItem = _ingredient;
-        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mModel, mWorkbench.mBowl.transform.position);
+        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mPrefab, mWorkbench.mBowl.transform.position);
     }
 }

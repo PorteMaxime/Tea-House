@@ -12,108 +12,57 @@ public class PacketLabelling : IPackaging
     }
     #endregion
 
-    public GameObject mPrinterScreenUI = null;
-    private GameObject mPrinterViewPoint = null;
-
-    private GameObject mLabelPrefab = null;
-
-    public GameObject mDebug = null;
-    public IngredientData mDebugData = null;
-
     private Dictionary<Mail, GameObject> mOrders = new Dictionary<Mail, GameObject>();
 
-    private Printer_SelectOrder mPrinterScript = null;
-    private GameObject mSelectedGo = null;
+    public GameObject mLabelGo = null;
 
     private void Init()
     {
-        mPrinterViewPoint = mMain.transform.Find("Printer").transform.Find("ViewPoint").gameObject;
-        mPrinterScreenUI = mPrinterViewPoint.transform.parent.Find("PrinterScreen").gameObject;
-
-        mPrinterScript = mMain.transform.Find("Printer").GetComponent<Printer_SelectOrder>();
-
-        mLabelPrefab = GameObject.Find("DynamicTextureGenerator").transform.Find("LabelTexture_Canva").gameObject;
-        DynamicTextureManager.AddGenerator<LabelTextureGenerator>(DynamicTextureManager.DynamicTexture.Label, mLabelPrefab);
+        
     }
     public void OnEnter()
     {
-        mMain.mCameraController.GoTo(mPrinterViewPoint.transform);
-        InputManager.Get().mPlayerInteract.Player.Open.Disable();
-
-        foreach (Mail mail in mOrders.Keys)
-        {
-            if (mail.mOrder.mState != Order.State.Accepted)
-            {
-                GameObject.Destroy(mOrders[mail]);
-                mOrders.Remove(mail);
-            }
-        }
-
-        List<Mail> mails = MailManager.msInstance.GetMailsOfState(Order.State.Accepted);
-        foreach (Mail mail in mails)
-        {
-            if (mOrders.ContainsKey(mail) == false)
-                mOrders.Add(mail, mPrinterScript.CreateButton());
-        }
+        mMain.mCameraController.StartDragging(mLabelGo);
     }
 
     public void OnExit()
     {
-        mMain.mCameraController.Back();
-        InputManager.Get().mPlayerInteract.Player.Open.Enable();
-        mPrinterScreenUI.SetActive(false);
-
-        if (mSelectedGo != null)
-            mSelectedGo.transform.Find("Order_SelectionRect").gameObject.SetActive(false);
-        mSelectedGo = null;
+        mMain.mCameraController.StopDragging();
     }
 
     public void OnUpdate()
     {
-        if (mMain.mCameraController.IsMoving(0.001f) == false && mMain.mCameraController.IsRotating(0.001f) == false)
-            mPrinterScreenUI.SetActive(true);
+        // Leave state if the player release the label
+        if(mMain.mCameraController.IsDragging() == false)
+            mMain.mStateMachine.SwitchState(mMain.mCompleting);
 
-        if (InputManager.Get().mPlayerInteract.Player.Close.triggered == true)
+        mLabelGo.transform.rotation = mMain.mCameraController.gameObject.transform.rotation * Quaternion.Euler(90, 0, 180);
+        
+        if(mMain.mWorkingPoint.IsColliding(mLabelGo))
         {
+            mLabelGo.transform.parent = mMain.mOutputGO.transform;
+            mLabelGo.transform.rotation = Quaternion.Euler(80, 90, 0);
+
+            SnapLabelToPackage(mLabelGo);
+            
+            mMain.mCompleting.mIsLabelled = true;
             mMain.mStateMachine.SwitchState(mMain.mCompleting);
         }
     }
 
-    #region Printer Button Link
-    public void SelectOrder(GameObject newOrderGo)
+    private void SnapLabelToPackage(GameObject labelGO)
     {
-        if (mSelectedGo != null) mSelectedGo.transform.Find("Order_SelectionRect").gameObject.SetActive(false);
-
-        newOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(true);
-        mSelectedGo = newOrderGo;
-    }
-    public void Print()
-    {
-        if (mSelectedGo == null) return;
-
-        // Generate Texture + Label
-        Mail targetMail = null;
-        foreach(Mail mail in mOrders.Keys)
+        Transform labelPlace = mMain.mOutputGO.transform.Find("LabelPlace");
+        if(labelPlace == null)
         {
-            if (mOrders[mail] == mSelectedGo)
-            {
-                targetMail = mail;
-                break;
-            }
-        }
-
-        RenderTexture texture = DynamicTextureManager.Generate(DynamicTextureManager.DynamicTexture.Label,
-            targetMail.mPicture,
-            "targetMail.mName",
-            mDebugData,
-            mDebugData,
-            mDebugData,
-            mDebugData
+            GameObject packageBase = mMain.mOutputGO.transform.Find("Base").gameObject;
+            labelGO.transform.localPosition = new Vector3(
+                0.00105f,
+                0.003f,
+                0
             );
-
-        //Generate GameObject of the Label
-        mDebug.GetComponent<MeshRenderer>().materials[0].mainTexture = texture;
-        Debug.Log("Print");
+            return;
+        }
+        labelGO.transform.localPosition = labelPlace.transform.localPosition;
     }
-    #endregion
 }

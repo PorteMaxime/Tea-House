@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Printer_SelectOrder : MonoBehaviour
 {
-    private PacketLabelling mLabellingScript = null;
+    private PacketLabelPrinting mPacketLabelPrinting = null;
     private GameObject mScrollUI = null;
     private GameObject mPrinterScreenUI = null;
 
@@ -19,24 +19,24 @@ public class Printer_SelectOrder : MonoBehaviour
 
     private void Init()
     {
-        mLabellingScript = transform.parent.GetComponent<PackagingScript>().mLabelling;
+        mPacketLabelPrinting = transform.parent.GetComponent<PackagingScript>().mPrinting;
 
-        if (mLabellingScript == null) return;
+        if (mPacketLabelPrinting == null) return;
 
-        mPrinterScreenUI = mLabellingScript.mPrinterScreenUI;
+        mPrinterScreenUI = mPacketLabelPrinting.mPrinterScreenUI;
         mScrollUI = mPrinterScreenUI.transform.Find("Background/Printer_Scroll/Viewport/Content").gameObject;
     }
 
-    public void SelectOrder(GameObject orderGo) => mLabellingScript.SelectOrder(orderGo);
+    public void SelectOrder(GameObject orderGo) => mPacketLabelPrinting.SelectOrder(orderGo);
     public void Print()
     {
-        if (mLabellingScript == null) Init();
-        mLabellingScript.Print();
+        if (mPacketLabelPrinting == null) Init();
+        mPacketLabelPrinting.CreateLabel();
     }
 
     public GameObject CreateButton()
     {
-        if (mLabellingScript == null) Init();
+        if (mPacketLabelPrinting == null) Init();
 
         GameObject mailGo = GameObject.Instantiate(mOrderGoPrefab, mScrollUI.transform);
         Vector3 currentMailPos = mailGo.transform.position;

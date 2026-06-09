@@ -3,7 +3,7 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     public string mName;
-    public GameObject mModel;
+    public GameObject mPrefab;
     public int mWarmth;
     public int mFreshness;
     public int mRelaxation;

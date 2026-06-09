@@ -34,7 +34,9 @@ public class MailManager : MonoBehaviour
     private List<Mail>[] mCalendar = new List<Mail>[7];
     private int mCurrentDay = 0;
     private bool mHasSend = false;
-    private (int, int) mToSendNumber = (5, 8);
+    
+    // TODO : Divide numbers by 10 => time 10 is for Testing
+    private (int, int) mToSendNumber = (50, 80);
 
     void Start()
     {
@@ -73,7 +75,7 @@ public class MailManager : MonoBehaviour
         order.mOrderData.mRelaxation += pBase.mRelaxation;
         order.mOrderData.mPrestige += pBase.mPrestige;
 
-        for (int i = 0; i < Random.Range(1, 30); i++)
+        for (int i = 0; i < Random.Range(1, 3); i++)
         {
             IngredientData pIngredient = mIngredients[Random.Range(0, mIngredients.Count)];
 
