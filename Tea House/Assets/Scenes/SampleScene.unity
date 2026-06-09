@@ -468,23 +468,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1533689256463922143, guid: 6b507079284bf3f44b565104e5a8ddaa, type: 3}
   m_PrefabInstance: {fileID: 3566796002510025995}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1103167330 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8583082996116015450, guid: 15952d0d557cd924ca54150f4da11d60, type: 3}
-  m_PrefabInstance: {fileID: 6061047301083392438}
-  m_PrefabAsset: {fileID: 0}
---- !u!225 &1103167335
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103167330}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!114 &1103913568 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3472766682025363188, guid: b87e1584064131049bd54b9ed750babb, type: 3}
@@ -1753,14 +1736,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 214646230122216456, guid: 15952d0d557cd924ca54150f4da11d60, type: 3}
-      propertyPath: m_TargetTexture
-      value: 
-      objectReference: {fileID: 8400000, guid: 42b59799ba3ae104993eb8141c292041, type: 2}
-    - target: {fileID: 214646230122216456, guid: 15952d0d557cd924ca54150f4da11d60, type: 3}
-      propertyPath: orthographic size
-      value: 500
-      objectReference: {fileID: 0}
     - target: {fileID: 2083842162843180063, guid: 15952d0d557cd924ca54150f4da11d60, type: 3}
       propertyPath: m_Name
       value: DynamicTextureGenerator
@@ -1805,25 +1780,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5072210782559813370, guid: 15952d0d557cd924ca54150f4da11d60, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6045643037591137934, guid: 15952d0d557cd924ca54150f4da11d60, type: 3}
       propertyPath: m_SizeDelta.x
       value: 850
       objectReference: {fileID: 0}
-    - target: {fileID: 8180329950845986908, guid: 15952d0d557cd924ca54150f4da11d60, type: 3}
-      propertyPath: m_text
-      value: '- Ingredient1'
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8583082996116015450, guid: 15952d0d557cd924ca54150f4da11d60, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1103167335}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15952d0d557cd924ca54150f4da11d60, type: 3}
 --- !u!1001 &6781908833951815434
 PrefabInstance:
@@ -1889,14 +1853,6 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 32463ab3c2e0d484c94724e27b3e0aa4, type: 2}
-    - target: {fileID: 2902751145829269558, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570253864086399143, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4204850762193157484, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1909,10 +1865,6 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c0f50b1231986264ca71435c3384c35d, type: 2}
-    - target: {fileID: 7212437231784533800, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.005
-      objectReference: {fileID: 0}
     - target: {fileID: 7725508691347758566, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1921,11 +1873,7 @@ PrefabInstance:
       propertyPath: m_TagString
       value: MixtureBowl
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7985342285828531956, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
-    - {fileID: 3598996392095287284, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
-    - {fileID: 1729515868473539007, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
-    - {fileID: 4246429690978305540, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -1246,6 +1246,7 @@ GameObject:
   - component: {fileID: 2308425681017523119}
   - component: {fileID: 4896577753461538792}
   - component: {fileID: 7142871761471440637}
+  - component: {fileID: 8007127453844888159}
   m_Layer: 10
   m_Name: LabelTexture_Canva
   m_TagString: Untagged
@@ -1279,7 +1280,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1024, y: 1024}
+  m_SizeDelta: {x: 850, y: 1024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2308425681017523119
 Canvas:
@@ -1344,3 +1345,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &8007127453844888159
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8583082996116015450}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
