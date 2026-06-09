@@ -158,8 +158,8 @@ public class OrdersPageScript : MonoBehaviour
     {
         mCanvasOrderContent.SetActive(active);
 
-        mScrollView.GetComponent<RectTransform>().offsetMax = new Vector2(active ? -701 : 0, -60);
-        mCanvasFilters.GetComponent<RectTransform>().offsetMax = new Vector2(active ? -701 : 0, 0);
+        mScrollView.GetComponent<RectTransform>().offsetMax = new Vector2(active ? -901 : -40, -120);
+        mCanvasFilters.GetComponent<RectTransform>().offsetMax = new Vector2(active ? -901 : -40, 0);
     }
 
     public void SetOrderState(Mail mail, Order.State newState)

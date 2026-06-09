@@ -91,7 +91,7 @@ public class MailsPageScript : MonoBehaviour
     {
         mCanvasMailContent.SetActive(active);
 
-        mScrollView.GetComponent<RectTransform>().offsetMax = new Vector2(active ? -701 : 0, 0);
+        mScrollView.GetComponent<RectTransform>().offsetMax = new Vector2(active ? -901 : -40, -120);
     }
 
     public void AcceptMail()
