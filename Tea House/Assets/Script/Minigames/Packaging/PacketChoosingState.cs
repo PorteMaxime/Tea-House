@@ -61,7 +61,7 @@ public class PacketChoosingState : IPackaging
                 packageLid.AddComponent<WorkingPoint>();
 
             //mMain.mOutput = package.GetComponent<PackageScript>();
-            mMain.mStateMachine.SwitchState(mMain.mOpening);
+            mMain.mStateMachine.SwitchState(mMain.mCompleting);
         }
     }
 }

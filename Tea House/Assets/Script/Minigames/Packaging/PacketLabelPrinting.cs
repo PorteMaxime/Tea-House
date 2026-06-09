@@ -124,12 +124,10 @@ public class PacketLabelPrinting : IPackaging
         RenderTexture labelTexture = PrintLabel();
         if(labelTexture == null) return;
 
-        // TODO : CreateGameObject of Label
         GameObject label = GameObject.Instantiate(mLabelGoPrefab);
         label.transform.parent = mPrinterScript.gameObject.transform;
         label.transform.localRotation = Quaternion.identity;
         label.transform.localPosition = new Vector3(0, 0.001f, 0.003f); // TODO : Find a better way to set the position of the label
-        //label.transform.localScale *= 100f;                             // TODO : Find a better way to set the scale of the label
 
         label.GetComponent<MeshRenderer>().material.mainTexture = labelTexture;
         mMain.mLabelling.mLabelGo = label;

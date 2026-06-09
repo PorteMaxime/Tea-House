@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class PacketOpening : IPackaging
@@ -13,7 +14,7 @@ public class PacketOpening : IPackaging
     }
     #endregion
 
-    private GameObject mLid = null;
+    public GameObject mLid = null;
     private Rigidbody mLidRB = null;
 
     private GameObject mLidClosedPlace = null;
@@ -33,35 +34,33 @@ public class PacketOpening : IPackaging
 
         mLidClosedPlace = mMain.mOutputGO.transform.Find("LidClosePlace").gameObject;
         mLidClosedPlaceCollider = mLidClosedPlace.GetComponent<WorkingPoint>();
+
+        mMain.mCameraController.StartDragging(mLid);
+        if(mIsOpened == false)
+        {
+            mIsOpened = true;
+            mMain.mCompleting.mIsOpened = true;
+        }
     }
     public void OnExit()
     {
-        
     }
 
     public void OnUpdate()
     {
-        if(mIsOpened == true && mMain.mCameraController.IsDragging() == false) mLidRB.isKinematic = false;
-        else if(mMain.mCameraController.IsDragging() == false) mLidRB.isKinematic = true;
+        if(mIsOpened == true && mLidClosedPlaceCollider.IsColliding(mLid))
+        {
+            mIsOpened = false;
+            mMain.mCompleting.mIsOpened = false;
+            mLid.transform.position = mLidClosedPlace.transform.position;
+            mMain.mCameraController.StopDragging();
+        }
 
-        if (mMain.mCameraController.IsDragging() == false)
+        // if(mIsOpened == true && mMain.mCameraController.IsDragging() == false) mLidRB.isKinematic = false;
+        if(mMain.mCameraController.IsDragging() == false)
         {
-            List<GameObject> hitDraggables = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "PackageLid");
-            if(hitDraggables.Count > 0 && hitDraggables[0] == mLid)
-            { 
-                mMain.mCameraController.StartDragging(mLid);
-                if(mIsOpened == false) mIsOpened = true;
-            }
+            mLidRB.isKinematic = mIsOpened != true;
+            mMain.mStateMachine.SwitchState(mMain.mCompleting);
         }
-        else
-        {
-            if(mIsOpened == true && mLidClosedPlaceCollider.IsColliding(mLid))
-            {
-                mIsOpened = false;
-                mLid.transform.position = mLidClosedPlace.transform.position;
-                mMain.mCameraController.StopDragging();
-            }
-        }
-        // TODO : Find place to switch to state of completing
     }
 }

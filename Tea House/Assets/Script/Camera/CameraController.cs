@@ -43,6 +43,7 @@ public class CameraController : MonoBehaviour
     #region DragAndDrop
     // Drag & Drop
     public GameObject mHolding = null;              // GameObject holded
+    private Vector3 mHoldingOffset = Vector3.zero;
     private bool mHoldingWasKinematic = false;      // Before dragging, mHolding was kinematic ?
     public bool mHasReleasedDrag = false;           // Gameobject is released last frame ?
     private float mCameraDistance;                  // Distance between camera and gameobject
@@ -54,12 +55,24 @@ public class CameraController : MonoBehaviour
         mHolding = target;
 
         mCameraDistance = mCamera.WorldToScreenPoint(mHolding.transform.position).z;
+        Collider collider = target.GetComponent<Collider>();
+        if(collider != null)
+        {
+            if (collider is BoxCollider box)
+                mHoldingOffset = box.center;
+            else if (collider is SphereCollider sphere)
+                mHoldingOffset = sphere.center;
+            else if (collider is CapsuleCollider capsule)
+                mHoldingOffset = capsule.center;
+        }
+
+
 
         Rigidbody rb = target.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            mHoldingWasKinematic = rb.useGravity;
-            rb.isKinematic = false;
+            mHoldingWasKinematic = rb.isKinematic;
+            rb.isKinematic = true;
         }
     }
     public void StopDragging()
@@ -68,6 +81,7 @@ public class CameraController : MonoBehaviour
 
         Rigidbody rb = mHolding.GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = mHoldingWasKinematic;
+        mHoldingOffset = Vector3.zero;
 
         mHolding = null;
         mHasReleasedDrag = false;
@@ -242,7 +256,8 @@ public class CameraController : MonoBehaviour
                     mousePos.z = mCameraDistance;
                     Vector3 worldPos = mCamera.ScreenToWorldPoint(mousePos);
                     worldPos.x = mHolding.transform.position.x;
-                    mHolding.transform.position = worldPos;
+
+                    mHolding.transform.position = worldPos - mHoldingOffset;
                 }
             }
         }

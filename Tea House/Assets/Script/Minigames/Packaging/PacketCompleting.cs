@@ -15,6 +15,7 @@ public class PacketCompleting : IPackaging
     public bool mIsFilled = false;
     public bool mLabelPrinted = false;
     public bool mIsLabelled = false;
+    public bool mIsOpened = false;
 
     private void Init()
     {
@@ -29,26 +30,29 @@ public class PacketCompleting : IPackaging
 
     public void OnUpdate()
     {
-        if (mMain.mOpening.mIsOpened == true && mIsFilled == false)
+        if (mIsOpened == true && mIsFilled == false)
         {
-            List<GameObject> hits = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Ingredient");
-            if (hits.Count > 0)
+            List<GameObject> bowlHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "MixtureBowl");
+            if (bowlHit.Count > 0)
             {
-                mMain.mFilling.mBowl = hits[0];
+                mMain.mFilling.mBowl = bowlHit[0];
                 mMain.mStateMachine.SwitchState(mMain.mFilling);
             }
         }
+        List<GameObject> lidHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "PackageLid");
+        if (lidHit.Count > 0 && (mMain.mOpening.mLid != null ? lidHit.Contains(mMain.mOpening.mLid) : true))
+                mMain.mStateMachine.SwitchState(mMain.mOpening);
 
         if(mLabelPrinted == false)
         {
-            List<GameObject> hits = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Printer");
-            if (hits.Count > 0)
+            List<GameObject> printerHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Printer");
+            if (printerHit.Count > 0)
                 mMain.mStateMachine.SwitchState(mMain.mPrinting);
         }
         else if(mLabelPrinted == true && mIsLabelled == false)
         {
-            List<GameObject> hits = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Label");
-            if (hits.Count > 0)
+            List<GameObject> labelHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Label");
+            if (labelHit.Count > 0)
                 mMain.mStateMachine.SwitchState(mMain.mLabelling);
         }
     }

@@ -1917,6 +1917,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c0f50b1231986264ca71435c3384c35d, type: 2}
+    - target: {fileID: 7996184662912848925, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+      propertyPath: m_TagString
+      value: MixtureBowl
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7985342285828531956, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
     - {fileID: 3598996392095287284, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
