@@ -1,5 +1,8 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class BruisingState : IWorkbench
 {
@@ -8,13 +11,13 @@ public class BruisingState : IWorkbench
     Quaternion initBowlRot = Quaternion.identity;
     Vector3 initMortarPos = Vector3.zero;
     Quaternion initMortarRot = Quaternion.identity;
-    Vector3 posOffset = new Vector3(0, 0.1f, 0);
+    Vector3 posOffset = new Vector3(0.1f, 0.1f, 0);
+    Vector3 ingredientPosOffset = new Vector3(0, 0.1f, 0);
 
     GameObject fragIngredient;
 
     bool isEmpty = true;
     bool mItemBruised = false;
-    bool isHolding = true;
     public BruisingState(WorkbenchScript system)
     {
         mWorkbench = system;
@@ -28,7 +31,7 @@ public class BruisingState : IWorkbench
         initMortarPos = mWorkbench.mMortar.transform.position;
         initMortarRot = mWorkbench.mMortar.transform.rotation;
 
-        mWorkbench.currentItemG.transform.position = mWorkbench.mBowl.transform.position + posOffset;
+        mWorkbench.currentItemG.transform.position = mWorkbench.mBowl.transform.position + ingredientPosOffset;
         isEmpty = false;
     }
     public void OnUpdate()
@@ -42,9 +45,13 @@ public class BruisingState : IWorkbench
                 mWorkbench.mCameraController.StartDragging(mWorkbench.mMortar);
                 mWorkbench.mMortar.transform.rotation = Quaternion.identity;
             }
-            if (mWorkbench.mMortar.transform.position.y <= mWorkbench.mBowl.transform.position.y + posOffset.y && mItemBruised == false)
+            if (mWorkbench.mMortar.transform.localPosition.y <= mWorkbench.mBowl.transform.localPosition.y + posOffset.y 
+                && mWorkbench.mMortar.transform.localPosition.x <= mWorkbench.mBowl.transform.localPosition.x + posOffset.x
+                && mWorkbench.mMortar.transform.localPosition.x >= mWorkbench.mBowl.transform.localPosition.x - posOffset.x
+                && mItemBruised == false
+                && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
             {
-                fragIngredient = mWorkbench.InstantiateGameObject(mWorkbench.mCurrentItem.mFragIngredient, mWorkbench.mBowl.transform.position + posOffset, mWorkbench.mBowl);
+                fragIngredient = mWorkbench.InstantiateGameObject(mWorkbench.mCurrentItem.mFragIngredient, mWorkbench.mBowl.transform.position + ingredientPosOffset, mWorkbench.mBowl);
                 mWorkbench.mBruiseIngrdient = mWorkbench.mCurrentItem;
                 mWorkbench.DestroyCurrentIngredient();
 
@@ -57,6 +64,7 @@ public class BruisingState : IWorkbench
 
         if (isEmpty == false && mItemBruised == true)
         {
+
             List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Bowl");
 
             if (hitDraggables.Count > 0)
@@ -64,17 +72,15 @@ public class BruisingState : IWorkbench
                 mWorkbench.mCameraController.StartDragging(mWorkbench.mBowl);
             }
 
-            if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.mBowl))
+            if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.mBowl) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
             {
                 mWorkbench.mBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0);
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
             }
+
         }
-
-
-
-
     }
+
     public void OnExit()
     {
         mWorkbench.mCameraController.StopDragging();
@@ -95,6 +101,6 @@ public class BruisingState : IWorkbench
         mWorkbench.AddItemToMixture(mWorkbench.mBruiseIngrdient);
         mWorkbench.mBruiseIngrdient = null;
 
-        mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
+        //mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
     }
 }

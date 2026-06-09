@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
@@ -320,5 +321,9 @@ public class CameraController : MonoBehaviour
     public CameraStates GetState()
     {
         return mState;
+    }
+    IEnumerator maCoroutine()
+    {
+        yield return 1;
     }
 }

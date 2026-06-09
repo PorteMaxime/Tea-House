@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WorkbenchScript : MonoBehaviour
@@ -11,7 +12,7 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMixtureBowl;
     public IngredientData mCurrentItem = null;
     public GameObject currentItemG = null;
-    public IngredientData mMixture;
+    public List<IngredientData> mMixture;
     public IngredientData mBruiseIngrdient;
 
     public WorkbenchStateMachine stateMachine;
@@ -22,7 +23,7 @@ public class WorkbenchScript : MonoBehaviour
     void Awake()
     {
         mBruiseIngrdient = ScriptableObject.CreateInstance<IngredientData>();
-        mMixture = ScriptableObject.CreateInstance<IngredientData>();
+        mMixture = new List<IngredientData>();
     }
     void Start()
     {
@@ -41,16 +42,12 @@ public class WorkbenchScript : MonoBehaviour
 
     public void AddItemToMixture(IngredientData item)
     {
-        mMixture.mEnergy += item.mEnergy;
-        mMixture.mFreshness += item.mFreshness;
-        mMixture.mWarmth += item.mWarmth;
-        mMixture.mRelaxation += item.mRelaxation;
-        mMixture.mPrestige += item.mPrestige;
+        mMixture.Add(item);
     }
 
     public GameObject InstantiateGameObject(GameObject _gameObject, Vector3 pos)
     {
-        return Instantiate(_gameObject, pos, Quaternion.identity);
+        return Instantiate(_gameObject, pos, _gameObject.transform.rotation);
     }
     public GameObject InstantiateGameObject(GameObject _gameObject, Vector3 pos, GameObject _parent)
     {
