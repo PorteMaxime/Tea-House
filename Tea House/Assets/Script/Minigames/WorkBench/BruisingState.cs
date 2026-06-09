@@ -1,5 +1,8 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class BruisingState : IWorkbench
 {
@@ -77,6 +80,7 @@ public class BruisingState : IWorkbench
 
         }
     }
+
     public void OnExit()
     {
         mWorkbench.mCameraController.StopDragging();

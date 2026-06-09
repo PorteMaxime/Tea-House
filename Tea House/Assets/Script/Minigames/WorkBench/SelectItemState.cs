@@ -63,6 +63,6 @@ public class SelectItemState : IWorkbench
     void InitIngredient(IngredientData _ingredient)
     {
         mWorkbench.mCurrentItem = _ingredient;
-        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mModel, mWorkbench.mBowl.transform.position);
+        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mPrefab, mWorkbench.mBowl.transform.position);
     }
 }
