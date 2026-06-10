@@ -30,6 +30,8 @@ public class PacketLabelPrinting : IPackaging
     public GameObject mDebug = null;
     public IngredientData mDebugData = null;
 
+    private Camera_DepthView mDepthView = null;
+
     private void Init()
     {
         mPrinterViewPoint = mMain.transform.Find("Printer").transform.Find("ViewPoint").gameObject;
@@ -41,12 +43,13 @@ public class PacketLabelPrinting : IPackaging
 
         mLabelTextureGenerator = GameObject.Find("DynamicTextureGenerator").transform.Find("LabelTexture_Canva").gameObject;
         DynamicTextureManager.AddGenerator<LabelTextureGenerator>(DynamicTextureManager.DynamicTexture.Label, mLabelTextureGenerator);
+
+        mDepthView = mMain.mCameraController.GetControllerMod<Camera_DepthView>();
     }
 
     public void OnEnter()
     {
-        // TODO : GoTo
-        //mMain.mCameraController.GoTo(mPrinterViewPoint.transform);
+        mDepthView.GoTo(mPrinterViewPoint.transform);
         InputManager.Get().mPlayerInteract.Player.Open.Disable();
 
         foreach (Mail mail in mOrders.Keys)
@@ -71,15 +74,13 @@ public class PacketLabelPrinting : IPackaging
         InputManager.Get().mPlayerInteract.Player.Open.Enable();
         mPrinterScreenUI.SetActive(false);
         
-        // TODO : Back
-        //mMain.mCameraController.Back();
+        mDepthView.Back();
     }
 
     public void OnUpdate()
     {
-        // TODO : IsMoving + IsRotating
-        // if (mMain.mCameraController.IsMoving(0.001f) == false && mMain.mCameraController.IsRotating(0.001f) == false)
-        //     mPrinterScreenUI.SetActive(true);
+        if (mDepthView.IsMoving(0.001f) == false && mDepthView.IsRotating(0.001f) == false)
+            mPrinterScreenUI.SetActive(true);
 
         if (InputManager.Get().mPlayerInteract.Player.Close.triggered == true)
             mMain.mStateMachine.SwitchState(mMain.mCompleting);

@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
     };
 
     private Dictionary<CameraStates, List<CameraControllerMod>> mStatesMod = new Dictionary<CameraStates, List<CameraControllerMod>>();
-    public CameraStates mState = CameraStates.Orbital;
+    private CameraStates mState = CameraStates.Orbital;
     public enum CameraStates
     {
         Zoom,
@@ -56,6 +56,7 @@ public class CameraController : MonoBehaviour
             new List<CameraControllerMod>()
             {
                 CameraControllerMod.InteractiveHightlight,
+                CameraControllerMod.DepthView,
                 CameraControllerMod.Rotation,
                 CameraControllerMod.Raycast,
                 CameraControllerMod.XRAY,

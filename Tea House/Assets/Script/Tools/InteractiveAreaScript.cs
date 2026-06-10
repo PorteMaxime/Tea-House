@@ -8,6 +8,7 @@ public class InteractiveAreaScript : MonoBehaviour
 
     private CameraController mCameraController = null;
     private Camera_InteractionHighlight mCameraInteractionMod = null;
+    private Camera_DepthView mCameraDepthMod = null;
     private void Awake()
     {
         inputInteract = InputManager.Get().mPlayerInteract;
@@ -25,6 +26,7 @@ public class InteractiveAreaScript : MonoBehaviour
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
         mCameraController = camera.GetComponent<CameraController>();
         mCameraInteractionMod = mCameraController.GetControllerMod<Camera_InteractionHighlight>();
+        mCameraDepthMod = mCameraController.GetControllerMod<Camera_DepthView>();
     }
     void Update()
     {
@@ -43,18 +45,16 @@ public class InteractiveAreaScript : MonoBehaviour
 
     public void Enter()
     {
-        // TODO : GoTo
-        //mCameraController.GoTo(transform.Find("CameraMovePoint").transform);
+        mCameraDepthMod.GoTo(transform.Find("CameraMovePoint").transform);
         mCameraController.SetState(CameraController.CameraStates.Zoom);
         isUsing = true;
     }
 
     public void Quit()
     {
-        // TODO : Back
-        //mCameraController.Back();
         // TODO : StopDragging
         //mCameraController.StopDragging();
+        mCameraDepthMod.Back();
         mCameraController.SetState(CameraController.CameraStates.Orbital);
         isUsing = false;
     }

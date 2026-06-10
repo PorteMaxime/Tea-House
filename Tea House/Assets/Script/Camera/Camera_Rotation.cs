@@ -41,6 +41,6 @@ public class Camera_Rotation : ICameraControllerMod
 
     private bool IsRotating(float precision)
     {
-        return Quaternion.Angle(mMain.transform.parent.rotation, mTargetQuaternion) > precision;
+        return Quaternion.Angle(mMain.transform.parent.rotation, mTargetQuaternion) >= precision;
     }
 }
