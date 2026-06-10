@@ -5,7 +5,6 @@ public class WorkbenchScript : MonoBehaviour
 {
     public CameraController mCameraController;
     public PackagingScript mPackaging;
-    public Inventory inventory;
 
     public GameObject mBowl;
     public GameObject mMortar;

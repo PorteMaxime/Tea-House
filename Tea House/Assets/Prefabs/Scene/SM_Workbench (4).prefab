@@ -366,7 +366,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkBenchStorageScript
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
   amount: 0
 --- !u!4 &2267672845648835400 stripped
 Transform:
@@ -505,7 +504,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkBenchStorageScript
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
   amount: 0
 --- !u!4 &2162593051525851493 stripped
 Transform:
@@ -644,7 +642,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkBenchStorageScript
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
   amount: 0
 --- !u!4 &1968770567254415618 stripped
 Transform:
@@ -914,7 +911,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkBenchStorageScript
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
   amount: 0
 --- !u!1001 &2629811686256007866
 PrefabInstance:
@@ -1033,15 +1029,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 428201103015242896, guid: c7c8c13f23c4e2f41822ed9f4a7171a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 428201103015242896, guid: c7c8c13f23c4e2f41822ed9f4a7171a2, type: 3}
-      propertyPath: m_LocalPosition.y
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 428201103015242896, guid: c7c8c13f23c4e2f41822ed9f4a7171a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428201103015242896, guid: c7c8c13f23c4e2f41822ed9f4a7171a2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0015
+      value: -0.00015
       objectReference: {fileID: 0}
     - target: {fileID: 428201103015242896, guid: c7c8c13f23c4e2f41822ed9f4a7171a2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1074,6 +1070,10 @@ PrefabInstance:
     - target: {fileID: 428201103015242896, guid: c7c8c13f23c4e2f41822ed9f4a7171a2, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200320341025291629, guid: c7c8c13f23c4e2f41822ed9f4a7171a2, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2435188658019872989, guid: c7c8c13f23c4e2f41822ed9f4a7171a2, type: 3}
       propertyPath: m_Name
@@ -1610,7 +1610,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkBenchStorageScript
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
   amount: 0
 --- !u!4 &4300154961861299883 stripped
 Transform:
@@ -1993,7 +1992,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkBenchStorageScript
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
   amount: 0
 --- !u!4 &5426699246186204595 stripped
 Transform:
@@ -2137,7 +2135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkBenchStorageScript
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
   amount: 0
 --- !u!1001 &6350110749918406782
 PrefabInstance:
@@ -2271,7 +2268,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkBenchStorageScript
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
   amount: 0
 --- !u!4 &6893490853008625557 stripped
 Transform:
@@ -2410,7 +2406,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkBenchStorageScript
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
   amount: 0
 --- !u!4 &6380893610548928014 stripped
 Transform:
@@ -2647,7 +2642,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkBenchStorageScript
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  inventory: {fileID: 11400000, guid: eb7c5c5f5dfecb74991f816f9bf3e579, type: 2}
   amount: 0
 --- !u!4 &9055870076251308728 stripped
 Transform:
