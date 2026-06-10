@@ -12,7 +12,6 @@ public class WorkbenchStateMachine
         mCurrentState?.OnExit();
 
         mCurrentState = newState;
-        Debug.Log(mCurrentState);
         mCurrentState.OnEnter();
     }
 }

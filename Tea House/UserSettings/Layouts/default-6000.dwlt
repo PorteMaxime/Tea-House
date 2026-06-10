@@ -15,11 +15,11 @@ MonoBehaviour:
   m_PixelRect:
     serializedVersion: 2
     x: 0
-    y: 43
+    y: -1037
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 43
+    y: 0
     width: 1920
     height: 36
   m_SerializedDataModeController:
@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 684
+    y: 629
     width: 1476
     height: 302
   m_SerializedDataModeController:
@@ -619,7 +619,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Tools
+    - Assets/Script/Camera
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -629,22 +629,21 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/Tools
+  - Assets/Script/Camera
   m_LastFoldersGridSize: 64
   m_LastProjectPath: D:\source\repos\Tea-House\Tea House
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
+    scrollPos: {x: 0, y: 86}
     m_SelectedIDs:
-    - m_Data: 39340
+    - m_Data: 43544
     m_LastClickedID:
-      m_Data: 39340
+      m_Data: 43544
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 38906
-    - m_Data: 39048
+    - m_Data: 36640
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -679,7 +678,9 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 38906
+    - m_Data: 36640
+    - m_Data: 1000000000
+    - m_Data: 2147483647
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -706,8 +707,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs:
+    - m_Data: 43672
+    m_LastClickedInstanceID: 43672
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs:
     - m_Data: 38362
@@ -770,7 +772,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79
+    y: 24
     width: 362
     height: 579
   m_SerializedDataModeController:
@@ -793,7 +795,7 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -1608
+      - m_Data: -1654
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -840,8 +842,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 363
-    y: 79
+    x: 364
+    y: 24
     width: 1112
     height: 579
   m_SerializedDataModeController:
@@ -1218,9 +1220,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 2.3939419, y: -7.22432, z: -12.636135}
+    m_Target: {x: -6.7474494, y: -5.358489, z: -12.383923}
     speed: 2
-    m_Value: {x: 2.3939419, y: -7.22432, z: -12.636135}
+    m_Value: {x: -6.7474494, y: -5.358489, z: -12.383923}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1266,9 +1268,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.04960128, y: -0.9484792, z: 0.25028583, w: -0.18792664}
+    m_Target: {x: 0.04986077, y: -0.9499447, z: 0.22794633, w: 0.20784156}
     speed: 2
-    m_Value: {x: 0.04960128, y: 0.9484792, z: -0.25028583, w: 0.18792665}
+    m_Value: {x: -0.04985981, y: 0.9499263, z: -0.22794193, w: -0.20783755}
   m_Size:
     m_Target: 9.334015
     speed: 2
@@ -1468,8 +1470,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1477
-    y: 79
+    x: 1478
+    y: 24
     width: 442
     height: 907
   m_SerializedDataModeController:
@@ -1491,7 +1493,7 @@ MonoBehaviour:
     m_CachedPref: 171
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -1
+  m_LastInspectedObjectInstanceID: 43672
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0

@@ -17,31 +17,33 @@ public class SelectItemState : IWorkbench
     {
         if (mWorkbench.mCurrentItem == null)
         {
-            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), new string[2] { "Storage", "MixtureBowl"});
+            // TODO : GetRaycastHit
+            // List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), new string[2] { "Storage", "MixtureBowl"});
 
-            if (hitDraggables.Count > 0)
-            {
-                if (hitDraggables[0].TryGetComponent(out WorkBenchStorageScript workBenchStorageScript))
-                {
-                    InitIngredient(workBenchStorageScript.ingredient);
-                    workBenchStorageScript.CheckIngredient();
-                    mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
-                }
-                else if (hitDraggables[0] = mWorkbench.mMixtureBowl)
-                {
-                    mWorkbench.mCameraController.StartDragging(mWorkbench.mMixtureBowl);
-                }
-            }
+            // if (hitDraggables.Count > 0)
+            // {
+            //     if (hitDraggables[0].TryGetComponent(out WorkBenchStorageScript workBenchStorageScript))
+            //     {
+            //         InitIngredient(workBenchStorageScript.ingredient);
+            //         workBenchStorageScript.CheckIngredient();
+            //         mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
+            //     }
+            //     else if (hitDraggables[0] = mWorkbench.mMixtureBowl)
+            //     {
+            //         mWorkbench.mCameraController.StartDragging(mWorkbench.mMixtureBowl);
+            //     }
+            // }
         }
         else
         {
-            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Ingredient");
+            // TODO : GetRaycastHit
+            // List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Ingredient");
 
-            if (hitDraggables.Count > 0)
-            {
-                if (hitDraggables[0] == mWorkbench.currentItemG)
-                mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
-            }
+            // if (hitDraggables.Count > 0)
+            // {
+            //     if (hitDraggables[0] == mWorkbench.currentItemG)
+            //     mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
+            // }
         }
 
         if (mWorkbench.currentItemG == null)
@@ -56,7 +58,8 @@ public class SelectItemState : IWorkbench
     public void OnExit()
     {
         mWorkbench.inventory.RemoveItem(mWorkbench.mCurrentItem, 1);
-        mWorkbench.mCameraController.StopDragging();
+        // TODO : StopDragging
+        //mWorkbench.mCameraController.StopDragging();
     }
 
 

@@ -32,28 +32,32 @@ public class PacketCompleting : IPackaging
     {
         if (mIsOpened == true && mIsFilled == false)
         {
-            List<GameObject> bowlHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "MixtureBowl");
-            if (bowlHit.Count > 0)
-            {
-                mMain.mFilling.mBowl = bowlHit[0];
-                mMain.mStateMachine.SwitchState(mMain.mFilling);
-            }
+            // TODO : RAYCAST HIT
+            // List<GameObject> bowlHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "MixtureBowl");
+            // if (bowlHit.Count > 0)
+            // {
+            //     mMain.mFilling.mBowl = bowlHit[0];
+            //     mMain.mStateMachine.SwitchState(mMain.mFilling);
+            // }
         }
-        List<GameObject> lidHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "PackageLid");
-        if (lidHit.Count > 0 && (mMain.mOpening.mLid != null ? lidHit.Contains(mMain.mOpening.mLid) : true))
-                mMain.mStateMachine.SwitchState(mMain.mOpening);
+        // TODO : RAYCAST HIT
+        // List<GameObject> lidHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "PackageLid");
+        // if (lidHit.Count > 0 && (mMain.mOpening.mLid != null ? lidHit.Contains(mMain.mOpening.mLid) : true))
+        //         mMain.mStateMachine.SwitchState(mMain.mOpening);
 
         if(mLabelPrinted == false)
         {
-            List<GameObject> printerHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Printer");
-            if (printerHit.Count > 0)
-                mMain.mStateMachine.SwitchState(mMain.mPrinting);
+            // TODO : RAYCAST HIT
+            // List<GameObject> printerHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Printer");
+            // if (printerHit.Count > 0)
+            //     mMain.mStateMachine.SwitchState(mMain.mPrinting);
         }
         else if(mLabelPrinted == true && mIsLabelled == false)
         {
-            List<GameObject> labelHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Label");
-            if (labelHit.Count > 0)
-                mMain.mStateMachine.SwitchState(mMain.mLabelling);
+            // TODO : RAYCAST HIT
+            // List<GameObject> labelHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Label");
+            // if (labelHit.Count > 0)
+            //     mMain.mStateMachine.SwitchState(mMain.mLabelling);
         }
     }
 }

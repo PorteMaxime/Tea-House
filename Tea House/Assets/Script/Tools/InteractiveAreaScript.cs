@@ -31,38 +31,48 @@ public class InteractiveAreaScript : MonoBehaviour
         {
             if (inputInteract.Player.Open.triggered)
             {
-                isUsing = !isUsing && mCameraController.CanInteractWith(gameObject);
+                // TODO : CanInteractWith
+                //isUsing = !isUsing; //&& mCameraController.CanInteractWith(gameObject);
                 if (isUsing)
                 {
-                    Enter();
+                    //Enter();
                 }
-                else if (mCameraController.GetState() == CameraController.CameraStates.zoom)
-                {
-                    Quit();
-                }
+                // TODO : GetCameraState
+                // else if (mCameraController.GetState() == CameraController.CameraStates.zoom)
+                // {
+                //     Quit();
+                // }
             }
         }
     }
 
     public void Enter()
     {
-        mCameraController.GoTo(transform.Find("CameraMovePoint").transform);
-        mCameraController.SetState(CameraController.CameraStates.zoom);
-        mCameraController.mInteractionPopup.SetActive(false);
+        // TODO : GoTo
+        //mCameraController.GoTo(transform.Find("CameraMovePoint").transform);
+        // TODO : SetState
+        //mCameraController.SetState(CameraController.CameraStates.zoom);
+        // TODO : Disable InteractionPopup
+        //mCameraController.mInteractionPopup.SetActive(false);
 
-        mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = false;
-        mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = false;
+        // TODO : Block Player
+        // mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = false;
+        // mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = false;
         isUsing = true;
     }
 
     public void Quit()
     {
-        mCameraController.Back();
-        mCameraController.SetState(CameraController.CameraStates.orbitale);
-        mCameraController.StopDragging();
+        // TODO : Back
+        //mCameraController.Back();
+        // TODO : SetState
+        //mCameraController.SetState(CameraController.CameraStates.orbitale);
+        // TODO : StopDragging
+        //mCameraController.StopDragging();
 
-        mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = true;
-        mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = true;
+        // TODO : Allow Player to Move
+        // mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = true;
+        // mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = true;
         isUsing = false;
     }
 
@@ -70,7 +80,8 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            mCameraController.AddInteractionTarget(gameObject);
+            // TODO : AddInteractionTarget
+            //mCameraController.AddInteractionTarget(gameObject);
             canIntercat = true;
         }
     }
@@ -78,6 +89,7 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         canIntercat = false;
         isUsing = false;
-        mCameraController.RemoveInteractionTarget(gameObject);
+        // TODO : RemoveInteractionTarget
+        //mCameraController.RemoveInteractionTarget(gameObject);
     }
 }

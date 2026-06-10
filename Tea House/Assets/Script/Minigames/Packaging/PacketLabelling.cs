@@ -22,18 +22,21 @@ public class PacketLabelling : IPackaging
     }
     public void OnEnter()
     {
-        mMain.mCameraController.StartDragging(mLabelGo);
+        // TODO : Start Dragging
+        //mMain.mCameraController.StartDragging(mLabelGo);
     }
 
     public void OnExit()
     {
-        mMain.mCameraController.StopDragging();
+        // TODO : Stop Dragging
+        //mMain.mCameraController.StopDragging();
     }
 
     public void OnUpdate()
     {
         // Leave state if the player release the label
-        if(mMain.mCameraController.IsDragging() == false)
+        // TODO : Is Dragging
+        if(/*mMain.mCameraController.IsDragging()*/  true == false)
             mMain.mStateMachine.SwitchState(mMain.mCompleting);
 
         mLabelGo.transform.rotation = mMain.mCameraController.gameObject.transform.rotation * Quaternion.Euler(90, 0, 180);

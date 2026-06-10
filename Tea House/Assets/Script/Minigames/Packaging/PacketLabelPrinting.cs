@@ -45,7 +45,8 @@ public class PacketLabelPrinting : IPackaging
 
     public void OnEnter()
     {
-        mMain.mCameraController.GoTo(mPrinterViewPoint.transform);
+        // TODO : GoTo
+        //mMain.mCameraController.GoTo(mPrinterViewPoint.transform);
         InputManager.Get().mPlayerInteract.Player.Open.Disable();
 
         foreach (Mail mail in mOrders.Keys)
@@ -70,13 +71,15 @@ public class PacketLabelPrinting : IPackaging
         InputManager.Get().mPlayerInteract.Player.Open.Enable();
         mPrinterScreenUI.SetActive(false);
         
-        mMain.mCameraController.Back();
+        // TODO : Back
+        //mMain.mCameraController.Back();
     }
 
     public void OnUpdate()
     {
-        if (mMain.mCameraController.IsMoving(0.001f) == false && mMain.mCameraController.IsRotating(0.001f) == false)
-            mPrinterScreenUI.SetActive(true);
+        // TODO : IsMoving + IsRotating
+        // if (mMain.mCameraController.IsMoving(0.001f) == false && mMain.mCameraController.IsRotating(0.001f) == false)
+        //     mPrinterScreenUI.SetActive(true);
 
         if (InputManager.Get().mPlayerInteract.Player.Close.triggered == true)
             mMain.mStateMachine.SwitchState(mMain.mCompleting);

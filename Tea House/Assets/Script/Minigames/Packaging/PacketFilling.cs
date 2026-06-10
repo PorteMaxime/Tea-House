@@ -29,7 +29,8 @@ public class PacketFilling : IPackaging
     public void OnEnter()
     {
         mOldPosition = mBowl.transform.localPosition;
-        mMain.mCameraController.StartDragging(mBowl);
+        // TODO : StartDragging
+        //mMain.mCameraController.StartDragging(mBowl);
 
         BoxCollider packageCollider = mMain.mOutputGO.transform.Find("Base").GetComponent<BoxCollider>();
         Vector3 minBound = packageCollider.bounds.min;
@@ -48,8 +49,9 @@ public class PacketFilling : IPackaging
 
     public void OnUpdate()
     {
-        if (mMain.mCameraController.IsDragging() == false)
-            mMain.mStateMachine.SwitchState(mMain.mCompleting);
+        // TODO : IsDragging
+        // if (mMain.mCameraController.IsDragging() == false)
+        //     mMain.mStateMachine.SwitchState(mMain.mCompleting);
             
         if (mBowl.transform.position.z <= mRotationStartPos.z && mBowl.transform.position.z >= mRotationEndPos.z &&
             mBowl.transform.position.y >= mRotationStartPos.y)

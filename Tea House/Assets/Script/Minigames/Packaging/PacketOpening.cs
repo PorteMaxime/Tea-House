@@ -35,7 +35,8 @@ public class PacketOpening : IPackaging
         mLidClosedPlace = mMain.mOutputGO.transform.Find("LidClosePlace").gameObject;
         mLidClosedPlaceCollider = mLidClosedPlace.GetComponent<WorkingPoint>();
 
-        mMain.mCameraController.StartDragging(mLid);
+        // TODO : Start Dragging
+        //mMain.mCameraController.StartDragging(mLid);
         if(mIsOpened == false)
         {
             mIsOpened = true;
@@ -53,11 +54,12 @@ public class PacketOpening : IPackaging
             mIsOpened = false;
             mMain.mCompleting.mIsOpened = false;
             mLid.transform.position = mLidClosedPlace.transform.position;
-            mMain.mCameraController.StopDragging();
+            // TODO : Stop Dragging
+            //mMain.mCameraController.StopDragging();
         }
 
-        // if(mIsOpened == true && mMain.mCameraController.IsDragging() == false) mLidRB.isKinematic = false;
-        if(mMain.mCameraController.IsDragging() == false)
+        // TODO : Is Dragging
+        if(/*mMain.mCameraController.IsDragging()*/ true == false)
         {
             mLidRB.isKinematic = mIsOpened != true;
             mMain.mStateMachine.SwitchState(mMain.mCompleting);

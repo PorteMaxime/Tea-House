@@ -38,13 +38,14 @@ public class BruisingState : IWorkbench
     {
         if (isEmpty == false && mItemBruised == false)
         {
-            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Mortar");
+            // TODO : GetRaycastHit
+            // List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Mortar");
 
-            if (hitDraggables.Count > 0)
-            {
-                mWorkbench.mCameraController.StartDragging(mWorkbench.mMortar);
-                mWorkbench.mMortar.transform.rotation = Quaternion.identity;
-            }
+            // if (hitDraggables.Count > 0)
+            // {
+            //     mWorkbench.mCameraController.StartDragging(mWorkbench.mMortar);
+            //     mWorkbench.mMortar.transform.rotation = Quaternion.identity;
+            // }
             if (mWorkbench.mMortar.transform.localPosition.y <= mWorkbench.mBowl.transform.localPosition.y + posOffset.y 
                 && mWorkbench.mMortar.transform.localPosition.x <= mWorkbench.mBowl.transform.localPosition.x + posOffset.x
                 && mWorkbench.mMortar.transform.localPosition.x >= mWorkbench.mBowl.transform.localPosition.x - posOffset.x
@@ -55,7 +56,8 @@ public class BruisingState : IWorkbench
                 mWorkbench.mBruiseIngrdient = mWorkbench.mCurrentItem;
                 mWorkbench.DestroyCurrentIngredient();
 
-                mWorkbench.mCameraController.StopDragging();
+                // TODO : StopDragging
+                //mWorkbench.mCameraController.StopDragging();
                 mWorkbench.mMortar.transform.position = initMortarPos;
                 mWorkbench.mMortar.transform.rotation = initMortarRot;
                 mItemBruised = true;
@@ -64,13 +66,13 @@ public class BruisingState : IWorkbench
 
         if (isEmpty == false && mItemBruised == true)
         {
+            // TODO : GetRaycastHit
+            // List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Bowl");
 
-            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Bowl");
-
-            if (hitDraggables.Count > 0)
-            {
-                mWorkbench.mCameraController.StartDragging(mWorkbench.mBowl);
-            }
+            // if (hitDraggables.Count > 0)
+            // {
+            //     mWorkbench.mCameraController.StartDragging(mWorkbench.mBowl);
+            // }
 
             if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.mBowl) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
             {
@@ -83,7 +85,8 @@ public class BruisingState : IWorkbench
 
     public void OnExit()
     {
-        mWorkbench.mCameraController.StopDragging();
+        // TODO : StopDraggging
+        //mWorkbench.mCameraController.StopDragging();
 
         mWorkbench.mBowl.transform.rotation = Quaternion.Euler(0, 0, 180);
 

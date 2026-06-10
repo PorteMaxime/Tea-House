@@ -19,37 +19,37 @@ public class CameraXRAY : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        Vector3 pos = mCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
+    // void Update()
+    // {
+    //     Vector3 pos = mCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
 
-        Vector3 dir = mTarget.transform.position - pos;
-        float dist = Vector3.Distance(pos, dir);
-        dir.Normalize();
+    //     Vector3 dir = mTarget.transform.position - pos;
+    //     float dist = Vector3.Distance(pos, dir);
+    //     dir.Normalize();
 
 
-        if (dist > 0f)
-        {
-            int layers = LayerMask.GetMask(mLayerNameToXRAY);
-            RaycastHit[] hits = Physics.SphereCastAll(pos, mRaycastThickness, dir, dist, layers);
+    //     if (dist > 0f)
+    //     {
+    //         int layers = LayerMask.GetMask(mLayerNameToXRAY);
+    //         RaycastHit[] hits = Physics.SphereCastAll(pos, mRaycastThickness, dir, dist, layers);
 
-            foreach (RaycastHit hit in hits)
-            {
-                if (hit.collider.GetComponent<Camera>() == null)
-                {
-                    MeshRenderer mesh = GetRender(hit.collider.gameObject);
-                    if (mesh != null)
-                        mesh.enabled = false;
-                    ParentingXRAY parentingXRAY = GetParentingXRAY(hit.collider.gameObject);
-                    if (parentingXRAY != null)
-                        parentingXRAY.Show(false);
+    //         foreach (RaycastHit hit in hits)
+    //         {
+    //             if (hit.collider.GetComponent<Camera>() == null)
+    //             {
+    //                 MeshRenderer mesh = GetRender(hit.collider.gameObject);
+    //                 if (mesh != null)
+    //                     mesh.enabled = false;
+    //                 ParentingXRAY parentingXRAY = GetParentingXRAY(hit.collider.gameObject);
+    //                 if (parentingXRAY != null)
+    //                     parentingXRAY.Show(false);
 
-                    mCollided.Add(hit.collider.gameObject);
-                }
-            }
-            UpdateCollided();
-        }
-    }
+    //                 mCollided.Add(hit.collider.gameObject);
+    //             }
+    //         }
+    //         UpdateCollided();
+    //     }
+    // }
 
     void UpdateCollided()
     {

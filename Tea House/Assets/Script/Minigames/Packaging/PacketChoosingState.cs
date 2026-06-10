@@ -39,29 +39,30 @@ public class PacketChoosingState : IPackaging
     {
         if (mInitialized == false) Init(); 
 
-        List<GameObject> packages = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Package");
-        if (packages.Count > 0)
-        {
-            GameObject package = mMain.Instantiate(packages[0].transform.parent.gameObject, mWorkingPoint.position, Quaternion.identity);
+        // TODO : GetRaycastHit
+        // List<GameObject> packages = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Package");
+        // if (packages.Count > 0)
+        // {
+        //     GameObject package = mMain.Instantiate(packages[0].transform.parent.gameObject, mWorkingPoint.position, Quaternion.identity);
 
-            //mMain.ShareRender(packages[0], package);
-            package.transform.parent = mMain.transform;
-            package.transform.localScale = Vector3.one;
-            mMain.mOutputGO = package;
+        //     //mMain.ShareRender(packages[0], package);
+        //     package.transform.parent = mMain.transform;
+        //     package.transform.localScale = Vector3.one;
+        //     mMain.mOutputGO = package;
 
-            GameObject packageLid = package.transform.Find("Lid").gameObject;
-            if(packageLid != null && packageLid.GetComponent<Rigidbody>() == null)
-            {
-                Rigidbody rb = packageLid.AddComponent<Rigidbody>();
-                rb.useGravity = true;
-                rb.isKinematic = true;
-            }
+        //     GameObject packageLid = package.transform.Find("Lid").gameObject;
+        //     if(packageLid != null && packageLid.GetComponent<Rigidbody>() == null)
+        //     {
+        //         Rigidbody rb = packageLid.AddComponent<Rigidbody>();
+        //         rb.useGravity = true;
+        //         rb.isKinematic = true;
+        //     }
 
-            if (packageLid != null && packageLid.GetComponent<WorkingPoint>() == null)
-                packageLid.AddComponent<WorkingPoint>();
+        //     if (packageLid != null && packageLid.GetComponent<WorkingPoint>() == null)
+        //         packageLid.AddComponent<WorkingPoint>();
 
-            //mMain.mOutput = package.GetComponent<PackageScript>();
-            mMain.mStateMachine.SwitchState(mMain.mCompleting);
-        }
+        //     //mMain.mOutput = package.GetComponent<PackageScript>();
+        //     mMain.mStateMachine.SwitchState(mMain.mCompleting);
+        // }
     }
 }
