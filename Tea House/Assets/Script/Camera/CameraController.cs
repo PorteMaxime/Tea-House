@@ -18,15 +18,24 @@ public class CameraController : MonoBehaviour
     };
 
     private Dictionary<CameraStates, List<CameraControllerMod>> mStatesMod = new Dictionary<CameraStates, List<CameraControllerMod>>();
-    private CameraStates mState = CameraStates.Orbital;
+    public CameraStates mState = CameraStates.Orbital;
     public enum CameraStates
     {
         Zoom,
         Orbital
     }
 
+    private CharacterInput mPlayerInputComponent = null;
+    private MeshRenderer mPlayerRenderComponent = null;
+
+
+    #region Basics Methods
     void Awake()
     {
+        GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
+        mPlayerInputComponent = playerGO.GetComponent<CharacterInput>();
+        mPlayerRenderComponent = playerGO.GetComponent<MeshRenderer>();
+
         mCameraControllerMods.Add(CameraControllerMod.InteractiveHightlight, new Camera_InteractionHighlight(this));
         mCameraControllerMods.Add(CameraControllerMod.DepthView, new Camera_DepthView(this));
         mCameraControllerMods.Add(CameraControllerMod.Rotation, new Camera_Rotation(this));
@@ -63,6 +72,43 @@ public class CameraController : MonoBehaviour
             if(mCameraControllerMods.ContainsKey(modID) == true)
                 mCameraControllerMods[modID].OnUpdate();
         }
+    }
+    #endregion
+
+    #region State
+    public void SetState(CameraStates newState)
+    {
+        if(mState == newState) return;
+
+        mState = newState;
+
+        switch(mState)
+        {
+        case CameraStates.Orbital:
+            mPlayerInputComponent.mCanMove = true;
+            mPlayerRenderComponent.enabled = true;
+            break;
+        case CameraStates.Zoom:
+            mPlayerInputComponent.mCanMove = false;
+            mPlayerRenderComponent.enabled = false;
+            break;
+        }
+    }
+
+    public bool IsState(CameraStates state)
+    {
+        return mState == state;
+    }
+    #endregion
+
+    public ModType GetControllerMod<ModType>() where ModType : ICameraControllerMod
+    {
+        foreach(ICameraControllerMod mod in mCameraControllerMods.Values)
+        {
+            if(mod is ModType castedMod)
+                return castedMod;
+        }
+        return default;
     }
 }
 
@@ -229,7 +275,7 @@ public class CameraController : MonoBehaviour
 //     {
 //         zoomTargetOrder.Remove(target);
 
-//         if (zoomTargetOrder.Count <= 0)
+//         if (zoomTargetOrder.Count == 0)
 //         {
 //             Back();
 //             SetState(CameraController.CameraStates.orbitale);

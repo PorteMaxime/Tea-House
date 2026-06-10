@@ -6,8 +6,8 @@ public class InteractiveAreaScript : MonoBehaviour
     [SerializeField] private bool canIntercat = false;
     [SerializeField] public bool isUsing = false;
 
-    private GameObject mCamera;
-    private CameraController mCameraController;
+    private CameraController mCameraController = null;
+    private Camera_InteractionHighlight mCameraInteractionMod = null;
     private void Awake()
     {
         inputInteract = InputManager.Get().mPlayerInteract;
@@ -22,8 +22,9 @@ public class InteractiveAreaScript : MonoBehaviour
     }
     void Start()
     {
-        mCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        mCameraController = mCamera.GetComponent<CameraController>();
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        mCameraController = camera.GetComponent<CameraController>();
+        mCameraInteractionMod = mCameraController.GetControllerMod<Camera_InteractionHighlight>();
     }
     void Update()
     {
@@ -31,17 +32,11 @@ public class InteractiveAreaScript : MonoBehaviour
         {
             if (inputInteract.Player.Open.triggered)
             {
-                // TODO : CanInteractWith
-                //isUsing = !isUsing; //&& mCameraController.CanInteractWith(gameObject);
+                isUsing = !isUsing && mCameraInteractionMod.CanInteractWith(this);
                 if (isUsing)
-                {
-                    //Enter();
-                }
-                // TODO : GetCameraState
-                // else if (mCameraController.GetState() == CameraController.CameraStates.zoom)
-                // {
-                //     Quit();
-                // }
+                    Enter();
+                else if (mCameraController.IsState(CameraController.CameraStates.Zoom) == true)
+                    Quit();
             }
         }
     }
@@ -50,14 +45,7 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         // TODO : GoTo
         //mCameraController.GoTo(transform.Find("CameraMovePoint").transform);
-        // TODO : SetState
-        //mCameraController.SetState(CameraController.CameraStates.zoom);
-        // TODO : Disable InteractionPopup
-        //mCameraController.mInteractionPopup.SetActive(false);
-
-        // TODO : Block Player
-        // mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = false;
-        // mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = false;
+        mCameraController.SetState(CameraController.CameraStates.Zoom);
         isUsing = true;
     }
 
@@ -65,14 +53,9 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         // TODO : Back
         //mCameraController.Back();
-        // TODO : SetState
-        //mCameraController.SetState(CameraController.CameraStates.orbitale);
         // TODO : StopDragging
         //mCameraController.StopDragging();
-
-        // TODO : Allow Player to Move
-        // mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = true;
-        // mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = true;
+        mCameraController.SetState(CameraController.CameraStates.Orbital);
         isUsing = false;
     }
 
@@ -80,16 +63,17 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            // TODO : AddInteractionTarget
-            //mCameraController.AddInteractionTarget(gameObject);
+            mCameraInteractionMod.AddInteractionTarget(this);
             canIntercat = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        canIntercat = false;
-        isUsing = false;
-        // TODO : RemoveInteractionTarget
-        //mCameraController.RemoveInteractionTarget(gameObject);
+        if(other.gameObject.tag == "Player")
+        {
+            canIntercat = false;
+            isUsing = false;
+            mCameraInteractionMod.RemoveInteractionTarget(this);
+        }
     }
 }
