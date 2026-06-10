@@ -39,11 +39,11 @@ public class Camera_DepthView : ICameraControllerMod
             mMain.transform.rotation = Quaternion.Slerp(mMain.transform.rotation, mCurrentTarget.rotation, mRotationSpeed * Time.deltaTime);
     }
 
-    private bool IsMoving(float precision)
+    public bool IsMoving(float precision)
     {
         return mDepth.Count > 0 ? Vector3.Distance(mMain.transform.position, mCurrentTarget.position) >= precision : false;
     }
-    private bool IsRotating(float precision)
+    public bool IsRotating(float precision)
     {
         return Quaternion.Angle(mMain.transform.rotation, mCurrentTarget.rotation) >= precision;
     }
