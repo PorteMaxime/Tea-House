@@ -25,7 +25,6 @@ public class Camera_InteractionHighlight : ICameraControllerMod
         mPlayerInputComponent = mPlayerGO.GetComponent<CharacterInput>();
         mPlayerRenderComponent = mPlayerGO.GetComponent<MeshRenderer>();
     }
-
     public void OnUpdate()
     {
         if(mInteractionFields.Count > 0) HighlightInteraction();
