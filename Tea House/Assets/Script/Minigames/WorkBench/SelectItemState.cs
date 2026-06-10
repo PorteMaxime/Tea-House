@@ -43,9 +43,12 @@ public class SelectItemState : IWorkbench
                 mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
             }
         }
+        List<GameObject> hitSpoon = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Spoon");
 
-        if (mWorkbench.currentItemG == null)
-            return;
+        if (hitSpoon.Count > 0)
+        {
+            mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
+        }
 
         if (mWorkbench.mBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
         {

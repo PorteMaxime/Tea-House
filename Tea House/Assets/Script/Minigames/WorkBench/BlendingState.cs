@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BlendingState : IWorkbench
@@ -21,7 +22,13 @@ public class BlendingState : IWorkbench
 
     public void OnUpdate()
     {
-        throw new System.NotImplementedException();
+        List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Spoon");
+
+        if (hitDraggables.Count > 0)
+        {
+            mWorkbench.mCameraController.StartDragging(mWorkbench.mSpoon);
+            mWorkbench.mSpoon.transform.rotation = Quaternion.Euler(90,0,60);
+        }
     }
     public void OnExit()
     {
