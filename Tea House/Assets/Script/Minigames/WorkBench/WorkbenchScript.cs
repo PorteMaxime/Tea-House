@@ -14,11 +14,18 @@ public class WorkbenchScript : MonoBehaviour
     public List<IngredientData> mMixture;
     public IngredientData mBruiseIngrdient;
 
+    public GameObject mTopBorn;
+    public GameObject mBotBorn;
+    public GameObject mRightBorn;
+    public GameObject mLeftBorn;
+
+    public GameObject mSpoon;
+
     public WorkbenchStateMachine stateMachine;
 
     public SelectItemState selectItemState;
     public BruisingState bruisingState;
-
+    public BlendingState blendingState;
     void Awake()
     {
         mBruiseIngrdient = ScriptableObject.CreateInstance<IngredientData>();
@@ -30,6 +37,7 @@ public class WorkbenchScript : MonoBehaviour
 
         selectItemState = new SelectItemState(this);
         bruisingState = new BruisingState(this);
+        blendingState = new BlendingState(this);
 
         stateMachine.ChangeState(selectItemState);
     }
