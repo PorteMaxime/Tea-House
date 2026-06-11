@@ -50,8 +50,7 @@ public class BruisingState : IWorkbench
                 mWorkbench.mMortar.transform.rotation = Quaternion.identity;
             }
             if (mWorkbench.mMortar.transform.position.z <= mWorkbench.mRightBorn.transform.position.z
-                && mWorkbench.mMortar.transform.position.z >= mWorkbench.mLeftBorn.transform.position.z
-                && mItemBruised == false)
+                && mWorkbench.mMortar.transform.position.z >= mWorkbench.mLeftBorn.transform.position.z)
             {
                 if(mWorkbench.mMortar.transform.position.y >= mWorkbench.mTopBorn.transform.position.y)
                 {
@@ -81,6 +80,7 @@ public class BruisingState : IWorkbench
                 mWorkbench.mMortar.transform.position = initMortarPos;
                 mWorkbench.mMortar.transform.rotation = initMortarRot;
                 bottomMortar = 0;
+                topMortar = 0;
 
             }
 
@@ -100,6 +100,7 @@ public class BruisingState : IWorkbench
 
             if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.mBowl) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
             {
+                mWorkbench.blendingState.isEmpty = false;
                 mWorkbench.mBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0);
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
             }
@@ -122,6 +123,7 @@ public class BruisingState : IWorkbench
 
         isEmpty = true;
         mItemBruised = false;
+        canMoveBowl = false;
 
         mWorkbench.AddItemToMixture(mWorkbench.mBruiseIngrdient);
         mWorkbench.mBruiseIngrdient = null;

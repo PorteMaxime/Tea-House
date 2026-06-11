@@ -19,6 +19,9 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mRightBorn;
     public GameObject mLeftBorn;
 
+    public GameObject mMixtureRightBorn;
+    public GameObject mMixtureLeftBorn;
+
     public GameObject mSpoon;
 
     public WorkbenchStateMachine stateMachine;

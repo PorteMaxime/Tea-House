@@ -17,6 +17,13 @@ public class SelectItemState : IWorkbench
     {
         if (mWorkbench.mCurrentItem == null)
         {
+            List<GameObject> hitSpoon = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Spoon");
+
+            if (hitSpoon.Count > 0)
+            {
+                mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
+            }
+
             List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), new string[2] { "Storage", "MixtureBowl"});
 
             if (hitDraggables.Count > 0)
@@ -32,6 +39,7 @@ public class SelectItemState : IWorkbench
                     mWorkbench.mCameraController.StartDragging(mWorkbench.mMixtureBowl);
                 }
             }
+
         }
         else
         {
@@ -43,22 +51,16 @@ public class SelectItemState : IWorkbench
                 mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
             }
         }
-        List<GameObject> hitSpoon = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Spoon");
-
-        if (hitSpoon.Count > 0)
-        {
-            mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
-        }
 
         if (mWorkbench.mBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
         {
+            Inventory.msInstance.RemoveItem(mWorkbench.mCurrentItem, 1);
             mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
         }
 
     }
     public void OnExit()
     {
-        Inventory.msInstance.RemoveItem(mWorkbench.mCurrentItem, 1);
         mWorkbench.mCameraController.StopDragging();
     }
 
