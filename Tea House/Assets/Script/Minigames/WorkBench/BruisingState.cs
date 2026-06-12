@@ -22,9 +22,10 @@ public class BruisingState : IWorkbench
 
     bool isEmpty = true;
     bool mItemBruised = false;
+    bool canMoveBowl = false;
     int topMortar = 0;
     int bottomMortar = 0;
-    bool canMoveBowl = false;
+
 
 
     public void OnEnter()
@@ -102,6 +103,8 @@ public class BruisingState : IWorkbench
             {
                 mWorkbench.blendingState.isEmpty = false;
                 mWorkbench.mBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0);
+                fragIngredient.transform.SetParent(mWorkbench.mMixtureBowl.transform);
+                fragIngredient.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
             }
         }
@@ -112,11 +115,6 @@ public class BruisingState : IWorkbench
         mWorkbench.mCameraController.StopDragging();
 
         mWorkbench.mBowl.transform.rotation = Quaternion.Euler(0, 0, 180);
-
-        fragIngredient.GetComponent<Rigidbody>().useGravity = true;
-        fragIngredient.GetComponent<Rigidbody>().isKinematic = false;
-        fragIngredient.transform.SetParent(null);
-        fragIngredient.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 
         mWorkbench.mBowl.transform.position = initBowlPos;
         mWorkbench.mBowl.transform.rotation = initBowlRot;

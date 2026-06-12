@@ -215,15 +215,15 @@ public class CameraController : MonoBehaviour
     {
         if (mDepths.Count > 0)
         {
-            if (IsMoving(0.00001f) == false)
-                transform.position = mDepths[mDepths.Count - 1].position;
-            else
-                transform.position = Vector3.Slerp(transform.position, mDepths[mDepths.Count - 1].position, mMoveSpeed * Time.deltaTime);
+            //if (IsMoving(0.00001f) == false)
+            //    transform.position = mDepths[mDepths.Count - 1].position;
+            //else
+            //    transform.position = Vector3.Slerp(transform.position, mDepths[mDepths.Count - 1].position, mMoveSpeed * Time.deltaTime);
 
-            if (IsRotating(0.00001f) == false)
-                transform.rotation = mDepths[mDepths.Count - 1].rotation;
-            else
-                transform.rotation = Quaternion.Slerp(transform.rotation, mDepths[mDepths.Count - 1].rotation, mRotationSpeed * Time.deltaTime);
+            //if (IsRotating(0.00001f) == false)
+            //    transform.rotation = mDepths[mDepths.Count - 1].rotation;
+            //else
+            //    transform.rotation = Quaternion.Slerp(transform.rotation, mDepths[mDepths.Count - 1].rotation, mRotationSpeed * Time.deltaTime);
         }
 
         if (mState == CameraStates.zoom) ZoomedUpdate();
@@ -287,7 +287,6 @@ public class CameraController : MonoBehaviour
         }
         transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.Euler(0, mTargetRotation, 0), mRotationSpeed * Time.deltaTime);
     }
-
     public void GoTo(Transform otherTransform)
     {
         if (mDepths.Count == 0)
@@ -300,6 +299,7 @@ public class CameraController : MonoBehaviour
         GameObject save = new GameObject("save of " + otherTransform.name);
         save.transform.SetPositionAndRotation(otherTransform.position, otherTransform.rotation);
         mDepths.Add(save.transform);
+        LerpingCamera(mDepths[mDepths.Count - 1].position, mDepths[mDepths.Count - 1].rotation, 0.5f);
     }
     public void Back()
     {
@@ -322,8 +322,24 @@ public class CameraController : MonoBehaviour
     {
         return mState;
     }
-    IEnumerator maCoroutine()
+    IEnumerator mcMoveTo(Vector3 targetPosition, Quaternion targetRotation, float duration)
     {
-        yield return 1;
+        float elapsedTime = 0;
+        Vector3 positionOrigine = transform.position;
+        Quaternion rotationOrigine = transform.rotation;
+        while(elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.position = Vector3.Lerp(positionOrigine, targetPosition, elapsedTime / duration);
+            transform.rotation = Quaternion.Lerp(rotationOrigine, targetRotation, elapsedTime / duration);
+            yield return 0;
+        }
+
+        transform.position = targetPosition;
+        transform.rotation = targetRotation;
+    }
+    public void LerpingCamera(Vector3 targetPosition, Quaternion targetRotation, float duration)
+    {
+        StartCoroutine(mcMoveTo(targetPosition, targetRotation, duration));
     }
 }

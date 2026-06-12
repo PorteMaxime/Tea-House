@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SelectItemState : IWorkbench
 {
@@ -8,23 +9,35 @@ public class SelectItemState : IWorkbench
     {
         mWorkbench = system;
     }
-
+    float upPan = Screen.height * 0.15f;
+    float downPan = Screen.height * 0.85f;
+    bool moveUpCam = false;
+    bool moveDownCam = false;
     public void OnEnter()
     {
         //
     }
     public void OnUpdate()
     {
+        if (Mouse.current.position.ReadValue().y >= Screen.height - upPan && moveUpCam == false)
+        {
+            Quaternion targetRotation = mWorkbench.mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);
+            moveUpCam = true;
+            moveDownCam = false;
+            Debug.Log("lerpUp");
+            mWorkbench.mCameraController.LerpingCamera(mWorkbench.mCameraController.transform.position, targetRotation, 0.3f);
+        }
+        else if (Mouse.current.position.ReadValue().y <= Screen.height - downPan && moveDownCam == false)
+        {
+            Quaternion targetRotation = mWorkbench.mCameraController.transform.rotation * Quaternion.Euler(5f, 0f, 0f);
+            moveDownCam = true;
+            moveUpCam = false;
+            Debug.Log("lerpDown");
+            mWorkbench.mCameraController.LerpingCamera(mWorkbench.mCameraController.transform.position, targetRotation, 0.3f);
+        }
         if (mWorkbench.mCurrentItem == null)
         {
-            List<GameObject> hitSpoon = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Spoon");
-
-            if (hitSpoon.Count > 0)
-            {
-                mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
-            }
-
-            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), new string[2] { "Storage", "MixtureBowl"});
+            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), new string[3] { "Storage", "MixtureBowl", "Spoon" });
 
             if (hitDraggables.Count > 0)
             {
@@ -34,12 +47,15 @@ public class SelectItemState : IWorkbench
                     workBenchStorageScript.CheckIngredient();
                     mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
                 }
-                else if (hitDraggables[0] = mWorkbench.mMixtureBowl)
+                else if (hitDraggables[0] == mWorkbench.mMixtureBowl)
                 {
                     mWorkbench.mCameraController.StartDragging(mWorkbench.mMixtureBowl);
                 }
+                else if (hitDraggables[0] == mWorkbench.mSpoon)
+                {
+                    mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
+                }
             }
-
         }
         else
         {
