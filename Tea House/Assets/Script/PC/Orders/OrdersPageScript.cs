@@ -1,7 +1,5 @@
-using Palmmedia.ReportGenerator.Core.Parser.Filtering;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -62,6 +60,8 @@ public class OrdersPageScript : MonoBehaviour
         mCurrentFilters = mAvailableFilters;
 
         ToggleOrderContent(false);
+
+        MailManager.mOnMailExpired += OnMailExpired;
     }
 
     private void OnEnable()
@@ -76,7 +76,7 @@ public class OrdersPageScript : MonoBehaviour
             if (!mMailsDictionary.ContainsKey(mail))
                 CreateOrderPrefab(mail);
             else
-                UpdateOrderState(mail);
+                UpdateOrderPrefabState(mail);
         }
 
         UpdateMailsVisibility();
@@ -89,39 +89,48 @@ public class OrdersPageScript : MonoBehaviour
     {
         GameObject prefab = Instantiate(mOrderPrefab, mScrollViewContent.transform, false);
 
-        Transform temp = prefab.transform.Find("ButtonShowOrder/TextState");
-        if (temp != null)
-            temp.GetComponent<Text>().text = mail.mOrder.mState.ToString();
-
         // Ajout action
-        Button prefabButton = prefab.transform.Find("ButtonShowOrder").GetComponent<Button>();
+        Transform prefabButton = prefab.transform.Find("ButtonShowOrder");
         if (prefabButton != null)
-            prefabButton.onClick.AddListener(() => SelectMail(mail));
+        {
+            prefabButton.GetComponent<Button>().onClick.AddListener(() => SelectMail(mail));
+
+            Transform prefabState = prefabButton.Find("TextState");
+            if (prefabState != null)
+                prefabState.GetComponent<Text>().text = mail.mOrder.mState.ToString();
+
+            Transform prefabText = prefabButton.Find("TextDescription");
+            if (prefabText != null)
+                prefabText.GetComponent<Text>().text = mail.mText;
+
+        }
 
         mMailsDictionary.Add(mail, prefab);
     }
-    private void UpdateOrderState(Mail mail)
+
+    public void RemoveMailPrefab(Mail mail)
+    {
+        if (mMailsDictionary.ContainsKey(mail))
+        {
+            UnityEngine.Object.Destroy(mMailsDictionary[mail].gameObject);
+            mMailsDictionary.Remove(mail);
+        }
+
+        if (mSelectedMail != null && mSelectedMail.Item1 == mail)
+            DeSelectMail();
+    }
+
+    private void UpdateOrderPrefabState(Mail mail)
     {
         Transform temp = mMailsDictionary[mail].transform.Find("ButtonShowOrder/TextState");
         if (temp != null)
             temp.GetComponent<Text>().text = mail.mOrder.mState.ToString();
 
+        Transform sendButton = mCanvasOrderContent.transform.Find("ButtonSend");
+        if (sendButton != null)
+            sendButton.GetComponent<Button>().interactable = mail.mOrder.mState == Order.State.Accepted ? true : false;
+
         UpdateMailsVisibility();
-    }
-
-    public void CreateFilterPrefab(Order.State state)
-    {
-        GameObject prefab = Instantiate(mFilterPrefab, mCanvasFiltersContent.transform, false);
-
-        Toggle prefabToggle = prefab.transform.Find("ToggleFilter").GetComponent<Toggle>();
-        
-        if (prefabToggle != null)
-            prefabToggle.onValueChanged.AddListener((bool clicked) => ToggleFilter(state, clicked));
-        
-        Text text = prefabToggle.transform.Find("Label").GetComponent<Text>();
-
-        if (text != null)
-            text.text = state.ToString();
     }
 
     public void SelectMail(Mail mail)
@@ -134,24 +143,26 @@ public class OrdersPageScript : MonoBehaviour
             return;
 
         mSelectedMail = new Tuple<Mail, GameObject>(mail, mMailsDictionary[mail]);
-        // Mise à jour informations mail
+
         Transform temp = mCanvasOrderContent.transform.Find("ImageOrderContent");
         //if (temp != null)
             //temp.GetComponent<Image>(); // changer image
         temp = mCanvasOrderContent.transform.Find("TextMailContent");
         if (temp != null)
-            temp.GetComponent<Text>().text = "CONTENU MAIL ( / order)";
+            temp.GetComponent<Text>().text = mail.mText;
 
-        Button sendButton = mCanvasOrderContent.transform.Find("ButtonSend").GetComponent<Button>();
+        // Active ou désactive le bouton "envoyer"
+        Transform sendButton = mCanvasOrderContent.transform.Find("ButtonSend");
         if (sendButton != null)
-        {
-            if ( mail.mOrder.mState == Order.State.Accepted)
-                sendButton.interactable = true;
-            else
-                sendButton.interactable = false;
-        }
+            sendButton.GetComponent<Button>().interactable = mail.mOrder.mState == Order.State.Accepted ? true : false;
 
         ToggleOrderContent(true);
+    }
+
+    public void DeSelectMail()
+    {
+        ToggleOrderContent(false);
+        mSelectedMail = null;
     }
 
     public void ToggleOrderContent(bool active)
@@ -162,13 +173,29 @@ public class OrdersPageScript : MonoBehaviour
         mCanvasFilters.GetComponent<RectTransform>().offsetMax = new Vector2(active ? -901 : -40, 0);
     }
 
-    public void SetOrderState(Mail mail, Order.State newState)
+    private void OnMailExpired(Mail mail)
     {
-        mail.mOrder.mState = newState;
+        if (mMailsDictionary.ContainsKey(mail))
+            UpdateOrderPrefabState(mail);
+        else
+            CreateOrderPrefab(mail);
+    }
 
-        Transform temp = mMailsDictionary[mail].transform.Find("ButtonShowOrder/TextState");
-        if (temp != null)
-            temp.GetComponent<Text>().text = mail.mOrder.mState.ToString();
+    #region Filters
+
+    public void CreateFilterPrefab(Order.State state)
+    {
+        GameObject prefab = Instantiate(mFilterPrefab, mCanvasFiltersContent.transform, false);
+
+        Toggle prefabToggle = prefab.transform.Find("ToggleFilter").GetComponent<Toggle>();
+
+        if (prefabToggle != null)
+            prefabToggle.onValueChanged.AddListener((bool clicked) => ToggleFilter(state, clicked));
+
+        Text text = prefabToggle.transform.Find("Label").GetComponent<Text>();
+
+        if (text != null)
+            text.text = state.ToString();
     }
 
     public void ToggleFiltersContent()
@@ -190,22 +217,31 @@ public class OrdersPageScript : MonoBehaviour
 
         UpdateMailsVisibility();
     }
-
     private void UpdateMailsVisibility()
     {
+        bool isMailInFilter = false;
+
         foreach (Mail mail in mMailsDictionary.Keys)
         {
             if (mCurrentFilters.Contains(mail.mOrder.mState))
+            {
+                isMailInFilter = true;
                 mMailsDictionary[mail].SetActive(true);
+            }
             else
                 mMailsDictionary[mail].SetActive(false);
         }
+
+        if (!isMailInFilter)
+            DeSelectMail();
     }
+
+    #endregion Filters
 
     public void SendOrder()
     {
-        mSelectedMail.Item1.mOrder.mState = Order.State.Completed;
-        UpdateOrderState(mSelectedMail.Item1);
+        MailManager.msInstance.ChangeOrderState(mSelectedMail.Item1, Order.State.Completed);
+        UpdateOrderPrefabState(mSelectedMail.Item1);
 
         mSelectedMail = null;
         ToggleOrderContent(false);
@@ -215,7 +251,6 @@ public class OrdersPageScript : MonoBehaviour
 /* A faire :
  * - Envoyer la commande -> SendOrder()
  * - Score de la commande lorsqu'elle est envoyée, afficher le score (à la place du bouton envoyer ?) -> SendOrder()
- * - modifier l'image et le texte en fonction de la commande sélectionnée -> SelectMail()
- * - mettre à jour l'état des commandes lorsqu'elles expirent si les commandes peuvent expirer en pleine journée -> MailManager.cs
+ * - modifier l'image fonction de la commande sélectionnée -> SelectMail()
  * - ...
 */

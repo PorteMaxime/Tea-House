@@ -20,7 +20,7 @@ public class Clock : MonoBehaviour
         if (mDaylight == null)
             return;
 
-        TimeSpan time = mDaylight.currentTime;
+        TimeSpan time = mDaylight.mCurrentTime;
 
         if (mHours != null)
             mHours.transform.rotation = Quaternion.Euler(0, 0, time.Hours * 30 + time.Minutes / 2);

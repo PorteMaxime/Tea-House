@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +10,8 @@ public class MailsPageScript : MonoBehaviour
     private GameObject mCanvasMailContent;
 
     private GameObject mMailPrefab = null;
+
+    private List<Mail> mMailsToCreate = new List<Mail>();
 
     private Tuple<Mail, GameObject> mSelectedMail = null;
     private Dictionary<Mail, GameObject> mMailsDictionary = new Dictionary<Mail, GameObject>();
@@ -32,20 +33,17 @@ public class MailsPageScript : MonoBehaviour
             mCanvasMailContent = temp.gameObject;
 
         ToggleMailContent(false);
+
+        MailManager.mOnMailSent += OnMailSent;
+        MailManager.mOnMailExpired += OnMailExpired;
     }
 
     private void OnEnable()
     {
-        if (MailManager.msInstance == null)
-            return;
+        foreach (Mail mail in mMailsToCreate)
+            CreateMailPrefab(mail);
 
-        List<Mail> mailsToDisplay = MailManager.msInstance.GetMailsOfState(Order.State.Waiting);
-
-        foreach (Mail mail in mailsToDisplay)
-        {
-            if (!mMailsDictionary.ContainsKey(mail))
-                CreateMailPrefab(mail);
-        }
+        mMailsToCreate.Clear();
     }
 
     public void SelectMail(Mail mail)
@@ -59,26 +57,26 @@ public class MailsPageScript : MonoBehaviour
 
         mSelectedMail = new Tuple<Mail, GameObject>(mail, mMailsDictionary[mail]);
 
-        ToggleMailContent(true);
-
         // Enlever image "non lu"
         Transform temp = mSelectedMail.Item2.transform.Find("ButtonShowMail/ImageNotRead");
-        if (temp != null)
+        if (temp != null && temp.gameObject.activeSelf == true)
             temp.gameObject.SetActive(false);
 
         // Mise à jour informations mail
         temp = mCanvasMailContent.transform.Find("ImageMailTitle/ImageProfile");
-        //if (temp != null)
-        //temp.GetComponent<Image>(); // changer image
+        if (temp != null)
+            temp.GetComponent<Image>().sprite = mail.mPicture;
         temp = mCanvasMailContent.transform.Find("ImageMailTitle/TextSubject");
         if (temp != null)
-            temp.GetComponent<Text>().text = "SUJET";
+            temp.GetComponent<Text>().text = mail.mText;
         temp = mCanvasMailContent.transform.Find("ImageMailTitle/TextSender");
         if (temp != null)
-            temp.GetComponent<Text>().text = "QUELQU'UN";
+            temp.GetComponent<Text>().text = mail.mName;
         temp = mCanvasMailContent.transform.Find("TextMailContent");
         if (temp != null)
-            temp.GetComponent<Text>().text = "CONTENU MAIL";
+            temp.GetComponent<Text>().text = mail.mText;
+
+        ToggleMailContent(true);
     }
 
     public void DeSelectMail()
@@ -96,13 +94,13 @@ public class MailsPageScript : MonoBehaviour
 
     public void AcceptMail()
     {
-        mSelectedMail.Item1.mOrder.mState = Order.State.Accepted;
+        MailManager.msInstance.ChangeOrderState(mSelectedMail.Item1, Order.State.Accepted);
         RemoveMailPrefab(mSelectedMail.Item1);
     }
 
     public void RejectMail()
     {
-        mSelectedMail.Item1.mOrder.mState = Order.State.Rejected;
+        MailManager.msInstance.ChangeOrderState(mSelectedMail.Item1, Order.State.Rejected);
         RemoveMailPrefab(mSelectedMail.Item1);
     }
 
@@ -111,9 +109,23 @@ public class MailsPageScript : MonoBehaviour
         GameObject prefab = Instantiate(mMailPrefab, mScrollViewContent.transform, false);
 
         // Ajout action
-        Button prefabButton = prefab.transform.Find("ButtonShowMail").GetComponent<Button>();
+        Transform prefabButton = prefab.transform.Find("ButtonShowMail");
         if (prefabButton != null)
-            prefabButton.onClick.AddListener(() => SelectMail(mail));
+        {
+            prefabButton.GetComponent<Button>().onClick.AddListener(() => SelectMail(mail));
+
+            // Image et texte
+            Transform prefabImage = prefabButton.transform.Find("ImageProfile");
+            if (prefabImage != null)
+                prefabImage.GetComponent<Image>().sprite = mail.mPicture;
+
+            Transform prefabText = prefabButton.transform.Find("TextContent");
+            if (prefabText != null)
+                prefabText.GetComponent<Text>().text = mail.mText;
+
+            // image non lu
+
+        }
 
         mMailsDictionary.Add(mail, prefab);
     }
@@ -122,20 +134,33 @@ public class MailsPageScript : MonoBehaviour
     {
         if (mMailsDictionary.ContainsKey(mail))
         {
-            UnityEngine.Object.Destroy(mSelectedMail.Item2.transform.gameObject);
-
-            if (mSelectedMail.Item1 == mail)
-                DeSelectMail();
-
+            UnityEngine.Object.Destroy(mMailsDictionary[mail].gameObject);
             mMailsDictionary.Remove(mail);
         }
+
+        if (mSelectedMail != null && mSelectedMail.Item1 == mail)
+            DeSelectMail();
+    }
+
+    private void OnMailSent(Mail mail)
+    {
+        if (gameObject.activeSelf == true)
+            CreateMailPrefab(mail);
+        else
+            mMailsToCreate.Add(mail);
+    }
+
+    private void OnMailExpired(Mail mail)
+    {
+        if (mMailsToCreate.Contains(mail))
+            mMailsToCreate.Remove(mail);
+        else if (mMailsDictionary.ContainsKey(mail))
+            RemoveMailPrefab(mail);
     }
 }
 
 /* A faire :
- * - suppression prefabs quand les mails n'existent plus (appeler fonction via le MailManager.cs ?)
- * - mettre à jour les infos sur l'interface par rapport au mail sélectionné -> SelectMail()
- * - modifier arrière plan prefab quand il est sélectionné (afficher arrière plan différent ?) -> SelectMail() DeSelectMail()
- * - ajouter des mails en cours de journée si les commandes peuvent être crées en pleine journée -> MailManager.cs
+ * - modifier arrière plan prefab quand il est sélectionné ? (afficher arrière plan différent ?) -> SelectMail() DeSelectMail()
+ * - mettre image non lue aà la création du préfab
  * - ...
 */

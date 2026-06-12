@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class Mail
 {
@@ -8,17 +8,23 @@ public class Mail
     public string mName;
     public string mText;
     public int mSendDay;
-    public int mDuration;
+    public float mSendTime;
+    public float mDuration;
+    public float mExpiration;
     public bool mIsWaiting;
 
-    public Mail(Order _order, Sprite _image, string _name, string _text, int _sendDay, float _duration)
+    public Mail(Order _order, Sprite _image, string _name, int _sendDay, float _duration)
     {
         mOrder = _order;
         mPicture = _image;
         mName = _name;
-        mText = _text;
         mSendDay = _sendDay;
         mDuration = 1;
         mIsWaiting = false;
+    }
+
+    public void UpdateExpiration(Daylight daylight)
+    {
+        mExpiration = (mSendDay + mDuration) * daylight.mDayLength + mSendTime;
     }
 }

@@ -4,7 +4,9 @@ public class Order
 {
     public enum State
     {
-        Waiting,
+        NotSent,
+
+        InBox,
 
         Accepted,
         Rejected,
@@ -13,7 +15,7 @@ public class Order
         Expired
     }
 
-    public State mState = State.Waiting;
+    public State mState = State.NotSent;
 
     public IngredientData mOrderData = ScriptableObject.CreateInstance<IngredientData>();
 
