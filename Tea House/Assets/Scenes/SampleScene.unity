@@ -186,6 +186,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Workbench
       objectReference: {fileID: 0}
+    - target: {fileID: 5011441009041449800, guid: 0ed3785d34d30c548b53363185cf6b35, type: 3}
+      propertyPath: mPackaging
+      value: 
+      objectReference: {fileID: 2042890762}
+    - target: {fileID: 5011441009041449800, guid: 0ed3785d34d30c548b53363185cf6b35, type: 3}
+      propertyPath: mCameraController
+      value: 
+      objectReference: {fileID: 1227791478}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -221,6 +229,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
   mItemStartingAmount: 5
   mMoneyAmount: 20
+--- !u!114 &1227791478 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3472766682025363188, guid: b87e1584064131049bd54b9ed750babb, type: 3}
+  m_PrefabInstance: {fileID: 1922412655353252617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8d51be8c2b6564399ef73c8adb091a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
 --- !u!114 &1435202341 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
@@ -353,6 +372,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21e9ed8ee02cf5c40b1370e772e412bb, type: 3}
+--- !u!114 &2042890762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1416180946692586834, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+  m_PrefabInstance: {fileID: 6781908833951815434}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903866f01c872a84bb1b1491e7495855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PackagingScript
 --- !u!1001 &1922412655353252617
 PrefabInstance:
   m_ObjectHideFlags: 0
