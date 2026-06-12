@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class WorkingPoint : MonoBehaviour
 {
-    private List<GameObject> mCollider = new List<GameObject>();
+    public List<GameObject> mCollider = new List<GameObject>();
 
     private void OnTriggerEnter(Collider other)
     {

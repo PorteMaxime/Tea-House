@@ -11,7 +11,7 @@ public class SelectItemState : IWorkbench
     }
     float upPan = Screen.height * 0.15f;
     float downPan = Screen.height * 0.85f;
-    bool moveUpCam = false;
+    bool cameraLookUp = false;
     bool moveDownCam = false;
     public void OnEnter()
     {
@@ -19,20 +19,19 @@ public class SelectItemState : IWorkbench
     }
     public void OnUpdate()
     {
-        if (Mouse.current.position.ReadValue().y >= Screen.height - upPan && moveUpCam == false)
+        if (Mouse.current.position.ReadValue().y >= Screen.height - upPan && cameraLookUp == false)
         {
             Quaternion targetRotation = mWorkbench.mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);
-            moveUpCam = true;
+            cameraLookUp = true;
             moveDownCam = false;
-            Debug.Log("lerpUp");
             mWorkbench.mCameraController.LerpingCamera(mWorkbench.mCameraController.transform.position, targetRotation, 0.3f);
         }
-        else if (Mouse.current.position.ReadValue().y <= Screen.height - downPan && moveDownCam == false)
+        else if (Mouse.current.position.ReadValue().y <= Screen.height - downPan && cameraLookUp == true)
         {
             Quaternion targetRotation = mWorkbench.mCameraController.transform.rotation * Quaternion.Euler(5f, 0f, 0f);
+
+            cameraLookUp = false;
             moveDownCam = true;
-            moveUpCam = false;
-            Debug.Log("lerpDown");
             mWorkbench.mCameraController.LerpingCamera(mWorkbench.mCameraController.transform.position, targetRotation, 0.3f);
         }
         if (mWorkbench.mCurrentItem == null)
@@ -68,7 +67,7 @@ public class SelectItemState : IWorkbench
             }
         }
 
-        if (mWorkbench.mBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
+        if (mWorkbench.mMortarBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
         {
             Inventory.msInstance.RemoveItem(mWorkbench.mCurrentItem, 1);
             mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
@@ -84,6 +83,6 @@ public class SelectItemState : IWorkbench
     void InitIngredient(IngredientData _ingredient)
     {
         mWorkbench.mCurrentItem = _ingredient;
-        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mPrefab, mWorkbench.mBowl.transform.position);
+        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mPrefab, mWorkbench.mMortarBowl.transform.position);
     }
 }

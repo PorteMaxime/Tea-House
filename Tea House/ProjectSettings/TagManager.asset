@@ -10,13 +10,13 @@ TagManager:
   - Ingredient
   - Storage
   - WorkingPoint
-  - Bowl
-  - Mortar
   - SunLight
   - Label
   - PackageLid
   - MixtureBowl
   - Spoon
+  - MortarBowl
+  - MortarPilon
   layers:
   - Default
   - TransparentFX

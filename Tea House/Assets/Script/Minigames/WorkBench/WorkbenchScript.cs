@@ -6,18 +6,18 @@ public class WorkbenchScript : MonoBehaviour
     public CameraController mCameraController;
     public PackagingScript mPackaging;
 
-    public GameObject mBowl;
-    public GameObject mMortar;
+    public GameObject mMortarBowl;
+    public GameObject mMortarPilon;
     public GameObject mMixtureBowl;
     public IngredientData mCurrentItem = null;
     public GameObject currentItemG = null;
     public List<IngredientData> mMixture;
     public IngredientData mBruiseIngrdient;
 
-    public GameObject mTopBorn;
-    public GameObject mBotBorn;
-    public GameObject mRightBorn;
-    public GameObject mLeftBorn;
+    public GameObject mMortarTopBorn;
+    public GameObject mMortarBotBorn;
+    public GameObject mMortarRightBorn;
+    public GameObject mMortarLeftBorn;
 
     public GameObject mMixtureRightBorn;
     public GameObject mMixtureLeftBorn;
