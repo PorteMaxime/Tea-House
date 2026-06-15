@@ -86,8 +86,9 @@ public class BruisingState : IWorkbench
             }
 
         }
-        if(canMoveBowl == false && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
+        if(canMoveBowl == false && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame() && mItemBruised)
         {
+            Debug.Log("canMoveBowl");
             canMoveBowl = true;
         }
         if (isEmpty == false && mItemBruised == true && canMoveBowl == true)

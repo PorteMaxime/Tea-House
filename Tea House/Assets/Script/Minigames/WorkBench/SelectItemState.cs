@@ -65,14 +65,13 @@ public class SelectItemState : IWorkbench
                 if (hitDraggables[0] == mWorkbench.currentItemG)
                 mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
             }
-        }
 
-        if (mWorkbench.mMortarBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
-        {
-            Inventory.msInstance.RemoveItem(mWorkbench.mCurrentItem, 1);
-            mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
+            if (mWorkbench.mMortarBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
+            {
+                Inventory.msInstance.RemoveItem(mWorkbench.mCurrentItem, 1);
+                mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
+            }
         }
-
     }
     public void OnExit()
     {
