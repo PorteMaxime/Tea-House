@@ -13,8 +13,7 @@ public class CameraController : MonoBehaviour
         DepthView,
         Rotation,
         Raycast,
-        DragAndDrop,
-        XRAY
+        DragAndDrop
     };
 
     private Dictionary<CameraStates, List<CameraControllerMod>> mStatesMod = new Dictionary<CameraStates, List<CameraControllerMod>>();
@@ -42,7 +41,6 @@ public class CameraController : MonoBehaviour
 
         mCameraControllerMods.Add(CameraControllerMod.Raycast, new Camera_Raycast(this));
         mCameraControllerMods.Add(CameraControllerMod.DragAndDrop, new CameraDragAndDrop(this));
-        mCameraControllerMods.Add(CameraControllerMod.XRAY, new Camera_XRAY(this));
 
         mStatesMod.Add(CameraStates.Zoom,
             new List<CameraControllerMod>()
@@ -58,8 +56,7 @@ public class CameraController : MonoBehaviour
                 CameraControllerMod.InteractiveHightlight,
                 CameraControllerMod.DepthView,
                 CameraControllerMod.Rotation,
-                CameraControllerMod.Raycast,
-                CameraControllerMod.XRAY,
+                CameraControllerMod.Raycast
             }
         );
     }
@@ -72,6 +69,17 @@ public class CameraController : MonoBehaviour
         {
             if(mCameraControllerMods.ContainsKey(modID) == true)
                 mCameraControllerMods[modID].OnUpdate();
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if(mStatesMod.ContainsKey(mState) == false) return;
+
+        foreach(CameraControllerMod modID in mStatesMod[mState])
+        {
+            if(mCameraControllerMods.ContainsKey(modID) == true)
+                mCameraControllerMods[modID].OnFixedUpdate();
         }
     }
     #endregion

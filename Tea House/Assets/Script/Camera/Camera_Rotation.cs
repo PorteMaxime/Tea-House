@@ -38,6 +38,7 @@ public class Camera_Rotation : ICameraControllerMod
         if(IsRotating(0.00001f) == true)
             mMain.transform.parent.rotation = Quaternion.Slerp(mMain.transform.parent.rotation, mTargetQuaternion, mRotationSpeed * Time.deltaTime);
     }
+    public void OnFixedUpdate() {}
 
     private bool IsRotating(float precision)
     {

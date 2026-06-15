@@ -14,6 +14,8 @@ public class PacketOpening : IPackaging
     }
     #endregion
 
+    private Input_PlayerInteract mPlayerInteract = null;
+
     public GameObject mLid = null;
     private Rigidbody mLidRB = null;
 
@@ -22,9 +24,13 @@ public class PacketOpening : IPackaging
 
     public bool mIsOpened = false;
 
+    private CameraDragAndDrop mDragAndDrop = null;
+
     void Init()
     {
-        
+        mDragAndDrop = mMain.mCameraController.GetControllerMod<CameraDragAndDrop>();
+        mPlayerInteract = InputManager.Get().mPlayerInteract;
+        mPlayerInteract.Enable();
     }
 
     public void OnEnter()
@@ -35,8 +41,13 @@ public class PacketOpening : IPackaging
         mLidClosedPlace = mMain.mOutputGO.transform.Find("LidClosePlace").gameObject;
         mLidClosedPlaceCollider = mLidClosedPlace.GetComponent<WorkingPoint>();
 
-        // TODO : Start Dragging
-        //mMain.mCameraController.StartDragging(mLid);
+        if(mDragAndDrop.StartDragging(mLid) == false)
+        {
+            mMain.mStateMachine.SwitchState(mMain.mCompleting);
+            Debug.Log("can't drag lid");
+            return;
+        }
+        
         if(mIsOpened == false)
         {
             mIsOpened = true;
@@ -45,21 +56,24 @@ public class PacketOpening : IPackaging
     }
     public void OnExit()
     {
+        mDragAndDrop.StopDragging();
     }
 
     public void OnUpdate()
     {
-        if(mIsOpened == true && mLidClosedPlaceCollider.IsColliding(mLid))
+        if(mIsOpened == true && mLidClosedPlaceCollider.IsColliding(mLid) && mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
         {
             mIsOpened = false;
             mMain.mCompleting.mIsOpened = false;
             mLid.transform.position = mLidClosedPlace.transform.position;
-            // TODO : Stop Dragging
-            //mMain.mCameraController.StopDragging();
+            mDragAndDrop.StopDragging();
+        }
+        else if(mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
+        {
+            mDragAndDrop.StopDragging();
         }
 
-        // TODO : Is Dragging
-        if(/*mMain.mCameraController.IsDragging()*/ true == false)
+        if(mDragAndDrop.IsDragging() == false)
         {
             mLidRB.isKinematic = mIsOpened != true;
             mMain.mStateMachine.SwitchState(mMain.mCompleting);

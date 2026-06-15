@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class InteractiveAreaScript : MonoBehaviour
@@ -8,6 +9,7 @@ public class InteractiveAreaScript : MonoBehaviour
 
     private CameraController mCameraController = null;
     private Camera_InteractionHighlight mCameraInteractionMod = null;
+    private CameraDragAndDrop mDragAndDrop = null;
     private Camera_DepthView mCameraDepthMod = null;
     private void Awake()
     {
@@ -27,6 +29,7 @@ public class InteractiveAreaScript : MonoBehaviour
         mCameraController = camera.GetComponent<CameraController>();
         mCameraInteractionMod = mCameraController.GetControllerMod<Camera_InteractionHighlight>();
         mCameraDepthMod = mCameraController.GetControllerMod<Camera_DepthView>();
+        mDragAndDrop = mCameraController.GetControllerMod<CameraDragAndDrop>();
     }
     void Update()
     {
@@ -52,8 +55,7 @@ public class InteractiveAreaScript : MonoBehaviour
 
     public void Quit()
     {
-        // TODO : StopDragging
-        //mCameraController.StopDragging();
+        mDragAndDrop.StopDragging();
         mCameraDepthMod.Back();
         mCameraController.SetState(CameraController.CameraStates.Orbital);
         isUsing = false;

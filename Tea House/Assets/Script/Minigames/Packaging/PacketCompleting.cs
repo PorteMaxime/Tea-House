@@ -17,8 +17,14 @@ public class PacketCompleting : IPackaging
     public bool mIsLabelled = false;
     public bool mIsOpened = false;
 
+    private Camera_Raycast mRaycast = null;
+    private Input_PlayerInteract mPlayerInteract = null;
+
     private void Init()
     {
+        mRaycast = mMain.mCameraController.GetControllerMod<Camera_Raycast>();
+        mPlayerInteract = InputManager.Get().mPlayerInteract;
+        mPlayerInteract.Enable();
     }
     public void OnEnter()
     {
@@ -30,34 +36,36 @@ public class PacketCompleting : IPackaging
 
     public void OnUpdate()
     {
+        if (mPlayerInteract.Player.Select.IsPressed() == false) return;
+
         if (mIsOpened == true && mIsFilled == false)
         {
-            // TODO : RAYCAST HIT
-            // List<GameObject> bowlHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "MixtureBowl");
-            // if (bowlHit.Count > 0)
-            // {
-            //     mMain.mFilling.mBowl = bowlHit[0];
-            //     mMain.mStateMachine.SwitchState(mMain.mFilling);
-            // }
+            GameObject bowl = null;
+            mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MixtureBowl", out bowl);
+            if (bowl != null)
+            {
+                mMain.mFilling.mBowl = bowl;
+                mMain.mStateMachine.SwitchState(mMain.mFilling);
+            }
         }
-        // TODO : RAYCAST HIT
-        // List<GameObject> lidHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "PackageLid");
-        // if (lidHit.Count > 0 && (mMain.mOpening.mLid != null ? lidHit.Contains(mMain.mOpening.mLid) : true))
-        //         mMain.mStateMachine.SwitchState(mMain.mOpening);
+        GameObject lid = null;
+        mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "PackageLid", out lid);
+        if (lid != null && (mMain.mOpening.mLid != null ? lid == mMain.mOpening.mLid : true))
+                mMain.mStateMachine.SwitchState(mMain.mOpening);
 
         if(mLabelPrinted == false)
         {
-            // TODO : RAYCAST HIT
-            // List<GameObject> printerHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Printer");
-            // if (printerHit.Count > 0)
-            //     mMain.mStateMachine.SwitchState(mMain.mPrinting);
+            GameObject printer = null;
+            mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Printer", out printer);
+            if (printer != null)
+                mMain.mStateMachine.SwitchState(mMain.mPrinting);
         }
         else if(mLabelPrinted == true && mIsLabelled == false)
         {
-            // TODO : RAYCAST HIT
-            // List<GameObject> labelHit = mMain.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Label");
-            // if (labelHit.Count > 0)
-            //     mMain.mStateMachine.SwitchState(mMain.mLabelling);
+            GameObject label = null;
+            mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Label", out label);
+            if (label != null)
+                mMain.mStateMachine.SwitchState(mMain.mLabelling);
         }
     }
 }

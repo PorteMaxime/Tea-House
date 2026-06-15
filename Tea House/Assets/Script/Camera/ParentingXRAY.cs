@@ -1,33 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ParentingXRAY : MonoBehaviour
 {
     [SerializeField] private GameObject[] mChilds;
+    private bool mIsShown = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private GameObject mCamera = null;
+
+    public void Start()
     {
-
+        mCamera = GameObject.Find("CameraOrigin/Main Camera").gameObject;
+        mIsShown = GetComponent<MeshRenderer>().enabled;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-
+        Ray ray = new Ray(mCamera.transform.position, new Vector3(0, 0, 0) - mCamera.transform.position);
+        Camera_Raycast.Raycast(ray, 2f, Mathf.Infinity, LayerMask.GetMask("Wall"), (string[])null, out List<GameObject> hits);
+        
+        if(hits.Contains(transform.gameObject) == true)
+            Show(false);
+        else
+            Show(true);
     }
 
-    public void Show(bool isShown)
+    private void Show(bool toShow)
     {
-        MeshRenderer mesh = GetComponent<MeshRenderer>();
-        if (mesh != null)
-            mesh.enabled = isShown;
+        foreach(GameObject child in mChilds)
+            Show(toShow, child);
+        
+        Show(toShow, transform.gameObject);
+        
+        mIsShown = toShow;
+    }
 
-        foreach (GameObject child in mChilds)
-        {
-            mesh = child.GetComponent<MeshRenderer>();
-            if (mesh == null)
-                mesh = child.GetComponentInChildren<MeshRenderer>();
-            mesh.enabled = isShown;
-        }
+    private void Show(bool toShow, GameObject target)
+    {
+        MeshRenderer meshR = target.GetComponent<MeshRenderer>();
+        if(meshR != null) meshR.enabled = toShow;
+
+        MeshRenderer[] meshRenderers = target.GetComponentsInChildren<MeshRenderer>();
+        foreach(MeshRenderer mesh in meshRenderers)
+            mesh.enabled = toShow;
     }
 }

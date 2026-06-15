@@ -7,7 +7,7 @@ public class PackagingStateMachine
     public void Update()
     {
         if (mCurrentState == null) return;
-
+        Debug.Log(mCurrentState);
         mCurrentState.OnUpdate();
     }
 

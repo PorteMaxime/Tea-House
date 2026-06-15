@@ -16,27 +16,26 @@ public class PacketLabelling : IPackaging
 
     public GameObject mLabelGo = null;
 
+    private CameraDragAndDrop mDragAndDrop = null;
+
     private void Init()
     {
-        
+        mDragAndDrop = mMain.mCameraController.GetControllerMod<CameraDragAndDrop>();
     }
     public void OnEnter()
     {
-        // TODO : Start Dragging
-        //mMain.mCameraController.StartDragging(mLabelGo);
+        if(mDragAndDrop.StartDragging(mLabelGo) == false) mMain.mStateMachine.SwitchState(mMain.mCompleting);
     }
 
     public void OnExit()
     {
-        // TODO : Stop Dragging
-        //mMain.mCameraController.StopDragging();
+        mDragAndDrop.StopDragging();
     }
 
     public void OnUpdate()
     {
         // Leave state if the player release the label
-        // TODO : Is Dragging
-        if(/*mMain.mCameraController.IsDragging()*/  true == false)
+        if(mDragAndDrop.IsDragging() == false)
             mMain.mStateMachine.SwitchState(mMain.mCompleting);
 
         mLabelGo.transform.rotation = mMain.mCameraController.gameObject.transform.rotation * Quaternion.Euler(90, 0, 180);

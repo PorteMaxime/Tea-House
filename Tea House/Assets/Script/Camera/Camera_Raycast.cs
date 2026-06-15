@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Camera_Raycast : ICameraControllerMod
 {
@@ -21,12 +22,12 @@ public class Camera_Raycast : ICameraControllerMod
     {
         return;
     }
+    public void OnFixedUpdate() {}
 
     #region Single Raycast
     static public void Raycast(Ray ray, float distance, LayerMask[] layers, string[] tags, out GameObject hit)
     {
         int totalLayers = 0;
-
         if (layers != null)
         {
             foreach (LayerMask layer in layers)
@@ -132,6 +133,54 @@ public class Camera_Raycast : ICameraControllerMod
     }
     #endregion
 
+    #region Mouse Single Raycast
+    public void MouseRaycast(float distance, LayerMask[] layers, string[] tags, out GameObject hit)
+    {
+        Camera cam = Camera.main;
+        Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Raycast(ray, distance, layers, tags, out hit);
+        return;
+    }
+    public void MouseRaycast(float radius, float distance, LayerMask[] layers, string[] tags, out GameObject hit)
+    {
+        Camera cam = Camera.main;
+        Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Raycast(ray, radius, distance, layers, tags, out hit);
+        return;
+    }
+
+    public void MouseRaycast(float distance, LayerMask layer, string tag, out GameObject hit)
+    {
+        MouseRaycast(distance, new LayerMask[1] { layer }, new string[1] { tag }, out hit);
+        return;
+    }
+    public void MouseRaycast(float distance, LayerMask layer, string[] tags, out GameObject hit)
+    {
+        MouseRaycast(distance, new LayerMask[1] { layer }, tags, out hit);
+        return;
+    }
+    public void MouseRaycast(float distance, LayerMask[] layers, string tag, out GameObject hit)
+    {
+        MouseRaycast(distance, layers, new string[1] { tag }, out hit);
+        return;
+    }
+    public void MouseRaycast(float radius, float distance, LayerMask layer, string tag, out GameObject hit)
+    {
+        MouseRaycast(radius, distance, new LayerMask[1] { layer }, new string[1] { tag }, out hit);
+        return;
+    }
+    public void MouseRaycast(float radius, float distance, LayerMask layer, string[] tags, out GameObject hit)
+    {
+        MouseRaycast(radius, distance, new LayerMask[1] { layer }, tags, out hit);
+        return;
+    }
+    public void MouseRaycast(float radius, float distance, LayerMask[] layers, string tag, out GameObject hit)
+    {
+        MouseRaycast(radius, distance, layers, new string[1] { tag }, out hit);
+        return;
+    }
+    #endregion
+
     #region Multi Raycast
     static public void Raycast(Ray ray, float distance, LayerMask[] layers, string[] tags, out List<GameObject> hits)
     {
@@ -180,8 +229,8 @@ public class Camera_Raycast : ICameraControllerMod
         }
 
         bool hasTagFilter = tags != null && tags.Length > 0;
-
-        RaycastHit[] hitsInfo = Physics.SphereCastAll(ray, distance, totalLayers);
+        
+        RaycastHit[] hitsInfo = Physics.SphereCastAll(ray, radius, distance, totalLayers);
 
         foreach (RaycastHit hitInfo in hitsInfo)
         {
@@ -232,6 +281,52 @@ public class Camera_Raycast : ICameraControllerMod
     static public void Raycast(Ray ray, float radius, float distance, LayerMask[] layers, string tag, out List<GameObject> hits)
     {
         Raycast(ray, radius, distance, layers, new string[1] { tag }, out hits);
+        return;
+    }
+    #endregion
+
+    #region Mouse Mutli Raycast
+    public void MouseRaycast(float distance, LayerMask[] layers, string[] tags, out List<GameObject> hits)
+    {
+        Ray ray = mMain.GetComponent<Camera>().ScreenPointToRay(Mouse.current.position.ReadValue());
+        Raycast(ray, distance, layers, tags, out hits);
+        return;
+    }
+    public void MouseRaycast(float radius, float distance, LayerMask[] layers, string[] tags, out List<GameObject> hits)
+    {
+        Ray ray = mMain.GetComponent<Camera>().ScreenPointToRay(Mouse.current.position.ReadValue());
+        Raycast(ray, radius, distance, layers, tags, out hits);
+        return;
+    }
+
+    public void MouseRaycast(float distance, LayerMask layer, string tag, out List<GameObject> hits)
+    {
+        MouseRaycast(distance, new LayerMask[1] { layer }, new string[1] { tag }, out hits);
+        return;
+    }
+    public void MouseRaycast(float distance, LayerMask layer, string[] tags, out List<GameObject> hits)
+    {
+        MouseRaycast(distance, new LayerMask[1] { layer }, tags, out hits);
+        return;
+    }
+    public void MouseRaycast(float distance, LayerMask[] layers, string tag, out List<GameObject> hits)
+    {
+        MouseRaycast(distance, layers, new string[1] { tag }, out hits);
+        return;
+    }
+    public void MouseRaycast(float radius, float distance, LayerMask layer, string tag, out List<GameObject> hits)
+    {
+        MouseRaycast(radius, distance, new LayerMask[1] { layer }, new string[1] { tag }, out hits);
+        return;
+    }
+    public void MouseRaycast(float radius, float distance, LayerMask layer, string[] tags, out List<GameObject> hits)
+    {
+        MouseRaycast(radius, distance, new LayerMask[1] { layer }, tags, out hits);
+        return;
+    }
+    public void MouseRaycast(float radius, float distance, LayerMask[] layers, string tag, out List<GameObject> hits)
+    {
+        MouseRaycast(radius, distance, layers, new string[1] { tag }, out hits);
         return;
     }
     #endregion

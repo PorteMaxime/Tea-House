@@ -30,6 +30,8 @@ public class Camera_InteractionHighlight : ICameraControllerMod
         if(mInteractionFields.Count > 0) HighlightInteraction();
     }
 
+    public void OnFixedUpdate() {}
+
     public void AddInteractionTarget(InteractiveAreaScript target)
     {
         mInteractionFields.Add(target);
