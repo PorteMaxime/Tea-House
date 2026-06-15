@@ -66,7 +66,7 @@ public class BlendingState : IWorkbench
 
             }
         }
-        else
+        if(isEmpty == true)
         {
             mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
         }
