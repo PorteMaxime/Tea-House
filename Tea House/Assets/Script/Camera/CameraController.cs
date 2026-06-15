@@ -307,6 +307,7 @@ public class CameraController : MonoBehaviour
             return;
         Destroy(mDepths[mDepths.Count - 1].gameObject);
         mDepths.RemoveAt(mDepths.Count - 1);
+        LerpingCamera(mDepths[mDepths.Count - 1].position, mDepths[mDepths.Count - 1].rotation, 0.5f);
     }
     public bool IsMoving(float precision)
     {

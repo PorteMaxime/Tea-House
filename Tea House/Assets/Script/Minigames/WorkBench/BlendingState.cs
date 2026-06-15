@@ -19,6 +19,7 @@ public class BlendingState : IWorkbench
     int leftMixtureBowl = 0;
     public bool isEmpty = true;
     bool mIsBlended = false;
+    bool canSwap = false;
     public void OnEnter()
     {
         initSpoonPos = mWorkbench.mSpoon.transform.position;
@@ -41,6 +42,7 @@ public class BlendingState : IWorkbench
                 if (leftMixtureBowl == rightMixtureBowl)
                 {
                     leftMixtureBowl++;
+                    mWorkbench.RotateGameObject(mWorkbench.mMixtureBowl, mWorkbench.mMixtureBowl.transform.rotation * Quaternion.Euler(0, 180, 0), 1.0f);
                 }
 
             }
@@ -49,6 +51,7 @@ public class BlendingState : IWorkbench
                 if (leftMixtureBowl > rightMixtureBowl)
                 {
                     rightMixtureBowl++;
+                    mWorkbench.RotateGameObject(mWorkbench.mMixtureBowl, mWorkbench.mMixtureBowl.transform.rotation * Quaternion.Euler(0, 180, 0), 1.0f);
                 }
 
             }
@@ -70,13 +73,21 @@ public class BlendingState : IWorkbench
         {
             mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
         }
+        if(canSwap == false && mIsBlended == true && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
+        {
+            Debug.Log("canSwap");
+            canSwap = true;
+        }
 
-        if(mIsBlended == true && Mouse.current.position.ReadValue().x > Screen.width * 0.8)
+        if(mIsBlended == true && canSwap == true && Mouse.current.position.ReadValue().x > Screen.width * 0.8)
         {
             if(Mouse.current.leftButton.isPressed)
             {
                 mWorkbench.mCameraController.LerpingCamera(mWorkbench.mCameraPosPackaging.transform.position, mWorkbench.mCameraPosPackaging.transform.rotation, 0.5f);
-                mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
+                mWorkbench.LerpGameObject(mWorkbench.mMixtureBowl, mWorkbench.mMixtureBowlPackagingPos.transform.position, 0.5f);
+
+                //mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
+                //mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
             }
         }
     }
