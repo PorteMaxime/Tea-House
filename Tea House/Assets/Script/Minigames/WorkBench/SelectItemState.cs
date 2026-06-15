@@ -12,7 +12,7 @@ public class SelectItemState : IWorkbench
     float upPan = Screen.height * 0.15f;
     float downPan = Screen.height * 0.85f;
     bool cameraLookUp = false;
-    bool moveDownCam = false;
+    //bool moveDownCam = false;
     public void OnEnter()
     {
         //
@@ -23,7 +23,7 @@ public class SelectItemState : IWorkbench
         {
             Quaternion targetRotation = mWorkbench.mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);
             cameraLookUp = true;
-            moveDownCam = false;
+            //moveDownCam = false;
             mWorkbench.mCameraController.LerpingCamera(mWorkbench.mCameraController.transform.position, targetRotation, 0.3f);
         }
         else if (Mouse.current.position.ReadValue().y <= Screen.height - downPan && cameraLookUp == true)
@@ -31,7 +31,7 @@ public class SelectItemState : IWorkbench
             Quaternion targetRotation = mWorkbench.mCameraController.transform.rotation * Quaternion.Euler(5f, 0f, 0f);
 
             cameraLookUp = false;
-            moveDownCam = true;
+            //moveDownCam = true;
             mWorkbench.mCameraController.LerpingCamera(mWorkbench.mCameraController.transform.position, targetRotation, 0.3f);
         }
         if (mWorkbench.mCurrentItem == null)

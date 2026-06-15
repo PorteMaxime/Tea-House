@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BlendingState : IWorkbench
 {
@@ -66,11 +67,22 @@ public class BlendingState : IWorkbench
             }
         }
 
-
-        if (InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame() && mIsBlended == true)
+        if(mIsBlended == true && Mouse.current.position.ReadValue().x > Screen.width * 0.8)
         {
-            mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
+            if(Mouse.current.leftButton.isPressed)
+            {
+                Debug.Log("Swap");
+
+                mWorkbench.mCameraController.LerpingCamera(mWorkbench.mCameraPosPackaging.transform.position, mWorkbench.mCameraPosPackaging.transform.rotation, 0.5f);
+                mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
+            }
         }
+
+
+        //if (InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame() && mIsBlended == true)
+        //{
+        //    mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
+        //}
 
     }
     public void OnExit()

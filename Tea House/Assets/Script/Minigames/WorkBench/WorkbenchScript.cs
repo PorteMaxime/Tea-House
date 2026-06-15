@@ -5,6 +5,8 @@ public class WorkbenchScript : MonoBehaviour
 {
     public CameraController mCameraController;
     public PackagingScript mPackaging;
+    public InteractiveAreaScript mInteractiveArea;
+    public GameObject mCameraPosPackaging;
 
     public GameObject mMortarBowl;
     public GameObject mMortarPilon;
@@ -47,7 +49,11 @@ public class WorkbenchScript : MonoBehaviour
 
     void Update()
     {
-        stateMachine.Update();
+        if (mInteractiveArea.isUsing)
+        {
+            stateMachine.Update();
+        }
+
     }
 
     public void AddItemToMixture(IngredientData item)
