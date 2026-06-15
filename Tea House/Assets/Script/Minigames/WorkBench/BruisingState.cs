@@ -105,6 +105,7 @@ public class BruisingState : IWorkbench
                 mWorkbench.blendingState.isEmpty = false;
                 mWorkbench.mMortarBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0);
                 fragIngredient.transform.SetParent(mWorkbench.mMixtureBowl.transform);
+                fragIngredient.transform.localPosition = new Vector3(0, 0.001f, 0);
                 fragIngredient.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
             }
