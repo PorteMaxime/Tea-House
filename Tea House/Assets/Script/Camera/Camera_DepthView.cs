@@ -28,15 +28,15 @@ public class Camera_DepthView : ICameraControllerMod
     {
         if (mDepth.Count == 0) return;
 
-        if (IsMoving(0.00001f) == false)
-            mMain.transform.position = mCurrentTarget.position;
-        else
-            mMain.transform.position = Vector3.Slerp(mMain.transform.position, mCurrentTarget.position, mMoveSpeed * Time.deltaTime);
+        // if (IsMoving(0.00001f) == false)
+        //     mMain.transform.position = mCurrentTarget.position;
+        // else
+        //     mMain.transform.position = Vector3.Slerp(mMain.transform.position, mCurrentTarget.position, mMoveSpeed * Time.deltaTime);
 
-        if (IsRotating(0.00001f) == false)
-            mMain.transform.rotation = mCurrentTarget.rotation;
-        else
-            mMain.transform.rotation = Quaternion.Slerp(mMain.transform.rotation, mCurrentTarget.rotation, mRotationSpeed * Time.deltaTime);
+        // if (IsRotating(0.00001f) == false)
+        //     mMain.transform.rotation = mCurrentTarget.rotation;
+        // else
+        //     mMain.transform.rotation = Quaternion.Slerp(mMain.transform.rotation, mCurrentTarget.rotation, mRotationSpeed * Time.deltaTime);
     }
 
     public void OnFixedUpdate() {}
@@ -54,6 +54,7 @@ public class Camera_DepthView : ICameraControllerMod
     {
         mDepth.Add(otherTransform);
         mCurrentTarget = mDepth[mDepth.Count - 1];
+        LerpingCamera(otherTransform.position, otherTransform.rotation, 0.5f);
     }
     public void Back()
     {
@@ -61,10 +62,32 @@ public class Camera_DepthView : ICameraControllerMod
         
         mDepth.RemoveAt(mDepth.Count - 1);
         mCurrentTarget = mDepth[mDepth.Count - 1];
+        LerpingCamera(mCurrentTarget.position, mCurrentTarget.rotation, 0.5f);
     }
 
     private IEnumerator ReturnToOrbital()
     {
         yield return 0f;
+    }
+
+    IEnumerator mcMoveTo(Vector3 targetPosition, Quaternion targetRotation, float duration)
+    {
+        float elapsedTime = 0;
+        Vector3 positionOrigine = mMain.transform.position;
+        Quaternion rotationOrigine = mMain.transform.rotation;
+        while(elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            mMain.transform.position = Vector3.Lerp(positionOrigine, targetPosition, elapsedTime / duration);
+            mMain.transform.rotation = Quaternion.Lerp(rotationOrigine, targetRotation, elapsedTime / duration);
+            yield return 0;
+        }
+
+        mMain.transform.position = targetPosition;
+        mMain.transform.rotation = targetRotation;
+    }
+    public void LerpingCamera(Vector3 targetPosition, Quaternion targetRotation, float duration)
+    {
+        mMain.StartCoroutine(mcMoveTo(targetPosition, targetRotation, duration));
     }
 }

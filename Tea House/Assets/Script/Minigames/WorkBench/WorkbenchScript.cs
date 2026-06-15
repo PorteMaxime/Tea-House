@@ -4,6 +4,9 @@ using UnityEngine;
 public class WorkbenchScript : MonoBehaviour
 {
     public CameraController mCameraController;
+    public Camera_Raycast mCameraRaycast;
+    public CameraDragAndDrop mDragAndDrop;
+    public Camera_DepthView mCameraDepth;
     public PackagingScript mPackaging;
     public Inventory inventory;
 
@@ -27,6 +30,10 @@ public class WorkbenchScript : MonoBehaviour
     }
     void Start()
     {
+        mCameraRaycast = mCameraController.GetControllerMod<Camera_Raycast>();
+        mDragAndDrop = mCameraController.GetControllerMod<CameraDragAndDrop>();
+        mCameraDepth = mCameraController.GetControllerMod<Camera_DepthView>();
+        
         stateMachine = new WorkbenchStateMachine();
 
         selectItemState = new SelectItemState(this);

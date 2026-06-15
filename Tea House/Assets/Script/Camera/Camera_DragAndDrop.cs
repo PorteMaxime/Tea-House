@@ -53,6 +53,7 @@ public class CameraDragAndDrop : ICameraControllerMod
             (LayerMask[])null, 
             (string[])null, 
             out obstacle);
+
         Debug.Log((obstacle != null) + " / " + (obstacle.Count > 1) + " / " + (obstacle.Count > 1 ? obstacle[0] != mDragging : "pas assez"));
         if(obstacle != null && obstacle.Count > 1 && obstacle[0] != mDragging)
             Debug.Log("Hit");

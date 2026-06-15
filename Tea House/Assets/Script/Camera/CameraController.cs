@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class CameraController : MonoBehaviour
 {
     private Dictionary<CameraControllerMod, ICameraControllerMod>  mCameraControllerMods = new Dictionary<CameraControllerMod, ICameraControllerMod>();
-    private enum CameraControllerMod
+    public enum CameraControllerMod
     {
         InteractiveHightlight,
         DepthView,

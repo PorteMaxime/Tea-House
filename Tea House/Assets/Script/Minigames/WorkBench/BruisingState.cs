@@ -38,8 +38,12 @@ public class BruisingState : IWorkbench
     {
         if (isEmpty == false && mItemBruised == false)
         {
+<<<<<<< Updated upstream
             // TODO : GetRaycastHit
             // List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Mortar");
+=======
+            mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MortarPilon", out List<GameObject> hitDraggables);
+>>>>>>> Stashed changes
 
             // if (hitDraggables.Count > 0)
             // {
@@ -52,7 +56,36 @@ public class BruisingState : IWorkbench
                 && mItemBruised == false
                 && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
             {
+<<<<<<< Updated upstream
                 fragIngredient = mWorkbench.InstantiateGameObject(mWorkbench.mCurrentItem.mFragIngredient, mWorkbench.mBowl.transform.position + ingredientPosOffset, mWorkbench.mBowl);
+=======
+                mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarPilon);
+                mWorkbench.mMortarPilon.transform.rotation = Quaternion.identity;
+            }
+            if (mWorkbench.mMortarPilon.transform.position.z <= mWorkbench.mMortarRightBorn.transform.position.z
+                && mWorkbench.mMortarPilon.transform.position.z >= mWorkbench.mMortarLeftBorn.transform.position.z)
+            {
+                if(mWorkbench.mMortarPilon.transform.position.y >= mWorkbench.mMortarTopBorn.transform.position.y)
+                {
+                    if(bottomMortar > topMortar)
+                    {
+                        topMortar++;
+                    }
+
+                }
+                else if (mWorkbench.mMortarPilon.transform.position.y <= mWorkbench.mMortarBotBorn.transform.position.y)
+                {
+                    if (bottomMortar == topMortar)
+                    {
+                        bottomMortar++;
+                    }
+
+                }
+            }
+            if (bottomMortar == 4)
+            {
+                fragIngredient = mWorkbench.InstantiateGameObject(mWorkbench.mCurrentItem.mFragIngredient, mWorkbench.mMortarBowl.transform.position + ingredientPosOffset, mWorkbench.mMortarBowl);
+>>>>>>> Stashed changes
                 mWorkbench.mBruiseIngrdient = mWorkbench.mCurrentItem;
                 mWorkbench.DestroyCurrentIngredient();
 
@@ -61,13 +94,39 @@ public class BruisingState : IWorkbench
                 mWorkbench.mMortar.transform.position = initMortarPos;
                 mWorkbench.mMortar.transform.rotation = initMortarRot;
                 mItemBruised = true;
+<<<<<<< Updated upstream
+=======
+
+                mWorkbench.mDragAndDrop.StopDragging();
+                mWorkbench.mMortarPilon.transform.position = initMortarPos;
+                mWorkbench.mMortarPilon.transform.rotation = initMortarRot;
+                bottomMortar = 0;
+                topMortar = 0;
+
+>>>>>>> Stashed changes
             }
         }
+<<<<<<< Updated upstream
 
         if (isEmpty == false && mItemBruised == true)
         {
             // TODO : GetRaycastHit
             // List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Bowl");
+=======
+        if(canMoveBowl == false && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame() && mItemBruised)
+        {
+            Debug.Log("canMoveBowl");
+            canMoveBowl = true;
+        }
+        if (isEmpty == false && mItemBruised == true && canMoveBowl == true)
+        {
+            mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MortarBowl", out List<GameObject> hitDraggables);
+
+            if (hitDraggables.Count > 0)
+            {
+                mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarBowl);
+            }
+>>>>>>> Stashed changes
 
             // if (hitDraggables.Count > 0)
             // {
@@ -85,8 +144,12 @@ public class BruisingState : IWorkbench
 
     public void OnExit()
     {
+<<<<<<< Updated upstream
         // TODO : StopDraggging
         //mWorkbench.mCameraController.StopDragging();
+=======
+        mWorkbench.mDragAndDrop.StopDragging();
+>>>>>>> Stashed changes
 
         mWorkbench.mBowl.transform.rotation = Quaternion.Euler(0, 0, 180);
 
