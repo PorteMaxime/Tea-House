@@ -58,7 +58,8 @@ public class CameraDragAndDrop : ICameraControllerMod
         if(obstacle != null && obstacle.Count > 1 && obstacle[0] != mDragging)
             Debug.Log("Hit");
         
-        mDragging.transform.position = worldPos - mDraggingOffset;
+        worldPos = worldPos - mDraggingOffset;
+        mDragging.transform.position = new Vector3(mDraggedOriginX, worldPos.y, worldPos.z);
     }
 
     public void OnFixedUpdate()

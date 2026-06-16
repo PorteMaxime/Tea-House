@@ -24,6 +24,19 @@ public class Camera_Raycast : ICameraControllerMod
     }
     public void OnFixedUpdate() {}
 
+    public Vector3 GetImpact(float originDistance, GameObject xAxeSnap)
+    {
+        Vector3 mousePos = Mouse.current.position.ReadValue();      // Coordonnées X / Y de la souris sur l'écran
+        mousePos.z = originDistance;
+        Vector3 worldPos = mMain.mCamera.ScreenToWorldPoint(mousePos);
+
+        Vector3 dir = (worldPos - mMain.transform.position).normalized;
+        float dist = Vector3.Distance(mMain.transform.position, new Vector3(xAxeSnap.transform.position.x, worldPos.y, worldPos.z));
+        worldPos = mMain.transform.position + dir * dist;
+
+        return worldPos;
+    }
+
     #region Single Raycast
     static public void Raycast(Ray ray, float distance, LayerMask[] layers, string[] tags, out GameObject hit)
     {

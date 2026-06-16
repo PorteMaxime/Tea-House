@@ -27,6 +27,8 @@ public class CameraController : MonoBehaviour
     private CharacterInput mPlayerInputComponent = null;
     private MeshRenderer mPlayerRenderComponent = null;
 
+    public Camera mCamera = null;
+
 
     #region Basics Methods
     void Awake()
@@ -34,6 +36,7 @@ public class CameraController : MonoBehaviour
         GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
         mPlayerInputComponent = playerGO.GetComponent<CharacterInput>();
         mPlayerRenderComponent = playerGO.GetComponent<MeshRenderer>();
+        mCamera = GetComponent<Camera>();
 
         mCameraControllerMods.Add(CameraControllerMod.InteractiveHightlight, new Camera_InteractionHighlight(this));
         mCameraControllerMods.Add(CameraControllerMod.DepthView, new Camera_DepthView(this));

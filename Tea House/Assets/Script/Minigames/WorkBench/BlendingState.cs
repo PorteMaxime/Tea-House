@@ -28,42 +28,45 @@ public class BlendingState : IWorkbench
     public void OnUpdate()
     {
         if(isEmpty == false && mIsBlended == false){
-            mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Spoon", out List<GameObject> hitDraggables);
-
-            if (hitDraggables.Count > 0)
+            if (true)// inputplayer
             {
-                mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mSpoon);
-                mWorkbench.mSpoon.transform.rotation = Quaternion.Euler(90, 180, 60);
-            }
+                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Spoon", out List<GameObject> hitDraggables);
 
-            if (mWorkbench.mSpoon.transform.position.z <= mWorkbench.mMixtureLeftBorn.transform.position.z)
-            {
-                if (leftMixtureBowl == rightMixtureBowl)
+                if (hitDraggables.Count > 0)
                 {
-                    leftMixtureBowl++;
+                    mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mSpoon);
+                    mWorkbench.mSpoon.transform.rotation = Quaternion.Euler(90, 180, 60);
                 }
 
-            }
-            else if (mWorkbench.mSpoon.transform.position.z >= mWorkbench.mMixtureRightBorn.transform.position.z)
-            {
-                if (leftMixtureBowl > rightMixtureBowl)
+                if (mWorkbench.mSpoon.transform.position.z <= mWorkbench.mMixtureLeftBorn.transform.position.z)
                 {
-                    rightMixtureBowl++;
+                    if (leftMixtureBowl == rightMixtureBowl)
+                    {
+                        leftMixtureBowl++;
+                    }
+
+                }
+                else if (mWorkbench.mSpoon.transform.position.z >= mWorkbench.mMixtureRightBorn.transform.position.z)
+                {
+                    if (leftMixtureBowl > rightMixtureBowl)
+                    {
+                        rightMixtureBowl++;
+                    }
+
                 }
 
-            }
+                if (rightMixtureBowl == 4)
+                {
+                    mIsBlended = true;
 
-            if (rightMixtureBowl == 4)
-            {
-                mIsBlended = true;
+                    leftMixtureBowl = 0;
+                    rightMixtureBowl = 0;
 
-                leftMixtureBowl = 0;
-                rightMixtureBowl = 0;
+                    mWorkbench.mDragAndDrop.StopDragging();
+                    mWorkbench.mSpoon.transform.position = initSpoonPos;
+                    mWorkbench.mSpoon.transform.rotation = initSpoonRot;
 
-                mWorkbench.mDragAndDrop.StopDragging();
-                mWorkbench.mSpoon.transform.position = initSpoonPos;
-                mWorkbench.mSpoon.transform.rotation = initSpoonRot;
-
+                }
             }
         }
         if(isEmpty == true)
