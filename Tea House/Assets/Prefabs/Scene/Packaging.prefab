@@ -1017,6 +1017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49071b30c88fbd342ba85675938d0bbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkingPoint
+  mCollider: []
 --- !u!1 &7996184662912848925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,11 +1262,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3760350829255424928, guid: 2219444268af1184b95f38eef75a1202, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: -1.357
       objectReference: {fileID: 0}
     - target: {fileID: 3760350829255424928, guid: 2219444268af1184b95f38eef75a1202, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.75
+      value: 2.245
       objectReference: {fileID: 0}
     - target: {fileID: 3760350829255424928, guid: 2219444268af1184b95f38eef75a1202, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1468,8 +1469,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.017901646, y: 0.011044044, z: 0.03183913}
-  m_Center: {x: 0, y: -2.3283064e-10, z: -0.0000000018626451}
+  m_Size: {x: 0.017449243, y: 0.010167675, z: 0.03138672}
+  m_Center: {x: 0, y: -2.3283064e-10, z: 0}
 --- !u!33 &7280909676095665958
 MeshFilter:
   m_ObjectHideFlags: 0
