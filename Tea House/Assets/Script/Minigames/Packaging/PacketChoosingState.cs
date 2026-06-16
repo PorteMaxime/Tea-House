@@ -59,10 +59,9 @@ public class PacketChoosingState : IPackaging
 
         if (mPlayerInteract.Player.Select.triggered == false) return;
 
-        GameObject currentPackage = null;
-        mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Package", out currentPackage);
+        mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Package", out RaycastHit currentPackage);
 
-        if (currentPackage != null)
+        if (currentPackage.collider != null)
         {
             GameObject package = mMain.Instantiate(currentPackage.transform.parent.gameObject, mWorkingPoint.position, Quaternion.identity);
 

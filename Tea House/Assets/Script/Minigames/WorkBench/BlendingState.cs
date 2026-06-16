@@ -30,7 +30,7 @@ public class BlendingState : IWorkbench
         if(isEmpty == false && mIsBlended == false){
             if (true)// inputplayer
             {
-                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Spoon", out List<GameObject> hitDraggables);
+                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Spoon", out List<RaycastHit> hitDraggables);
 
                 if (hitDraggables.Count > 0)
                 {

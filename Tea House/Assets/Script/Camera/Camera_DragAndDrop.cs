@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -45,18 +47,22 @@ public class CameraDragAndDrop : ICameraControllerMod
         float dist = Vector3.Distance(mMain.transform.position, new Vector3(mDraggedOriginX, worldPos.y, worldPos.z));
         worldPos = mMain.transform.position + dir * dist; 
 
-        List<GameObject> obstacle;
         Camera_Raycast.Raycast(
             new Ray(mMain.transform.position, dir),
-            5f,
             dist, 
             (LayerMask[])null, 
             (string[])null, 
-            out obstacle);
+            out List<RaycastHit> obstacles);
 
-        Debug.Log((obstacle != null) + " / " + (obstacle.Count > 1) + " / " + (obstacle.Count > 1 ? obstacle[0] != mDragging : "pas assez"));
-        if(obstacle != null && obstacle.Count > 1 && obstacle[0] != mDragging)
-            Debug.Log("Hit");
+        if(obstacles != null && obstacles.Count > 0 && obstacles[0].collider.gameObject.tag != "Player" && obstacles[0].collider.gameObject != mDragging) 
+        {
+            float distance = Vector3.Distance(obstacles[0].point, mMain.transform.position);
+            worldPos = mMain.transform.position + dir * distance;
+
+            Vector3 normal = obstacles[0].normal;
+            Vector3 size = mDragging.GetComponent<Collider>().bounds.extents;
+            worldPos += new Vector3(normal.x * size.x, normal.y * size.y, normal.z * size.z);
+        }
         
         worldPos = worldPos - mDraggingOffset;
         mDragging.transform.position = new Vector3(mDraggedOriginX, worldPos.y, worldPos.z);
@@ -123,13 +129,12 @@ public class CameraDragAndDrop : ICameraControllerMod
 
     public bool CanDrag(GameObject target)
     {
-        List<GameObject> hits = null;
         mRaycast.MouseRaycast(
             Mathf.Infinity,
             LayerMask.GetMask(LayerMask.LayerToName(target.layer)),
             target.transform.tag,
-            out hits
+            out List<RaycastHit> hits
              );
-        return hits.Contains(target);
+        return hits.Any(hit => hit.collider.gameObject == target);
     }
 }

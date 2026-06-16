@@ -40,31 +40,27 @@ public class PacketCompleting : IPackaging
 
         if (mIsOpened == true && mIsFilled == false)
         {
-            GameObject bowl = null;
-            mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MixtureBowl", out bowl);
-            if (bowl != null)
+            mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MixtureBowl", out RaycastHit bowl);
+            if (bowl.collider != null)
             {
-                mMain.mFilling.mBowl = bowl;
+                mMain.mFilling.mBowl = bowl.collider.gameObject;
                 mMain.mStateMachine.SwitchState(mMain.mFilling);
             }
         }
-        GameObject lid = null;
-        mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "PackageLid", out lid);
-        if (lid != null && (mMain.mOpening.mLid != null ? lid == mMain.mOpening.mLid : true))
+        mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "PackageLid", out RaycastHit lid);
+        if (lid.collider != null && (mMain.mOpening.mLid != null ? lid.collider.gameObject == mMain.mOpening.mLid : true))
                 mMain.mStateMachine.SwitchState(mMain.mOpening);
 
         if(mLabelPrinted == false)
         {
-            GameObject printer = null;
-            mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Printer", out printer);
-            if (printer != null)
+            mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Printer", out RaycastHit printer);
+            if (printer.collider != null)
                 mMain.mStateMachine.SwitchState(mMain.mPrinting);
         }
         else if(mLabelPrinted == true && mIsLabelled == false)
         {
-            GameObject label = null;
-            mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Label", out label);
-            if (label != null)
+            mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Label", out RaycastHit label);
+            if (label.collider != null)
                 mMain.mStateMachine.SwitchState(mMain.mLabelling);
         }
     }

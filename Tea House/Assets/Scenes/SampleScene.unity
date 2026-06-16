@@ -857,6 +857,22 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c0f50b1231986264ca71435c3384c35d, type: 2}
+    - target: {fileID: 7859292666797858198, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+      propertyPath: m_Size.x
+      value: 0.017449243
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859292666797858198, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+      propertyPath: m_Size.y
+      value: 0.010167675
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859292666797858198, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+      propertyPath: m_Size.z
+      value: 0.03138672
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859292666797858198, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7996184662912848925, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
       propertyPath: m_TagString
       value: MixtureBowl

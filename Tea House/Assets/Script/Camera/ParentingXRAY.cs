@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ParentingXRAY : MonoBehaviour
@@ -18,9 +19,9 @@ public class ParentingXRAY : MonoBehaviour
     public void Update()
     {
         Ray ray = new Ray(mCamera.transform.position, new Vector3(0, 0, 0) - mCamera.transform.position);
-        Camera_Raycast.Raycast(ray, 2f, Mathf.Infinity, LayerMask.GetMask("Wall"), (string[])null, out List<GameObject> hits);
-        
-        if(hits.Contains(transform.gameObject) == true)
+        Camera_Raycast.Raycast(ray, 2f, Mathf.Infinity, LayerMask.GetMask("Wall"), (string[])null, out List<RaycastHit> hits);
+
+        if (hits.Any(hit => hit.collider.gameObject == transform.gameObject) == true)
             Show(false);
         else
             Show(true);

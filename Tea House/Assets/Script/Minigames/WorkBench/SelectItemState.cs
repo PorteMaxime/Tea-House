@@ -38,21 +38,22 @@ public class SelectItemState : IWorkbench
         {
             if(InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)// inputplayer
             {
-                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), new string[3] { "Storage", "MixtureBowl", "Spoon" }, out List<GameObject> hitDraggables);
+                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), new string[3] { "Storage", "MixtureBowl", "Spoon" }, out List<RaycastHit> hitDraggables);
 
                 if (hitDraggables.Count > 0)
                 {
-                    if (hitDraggables[0].TryGetComponent(out WorkBenchStorageScript workBenchStorageScript))
+                    GameObject target = hitDraggables[0].collider.gameObject;
+                    if (target.TryGetComponent(out WorkBenchStorageScript workBenchStorageScript))
                     {
                         InitIngredient(workBenchStorageScript.ingredient);
                         workBenchStorageScript.CheckIngredient();
                         mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG);
                     }
-                    else if (hitDraggables[0] == mWorkbench.mMixtureBowl)
+                    else if (target == mWorkbench.mMixtureBowl)
                     {
                         mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMixtureBowl);
                     }
-                    else if (hitDraggables[0] == mWorkbench.mSpoon)
+                    else if (target == mWorkbench.mSpoon)
                     {
                         mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
                     }
@@ -63,11 +64,11 @@ public class SelectItemState : IWorkbench
         {
             if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)// inputplayer
             {
-                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Ingredient", out List<GameObject> hitDraggables);
+                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Ingredient", out List<RaycastHit> hitDraggables);
 
                 if (hitDraggables.Count > 0)
                 {
-                    if (hitDraggables[0] == mWorkbench.currentItemG)
+                    if (hitDraggables[0].collider.gameObject == mWorkbench.currentItemG)
                         mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG);
                 }
             }

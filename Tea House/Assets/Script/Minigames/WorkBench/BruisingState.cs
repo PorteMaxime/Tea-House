@@ -45,7 +45,7 @@ public class BruisingState : IWorkbench
         {
             if (InputManager.Get().mPlayerInteract.Player.Select.triggered)// inputplayer
             {
-                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MortarPilon", out List<GameObject> hitDraggables);
+                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MortarPilon", out List<RaycastHit> hitDraggables);
 
                 if (hitDraggables.Count > 0)
                 {
@@ -93,7 +93,7 @@ public class BruisingState : IWorkbench
         {
             if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed())// inputplayer
             {
-                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MortarBowl", out List<GameObject> hitDraggables);
+                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MortarBowl", out List<RaycastHit> hitDraggables);
 
                 if (hitDraggables.Count > 0)
                 {
