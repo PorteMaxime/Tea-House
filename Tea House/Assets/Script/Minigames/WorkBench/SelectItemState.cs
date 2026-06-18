@@ -10,7 +10,6 @@ public class SelectItemState : IWorkbench
         mWorkbench = system;
     }
 
-    //bool moveDownCam = false;
     public void OnEnter()
     {
         //

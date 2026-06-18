@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class WorkbenchScript : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMixtureLeftBorn;
 
     public GameObject mSpoon;
+    public GameObject panelSawp;
 
     public WorkbenchStateMachine stateMachine;
 
@@ -55,27 +57,14 @@ public class WorkbenchScript : MonoBehaviour
         blendingState = new BlendingState(this);
 
         stateMachine.ChangeState(selectItemState);
+
     }
 
     void Update()
     {
         if (mInteractiveArea.isUsing)
         {
-            if (Mouse.current.position.ReadValue().y >= Screen.height - upPan && cameraLookUp == false)
-            {
-                Quaternion targetRotation = mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);
-                cameraLookUp = true;
-                //moveDownCam = false;
-                mCameraController.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
-            }
-            else if (Mouse.current.position.ReadValue().y <= Screen.height - downPan && cameraLookUp == true)
-            {
-                Quaternion targetRotation = mCameraController.transform.rotation * Quaternion.Euler(5f, 0f, 0f);
-
-                cameraLookUp = false;
-                //moveDownCam = true;
-                mCameraController.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
-            }
+            LookShelf();
 
             stateMachine.Update();
         }
@@ -133,5 +122,26 @@ public class WorkbenchScript : MonoBehaviour
         }
 
         _go.transform.position = targetPosition;
+    }
+
+    void LookShelf()
+    {
+        if (Mouse.current.position.ReadValue().y >= Screen.height - upPan && cameraLookUp == false)
+        {
+            Quaternion targetRotation = mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);
+            cameraLookUp = true;
+            mCameraController.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
+        }
+        else if (Mouse.current.position.ReadValue().y <= Screen.height - downPan && cameraLookUp == true)
+        {
+            Quaternion targetRotation = mCameraController.transform.rotation * Quaternion.Euler(5f, 0f, 0f);
+
+            cameraLookUp = false;
+            mCameraController.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
+        }
+    }
+    public void throwToTrash()
+    {
+
     }
 }

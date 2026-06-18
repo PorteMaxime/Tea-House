@@ -59,7 +59,7 @@ public class BlendingState : IWorkbench
             if (rightMixtureBowl == 4)
             {
                 mIsBlended = true;
-
+                mWorkbench.panelSawp.SetActive(true);
                 leftMixtureBowl = 0;
                 rightMixtureBowl = 0;
 
@@ -85,14 +85,13 @@ public class BlendingState : IWorkbench
             {
                 mWorkbench.mCameraController.LerpingCamera(mWorkbench.mCameraPosPackaging.transform.position, mWorkbench.mCameraPosPackaging.transform.rotation, 0.5f);
                 mWorkbench.LerpGameObject(mWorkbench.mMixtureBowl, mWorkbench.mMixtureBowlPackagingPos.transform.position, 0.5f);
-
                 //mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
-                //mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
+                mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
             }
         }
     }
     public void OnExit()
     {
-        
+        mWorkbench.panelSawp.SetActive(false);
     }
 }
