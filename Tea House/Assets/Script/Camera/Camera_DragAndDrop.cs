@@ -80,7 +80,7 @@ public class CameraDragAndDrop : ICameraControllerMod
     public void OnFixedUpdate()
     {
         if(IsDragging() == false || mDraggingRB == null) return;
-
+        Debug.Log("Drag: " + mDragging.name);
         Vector3 moveVector = mTargetPos - mDraggingRB.position;
         moveVector *= mMoveSpeed;
         mDraggingRB.linearVelocity = moveVector;
@@ -100,7 +100,7 @@ public class CameraDragAndDrop : ICameraControllerMod
     {
         if(target == null) return false;
         if(CanDrag(target) == false) return false;
-        
+        Debug.Log("Start Dragging");
         mDraggedOriginX = target.transform.position.x;
         Vector3 toTarget = target.transform.position - mMain.transform.position;
         mDraggedOriginDistance = Vector3.Dot(toTarget, mMain.transform.forward);
@@ -123,7 +123,7 @@ public class CameraDragAndDrop : ICameraControllerMod
     public void StopDragging()
     {
         if (mDragging == null) return;
-
+        Debug.Log("Stop Dragging");
         Rigidbody rb = mDragging.GetComponent<Rigidbody>();
         if (rb != null) 
         {
@@ -154,6 +154,6 @@ public class CameraDragAndDrop : ICameraControllerMod
             target.transform.tag,
             out List<RaycastHit> hits
              );
-        return hits.Any(hit => hit.collider.gameObject == target);
+        return IsDragging() == false && hits.Any(hit => hit.collider.gameObject == target);
     }
 }

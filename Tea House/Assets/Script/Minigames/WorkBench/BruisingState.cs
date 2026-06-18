@@ -49,7 +49,7 @@ public class BruisingState : IWorkbench
 
                 if (hitDraggables.Count > 0)
                 {
-                    fragIngredient = mWorkbench.InstantiateGameObject(mWorkbench.mCurrentItem.mFragIngredient, mWorkbench.mMixtureBowl.transform.position + ingredientPosOffset, mWorkbench.mMixtureBowl);
+                    //fragIngredient = mWorkbench.InstantiateGameObject(mWorkbench.mCurrentItem.mFragIngredient, mWorkbench.mMixtureBowl.transform.position + ingredientPosOffset, mWorkbench.mMixtureBowl);
                     mWorkbench.mMortarPilon.transform.rotation = Quaternion.identity;
                     mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarPilon);
                 }
@@ -116,7 +116,7 @@ public class BruisingState : IWorkbench
     public void OnExit()
     {
         mWorkbench.mDragAndDrop.StopDragging();
-
+    
         mWorkbench.mMortarBowl.transform.rotation = Quaternion.Euler(0, 0, 180);
 
         mWorkbench.mMortarBowl.transform.position = initBowlPos;
