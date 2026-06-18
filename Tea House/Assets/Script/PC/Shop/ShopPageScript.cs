@@ -94,7 +94,7 @@ public class ShopPageScript : MonoBehaviour
 		GameObject creationRow = null;
 		GameObject creationItem = null;
 
-        foreach (ItemData item in Inventory.msInstance.mItems.Keys)
+        foreach (ItemData item in Inventory.msInstance.GetItemsOfType<ItemData>())
 		{
 			if (mShopItems.ContainsKey(item))
 			{
@@ -289,7 +289,7 @@ public class ShopPageScript : MonoBehaviour
 
 			foreach (ItemData item in mShopItems.Keys)
 			{
-				Inventory.msInstance.AddItem(item, mShopItems[item].mAmount);
+				Inventory.msInstance.ChangeItemAmount(item, mShopItems[item].mAmount);
             }
 
 			EmptyCart();

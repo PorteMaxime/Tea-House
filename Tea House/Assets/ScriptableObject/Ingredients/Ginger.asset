@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
   m_Name: Ginger
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  mName: Gingembre
+  mName: Ginger
   mPrefab: {fileID: 0}
+  mIsUnlocked: 1
   mStats:
   - mStat: 0
     mValue: 2
@@ -26,5 +27,4 @@ MonoBehaviour:
   - mStat: 4
     mValue: 0
   mPrice: 6
-  mIsBase: 0
   mFragIngredient: {fileID: 0}

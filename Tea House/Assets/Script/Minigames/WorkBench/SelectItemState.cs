@@ -55,7 +55,7 @@ public class SelectItemState : IWorkbench
     }
     public void OnExit()
     {
-        mWorkbench.inventory.RemoveItem(mWorkbench.mCurrentItem, 1);
+        mWorkbench.inventory.ChangeItemAmount(mWorkbench.mCurrentItem, -1);
         mWorkbench.mCameraController.StopDragging();
     }
 

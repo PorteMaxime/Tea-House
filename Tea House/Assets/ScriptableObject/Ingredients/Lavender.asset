@@ -12,11 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
   m_Name: Lavender
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  mName: Lavande
+  mName: Lavender
   mPrefab: {fileID: 0}
+  mIsUnlocked: 1
   mStats:
+  - mStat: 0
+    mValue: 2
+  - mStat: 1
+    mValue: 2
   - mStat: 2
     mValue: 2
+  - mStat: 3
+    mValue: 2
+  - mStat: 4
+    mValue: 2
   mPrice: 9
-  mIsBase: 0
   mFragIngredient: {fileID: 0}

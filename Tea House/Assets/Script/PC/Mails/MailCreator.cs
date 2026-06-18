@@ -6,9 +6,6 @@ public class MailCreator : MonoBehaviour
 {
     [SerializeField] private Daylight mDaylight;
 
-    public List<IngredientData> mBases;
-    public List<IngredientData> mIngredients;
-
     private Vector2Int mMailsPerDayRange = new Vector2Int(1, 7);
 
     private Vector2Int mIngredientsAmount = new Vector2Int(1 , 3);
@@ -88,18 +85,21 @@ public class MailCreator : MonoBehaviour
         Order order = new Order();
 
         // Base
-        IngredientData baseIngredient = mBases[Random.Range(0, mBases.Count)];
+        List<BaseData> bases = Inventory.msInstance.GetItemsOfType<BaseData>();
+
+        BaseData baseIngredient = bases[Random.Range(0, bases.Count)];
         mail.mText += "\n" + baseIngredient.mName;
 
         order.AddStats(baseIngredient.mStats);
 
         // Ingredients
+        List<IngredientData> ingredients = Inventory.msInstance.GetItemsOfType<IngredientData>();
         for (int i = 0; i < Random.Range(mIngredientsAmount.x, mIngredientsAmount.y + 1); i++)
         {
-            IngredientData ingredient = mIngredients[Random.Range(0, mIngredients.Count)];
+            IngredientData ingredient = ingredients[Random.Range(0, ingredients.Count)];
             mail.mText += "\n" + ingredient.mName;
 
-            if (Random.Range(0, 101) <= mTorrefiedProbability)
+            if (Inventory.msInstance.isTorrefactionUnlocked == true && Random.Range(0, 101) <= mTorrefiedProbability)
             {
                 mail.mText += " + torrefaction";
 
@@ -109,6 +109,24 @@ public class MailCreator : MonoBehaviour
             }
             else
                 order.AddStats(ingredient.mStats);
+        }
+
+        for (int i = 0; i < order.mOrderData.mStats.Count; i++)
+        {
+            if (order.mOrderData.mStats[i].mValue != 0)
+            {
+                int oppositeStat = ItemData.GetOppositeIndex(order.mOrderData.mStats[i].mStat);
+
+                if (oppositeStat >= 0 && order.mOrderData.mStats[oppositeStat].mValue != 0)
+                {
+                    int rand = Random.Range(0, 2);
+
+                    if (rand == 0)
+                        order.mOrderData.mStats[i].mValue = 0;
+                    else
+                        order.mOrderData.mStats[oppositeStat].mValue = 0;
+                }
+            }
         }
 
         mail.mOrder = order;

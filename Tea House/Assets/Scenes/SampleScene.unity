@@ -222,31 +222,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1be29c356b85164383989412ed6ba11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
-  mGameItems:
-  - mName: BlackTea
-    mItemData: {fileID: 11400000, guid: 553eb048e4ff5194791490d233618394, type: 2}
-  - mName: GreenTea
-    mItemData: {fileID: 11400000, guid: ebfff9014821c7444a7a8dcbceb12973, type: 2}
-  - mName: Mint
-    mItemData: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  - mName: Ginger
-    mItemData: {fileID: 11400000, guid: ee5e025f750d0dd4a88b7dfbf41c9d6a, type: 2}
-  - mName: Lavender
-    mItemData: {fileID: 11400000, guid: a8d716ca5b5e12e4383db49619f670a7, type: 2}
-  - mName: Chamomile
-    mItemData: {fileID: 11400000, guid: 9162036cf6b6b964983c3b904242e2f8, type: 2}
-  - mName: Cinnamon
-    mItemData: {fileID: 11400000, guid: f5843b2e66b4268478d320a698b8a517, type: 2}
-  - mName: Jasmine
-    mItemData: {fileID: 11400000, guid: 852fd030af483c94fae7fc8cac092837, type: 2}
-  - mName: DriedOrange
-    mItemData: {fileID: 11400000, guid: dbdd9d1154fe6984cb0adb0df4882fc6, type: 2}
-  - mName: DriedBerries
-    mItemData: {fileID: 11400000, guid: 644a5961a1860504cbb375b8b0a3c8e1, type: 2}
   mStartingItems:
-  - {fileID: 11400000, guid: 553eb048e4ff5194791490d233618394, type: 2}
+  - {fileID: 11400000, guid: 58dc0b9db1e5fad468f33007175daf43, type: 2}
+  - {fileID: 11400000, guid: 074e77102efb47c48b77b8f285982a83, type: 2}
   - {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  - {fileID: 11400000, guid: a8d716ca5b5e12e4383db49619f670a7, type: 2}
   - {fileID: 11400000, guid: ee5e025f750d0dd4a88b7dfbf41c9d6a, type: 2}
   mStartingItemsAmount: 5
   mMoneyAmount: 20
@@ -312,12 +291,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MailCreator
   mDaylight: {fileID: 1435202341}
-  mBases:
-  - {fileID: 11400000, guid: 553eb048e4ff5194791490d233618394, type: 2}
-  - {fileID: 11400000, guid: ebfff9014821c7444a7a8dcbceb12973, type: 2}
-  mIngredients:
-  - {fileID: 11400000, guid: ee5e025f750d0dd4a88b7dfbf41c9d6a, type: 2}
-  - {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
   mImages:
   - {fileID: 21300000, guid: fc3375a342626b84b854fbc2b83f43b3, type: 3}
   - {fileID: 21300000, guid: f76adcedca9e2584db14b9d22a418989, type: 3}
@@ -1573,6 +1546,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7257156430974041594, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: mDaylight
+      value: 
+      objectReference: {fileID: 1435202341}
     - target: {fileID: 7483064356113668128, guid: 0a951a409213101409900dbdcc41c459, type: 3}
       propertyPath: m_IsActive
       value: 1

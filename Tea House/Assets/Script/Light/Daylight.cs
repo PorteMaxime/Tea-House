@@ -44,8 +44,6 @@ public class Daylight : MonoBehaviour
 
         foreach (float phaseLength in mPhases.Values)
             mDayLength += phaseLength * (1 / mDaySpeedMultiplier);
-
-        mMailCreator.CreateMail();
     }
 
     void Update()

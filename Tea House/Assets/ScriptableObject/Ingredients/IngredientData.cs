@@ -1,12 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using static UnityEngine.LowLevelPhysics2D.PhysicsShape;
 
 [CreateAssetMenu(fileName = "Game", menuName = "Scriptable Objects/ingredientData")]
 public class IngredientData : ItemData
 {
-    public bool mIsBase;
     public GameObject mFragIngredient;
 
     public List<StatValue> GetTorrefiedStats()

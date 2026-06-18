@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
   m_Name: DriedOrange
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  mName: "Orange s\xE9ch\xE9e"
+  mName: Dried Orange
   mPrefab: {fileID: 0}
+  mIsUnlocked: 1
   mStats:
   - mStat: 1
     mValue: 1
   - mStat: 3
     mValue: 1
   mPrice: 5
-  mIsBase: 0
   mFragIngredient: {fileID: 0}

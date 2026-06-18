@@ -1501,7 +1501,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4408927318626378152}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: OrdersPageScript, Assembly-CSharp
           m_MethodName: ToggleFiltersContent
           m_Mode: 1
@@ -1741,7 +1741,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4408927318626378152}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: OrdersPageScript, Assembly-CSharp
         m_MethodName: ToggleFiltersContent
         m_Mode: 1
@@ -3285,7 +3285,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4408927318626378152}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: OrdersPageScript, Assembly-CSharp
         m_MethodName: SendOrder
         m_Mode: 1
@@ -3756,7 +3756,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6547032821113437430}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MailsPageScript, Assembly-CSharp
         m_MethodName: RejectMail
         m_Mode: 1
@@ -4609,7 +4609,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4408927318626378152}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: OrdersPageScript, Assembly-CSharp
           m_MethodName: ToggleFiltersContent
           m_Mode: 6
@@ -5666,7 +5666,6 @@ GameObject:
   - component: {fileID: 7076319814764730522}
   - component: {fileID: 1765255975308298810}
   - component: {fileID: 2181675335621771700}
-  - component: {fileID: 4408927318626378152}
   m_Layer: 0
   m_Name: CanvasOrders
   m_TagString: Untagged
@@ -5760,19 +5759,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4408927318626378152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6313513779979370723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12e5d278e440a44489f49358517d7d8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  mAvailableFilters: 020000000400000005000000
 --- !u!1 &6419722011038085406
 GameObject:
   m_ObjectHideFlags: 0
@@ -6356,7 +6342,7 @@ GameObject:
   - component: {fileID: 5252799087275748301}
   - component: {fileID: 2265864180483745014}
   - component: {fileID: 6543002600283283939}
-  - component: {fileID: 7369280927442780569}
+  - component: {fileID: 8438461762896719940}
   m_Layer: 0
   m_Name: CanvasHome
   m_TagString: Untagged
@@ -6452,7 +6438,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7369280927442780569
+--- !u!114 &8438461762896719940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6463,7 +6449,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bec505ffaeb8d544b8f5376c3387ad27, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::HomePageScript
   mDaylight: {fileID: 0}
 --- !u!1 &7439803325459003573
 GameObject:
@@ -7021,10 +7007,7 @@ GameObject:
   - component: {fileID: 1304619265639156315}
   - component: {fileID: 6895389060667167229}
   - component: {fileID: 6069314062128993139}
-  - component: {fileID: 8236858357556853684}
   - component: {fileID: 5293540871058026977}
-  - component: {fileID: 868333055796324839}
-  - component: {fileID: 266813990230364062}
   m_Layer: 5
   m_Name: ComputerCanvas
   m_TagString: Untagged
@@ -7133,19 +7116,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ComputerScript
   mActiveCanvas: {fileID: 0}
   interactionScript: {fileID: 0}
---- !u!114 &8236858357556853684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7914305041477033536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Mask
-  m_ShowMaskGraphic: 1
 --- !u!222 &5293540871058026977
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7154,49 +7124,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7914305041477033536}
   m_CullTransparentMesh: 1
---- !u!114 &868333055796324839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7914305041477033536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.003921569}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &266813990230364062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7914305041477033536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277353f7164d317448352d0b86352748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StaticCornerRadius
-  mCornerRadius: 135
 --- !u!1 &8019890660580561534
 GameObject:
   m_ObjectHideFlags: 0
@@ -7838,7 +7765,6 @@ GameObject:
   - component: {fileID: 5102405294387916592}
   - component: {fileID: 2442766226887406991}
   - component: {fileID: 8637409731951065665}
-  - component: {fileID: 6547032821113437430}
   m_Layer: 0
   m_Name: CanvasMails
   m_TagString: Untagged
@@ -7931,18 +7857,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6547032821113437430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8535665394587800990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90bacbf1dd014ec4084bf294c1433abd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1 &8750261604128764031
 GameObject:
   m_ObjectHideFlags: 0
@@ -8418,7 +8332,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6547032821113437430}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MailsPageScript, Assembly-CSharp
         m_MethodName: AcceptMail
         m_Mode: 1

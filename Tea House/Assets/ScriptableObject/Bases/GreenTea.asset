@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
+  m_Script: {fileID: 11500000, guid: f979dc826b0b73543a53b268f757f816, type: 3}
   m_Name: GreenTea
-  m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  mName: "Th\xE9 Vert"
+  m_EditorClassIdentifier: Assembly-CSharp::BaseData
+  mName: GreenTea
   mPrefab: {fileID: 0}
+  mIsUnlocked: 1
   mStats:
   - mStat: 0
     mValue: 0
@@ -25,6 +26,5 @@ MonoBehaviour:
     mValue: 1
   - mStat: 4
     mValue: 0
-  mPrice: 7
-  mIsBase: 0
-  mFragIngredient: {fileID: 0}
+  mPrice: 0
+  mFragBase: {fileID: 0}
