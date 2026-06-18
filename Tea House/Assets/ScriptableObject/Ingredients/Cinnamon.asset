@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Cinnamon
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Cannelle
-  mModel: {fileID: 0}
-  mWarmth: 2
-  mFreshness: 0
-  mRelaxation: 0
-  mEnergy: 0
-  mPrestige: 1
+  mPrefab: {fileID: 0}
+  mStats:
+  - mStat: 0
+    mValue: 2
+  - mStat: 4
+    mValue: 1
   mPrice: 3
   mIsBase: 0
   mFragIngredient: {fileID: 0}

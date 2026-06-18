@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: GreenTea
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: "Th\xE9 Vert"
-  mModel: {fileID: 0}
-  mWarmth: 0
-  mFreshness: 2
-  mRelaxation: 1
-  mEnergy: 1
-  mPrestige: 0
+  mPrefab: {fileID: 0}
+  mStats:
+  - mStat: 0
+    mValue: 0
+  - mStat: 1
+    mValue: 2
+  - mStat: 2
+    mValue: 1
+  - mStat: 3
+    mValue: 1
+  - mStat: 4
+    mValue: 0
   mPrice: 7
   mIsBase: 0
   mFragIngredient: {fileID: 0}

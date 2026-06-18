@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: Chamomile
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Camomille
-  mModel: {fileID: 0}
-  mWarmth: 0
-  mFreshness: 0
-  mRelaxation: 1
-  mEnergy: 0
-  mPrestige: 0
+  mPrefab: {fileID: 0}
+  mStats:
+  - mStat: 2
+    mValue: 1
   mPrice: 2
   mIsBase: 0
   mFragIngredient: {fileID: 0}

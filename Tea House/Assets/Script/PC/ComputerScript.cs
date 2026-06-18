@@ -20,7 +20,7 @@ public class ComputerScript : MonoBehaviour
         foreach (Transform child in gameObject.transform)
         {
             mCanvas.Add(child.name, child.gameObject);
-            child.gameObject.SetActive(true); // Uniquement pour les awake de chaque page
+            //child.gameObject.SetActive(true); // Uniquement pour les awake de chaque page
             child.gameObject.SetActive(false);
 
             if (mCanvas.Count() < 2)

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: DriedBerries
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: "Baies s\xE9ch\xE9es"
-  mModel: {fileID: 0}
-  mWarmth: 0
-  mFreshness: 1
-  mRelaxation: 0
-  mEnergy: 0
-  mPrestige: 1
+  mPrefab: {fileID: 0}
+  mStats:
+  - mStat: 1
+    mValue: 1
+  - mStat: 4
+    mValue: 1
   mPrice: 4
   mIsBase: 0
   mFragIngredient: {fileID: 0}

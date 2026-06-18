@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: BlackTea
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: "Th\xE9 noir"
-  mModel: {fileID: 0}
-  mWarmth: 2
-  mFreshness: 0
-  mRelaxation: 0
-  mEnergy: 1
-  mPrestige: 1
+  mPrefab: {fileID: 0}
+  mStats:
+  - mStat: 0
+    mValue: 2
+  - mStat: 1
+    mValue: 0
+  - mStat: 2
+    mValue: 0
+  - mStat: 3
+    mValue: 1
+  - mStat: 4
+    mValue: 1
   mPrice: 1
   mIsBase: 0
   mFragIngredient: {fileID: 0}

@@ -9,18 +9,16 @@ public class Mail
     public string mText;
     public int mSendDay;
     public float mSendTime;
-    public float mDuration;
+    public int mDuration;
     public float mExpiration;
-    public bool mIsWaiting;
 
-    public Mail(Order _order, Sprite _image, string _name, int _sendDay, float _duration)
+    public void InitData(Order _order, Sprite _image, string _name, int _sendDay, int _duration)
     {
         mOrder = _order;
         mPicture = _image;
         mName = _name;
         mSendDay = _sendDay;
-        mDuration = 1;
-        mIsWaiting = false;
+        mDuration = _duration;
     }
 
     public void UpdateExpiration(Daylight daylight)

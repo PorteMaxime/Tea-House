@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: Lavender
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Lavande
-  mModel: {fileID: 0}
-  mWarmth: 0
-  mFreshness: 0
-  mRelaxation: 2
-  mEnergy: 0
-  mPrestige: 0
+  mPrefab: {fileID: 0}
+  mStats:
+  - mStat: 2
+    mValue: 2
   mPrice: 9
   mIsBase: 0
   mFragIngredient: {fileID: 0}

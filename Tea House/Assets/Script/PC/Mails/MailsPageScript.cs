@@ -1,166 +1,170 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+//using System;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using UnityEngine.UI;
 
-public class MailsPageScript : MonoBehaviour
-{
-    private GameObject mScrollView;
-    private GameObject mScrollViewContent;
-    private GameObject mCanvasMailContent;
+//public class MailsPageScript : MonoBehaviour
+//{
+//    private GameObject mScrollView;
+//    private GameObject mScrollViewContent;
+//    private GameObject mCanvasMailContent;
 
-    private GameObject mMailPrefab = null;
+//    private GameObject mMailPrefab = null;
 
-    private List<Mail> mMailsToCreate = new List<Mail>();
+//    private List<Mail> mMailsToCreate = new List<Mail>();
 
-    private Tuple<Mail, GameObject> mSelectedMail = null;
-    private Dictionary<Mail, GameObject> mMailsDictionary = new Dictionary<Mail, GameObject>();
+//    private Tuple<Mail, GameObject> mSelectedMail = null;
+//    private Dictionary<Mail, GameObject> mMailsDictionary = new Dictionary<Mail, GameObject>();
 
-    private void Awake()
-    {
-        mMailPrefab = Resources.Load<GameObject>("PC/Mail/CanvasMailShort");
+//    private MailSystem mMailSystem;
 
-        Transform temp = transform.Find("ScrollView");
-        if (temp != null)
-            mScrollView = temp.gameObject;
+//    private void Awake()
+//    {
+//        mMailPrefab = Resources.Load<GameObject>("PC/Mail/CanvasMailShort");
 
-        temp = transform.Find("ScrollView/Viewport/ContentScrollView");
-        if (temp != null)
-            mScrollViewContent = temp.gameObject;
+//        Transform temp = transform.Find("ScrollView");
+//        if (temp != null)
+//            mScrollView = temp.gameObject;
 
-        temp = transform.Find("CanvasMailContent");
-        if (temp != null)
-            mCanvasMailContent = temp.gameObject;
+//        temp = transform.Find("ScrollView/Viewport/ContentScrollView");
+//        if (temp != null)
+//            mScrollViewContent = temp.gameObject;
 
-        ToggleMailContent(false);
+//        temp = transform.Find("CanvasMailContent");
+//        if (temp != null)
+//            mCanvasMailContent = temp.gameObject;
 
-        MailManager.mOnMailSent += OnMailSent;
-        MailManager.mOnMailExpired += OnMailExpired;
-    }
+//        ToggleMailContent(false);
 
-    private void OnEnable()
-    {
-        foreach (Mail mail in mMailsToCreate)
-            CreateMailPrefab(mail);
+//        mMailSystem = gameObject.GetComponentInParent<MailSystem>();
 
-        mMailsToCreate.Clear();
-    }
+//        mMailSystem.mOnMailSent += OnMailSent;
+//        mMailSystem.mOnMailExpired += OnMailExpired;
+//    }
 
-    public void SelectMail(Mail mail)
-    {
-        if (!mMailsDictionary.ContainsKey(mail))
-            return;
+//    private void OnEnable()
+//    {
+//        foreach (Mail mail in mMailsToCreate)
+//            CreateMailPrefab(mail);
 
-        // Si le mail est déjà sélectionné
-        if (mSelectedMail != null && mail == mSelectedMail.Item1)
-            return;
+//        mMailsToCreate.Clear();
+//    }
 
-        mSelectedMail = new Tuple<Mail, GameObject>(mail, mMailsDictionary[mail]);
+//    public void SelectMail(Mail mail)
+//    {
+//        if (!mMailsDictionary.ContainsKey(mail))
+//            return;
 
-        // Enlever image "non lu"
-        Transform temp = mSelectedMail.Item2.transform.Find("ButtonShowMail/ImageNotRead");
-        if (temp != null && temp.gameObject.activeSelf == true)
-            temp.gameObject.SetActive(false);
+//        // Si le mail est déjà sélectionné
+//        if (mSelectedMail != null && mail == mSelectedMail.Item1)
+//            return;
 
-        // Mise à jour informations mail
-        temp = mCanvasMailContent.transform.Find("ImageMailTitle/ImageProfile");
-        if (temp != null)
-            temp.GetComponent<Image>().sprite = mail.mPicture;
-        temp = mCanvasMailContent.transform.Find("ImageMailTitle/TextSubject");
-        if (temp != null)
-            temp.GetComponent<Text>().text = mail.mText;
-        temp = mCanvasMailContent.transform.Find("ImageMailTitle/TextSender");
-        if (temp != null)
-            temp.GetComponent<Text>().text = mail.mName;
-        temp = mCanvasMailContent.transform.Find("TextMailContent");
-        if (temp != null)
-            temp.GetComponent<Text>().text = mail.mText;
+//        mSelectedMail = new Tuple<Mail, GameObject>(mail, mMailsDictionary[mail]);
 
-        ToggleMailContent(true);
-    }
+//        // Enlever image "non lu"
+//        Transform temp = mSelectedMail.Item2.transform.Find("ButtonShowMail/ImageNotRead");
+//        if (temp != null && temp.gameObject.activeSelf == true)
+//            temp.gameObject.SetActive(false);
 
-    public void DeSelectMail()
-    {
-        ToggleMailContent(false);
-        mSelectedMail = null;
-    }
+//        // Mise à jour informations mail
+//        temp = mCanvasMailContent.transform.Find("ImageMailTitle/ImageProfile");
+//        if (temp != null)
+//            temp.GetComponent<Image>().sprite = mail.mPicture;
+//        temp = mCanvasMailContent.transform.Find("ImageMailTitle/TextSubject");
+//        if (temp != null)
+//            temp.GetComponent<Text>().text = mail.mText;
+//        temp = mCanvasMailContent.transform.Find("ImageMailTitle/TextSender");
+//        if (temp != null)
+//            temp.GetComponent<Text>().text = mail.mName;
+//        temp = mCanvasMailContent.transform.Find("TextMailContent");
+//        if (temp != null)
+//            temp.GetComponent<Text>().text = mail.mText;
 
-    public void ToggleMailContent(bool active)
-    {
-        mCanvasMailContent.SetActive(active);
+//        ToggleMailContent(true);
+//    }
 
-        mScrollView.GetComponent<RectTransform>().offsetMax = new Vector2(active ? -901 : -40, -120);
-    }
+//    public void DeSelectMail()
+//    {
+//        ToggleMailContent(false);
+//        mSelectedMail = null;
+//    }
 
-    public void AcceptMail()
-    {
-        MailManager.msInstance.ChangeOrderState(mSelectedMail.Item1, Order.State.Accepted);
-        RemoveMailPrefab(mSelectedMail.Item1);
-    }
+//    public void ToggleMailContent(bool active)
+//    {
+//        mCanvasMailContent.SetActive(active);
 
-    public void RejectMail()
-    {
-        MailManager.msInstance.ChangeOrderState(mSelectedMail.Item1, Order.State.Rejected);
-        RemoveMailPrefab(mSelectedMail.Item1);
-    }
+//        mScrollView.GetComponent<RectTransform>().offsetMax = new Vector2(active ? -1051 : -20, -120);
+//    }
 
-    public void CreateMailPrefab(Mail mail)
-    {
-        GameObject prefab = Instantiate(mMailPrefab, mScrollViewContent.transform, false);
+//    public void AcceptMail()
+//    {
+//        mMailSystem.ChangeOrderState(mSelectedMail.Item1, Order.State.Accepted);
+//        RemoveMailPrefab(mSelectedMail.Item1);
+//    }
 
-        // Ajout action
-        Transform prefabButton = prefab.transform.Find("ButtonShowMail");
-        if (prefabButton != null)
-        {
-            prefabButton.GetComponent<Button>().onClick.AddListener(() => SelectMail(mail));
+//    public void RejectMail()
+//    {
+//        mMailSystem.ChangeOrderState(mSelectedMail.Item1, Order.State.Rejected);
+//        RemoveMailPrefab(mSelectedMail.Item1);
+//    }
 
-            // Image et texte
-            Transform prefabImage = prefabButton.transform.Find("ImageProfile");
-            if (prefabImage != null)
-                prefabImage.GetComponent<Image>().sprite = mail.mPicture;
+//    public void CreateMailPrefab(Mail mail)
+//    {
+//        GameObject prefab = Instantiate(mMailPrefab, mScrollViewContent.transform, false);
 
-            Transform prefabText = prefabButton.transform.Find("TextContent");
-            if (prefabText != null)
-                prefabText.GetComponent<Text>().text = mail.mText;
+//        // Ajout action
+//        Transform prefabButton = prefab.transform.Find("ButtonShowMail");
+//        if (prefabButton != null)
+//        {
+//            prefabButton.GetComponent<Button>().onClick.AddListener(() => SelectMail(mail));
 
-            // image non lu
+//            // Image et texte
+//            Transform prefabImage = prefabButton.transform.Find("ImageProfile");
+//            if (prefabImage != null)
+//                prefabImage.GetComponent<Image>().sprite = mail.mPicture;
 
-        }
+//            Transform prefabText = prefabButton.transform.Find("TextContent");
+//            if (prefabText != null)
+//                prefabText.GetComponent<Text>().text = mail.mText;
 
-        mMailsDictionary.Add(mail, prefab);
-    }
+//            // image non lu
 
-    public void RemoveMailPrefab(Mail mail)
-    {
-        if (mMailsDictionary.ContainsKey(mail))
-        {
-            UnityEngine.Object.Destroy(mMailsDictionary[mail].gameObject);
-            mMailsDictionary.Remove(mail);
-        }
+//        }
 
-        if (mSelectedMail != null && mSelectedMail.Item1 == mail)
-            DeSelectMail();
-    }
+//        mMailsDictionary.Add(mail, prefab);
+//    }
 
-    private void OnMailSent(Mail mail)
-    {
-        if (gameObject.activeSelf == true)
-            CreateMailPrefab(mail);
-        else
-            mMailsToCreate.Add(mail);
-    }
+//    public void RemoveMailPrefab(Mail mail)
+//    {
+//        if (mMailsDictionary.ContainsKey(mail))
+//        {
+//            UnityEngine.Object.Destroy(mMailsDictionary[mail].gameObject);
+//            mMailsDictionary.Remove(mail);
+//        }
 
-    private void OnMailExpired(Mail mail)
-    {
-        if (mMailsToCreate.Contains(mail))
-            mMailsToCreate.Remove(mail);
-        else if (mMailsDictionary.ContainsKey(mail))
-            RemoveMailPrefab(mail);
-    }
-}
+//        if (mSelectedMail != null && mSelectedMail.Item1 == mail)
+//            DeSelectMail();
+//    }
 
-/* A faire :
- * - modifier arrière plan prefab quand il est sélectionné ? (afficher arrière plan différent ?) -> SelectMail() DeSelectMail()
- * - mettre image non lue aà la création du préfab
- * - ...
-*/
+//    private void OnMailSent(Mail mail)
+//    {
+//        if (gameObject.activeSelf == true)
+//            CreateMailPrefab(mail);
+//        else
+//            mMailsToCreate.Add(mail);
+//    }
+
+//    private void OnMailExpired(Mail mail)
+//    {
+//        if (mMailsToCreate.Contains(mail))
+//            mMailsToCreate.Remove(mail);
+//        else if (mMailsDictionary.ContainsKey(mail))
+//            RemoveMailPrefab(mail);
+//    }
+//}
+
+///* A faire :
+// * - modifier arrière plan prefab quand il est sélectionné ? (afficher arrière plan différent ?) -> SelectMail() DeSelectMail()
+// * - mettre image non lue aà la création du préfab
+// * - ...
+//*/

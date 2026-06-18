@@ -2,14 +2,28 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public class Item
+{
+    public string mName;
+
+    public ItemData mItemData;
+}
+
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private List<ItemData> mUnlockedItems = new List<ItemData>();
-    [SerializeField] private int mItemStartingAmount = 5;
+    // Items existant dans le jeu
+    [SerializeField] private List<Item> mGameItems = new List<Item>();
 
+    [SerializeField] private List<ItemData> mStartingItems = new List<ItemData>();
+    [SerializeField] private int mStartingItemsAmount = 5;
+
+    // Items du joueur
     [SerializeField] public Dictionary<ItemData, int> mItems = new Dictionary<ItemData, int>();
 
-    public int mMoneyAmount;
+    [SerializeField] public int mMoneyAmount;
+
+    [SerializeField] public bool isTorrefactionUnlocked = false;
 
     #region Singleton
     public static event Action<Inventory> mOnInventoryCreated;
@@ -19,11 +33,10 @@ public class Inventory : MonoBehaviour
     {
         msInstance = this;
 
-        foreach (var item in mUnlockedItems)
-            mItems.Add(item, mItemStartingAmount);
+        foreach (var item in mStartingItems)
+            mItems.Add(item, mStartingItemsAmount);
 
         mOnInventoryCreated?.Invoke(this);
-
     }
     #endregion
 
@@ -33,24 +46,43 @@ public class Inventory : MonoBehaviour
             mItems[key] = 0;
     }
 
-    public void AddItem(ItemData _item, int _amount)
+    public void AddItem(ItemData item, int amount)
     {
-        if (mItems.ContainsKey(_item))
-            mItems[_item] += _amount;
+        if (mItems.ContainsKey(item))
+            mItems[item] += amount;
         else
-            mItems[_item] = _amount;
+            mItems[item] = amount;
     }
 
-    public bool RemoveItem(ItemData _item, int _amount)
+    public bool RemoveItem(ItemData item, int amount)
     {
-        if (mItems.ContainsKey(_item))
+        if (mItems.ContainsKey(item))
         {
-            if (mItems[_item] < _amount)
+            if (mItems[item] < amount)
                 return false;
 
-            mItems[_item] -= _amount;
+            mItems[item] -= amount;
             return true;
         }
         return false;
+    }
+
+    public void UnlockItem(ItemData item)
+    {
+        if (mItems.ContainsKey(item))
+            return;
+
+        AddItem(item, 0);
+    }
+
+    public ItemData GetItem(string itemName)
+    {
+        foreach (var item in mGameItems)
+        {
+            if (item.mName == itemName)
+                return item.mItemData;
+        }
+
+        return null;
     }
 }

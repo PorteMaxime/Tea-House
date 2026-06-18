@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Order
@@ -19,10 +20,11 @@ public class Order
 
     public IngredientData mOrderData = ScriptableObject.CreateInstance<IngredientData>();
 
-    // Objectif de la commande
-    [SerializeField] public bool mIsLowerLimitWarmth = false;
-    [SerializeField] public bool mIsLowerLimitFreshness = false;
-    [SerializeField] public bool mIsLowerLimitRelaxation = false;
-    [SerializeField] public bool mIsLowerLimitEnergy = false;
-    [SerializeField] public bool mIsLowerLimitPrestige = false;
+    public void AddStats(List<StatValue> newStats)
+    {
+        for (int i = 0; i < mOrderData.mStats.Count; i++)
+        {
+            mOrderData.mStats[i].mValue += newStats[i].mValue;
+        }
+    }
 }

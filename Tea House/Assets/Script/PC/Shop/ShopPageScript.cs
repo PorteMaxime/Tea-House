@@ -150,18 +150,21 @@ public class ShopPageScript : MonoBehaviour
             creationItem = Instantiate(mShopItemPrefab, creationRow.transform, false);
 			mShopItems.Add(item, (creationItem, null, 0));
 
-			Text priceText = creationItem.transform.Find("TextPrice").GetComponent<Text>();
+			Transform priceText = creationItem.transform.Find("TextPrice");
 			if (priceText != null)
-				priceText.text = item.mPrice + " $";
+				priceText.GetComponent<Text>().text = item.mPrice + " $";
 
-            Button changeAmount = creationItem.transform.Find("CanvasAddToCart/ButtonAddToCart").GetComponent<Button>();
-            changeAmount.onClick.AddListener(() => ChangeCartItemAmount(item, 1));
+            Transform changeAmount = creationItem.transform.Find("CanvasAddToCart/ButtonAddToCart");
+            if (changeAmount != null)
+                changeAmount.GetComponent<Button>().onClick.AddListener(() => ChangeCartItemAmount(item, 1));
 
-            changeAmount = creationItem.transform.Find("CanvasAddRemove/ButtonRemove").GetComponent<Button>();
-            changeAmount.onClick.AddListener(() => ChangeCartItemAmount(item, -1));
+            changeAmount = creationItem.transform.Find("CanvasAddRemove/ButtonRemove");
+            if (changeAmount != null)
+                changeAmount.GetComponent<Button>().onClick.AddListener(() => ChangeCartItemAmount(item, -1));
 
-            changeAmount = creationItem.transform.Find("CanvasAddRemove/ButtonAdd").GetComponent<Button>();
-            changeAmount.onClick.AddListener(() => ChangeCartItemAmount(item, 1));
+            changeAmount = creationItem.transform.Find("CanvasAddRemove/ButtonAdd");
+            if (changeAmount != null)
+                changeAmount.GetComponent<Button>().onClick.AddListener(() => ChangeCartItemAmount(item, 1));
 
             itemNumber += 1;
 		}

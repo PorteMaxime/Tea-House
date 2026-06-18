@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static Daylight;
 
 public class Daylight : MonoBehaviour
 {
@@ -19,6 +18,9 @@ public class Daylight : MonoBehaviour
     [SerializeField] private TimeSpan mDayStartHour = new TimeSpan(8, 0, 0);
     [SerializeField] private float mDaySpeedMultiplier = 1; // 1 seconde irl = 1h en jeu
     public TimeSpan mCurrentTime;
+
+    [SerializeField] private MailSystem mMailSystem;
+    [SerializeField] private MailCreator mMailCreator;
 
     public enum Phase
     {
@@ -42,6 +44,8 @@ public class Daylight : MonoBehaviour
 
         foreach (float phaseLength in mPhases.Values)
             mDayLength += phaseLength * (1 / mDaySpeedMultiplier);
+
+        mMailCreator.CreateMail();
     }
 
     void Update()
@@ -59,7 +63,7 @@ public class Daylight : MonoBehaviour
 
             if (mCurrentPhase + 1 >= Phase.Count)
             {
-                // Fin de journee
+                // Journee suivante
                 transform.parent.rotation = Quaternion.Euler(new Vector3(0f, -45f, 0f));
                 mCurrentTime = mDayStartHour;
                 mCurrentDay += 1;
@@ -67,7 +71,10 @@ public class Daylight : MonoBehaviour
 
                 ChangePhase(mPhases.Keys.First());
 
-                MailManager.msInstance.StartDay();
+                mMailSystem.AddMailsToSend();
+
+                mMailCreator.CreateDailyMails();
+
             }
             else
             {

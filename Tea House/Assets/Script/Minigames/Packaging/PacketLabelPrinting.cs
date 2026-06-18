@@ -30,6 +30,8 @@ public class PacketLabelPrinting : IPackaging
     public GameObject mDebug = null;
     public IngredientData mDebugData = null;
 
+    private MailSystem mMailSystem;
+
     private void Init()
     {
         mPrinterViewPoint = mMain.transform.Find("Printer").transform.Find("ViewPoint").gameObject;
@@ -41,6 +43,8 @@ public class PacketLabelPrinting : IPackaging
 
         mLabelTextureGenerator = GameObject.Find("DynamicTextureGenerator").transform.Find("LabelTexture_Canva").gameObject;
         DynamicTextureManager.AddGenerator<LabelTextureGenerator>(DynamicTextureManager.DynamicTexture.Label, mLabelTextureGenerator);
+
+        mMailSystem = GameObject.FindGameObjectWithTag("ComputerCanvas").GetComponent<MailSystem>();
     }
 
     public void OnEnter()
@@ -57,7 +61,7 @@ public class PacketLabelPrinting : IPackaging
             }
         }
 
-        List<Mail> mails = MailManager.msInstance.GetMailsOfState(Order.State.Accepted);
+        List<Mail> mails = mMailSystem.GetMailsOfState(Order.State.Accepted);
         foreach (Mail mail in mails)
         {
             if (mOrders.ContainsKey(mail) == false)
