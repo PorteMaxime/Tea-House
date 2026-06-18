@@ -65,8 +65,9 @@ public class PacketOpening : IPackaging
         {
             mIsOpened = false;
             mMain.mCompleting.mIsOpened = false;
-            mLid.transform.position = mLidClosedPlace.transform.position;
             mDragAndDrop.StopDragging();
+            mLid.transform.position = mLidClosedPlace.transform.position;
+            mLid.transform.rotation = mLidClosedPlace.transform.rotation;
         }
         else if(mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
         {

@@ -45,23 +45,33 @@ public class PacketCompleting : IPackaging
             {
                 mMain.mFilling.mBowl = bowl.collider.gameObject;
                 mMain.mStateMachine.SwitchState(mMain.mFilling);
+                return;
             }
         }
         mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "PackageLid", out RaycastHit lid);
         if (lid.collider != null && (mMain.mOpening.mLid != null ? lid.collider.gameObject == mMain.mOpening.mLid : true))
-                mMain.mStateMachine.SwitchState(mMain.mOpening);
+        {
+            mMain.mStateMachine.SwitchState(mMain.mOpening);
+            return;
+        }
 
         if(mLabelPrinted == false)
         {
             mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Printer", out RaycastHit printer);
             if (printer.collider != null)
+            {
                 mMain.mStateMachine.SwitchState(mMain.mPrinting);
+                return;
+            }
         }
         else if(mLabelPrinted == true && mIsLabelled == false)
         {
             mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Label", out RaycastHit label);
             if (label.collider != null)
+            {
                 mMain.mStateMachine.SwitchState(mMain.mLabelling);
+                return;
+            }
         }
     }
 }

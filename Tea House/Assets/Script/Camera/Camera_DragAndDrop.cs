@@ -74,7 +74,7 @@ public class CameraDragAndDrop : ICameraControllerMod
         // }
         
         worldPos = worldPos - mDraggingOffset;
-        mTargetPos = new Vector3(mDraggedOriginX, worldPos.y, worldPos.z);
+        mTargetPos = worldPos;//new Vector3(mDraggedOriginX, worldPos.y, worldPos.z);
     }
 
     public void OnFixedUpdate()
@@ -109,9 +109,10 @@ public class CameraDragAndDrop : ICameraControllerMod
         if (mDraggingRB != null)
         {
             mDraggedRBWasKinematic = mDraggingRB.isKinematic;
+            mDraggingRB.interpolation = RigidbodyInterpolation.Interpolate;
             mDraggingRB.isKinematic = false;
             mDraggingRB.useGravity = false;
-            mDraggingRB.constraints = RigidbodyConstraints.FreezeRotation;
+            mDraggingRB.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionX;
         }
 
         mDragging = target;
@@ -126,10 +127,10 @@ public class CameraDragAndDrop : ICameraControllerMod
         Rigidbody rb = mDragging.GetComponent<Rigidbody>();
         if (rb != null) 
         {
-            //rb.isKinematic = true;
             rb.useGravity = true;
+            mDragging.transform.position = rb.position;
+            mDraggingRB.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionX;
         }
-
         mDragging = null;
         mDraggingOffset = Vector3.zero;
         mDraggedOriginX = 0f;

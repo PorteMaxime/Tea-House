@@ -42,6 +42,8 @@ public class PacketFilling : IPackaging
         Vector3 minBound = packageCollider.bounds.min;
         Vector3 maxBound = packageCollider.bounds.max;
 
+        mBowl.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+
         mRotationStartPos = new Vector3(0, maxBound.y, maxBound.z + mBowl.transform.position.z);
         mRotationEndPos = new Vector3(0, 0, minBound.z - mBowl.transform.position.z);
     }
