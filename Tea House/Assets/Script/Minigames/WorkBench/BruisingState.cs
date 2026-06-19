@@ -43,19 +43,25 @@ public class BruisingState : IWorkbench
     {
         if (isEmpty == false && mItemBruised == false)
         {
-            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "MortarPilon");
-
-            if (hitDraggables.Count > 0)
+            if (InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
             {
-                mWorkbench.mCameraController.StartDragging(mWorkbench.mMortarPilon);
-                mWorkbench.mMortarPilon.transform.rotation = Quaternion.identity;
+                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MortarPilon", out List<RaycastHit> hitDraggables);
+
+                if (hitDraggables.Count > 0)
+                {
+                    mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarPilon);
+                    mWorkbench.mMortarPilon.transform.rotation = Quaternion.identity;
+                }
             }
+            else if (InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame() == true && mWorkbench.mDragAndDrop.IsDragging() == true)
+                mWorkbench.mDragAndDrop.StopDragging();
+
             if (mWorkbench.mMortarPilon.transform.position.z <= mWorkbench.mMortarRightBorn.transform.position.z
                 && mWorkbench.mMortarPilon.transform.position.z >= mWorkbench.mMortarLeftBorn.transform.position.z)
             {
-                if(mWorkbench.mMortarPilon.transform.position.y >= mWorkbench.mMortarTopBorn.transform.position.y)
+                if (mWorkbench.mMortarPilon.transform.position.y >= mWorkbench.mMortarTopBorn.transform.position.y)
                 {
-                    if(bottomMortar > topMortar)
+                    if (bottomMortar > topMortar)
                     {
                         topMortar++;
                     }
@@ -77,7 +83,7 @@ public class BruisingState : IWorkbench
                 mWorkbench.DestroyCurrentIngredient();
                 mItemBruised = true;
 
-                mWorkbench.mCameraController.StopDragging();
+                mWorkbench.mDragAndDrop.StopDragging();
                 mWorkbench.mMortarPilon.transform.position = initMortarPos;
                 mWorkbench.mMortarPilon.transform.rotation = initMortarRot;
                 bottomMortar = 0;
@@ -92,11 +98,14 @@ public class BruisingState : IWorkbench
         }
         if (isEmpty == false && mItemBruised == true && canMoveBowl == true)
         {
-            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "MortarBowl");
-
-            if (hitDraggables.Count > 0)
+            if(InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
             {
-                mWorkbench.mCameraController.StartDragging(mWorkbench.mMortarBowl);
+                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MortarBowl", out List<RaycastHit> hitDraggables);
+
+                if (hitDraggables.Count > 0)
+                {
+                    mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarBowl);
+                }
             }
 
             if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.mMortarBowl) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
@@ -113,12 +122,13 @@ public class BruisingState : IWorkbench
 
     public void OnExit()
     {
-        mWorkbench.mCameraController.StopDragging();
+        mWorkbench.mDragAndDrop.StopDragging();
 
         mWorkbench.mMortarBowl.transform.rotation = Quaternion.Euler(0, 0, 180);
 
         mWorkbench.mMortarBowl.transform.position = initBowlPos;
         mWorkbench.mMortarBowl.transform.rotation = initBowlRot;
+        mWorkbench.mMortarBowl.GetComponent<Rigidbody>().isKinematic = true;
 
         isEmpty = true;
         mItemBruised = false;

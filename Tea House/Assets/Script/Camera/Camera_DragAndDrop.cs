@@ -46,41 +46,16 @@ public class CameraDragAndDrop : ICameraControllerMod
 
         Vector3 dir = (worldPos - mMain.transform.position).normalized;
         float dist = Vector3.Distance(mMain.transform.position, new Vector3(mDraggedOriginX, worldPos.y, worldPos.z));
-        worldPos = mMain.transform.position + dir * dist; 
-
-        // Camera_Raycast.Raycast(
-        //     new Ray(mMain.transform.position, dir),
-        //     mDragging.GetComponent<Collider>().bounds.extents.x,
-        //     dist, 
-        //     (LayerMask[])null, 
-        //     (string[])null, 
-        //     out List<RaycastHit> obstacles);
-
-        // int indices = 0;
-        // while(obstacles[indices].collider.GetComponent<MeshRenderer>() == null && indices != obstacles.Count - 1)
-        //     indices++;
-        // if(obstacles != null && obstacles.Count > 0 && obstacles[indices].collider.gameObject.tag != "Player" && obstacles[indices].collider.gameObject != mDragging && obstacles[indices].collider.GetComponent<MeshRenderer>() != null) 
-        // {
-        //     GameObject obstacle = obstacles[indices].collider.gameObject;
-
-        //     float obstacleDistance = Vector3.Distance(obstacles[indices].point, mMain.transform.position);
-        //     worldPos = mMain.transform.position + dir * obstacleDistance;
-
-        //     Vector3 normal = obstacles[indices].normal;
-        //     Debug.Log(obstacle.name + ": " + normal);
-        //     if(normal.x != 0f || normal.z != 0f) return;
-        //     Vector3 size = mDragging.GetComponent<Collider>().bounds.extents;
-        //     worldPos += new Vector3(normal.x * size.x, normal.y * size.y, normal.z * size.z);
-        // }
+        worldPos = mMain.transform.position + dir * dist;
         
         worldPos = worldPos - mDraggingOffset;
-        mTargetPos = worldPos;//new Vector3(mDraggedOriginX, worldPos.y, worldPos.z);
+        mTargetPos = worldPos;
     }
 
     public void OnFixedUpdate()
     {
         if(IsDragging() == false || mDraggingRB == null) return;
-        Debug.Log("Drag: " + mDragging.name);
+        Debug.Log(mDragging.name);
         Vector3 moveVector = mTargetPos - mDraggingRB.position;
         moveVector *= mMoveSpeed;
         mDraggingRB.linearVelocity = moveVector;
@@ -100,7 +75,7 @@ public class CameraDragAndDrop : ICameraControllerMod
     {
         if(target == null) return false;
         if(CanDrag(target) == false) return false;
-        Debug.Log("Start Dragging");
+
         mDraggedOriginX = target.transform.position.x;
         Vector3 toTarget = target.transform.position - mMain.transform.position;
         mDraggedOriginDistance = Vector3.Dot(toTarget, mMain.transform.forward);
@@ -123,7 +98,7 @@ public class CameraDragAndDrop : ICameraControllerMod
     public void StopDragging()
     {
         if (mDragging == null) return;
-        Debug.Log("Stop Dragging");
+
         Rigidbody rb = mDragging.GetComponent<Rigidbody>();
         if (rb != null) 
         {

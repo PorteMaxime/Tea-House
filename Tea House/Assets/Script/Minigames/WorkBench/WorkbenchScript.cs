@@ -73,7 +73,7 @@ public class WorkbenchScript : MonoBehaviour
                 Quaternion targetRotation = mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);
                 cameraLookUp = true;
                 //moveDownCam = false;
-                mCameraController.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
+                mCameraDepth.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
             }
             else if (Mouse.current.position.ReadValue().y <= Screen.height - downPan && cameraLookUp == true)
             {
@@ -81,7 +81,7 @@ public class WorkbenchScript : MonoBehaviour
 
                 cameraLookUp = false;
                 //moveDownCam = true;
-                mCameraController.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
+                mCameraDepth.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
             }
 
             stateMachine.Update();
