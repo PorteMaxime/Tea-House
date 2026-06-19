@@ -33,7 +33,5 @@ public class Mail
     public void UpdateExpiration(Daylight daylight)
     {
         mExpiration = (mSendDay + mDuration) * daylight.mDayLength + mSendTime;
-
-        mText += "\nExiration " + mExpiration;
     }
 }

@@ -16,9 +16,15 @@ MonoBehaviour:
   mPrefab: {fileID: 0}
   mIsUnlocked: 1
   mStats:
+  - mStat: 0
+    mValue: 0
   - mStat: 1
     mValue: 1
+  - mStat: 2
+    mValue: 0
   - mStat: 3
     mValue: 1
+  - mStat: 4
+    mValue: 0
   mPrice: 5
   mFragIngredient: {fileID: 0}

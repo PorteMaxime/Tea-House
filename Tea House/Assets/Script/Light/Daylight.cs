@@ -51,9 +51,9 @@ public class Daylight : MonoBehaviour
         float timeSpent = Time.deltaTime * mDaySpeedMultiplier;
 
         mPhaseTimeSpent += timeSpent;
-        mDayTimeSpent += timeSpent;
+        mDayTimeSpent += Time.deltaTime;
 
-        mCurrentTime += TimeSpan.FromSeconds(Time.deltaTime * 3600 * mDaySpeedMultiplier);
+        mCurrentTime += TimeSpan.FromSeconds(timeSpent * 3600);
 
         if (mPhaseTimeSpent >= mCurrentPhaseLength)
         {
@@ -95,6 +95,6 @@ public class Daylight : MonoBehaviour
 
     public float GetTotalTimeSpent()
     {
-        return mCurrentDay * mDayLength + mDayTimeSpent / mDayLength;
+        return mCurrentDay * mDayLength + mDayTimeSpent;
     }
 }

@@ -59,6 +59,8 @@ public class MailSystem : MonoBehaviour
             // Expiration des mails
             CheckExpired();
 
+            Debug.Log(mMails[Order.State.InBox].Count);
+
             yield return new WaitForSeconds(1);
         }
     }

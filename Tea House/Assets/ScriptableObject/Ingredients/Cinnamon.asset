@@ -18,6 +18,12 @@ MonoBehaviour:
   mStats:
   - mStat: 0
     mValue: 2
+  - mStat: 1
+    mValue: 0
+  - mStat: 2
+    mValue: 0
+  - mStat: 3
+    mValue: 0
   - mStat: 4
     mValue: 1
   mPrice: 3

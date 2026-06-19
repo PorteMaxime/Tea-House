@@ -160,105 +160,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7538923027421638332, guid: 21e9ed8ee02cf5c40b1370e772e412bb, type: 3}
   m_PrefabInstance: {fileID: 1729371942}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &341795902
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 341795906}
-  - component: {fileID: 341795905}
-  - component: {fileID: 341795904}
-  - component: {fileID: 341795903}
-  m_Layer: 0
-  m_Name: MailManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &341795903
+--- !u!114 &341795904 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3807418820913744295, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+  m_PrefabInstance: {fileID: 2877070593728398385}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341795902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31bf0f081b1b06b4da58e212307060ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MailCanvasScript
-  mMailPrefab: {fileID: 6793491618068010826, guid: 8eb53f24edbf19c4d817eaf82e5e1f2a, type: 3}
-  mMailsScrollView: {fileID: 2017603746}
-  mMailsScrollViewContent: {fileID: 2084211617}
-  mCanvasMailContent: {fileID: 754091607}
-  mMailImageProfile: {fileID: 98171718}
-  mMailTextSubject: {fileID: 2039782016}
-  mMailTextSender: {fileID: 606396372}
-  mTextMailContent: {fileID: 948471595}
-  mOrderPrefab: {fileID: 5690282316218770188, guid: 781dc0a8a802948448ee33cc5d782936, type: 3}
-  mOrdersScrollView: {fileID: 614833718}
-  mOrdersScrollViewContent: {fileID: 533884685}
-  mCanvasOrderContent: {fileID: 1575218753}
-  mFilterPrefab: {fileID: 3819546178474530754, guid: 22ca44194141b6e44a260223928d5edd, type: 3}
-  mCanvasFilters: {fileID: 926749290}
-  mCanvasFiltersContent: {fileID: 1112566896}
-  mCanvasFiltersPopup: {fileID: 556847819}
-  mAvailableFilters: 02000000030000000400000005000000
---- !u!114 &341795904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341795902}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9beb461b0779d04b84f744dfeae179f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MailCreator
-  mDaylight: {fileID: 1435202341}
-  mImages:
-  - {fileID: 21300000, guid: fc3375a342626b84b854fbc2b83f43b3, type: 3}
-  - {fileID: 21300000, guid: f76adcedca9e2584db14b9d22a418989, type: 3}
-  - {fileID: 21300000, guid: 6168bc0706358cf41896d7a20d8f052d, type: 3}
-  mFirstNames:
-  - "pr\xE9nom 1"
-  - "pr\xE9nom 2"
-  mLastNames:
-  - 'nom 1 '
-  - nom 2
---- !u!114 &341795905
+--- !u!114 &341795905 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7744142355494125791, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+  m_PrefabInstance: {fileID: 2877070593728398385}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341795902}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2998e815737864d469637b2896db7726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MailSystem
-  mDaylight: {fileID: 1435202341}
---- !u!4 &341795906
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341795902}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.72376, y: -0, z: -9.76725}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &533884685 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3485140642822715821, guid: 0a951a409213101409900dbdcc41c459, type: 3}
@@ -323,7 +246,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   mStartingItems:
   - {fileID: 11400000, guid: 58dc0b9db1e5fad468f33007175daf43, type: 2}
+  - {fileID: 11400000, guid: 074e77102efb47c48b77b8f285982a83, type: 2}
   - {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
+  - {fileID: 11400000, guid: ee5e025f750d0dd4a88b7dfbf41c9d6a, type: 2}
+  - {fileID: 11400000, guid: a8d716ca5b5e12e4383db49619f670a7, type: 2}
+  - {fileID: 11400000, guid: 9162036cf6b6b964983c3b904242e2f8, type: 2}
+  - {fileID: 11400000, guid: f5843b2e66b4268478d320a698b8a517, type: 2}
+  - {fileID: 11400000, guid: 852fd030af483c94fae7fc8cac092837, type: 2}
+  - {fileID: 11400000, guid: dbdd9d1154fe6984cb0adb0df4882fc6, type: 2}
+  - {fileID: 11400000, guid: 644a5961a1860504cbb375b8b0a3c8e1, type: 2}
   mStartingItemsAmount: 5
   mMoneyAmount: 20
   isTorrefactionUnlocked: 1
@@ -666,6 +597,123 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b87e1584064131049bd54b9ed750babb, type: 3}
+--- !u!1001 &2877070593728398385
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mCanvasFilters
+      value: 
+      objectReference: {fileID: 926749290}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mMailTextSender
+      value: 
+      objectReference: {fileID: 606396372}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mMailTextSubject
+      value: 
+      objectReference: {fileID: 2039782016}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mMailsScrollView
+      value: 
+      objectReference: {fileID: 2017603746}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mTextMailContent
+      value: 
+      objectReference: {fileID: 948471595}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mMailImageProfile
+      value: 
+      objectReference: {fileID: 98171718}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mOrdersScrollView
+      value: 
+      objectReference: {fileID: 614833718}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mCanvasMailContent
+      value: 
+      objectReference: {fileID: 754091607}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mCanvasFiltersPopup
+      value: 
+      objectReference: {fileID: 556847819}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mCanvasOrderContent
+      value: 
+      objectReference: {fileID: 1575218753}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mCanvasFiltersContent
+      value: 
+      objectReference: {fileID: 1112566896}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mMailsScrollViewContent
+      value: 
+      objectReference: {fileID: 2084211617}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mOrdersScrollViewContent
+      value: 
+      objectReference: {fileID: 533884685}
+    - target: {fileID: 1833484119412835154, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_Name
+      value: MailManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807418820913744295, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mDaylight
+      value: 
+      objectReference: {fileID: 1435202341}
+    - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.72376
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.76725
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744142355494125791, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mDaylight
+      value: 
+      objectReference: {fileID: 1435202341}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
 --- !u!1001 &4693577323799374540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -778,18 +826,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2274463650786246165, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2274463650786246165, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
-      propertyPath: m_Intensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2274463650786246165, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
-      propertyPath: m_Lightmapping
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
       propertyPath: mMailSystem
       value: 
@@ -800,19 +836,7 @@ PrefabInstance:
       objectReference: {fileID: 341795904}
     - target: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
       propertyPath: mDaySpeedMultiplier
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4902280044909388087, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4902280044909388087, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.9128342
-      objectReference: {fileID: 0}
-    - target: {fileID: 4902280044909388087, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.4083305
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4902280044909388087, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1940,4 +1964,4 @@ SceneRoots:
   - {fileID: 8848599013595631736}
   - {fileID: 6061047301083392438}
   - {fileID: 7347345831246974291}
-  - {fileID: 341795906}
+  - {fileID: 2877070593728398385}

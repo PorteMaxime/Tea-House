@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1833484119412835154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7642152416298563229}
+  - component: {fileID: 7744142355494125791}
+  - component: {fileID: 3807418820913744295}
+  - component: {fileID: 1524140342625153491}
+  m_Layer: 0
+  m_Name: MailManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7642152416298563229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833484119412835154}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.72376, y: -0, z: -9.76725}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7744142355494125791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833484119412835154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2998e815737864d469637b2896db7726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MailSystem
+  mDaylight: {fileID: 0}
+--- !u!114 &3807418820913744295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833484119412835154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9beb461b0779d04b84f744dfeae179f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MailCreator
+  mDaylight: {fileID: 0}
+  mImages:
+  - {fileID: 21300000, guid: fc3375a342626b84b854fbc2b83f43b3, type: 3}
+  - {fileID: 21300000, guid: f76adcedca9e2584db14b9d22a418989, type: 3}
+  - {fileID: 21300000, guid: 6168bc0706358cf41896d7a20d8f052d, type: 3}
+  mFirstNames:
+  - "pr\xE9nom 1"
+  - "pr\xE9nom 2"
+  mLastNames:
+  - 'nom 1 '
+  - nom 2
+--- !u!114 &1524140342625153491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833484119412835154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31bf0f081b1b06b4da58e212307060ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MailCanvasScript
+  mMailPrefab: {fileID: 6793491618068010826, guid: 8eb53f24edbf19c4d817eaf82e5e1f2a, type: 3}
+  mMailsScrollView: {fileID: 0}
+  mMailsScrollViewContent: {fileID: 0}
+  mCanvasMailContent: {fileID: 0}
+  mMailImageProfile: {fileID: 0}
+  mMailTextSubject: {fileID: 0}
+  mMailTextSender: {fileID: 0}
+  mTextMailContent: {fileID: 0}
+  mOrderPrefab: {fileID: 5690282316218770188, guid: 781dc0a8a802948448ee33cc5d782936, type: 3}
+  mOrdersScrollView: {fileID: 0}
+  mOrdersScrollViewContent: {fileID: 0}
+  mCanvasOrderContent: {fileID: 0}
+  mFilterPrefab: {fileID: 3819546178474530754, guid: 22ca44194141b6e44a260223928d5edd, type: 3}
+  mCanvasFilters: {fileID: 0}
+  mCanvasFiltersContent: {fileID: 0}
+  mCanvasFiltersPopup: {fileID: 0}
+  mAvailableFilters: 02000000030000000400000005000000

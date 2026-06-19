@@ -17,14 +17,14 @@ MonoBehaviour:
   mIsUnlocked: 1
   mStats:
   - mStat: 0
-    mValue: 2
+    mValue: 0
   - mStat: 1
-    mValue: 2
+    mValue: 0
   - mStat: 2
     mValue: 2
   - mStat: 3
-    mValue: 2
+    mValue: 0
   - mStat: 4
-    mValue: 2
-  mPrice: 9
+    mValue: 0
+  mPrice: 8
   mFragIngredient: {fileID: 0}
