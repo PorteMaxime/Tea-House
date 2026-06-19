@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class Mail
 {
     public int id;
@@ -13,7 +12,7 @@ public class Mail
     public string mText;
     public int mSendDay;
     public float mSendTime;
-    public int mDuration;
+    public int mDuration = 0;
     public float mExpiration;
 
     public Mail()
