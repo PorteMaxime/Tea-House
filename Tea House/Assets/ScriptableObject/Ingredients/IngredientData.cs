@@ -9,10 +9,15 @@ public class IngredientData : ItemData
     public List<StatValue> GetTorrefiedStats()
     {
         List<StatValue> torrefiedStats = new List<StatValue>();
+        StatValue statValue;
 
         for (int i = 0; i < mStats.Count; i++)
         {
-            torrefiedStats.Add(mStats[i]);
+            statValue = new StatValue();
+            statValue.mStat = mStats[i].mStat;
+            statValue.mValue = mStats[i].mValue;
+
+            torrefiedStats.Add(statValue);
 
             if (mStats[i].mValue > 0 && mStats[i].mStat != ItemData.Stat.Prestige)
             {
