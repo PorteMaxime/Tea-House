@@ -22,6 +22,8 @@ public class PacketOpening : IPackaging
     private GameObject mLidClosedPlace = null;
     private WorkingPoint mLidClosedPlaceCollider = null;
 
+    private Animator mPackageAnimator = null;
+
     public bool mIsOpened = false;
 
     private CameraDragAndDrop mDragAndDrop = null;
@@ -35,18 +37,28 @@ public class PacketOpening : IPackaging
 
     public void OnEnter()
     {
-        mLid = mMain.mOutputGO.transform.Find("Lid").gameObject;
-        mLidRB = mLid.GetComponent<Rigidbody>();
-
-        mLidClosedPlace = mMain.mOutputGO.transform.Find("LidClosePlace").gameObject;
-        mLidClosedPlaceCollider = mLidClosedPlace.GetComponent<WorkingPoint>();
-
-        if(mDragAndDrop.StartDragging(mLid) == false)
+        Transform lidTransform = mMain.mOutputGO.transform.Find("Lid");
+        if(lidTransform != null)
         {
-            mMain.mStateMachine.SwitchState(mMain.mCompleting);
-            Debug.Log("can't drag lid");
-            return;
+            mLid = lidTransform.gameObject;
+            mLidRB = mLid.GetComponent<Rigidbody>();
+
+            mLidClosedPlace = mMain.mOutputGO.transform.Find("LidClosePlace").gameObject;
+            mLidClosedPlaceCollider = mLidClosedPlace.GetComponent<WorkingPoint>();
+
+            if(mDragAndDrop.StartDragging(mLid) == false)
+            {
+                mMain.mStateMachine.SwitchState(mMain.mCompleting);
+                Debug.Log("can't drag lid");
+                return;
+            }
         }
+        else
+        {
+            mPackageAnimator = mMain.mOutputGO.GetComponent<Animator>();
+        }
+
+        
         
         if(mIsOpened == false)
         {
@@ -70,13 +82,12 @@ public class PacketOpening : IPackaging
             mLid.transform.rotation = mLidClosedPlace.transform.rotation;
         }
         else if(mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
-        {
             mDragAndDrop.StopDragging();
-        }
 
         if(mDragAndDrop.IsDragging() == false)
         {
-            mLidRB.isKinematic = mIsOpened != true;
+            if(mLidRB != null)
+                mLidRB.isKinematic = mIsOpened != true;
             mMain.mStateMachine.SwitchState(mMain.mCompleting);
         }
     }
