@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class InteractiveAreaScript : MonoBehaviour
@@ -6,8 +7,10 @@ public class InteractiveAreaScript : MonoBehaviour
     [SerializeField] private bool canIntercat = false;
     [SerializeField] public bool isUsing = false;
 
-    private GameObject mCamera;
-    private CameraController mCameraController;
+    private CameraController mCameraController = null;
+    private Camera_InteractionHighlight mCameraInteractionMod = null;
+    private CameraDragAndDrop mDragAndDrop = null;
+    private Camera_DepthView mCameraDepthMod = null;
     private void Awake()
     {
         inputInteract = InputManager.Get().mPlayerInteract;
@@ -22,8 +25,11 @@ public class InteractiveAreaScript : MonoBehaviour
     }
     void Start()
     {
-        mCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        mCameraController = mCamera.GetComponent<CameraController>();
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        mCameraController = camera.GetComponent<CameraController>();
+        mCameraInteractionMod = mCameraController.GetControllerMod<Camera_InteractionHighlight>();
+        mCameraDepthMod = mCameraController.GetControllerMod<Camera_DepthView>();
+        mDragAndDrop = mCameraController.GetControllerMod<CameraDragAndDrop>();
     }
     void Update()
     {
@@ -31,38 +37,27 @@ public class InteractiveAreaScript : MonoBehaviour
         {
             if (inputInteract.Player.Open.triggered)
             {
-                isUsing = !isUsing && mCameraController.CanInteractWith(gameObject);
+                isUsing = !isUsing && mCameraInteractionMod.CanInteractWith(this);
                 if (isUsing)
-                {
                     Enter();
-                }
-                else if (mCameraController.GetState() == CameraController.CameraStates.zoom)
-                {
+                else if (mCameraController.IsState(CameraController.CameraStates.Zoom) == true)
                     Quit();
-                }
             }
         }
     }
 
     public void Enter()
     {
-        mCameraController.GoTo(transform.Find("CameraMovePoint").transform);
-        mCameraController.SetState(CameraController.CameraStates.zoom);
-        mCameraController.mInteractionPopup.SetActive(false);
-
-        mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = false;
-        mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = false;
+        mCameraDepthMod.GoTo(transform.Find("CameraMovePoint").transform);
+        mCameraController.SetState(CameraController.CameraStates.Zoom);
         isUsing = true;
     }
 
     public void Quit()
     {
-        mCameraController.Back();
-        mCameraController.SetState(CameraController.CameraStates.orbitale);
-        mCameraController.StopDragging();
-
-        mCameraController.mPlayer.GetComponent<CharacterInput>().mCanMove = true;
-        mCameraController.mPlayer.GetComponent<MeshRenderer>().enabled = true;
+        mDragAndDrop.StopDragging();
+        mCameraDepthMod.Back();
+        mCameraController.SetState(CameraController.CameraStates.Orbital);
         isUsing = false;
     }
 
@@ -70,14 +65,17 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            mCameraController.AddInteractionTarget(gameObject);
+            mCameraInteractionMod.AddInteractionTarget(this);
             canIntercat = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        canIntercat = false;
-        isUsing = false;
-        mCameraController.RemoveInteractionTarget(gameObject);
+        if(other.gameObject.tag == "Player")
+        {
+            canIntercat = false;
+            isUsing = false;
+            mCameraInteractionMod.RemoveInteractionTarget(this);
+        }
     }
 }

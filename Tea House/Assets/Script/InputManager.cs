@@ -10,6 +10,6 @@ public class InputManager
     }
     #endregion
 
-    public Input_PlayerInteract mPlayerInteract = new();
-    public Input_PlayerMovement mPlayerMovement = new();
+    public Input_PlayerInteract mPlayerInteract = new Input_PlayerInteract();
+    public Input_PlayerMovement mPlayerMovement = new Input_PlayerMovement();
 }
