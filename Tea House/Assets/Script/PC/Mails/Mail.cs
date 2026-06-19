@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class Mail
 {
+    public int id;
+
+    public static int mailID = 0;
+
     public Order mOrder;
     public Sprite mPicture;
     public string mName;
@@ -11,6 +15,11 @@ public class Mail
     public float mSendTime;
     public int mDuration;
     public float mExpiration;
+
+    public Mail()
+    {
+        id = mailID;
+    }
 
     public void InitData(Order _order, Sprite _image, string _name, int _sendDay, int _duration)
     {
@@ -24,5 +33,7 @@ public class Mail
     public void UpdateExpiration(Daylight daylight)
     {
         mExpiration = (mSendDay + mDuration) * daylight.mDayLength + mSendTime;
+
+        mText += "\nExiration " + mExpiration;
     }
 }

@@ -9,18 +9,6 @@ public class StatValue
     public int mValue = 0;
 }
 
-public class OppositeValues
-{
-    public OppositeValues(ItemData.Stat _first, ItemData.Stat _second)
-    {
-        first = _first;
-        second = _second;
-    }
-
-    public ItemData.Stat first;
-    public ItemData.Stat second;
-}
-
 public class ItemData : ScriptableObject
 {
     public string mName;
@@ -40,12 +28,6 @@ public class ItemData : ScriptableObject
     }
 
     public List<StatValue> mStats = new List<StatValue>();
-
-    //static public List<OppositeValues> mOppositeValue = new List<OppositeValues>
-    //{
-    //    new OppositeValues(Stat.Warmth, Stat.Freshness),
-    //    new OppositeValues(Stat.Relaxation, Stat.Energy),
-    //};
 
     public static Dictionary<Stat, Stat> opposites = new Dictionary<Stat, Stat>
     {

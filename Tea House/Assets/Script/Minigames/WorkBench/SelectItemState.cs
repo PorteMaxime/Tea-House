@@ -56,7 +56,7 @@ public class SelectItemState : IWorkbench
 
                 if (mWorkbench.mMortarBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
                 {
-                    Inventory.msInstance.RemoveItem(mWorkbench.mCurrentItem, 1);
+                    Inventory.msInstance.ChangeItemAmount(mWorkbench.mCurrentItem, -1);
                     mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
                 }
             }
@@ -64,7 +64,6 @@ public class SelectItemState : IWorkbench
     }
     public void OnExit()
     {
-        mWorkbench.inventory.ChangeItemAmount(mWorkbench.mCurrentItem, -1);
         mWorkbench.mCameraController.StopDragging();
     }
 

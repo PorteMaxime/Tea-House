@@ -36,6 +36,8 @@ public class MailCreator : MonoBehaviour
     {
         Mail mail = new Mail();
 
+        Mail.mailID += 1;
+
         CreateMailData(mail);
 
         CreateOrder(mail);
@@ -60,8 +62,7 @@ public class MailCreator : MonoBehaviour
             return;
         }
 
-        mail.mText += "\ncréation jour " + mail.mSendDay +
-            "\ndurée" + mail.mDuration;
+        mail.mText += "\ncréation jour " + mail.mSendDay + " | durée " + mail.mDuration + " | expiration jour " + (mail.mSendDay + mail.mDuration);
 
         if (mail.mOrder.mOrderData.mStats.Count == 0)
         {

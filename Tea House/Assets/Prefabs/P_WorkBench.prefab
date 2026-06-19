@@ -1164,7 +1164,6 @@ GameObject:
   - component: {fileID: 4431775530191774434}
   - component: {fileID: 2716895647784472390}
   - component: {fileID: 5937604786178931396}
-  - component: {fileID: 2862056425392713513}
   - component: {fileID: 220720647943746098}
   m_Layer: 8
   m_Name: MortarPilon
@@ -1245,28 +1244,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2862056425392713513
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4270792013188916868}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3208565532853437848, guid: 9ee7d76945440ba4c896680d2d56a112, type: 3}
 --- !u!65 &220720647943746098
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2365,6 +2342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorkbenchScript
   mCameraController: {fileID: 0}
   mPackaging: {fileID: 0}
+  mMixtureBowlPackagingPos: {fileID: 0}
   mInteractiveArea: {fileID: 0}
   mCameraPosPackaging: {fileID: 0}
   mMortarBowl: {fileID: 6109382726890127359}

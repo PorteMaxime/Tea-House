@@ -92,4 +92,9 @@ public class Daylight : MonoBehaviour
     {
         return mCurrentTime.ToString(@"hh\:mm");
     }
+
+    public float GetTotalTimeSpent()
+    {
+        return mCurrentDay * mDayLength + mDayTimeSpent / mDayLength;
+    }
 }

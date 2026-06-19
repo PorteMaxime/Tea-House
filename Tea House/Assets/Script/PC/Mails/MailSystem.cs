@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class MailSystem : MonoBehaviour
 {
@@ -41,9 +42,9 @@ public class MailSystem : MonoBehaviour
         }
 
         // Tri des mails en fonction de leur heure d'envoi
-        mMails[Order.State.NotSent].OrderBy(mail => mail.mSendTime);
+        mMails[Order.State.NotSent] = mMails[Order.State.NotSent].OrderBy(mail => mail.mSendTime).ToList();
 
-        //mMailCreator.mCalendar[mDaylight.mCurrentDay % 7].Clear();
+        mMailCreator.mCalendar[mDaylight.mCurrentDay % 7].Clear();
     }
 
     #region Coroutine
@@ -77,14 +78,15 @@ public class MailSystem : MonoBehaviour
             else
                 break;
         }
-        mMails[Order.State.InBox].OrderBy(mail => mail.mExpiration);
+
+        mMails[Order.State.InBox] = mMails[Order.State.InBox].OrderBy(mail => mail.mExpiration).ToList();
     }
 
     private void CheckExpired()
     {
         Mail firstMail;
 
-        float totalTimeSpent = mDaylight.mCurrentDay * mDaylight.mDayLength + mDaylight.mDayTimeSpent;
+        float totalTimeSpent = mDaylight.GetTotalTimeSpent();
 
         foreach (Order.State state in mExpiringMailsStates)
         {

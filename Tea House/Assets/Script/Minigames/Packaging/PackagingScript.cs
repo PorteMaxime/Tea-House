@@ -22,6 +22,9 @@ public class PackagingScript : MonoBehaviour
 
     public PackageScript mOutput = null;
     public GameObject mOutputGO = null;
+
+    [SerializeField] public MailSystem mMailSystem = null;
+
     void Start()
     {
         mCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
