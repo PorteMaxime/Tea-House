@@ -47,34 +47,32 @@ public class PacketOpening : IPackaging
             mLidClosedPlaceCollider = mLidClosedPlace.GetComponent<WorkingPoint>();
 
             if(mDragAndDrop.StartDragging(mLid) == false)
-            {
-                mMain.mStateMachine.SwitchState(mMain.mCompleting);
+            {                
                 Debug.Log("can't drag lid");
+                mMain.mStateMachine.SwitchState(mMain.mCompleting);
                 return;
             }
+            if (mIsOpened == false)
+                mIsOpened = true;
         }
         else
         {
             mPackageAnimator = mMain.mOutputGO.GetComponent<Animator>();
             AnimatorStateInfo animatorInfo =  mPackageAnimator.GetCurrentAnimatorStateInfo(0);
-            if(animatorInfo.IsName("OpenBag") == false && (mPackageAnimator.IsInTransition(0) == false || (animatorInfo.normalizedTime < 1f) == false))
+            if(mPackageAnimator.IsInTransition(0) == false || (animatorInfo.normalizedTime < 1f) == false)
             {
-                // mPackageAnimator.SetFloat("AnimSpeed", mIsOpened == true ? -1f : 1f);
-                // mPackageAnimator.SetTrigger("PlayAnim");
-                //mPackageAnimator.Play("OpenBag", 0, mIsOpened == true ? 1f : 0f);
-                mPackageAnimator.SetFloat("AnimSpeed", mIsOpened ? -1f : 1f);
+                mPackageAnimator.SetFloat("AnimSpeed", mIsOpened == true ? -1f : 1f);
             
                 float startFrame = mIsOpened ? 1f : 0f;
                 mPackageAnimator.Play("OpenBag", 0, startFrame);
+
+                mIsOpened = mIsOpened == true ? false : true;
+                Debug.Log(mIsOpened);
             }
             mMain.mStateMachine.SwitchState(mMain.mCompleting);
         }
-        
-        if(mIsOpened == false)
-        {
-            mIsOpened = true;
-            mMain.mCompleting.mIsOpened = true;
-        }
+
+        mMain.mCompleting.mIsOpened = mIsOpened;
     }
     public void OnExit()
     {
@@ -83,27 +81,16 @@ public class PacketOpening : IPackaging
 
     public void OnUpdate()
     {        
-        if(mLid != null)
+        if(mIsOpened == true && mLidClosedPlaceCollider.IsColliding(mLid) && mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
         {
-            if(mIsOpened == true && mLidClosedPlaceCollider.IsColliding(mLid) && mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
-            {
-                mIsOpened = false;
-                mMain.mCompleting.mIsOpened = false;
-                mDragAndDrop.StopDragging();
-                mLid.transform.position = mLidClosedPlace.transform.position;
-                mLid.transform.rotation = mLidClosedPlace.transform.rotation;
-            }
-            else if(mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
-                mDragAndDrop.StopDragging();
+            mIsOpened = false;
+            mMain.mCompleting.mIsOpened = false;
+            mDragAndDrop.StopDragging();
+            mLid.transform.position = mLidClosedPlace.transform.position;
+            mLid.transform.rotation = mLidClosedPlace.transform.rotation;
         }
-        else
-        {
-            AnimatorStateInfo animatorInfo =  mPackageAnimator.GetCurrentAnimatorStateInfo(0);
-            if(animatorInfo.IsName("OpenBag") == false && (mPackageAnimator.IsInTransition(0) == false || (animatorInfo.normalizedTime < 1f) == false))
-            {
-                
-            }
-        }
+        else if(mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
+            mDragAndDrop.StopDragging();
         
         if(mDragAndDrop.IsDragging() == false)
         {

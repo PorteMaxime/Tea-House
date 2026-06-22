@@ -7,6 +7,7 @@ public class WorkingPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (mCollider.Contains(other.gameObject)) return;
         mCollider.Add(other.gameObject);
     }
     private void OnTriggerExit(Collider other)

@@ -51,6 +51,9 @@ public class PacketChoosingState : IPackaging
     {
         if (mChoosedPackage != null)
         {
+            if(mMain.mOutputGO != null)
+                GameObject.Destroy(mMain.mOutputGO);
+
             GameObject package = mMain.Instantiate(mChoosedPackage.transform.parent.gameObject, mWorkingPoint.position, Quaternion.identity);
 
             //mMain.ShareRender(packages[0], package);
@@ -62,9 +65,11 @@ public class PacketChoosingState : IPackaging
             if(lid != null)
             {    
                 GameObject packageLid = lid.gameObject;
-                if(packageLid != null && packageLid.GetComponent<Rigidbody>() != null)
+                if(packageLid != null)
                 {
-                    Rigidbody rb = packageLid.AddComponent<Rigidbody>();
+                    Rigidbody rb = packageLid.GetComponent<Rigidbody>();
+                    if(rb == null) 
+                        rb = packageLid.AddComponent<Rigidbody>();
                     rb.useGravity = true;
                     rb.isKinematic = true;
                 }
