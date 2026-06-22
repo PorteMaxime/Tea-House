@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &55171279
 RectTransform:
   m_ObjectHideFlags: 0
@@ -356,6 +356,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a4a6335163d949e4399f3f1c49de3bd3, type: 3}
       propertyPath: m_Name
       value: Monoi
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a4a6335163d949e4399f3f1c49de3bd3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a4a6335163d949e4399f3f1c49de3bd3, type: 3}
       propertyPath: m_TagString
@@ -1677,6 +1681,14 @@ PrefabInstance:
       propertyPath: ingredient
       value: 
       objectReference: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
+    - target: {fileID: 1685893308215132147, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.081
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685893308215132147, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.421
+      objectReference: {fileID: 0}
     - target: {fileID: 1742616916992023064, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
       propertyPath: ingredient
       value: 
