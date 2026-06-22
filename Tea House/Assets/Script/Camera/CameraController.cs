@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
     }
 
     private CharacterInput mPlayerInputComponent = null;
-    private MeshRenderer mPlayerRenderComponent = null;
+    private SkinnedMeshRenderer mPlayerSkinnedRenderComponent = null;
 
     public Camera mCamera = null;
 
@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
     {
         GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
         mPlayerInputComponent = playerGO.GetComponent<CharacterInput>();
-        mPlayerRenderComponent = playerGO.GetComponent<MeshRenderer>();
+        mPlayerSkinnedRenderComponent = playerGO.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
         mCamera = GetComponent<Camera>();
 
         mCameraControllerMods.Add(CameraControllerMod.InteractiveHightlight, new Camera_InteractionHighlight(this));
@@ -98,11 +98,11 @@ public class CameraController : MonoBehaviour
         {
         case CameraStates.Orbital:
             mPlayerInputComponent.mCanMove = true;
-            mPlayerRenderComponent.enabled = true;
+                mPlayerSkinnedRenderComponent.enabled = true;
             break;
         case CameraStates.Zoom:
             mPlayerInputComponent.mCanMove = false;
-            mPlayerRenderComponent.enabled = false;
+                mPlayerSkinnedRenderComponent.enabled = false;
             break;
         }
     }
