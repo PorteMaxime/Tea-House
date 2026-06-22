@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CharacterInput : MonoBehaviour
@@ -8,7 +9,10 @@ public class CharacterInput : MonoBehaviour
 
     [SerializeField] private GameObject mCameraOrigin;
     [SerializeField] private float mSpeed = 15f;
+    private float rotationSpeed = 360f;
     public bool mCanMove = true;
+
+    public Animator playerAnimator;
 
     void Awake() => mInput = new Input_PlayerMovement();
     void OnEnable() => mInput.Enable();
@@ -36,12 +40,22 @@ public class CharacterInput : MonoBehaviour
 
     void MovePlayer()
     {
-        if (mInput.Character.Move.IsPressed() && mCanMove)
+        bool isMoving = mInput.Character.Move.IsPressed() && mCanMove;
+
+        playerAnimator.SetBool("IsWalking", isMoving);
+
+        if (isMoving)
         {
+            playerAnimator.SetTrigger("Walk");
+
             Vector2 dir2 = mInput.Character.Move.ReadValue<Vector2>();
             Vector3 camDir = mCameraOrigin.transform.forward;
 
             Vector3 moveDirection = (mCameraOrigin.transform.forward * dir2.y + mCameraOrigin.transform.right * dir2.x).normalized;
+
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
             mRigidbody.linearVelocity = moveDirection * mSpeed;
         }
