@@ -6,16 +6,6 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    //#region Singleton
-    //private static CameraController mInstance = null;
-    //public static CameraController Get()
-    //{
-    //    if(mInstance == null)
-    //        mInstance = new CameraController();
-    //    return mInstance;
-    //}
-    //#endregion
-
     private Input_PlayerMovement mInputPlayerMovement;
     private Input_PlayerInteract mInputPlayerInteract;
     private Camera mCamera;
@@ -213,19 +203,6 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
-        if (mDepths.Count > 0)
-        {
-            //if (IsMoving(0.00001f) == false)
-            //    transform.position = mDepths[mDepths.Count - 1].position;
-            //else
-            //    transform.position = Vector3.Slerp(transform.position, mDepths[mDepths.Count - 1].position, mMoveSpeed * Time.deltaTime);
-
-            //if (IsRotating(0.00001f) == false)
-            //    transform.rotation = mDepths[mDepths.Count - 1].rotation;
-            //else
-            //    transform.rotation = Quaternion.Slerp(transform.rotation, mDepths[mDepths.Count - 1].rotation, mRotationSpeed * Time.deltaTime);
-        }
-
         if (mState == CameraStates.zoom) ZoomedUpdate();
         else if (mState == CameraStates.orbitale) OrbitalUpdate();
     }

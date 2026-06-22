@@ -1,0 +1,548 @@
+fileFormatVersion: 2
+guid: a4a6335163d949e4399f3f1c49de3bd3
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Monoil_rig|Monoil_rig|Monoi_Door
+      takeName: Monoil_rig|Monoil_rig|Monoi_Door
+      internalID: -7463340596044247302
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Monoil_rig|Monoil_rig|Monoi_Sitting_Idle
+      takeName: Monoil_rig|Monoil_rig|Monoi_Sitting_Idle
+      internalID: -1275335481982293600
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Monoil_rig|Monoil_rig|Monoi_Walk
+      takeName: Monoil_rig|Monoil_rig|Monoi_Walk
+      internalID: 1273516412682687836
+      firstFrame: 0
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Monoil_rig|Monoil_rig|Monoil_Idle
+      takeName: Monoil_rig|Monoil_rig|Monoil_Idle
+      internalID: 2015949418788089729
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Monoil_rig|Monoil_rig|Monoil_Idle_Extra
+      takeName: Monoil_rig|Monoil_rig|Monoil_Idle_Extra
+      internalID: -74330109531255180
+      firstFrame: 0
+      lastFrame: 129
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Monoil_rig|Monoil_rig|Monoil_Sit
+      takeName: Monoil_rig|Monoil_rig|Monoil_Sit
+      internalID: -4367952421959347756
+      firstFrame: 0
+      lastFrame: 54
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Monoil_rig|Monoil_rig|Monoil_Sitting_Idle_Extra
+      takeName: Monoil_rig|Monoil_rig|Monoil_Sitting_Idle_Extra
+      internalID: -3541022803198972245
+      firstFrame: 0
+      lastFrame: 109
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Monoi_Anim (1)(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Monoil_low
+      parentName: Monoi_Anim (1)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 99.999985, y: 99.999985, z: 99.999985}
+    - name: Monoil_rig
+      parentName: Monoi_Anim (1)(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071069, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 44.6015, y: 44.6015, z: 44.6015}
+    - name: root
+      parentName: Monoil_rig
+      position: {x: -0, y: 8.093631e-18, z: 0.0064138966}
+      rotation: {x: 0.70710677, y: -0.00000008429367, z: -0.00000008429366, w: 0.7071068}
+      scale: {x: 1, y: 0.9999999, z: 0.9999999}
+    - name: pelvis
+      parentName: root
+      position: {x: 2.0399012e-16, y: 0.0023044322, z: 9.313227e-10}
+      rotation: {x: 0.1499506, y: 1.4210855e-14, z: -0.000000035750976, w: 0.98869354}
+      scale: {x: 1, y: 0.9999997, z: 0.9999998}
+    - name: stomach
+      parentName: pelvis
+      position: {x: 1.597831e-16, y: 0.0055418448, z: 1.4901161e-10}
+      rotation: {x: -0.25674117, y: -5.1835967e-14, z: 0.00000006121185, w: 0.96648026}
+      scale: {x: 1, y: 1.0000004, z: 1.0000001}
+    - name: chest
+      parentName: stomach
+      position: {x: -5.2184424e-16, y: 0.0057819122, z: -2.2351741e-10}
+      rotation: {x: 0.07047259, y: -0.00000000571076, z: -0.000000017565407, w: 0.9975137}
+      scale: {x: 1, y: 0.9999999, z: 1.0000004}
+    - name: shoulder.l
+      parentName: chest
+      position: {x: 1.2910868e-11, y: 0.005072992, z: -6.581844e-10}
+      rotation: {x: -0.021932926, y: 0.00000017467276, z: 0.8147432, w: 0.57940704}
+      scale: {x: 0.9999999, y: 0.9999999, z: 0.99999976}
+    - name: arm.l
+      parentName: shoulder.l
+      position: {x: -0.000000004596077, y: 0.0036604502, z: -0.0000000014528632}
+      rotation: {x: 0.011376819, y: -0.014097199, z: -0.14374669, w: 0.98944867}
+      scale: {x: 0.9999998, y: 1.0000001, z: 1}
+    - name: forearm.l
+      parentName: arm.l
+      position: {x: 0.0000000121258195, y: 0.005235587, z: 4.4703483e-10}
+      rotation: {x: 0.04129006, y: 0.0006810462, z: -0.007984991, w: 0.9991151}
+      scale: {x: 1.0000004, y: 0.99999976, z: 1.0000004}
+    - name: hand.l
+      parentName: forearm.l
+      position: {x: -0.000000012256205, y: 0.005188695, z: -0.0000000016391277}
+      rotation: {x: -0.03985844, y: 0.0000009593499, z: 0.047712665, w: 0.9980656}
+      scale: {x: 1.0000005, y: 1.0000004, z: 1.0000001}
+    - name: neck
+      parentName: chest
+      position: {x: 1.2910868e-11, y: 0.005072992, z: -6.581844e-10}
+      rotation: {x: 0.106162824, y: 0.000000014921174, z: -0.000000022704699, w: 0.99434876}
+      scale: {x: 1.0000001, y: 0.9999999, z: 0.99999964}
+    - name: head
+      parentName: neck
+      position: {x: -9.415089e-11, y: 0.0028956602, z: -0.0000000013061798}
+      rotation: {x: -0.034421757, y: -0.000000009354255, z: 0.000000004251551, w: 0.9994074}
+      scale: {x: 0.9999999, y: 0.9999999, z: 1}
+    - name: Ear1.l
+      parentName: head
+      position: {x: -0.008180391, y: 0.023112418, z: -0.011604092}
+      rotation: {x: 0.9943712, y: -0.07418153, z: 0.0020072428, w: -0.07562507}
+      scale: {x: 0.9999994, y: 1.0000002, z: 0.99999964}
+    - name: Ear2.l
+      parentName: Ear1.l
+      position: {x: -0.0000000022910536, y: 0.0135681, z: 0.00000001209788}
+      rotation: {x: -0.047437835, y: 0.00056467636, z: -0.024633417, w: 0.9985703}
+      scale: {x: 1, y: 1.0000004, z: 1.0000002}
+    - name: Ear3.l
+      parentName: Ear2.l
+      position: {x: -0.0000000016763806, y: 0.013263903, z: -0.000000007755588}
+      rotation: {x: -0.03415, y: -0.00022554595, z: -0.03987031, w: 0.9986211}
+      scale: {x: 0.99999994, y: 1.0000002, z: 0.99999964}
+    - name: hair1.l
+      parentName: head
+      position: {x: -0.00020735797, y: 0.027736463, z: -0.0006723877}
+      rotation: {x: 0.4051287, y: 0.017478913, z: 0.52414167, w: 0.7488931}
+      scale: {x: 1.0000001, y: 0.9999999, z: 1.0000001}
+    - name: hair2.l
+      parentName: hair1.l
+      position: {x: 0.0000000015646219, y: 0.002579884, z: -0.000000013560056}
+      rotation: {x: -0.15600662, y: -0.0073676854, z: -0.09142497, w: 0.9834883}
+      scale: {x: 1.0000001, y: 1, z: 0.9999997}
+    - name: hair3.l
+      parentName: hair2.l
+      position: {x: 7.4505804e-11, y: 0.0031919715, z: 0.0000000045448543}
+      rotation: {x: -0.33890444, y: -0.0042441837, z: -0.34313136, w: 0.87600607}
+      scale: {x: 0.9999998, y: 0.9999999, z: 1.0000001}
+    - name: hair1.r
+      parentName: head
+      position: {x: 0.002481583, y: 0.027767193, z: -0.00021255595}
+      rotation: {x: 0.5053318, y: 0.13565156, z: 0.42618018, w: 0.7379762}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1.0000002}
+    - name: hair2.r
+      parentName: hair1.r
+      position: {x: -0.000000007841736, y: 0.0030338198, z: 0.000000007785856}
+      rotation: {x: -0.08117635, y: -0.09463637, z: -0.22189745, w: 0.9670656}
+      scale: {x: 0.99999964, y: 0.9999997, z: 0.99999964}
+    - name: hair3.r
+      parentName: hair2.r
+      position: {x: -0.0000000030267984, y: 0.0027777557, z: 0.000000011501833}
+      rotation: {x: -0.3731136, y: -0.25860405, z: -0.22548427, w: 0.8620134}
+      scale: {x: 0.9999997, y: 1.0000004, z: 0.99999946}
+    - name: Ear1.r
+      parentName: head
+      position: {x: 0.008180384, y: 0.0231124, z: -0.011604105}
+      rotation: {x: 0.9943712, y: 0.07418183, z: -0.002013827, w: -0.075624324}
+      scale: {x: 0.9999986, y: 1.0000001, z: 0.9999994}
+    - name: Ear2.r
+      parentName: Ear1.r
+      position: {x: 0.0000000065937638, y: 0.013568103, z: 0.000000018663703}
+      rotation: {x: -0.047437165, y: -0.0005644645, z: 0.024633786, w: 0.9985703}
+      scale: {x: 0.9999995, y: 0.9999996, z: 0.9999991}
+    - name: Ear3.r
+      parentName: Ear2.r
+      position: {x: -0.0000000029057263, y: 0.013263886, z: -0.000000009043142}
+      rotation: {x: -0.034149624, y: 0.00022556368, z: 0.03987088, w: 0.99862105}
+      scale: {x: 0.9999997, y: 1.0000006, z: 0.9999999}
+    - name: eyebrow.l
+      parentName: head
+      position: {x: -0.002455572, y: 0.017666006, z: 0.01218337}
+      rotation: {x: -0.5047094, y: 0.49405393, z: 0.39896384, w: 0.5848136}
+      scale: {x: 1.0000007, y: 1.0000001, z: 1.0000007}
+    - name: eyebrow.r
+      parentName: head
+      position: {x: 0.0024555773, y: 0.017666005, z: 0.012183383}
+      rotation: {x: -0.50470984, y: -0.49405375, z: -0.3989636, w: 0.58481365}
+      scale: {x: 1.0000007, y: 0.9999999, z: 1.0000007}
+    - name: mouth_edge.r
+      parentName: head
+      position: {x: 0.0025321525, y: 0.003197291, z: 0.013393387}
+      rotation: {x: 0.020906907, y: -0.691723, z: -0.02004203, w: 0.72158194}
+      scale: {x: 1.0000007, y: 1.0000004, z: 0.9999999}
+    - name: mouth.r
+      parentName: head
+      position: {x: 0.0013632166, y: 0.0033193496, z: 0.0135508645}
+      rotation: {x: 0.020906968, y: -0.691723, z: -0.02004203, w: 0.721582}
+      scale: {x: 1.0000005, y: 1, z: 0.9999998}
+    - name: mouth_mid
+      parentName: head
+      position: {x: 0.0000000033713876, y: 0.0035637233, z: 0.013669743}
+      rotation: {x: 0.020906948, y: -0.6917232, z: -0.020041918, w: 0.7215819}
+      scale: {x: 1.0000005, y: 0.9999999, z: 0.9999994}
+    - name: mouth_edge.l
+      parentName: head
+      position: {x: -0.002532145, y: 0.0031972956, z: 0.013393394}
+      rotation: {x: 0.020907082, y: 0.69172376, z: 0.02004188, w: 0.7215813}
+      scale: {x: 0.9999999, y: 1.0000004, z: 0.9999996}
+    - name: mouth.l
+      parentName: head
+      position: {x: -0.00136321, y: 0.003319345, z: 0.013550852}
+      rotation: {x: 0.020907005, y: 0.6917236, z: 0.020041874, w: 0.7215814}
+      scale: {x: 1.0000002, y: 1, z: 0.9999998}
+    - name: shoulder.r
+      parentName: chest
+      position: {x: 1.2910868e-11, y: 0.005072992, z: -6.581844e-10}
+      rotation: {x: -0.021933109, y: -4.1583526e-10, z: -0.8147433, w: 0.579407}
+      scale: {x: 0.99999964, y: 1.0000001, z: 0.9999998}
+    - name: arm.r
+      parentName: shoulder.r
+      position: {x: -0.0000000016065314, y: 0.0036604507, z: -0.0000000015646219}
+      rotation: {x: -0.011376717, y: -0.014096753, z: -0.14374806, w: -0.98944855}
+      scale: {x: 0.9999998, y: 1, z: 1.0000001}
+    - name: forearm.r
+      parentName: arm.r
+      position: {x: 6.1467287e-10, y: 0.0052355914, z: 0.0000000010430813}
+      rotation: {x: 0.041290745, y: -0.0006808216, z: 0.007983934, w: 0.9991151}
+      scale: {x: 1.0000004, y: 1.0000007, z: 1.0000001}
+    - name: hand.r
+      parentName: forearm.r
+      position: {x: 0.0000000077486035, y: 0.005188689, z: -0.0000000014528632}
+      rotation: {x: -0.03985849, y: -0.0000006148957, z: -0.047712874, w: 0.9980656}
+      scale: {x: 1.0000008, y: 0.99999934, z: 1.0000002}
+    - name: thigh.l
+      parentName: pelvis
+      position: {x: -0.0034820472, y: 0.0010656305, z: -0.00016698195}
+      rotation: {x: 0.0010296336, y: 0.23896521, z: 0.9708847, w: -0.016660444}
+      scale: {x: 1.0000001, y: 0.9999998, z: 0.9999998}
+    - name: shin.l
+      parentName: thigh.l
+      position: {x: 8.9406965e-10, y: 0.004765029, z: 8.5681673e-10}
+      rotation: {x: -0.13760413, y: 0.0049400153, z: 0.011951362, w: 0.99040294}
+      scale: {x: 1.0000004, y: 1, z: 1.0000001}
+    - name: foot.l
+      parentName: shin.l
+      position: {x: -0.0000071527434, y: 0.0039024805, z: 0.0010329401}
+      rotation: {x: 0.6843147, y: 0.035034657, z: -0.08177057, w: 0.72374004}
+      scale: {x: 0.99999994, y: 1.0000001, z: 0.9999994}
+    - name: tail
+      parentName: pelvis
+      position: {x: -0.000000001517906, y: 0.0041444227, z: -0.0063665686}
+      rotation: {x: -0.805143, y: -0.000000016722275, z: 0.00000017964321, w: 0.59308076}
+      scale: {x: 0.9999999, y: 0.9999999, z: 1}
+    - name: thigh.r
+      parentName: pelvis
+      position: {x: 0.0034820482, y: 0.0010656283, z: -0.0001669843}
+      rotation: {x: -0.0010290807, y: 0.23896569, z: 0.9708845, w: 0.016660409}
+      scale: {x: 1.0000004, y: 0.9999999, z: 0.9999989}
+    - name: shin.r
+      parentName: thigh.r
+      position: {x: -5.9604643e-10, y: 0.0047650286, z: -3.9115547e-10}
+      rotation: {x: -0.13760437, y: -0.004939725, z: -0.0119515015, w: 0.99040294}
+      scale: {x: 0.99999946, y: 1.0000007, z: 1.0000002}
+    - name: foot.r
+      parentName: shin.r
+      position: {x: 0.000007151896, y: 0.0039024889, z: 0.0010329405}
+      rotation: {x: 0.6845698, y: -0.037322026, z: 0.07960713, w: 0.7236256}
+      scale: {x: 1, y: 1.0000007, z: 0.9999998}
+    - name: knee.l
+      parentName: root
+      position: {x: -0.00314383, y: -0.0020611002, z: 0.003937959}
+      rotation: {x: -0.011783358, y: 0.70700866, z: 0.7070086, w: -0.011783517}
+      scale: {x: 1.0000002, y: 0.9999999, z: 0.9999999}
+    - name: knee.r
+      parentName: root
+      position: {x: 0.0031438305, y: -0.0020611002, z: 0.003937956}
+      rotation: {x: 0.011783508, y: 0.70700866, z: 0.7070086, w: 0.0117833465}
+      scale: {x: 1.0000002, y: 0.9999999, z: 0.9999999}
+    - name: heel.l
+      parentName: root
+      position: {x: -0.0030538528, y: -0.004924981, z: 0.005758255}
+      rotation: {x: 0.021819532, y: -0.7067701, z: 0.70677006, w: -0.02181897}
+      scale: {x: 1.0000007, y: 1.0000001, z: 1.0000001}
+    - name: heel.r
+      parentName: root
+      position: {x: 0.0030538526, y: -0.0053796857, z: -0.004377045}
+      rotation: {x: -0.021818994, y: -0.70677006, z: 0.7067701, w: 0.021819554}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.9999997}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
