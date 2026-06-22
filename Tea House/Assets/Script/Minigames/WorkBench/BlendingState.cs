@@ -28,13 +28,17 @@ public class BlendingState : IWorkbench
 
     public void OnUpdate()
     {
-        if(isEmpty == false && mIsBlended == false){
-            List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Spoon");
-
-            if (hitDraggables.Count > 0)
+        if(isEmpty == false && mIsBlended == false)
+        {
+            if(InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
             {
-                mWorkbench.mCameraController.StartDragging(mWorkbench.mSpoon);
-                mWorkbench.mSpoon.transform.rotation = Quaternion.Euler(90, 180, 60);
+                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Spoon", out List<RaycastHit> hitDraggables);
+
+                if (hitDraggables.Count > 0)
+                {
+                    mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mSpoon);
+                    mWorkbench.mSpoon.transform.rotation = Quaternion.Euler(90, 180, 60);
+                }
             }
 
             if (mWorkbench.mSpoon.transform.position.z <= mWorkbench.mMixtureLeftBorn.transform.position.z)
@@ -63,7 +67,7 @@ public class BlendingState : IWorkbench
                 leftMixtureBowl = 0;
                 rightMixtureBowl = 0;
 
-                mWorkbench.mCameraController.StopDragging();
+                mWorkbench.mDragAndDrop.StopDragging();
                 mWorkbench.mSpoon.transform.position = initSpoonPos;
                 mWorkbench.mSpoon.transform.rotation = initSpoonRot;
 
@@ -83,7 +87,7 @@ public class BlendingState : IWorkbench
         {
             if(Mouse.current.leftButton.isPressed)
             {
-                mWorkbench.mCameraController.LerpingCamera(mWorkbench.mCameraPosPackaging.transform.position, mWorkbench.mCameraPosPackaging.transform.rotation, 0.5f);
+                mWorkbench.mCameraDepth.LerpingCamera(mWorkbench.mCameraPosPackaging.transform.position, mWorkbench.mCameraPosPackaging.transform.rotation, 0.5f);
                 mWorkbench.LerpGameObject(mWorkbench.mMixtureBowl, mWorkbench.mMixtureBowlPackagingPos.transform.position, 0.5f);
                 //mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);

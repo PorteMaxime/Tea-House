@@ -9,22 +9,10 @@ public class WorkBenchStorageScript : MonoBehaviour
     void Start()
     {
         inventory = Inventory.msInstance;
-
-        Inventory.mOnInventoryCreated += OnInventoryCreated;
-    }
-
-    private void OnInventoryCreated(Inventory inv)
-    {
-        inventory = inv;
-
-        inventory.AddItem(ingredient, 5);
-        CheckIngredient();
-
-        Inventory.mOnInventoryCreated -= OnInventoryCreated;
     }
 
     public void CheckIngredient()
     {
-        amount = inventory.mItems[ingredient];
+        amount = inventory.GetAmount(ingredient);
     }
 }

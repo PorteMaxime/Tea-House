@@ -1,157 +1,277 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.UI;
-using Random = UnityEngine.Random;
+//using System;
+//using System.Collections;
+//using System.Collections.Generic;
+//using System.Linq;
+//using UnityEngine;
+//using Random = UnityEngine.Random;
 
-public class MailManager : MonoBehaviour
-{
-    #region Singleton
-    public static MailManager msInstance;
-    void Awake()
-    {
-        msInstance = this;
-    }
-    #endregion
+//public class MailManager : MonoBehaviour
+//{
+//    #region Singleton
+//    public static MailManager msInstance;
 
-    public Daylight mDaylight;
-    //private float[] time;
-    //private int toSend;
-    //private float mLast;
-    //private float mSpace;
+//    void Awake()
+//    {
+//        msInstance = this;
+//    }
+//    #endregion
 
+//    public static event Action<Mail> mOnMailSent;
+//    public static event Action<Mail> mOnMailExpired;
 
-    public List<IngredientData> mIngredients = new List<IngredientData>();
-    public (int, int) mTorrefiedProbability = (1, 50);
-    public List<IngredientData> mBases = new List<IngredientData>();
-    public List<Sprite> mPictures = new List<Sprite>();
-    public List<string> mNames = new List<string>();
-    public (float, float) mDurationSize = (5, 7);
+//    public Daylight mDaylight;
 
-    public List<Mail> mMails = new List<Mail>();
-    private List<Mail>[] mCalendar = new List<Mail>[7];
-    private int mCurrentDay = 0;
-    private bool mHasSend = false;
-    
-    // TODO : Divide numbers by 10 => time 10 is for Testing
-    private (int, int) mToSendNumber = (50, 80);
+//    private List<IngredientData> mAvailableIngredients = new List<IngredientData>();
+//    private List<IngredientData> mAvailableBases = new List<IngredientData>();
 
-    void Start()
-    {
-        mDaylight = GetComponent<Daylight>();
-        for (int i = 0; i < mCalendar.Length; i++)
-            mCalendar[i] = new List<Mail>();
-    }
+//    [SerializeField] private List<Sprite> mPictures = new List<Sprite>();
+//    [SerializeField] private List<string> mFirstNames = new List<string>();
+//    [SerializeField] private List<string> mLastNames = new List<string>();
 
-    void Update()
-    {
-        if (mDaylight.mPhase == Daylight.Phase.Morning && mHasSend == false)
-            StartDay();
-        if (mDaylight.mPhase == Daylight.Phase.Midday && mHasSend == true) mHasSend = false;
-    }
+//    [SerializeField] private int mPresetProbability = 10; // X % de chance que le mail soit choisi parmis les mails pre definis
 
-    public void CreateMail()
-    {
-        Order order = CreateOrder();
+//    [SerializeField] private Vector2Int mIngredientAmountRange = new Vector2Int(1, 3); // entre X et Y ingredient par commande
+//    [SerializeField] private int mTorrefiedProbability = 25; // X % de chance qu'un ingredient soit considere comme torrefie a la creation du mail
 
-        Sprite pic = mPictures[Random.Range(0, mPictures.Count)];
-        string name = mNames[Random.Range(0, mNames.Count)];
-        float duration = Random.Range(mDurationSize.Item1, mDurationSize.Item2);
+//    [SerializeField] private Vector2Int mDurationRange = new Vector2Int(2, 5); // les mails durent entre X et Y jours
+//    [SerializeField] private Vector2Int mMailsToSendRange = new Vector2Int(5, 8); // entre X et Y mails a creer par jour
 
-        int day = Random.Range(0, 7);
-        mCalendar[day].Add(new Mail(order, pic, name, "null", day, duration));
-    }
+//    [SerializeField] private Order.State[] mExpiringMailsStates = { Order.State.InBox, Order.State.Accepted }; // etats depuis lesquels les mails peuvent expirer
 
-    public Order CreateOrder()
-    {
-        Order order = new Order();
+//    private bool mDailyMailsCreated = false;
+//    private int mDailyMailsAmount = 0;
 
-        IngredientData pBase = mBases[Random.Range(0, mBases.Count)];
-        order.mOrderData.mWarmth += pBase.mWarmth;
-        order.mOrderData.mFreshness += pBase.mFreshness;
-        order.mOrderData.mEnergy += pBase.mEnergy;
-        order.mOrderData.mRelaxation += pBase.mRelaxation;
-        order.mOrderData.mPrestige += pBase.mPrestige;
+//    private Dictionary<Order.State, List<Mail>> mMails = new Dictionary<Order.State, List<Mail>>();
+//    private List<Mail>[] mCalendar = new List<Mail>[7];
 
-        for (int i = 0; i < Random.Range(1, 3); i++)
-        {
-            IngredientData pIngredient = mIngredients[Random.Range(0, mIngredients.Count)];
+//    void Start()
+//    {
+//        mDaylight = GetComponent<Daylight>();
 
-            // A VERIFIER
-            if (Random.Range(mTorrefiedProbability.Item1, mTorrefiedProbability.Item2) <= 50)
-                pIngredient = pIngredient.GetTorrefied();
+//        foreach (Order.State state in (Order.State[]) Order.State.GetValues(typeof(Order.State)))
+//            mMails[state] = new List<Mail>();
 
-            order.mOrderData.mWarmth += pBase.mWarmth;
-            order.mOrderData.mFreshness += pBase.mFreshness;
-            order.mOrderData.mEnergy += pBase.mEnergy;
-            order.mOrderData.mRelaxation += pBase.mRelaxation;
-            order.mOrderData.mPrestige += pBase.mPrestige;
-        }
+//        for (int i = 0; i < mCalendar.Length; i++)
+//            mCalendar[i] = new List<Mail>();
 
-        order.mIsLowerLimitWarmth = UnityEngine.Random.value < 0.5f;
-        order.mIsLowerLimitFreshness = UnityEngine.Random.value < 0.5f;
-        order.mIsLowerLimitRelaxation = UnityEngine.Random.value < 0.5f;
-        order.mIsLowerLimitEnergy = UnityEngine.Random.value < 0.5f;
-        order.mIsLowerLimitPrestige = UnityEngine.Random.value < 0.5f;
+//        StartDay();
 
-        return order;
-    }
+//        StartCoroutine(WatchMails());
+//    }
 
-    void CheckList()
-    {
-        for (int i = 0; i < mMails.Count; i++)
-        {
-            if (mMails[i].mSendDay + mMails[i].mDuration < mCurrentDay)
-            {
-                mMails.RemoveAt(i);
-                continue;
-            }
-        }
-    }
-    void AddDayList()
-    {
-        for (int i = 0; i < mCalendar[mCurrentDay % 7].Count; i++)
-        {
-            mMails.Add(mCalendar[mCurrentDay % 7][i]);
-        }
-        mCalendar[mCurrentDay % 7].Clear();
-    }
-    void StartDay()
-    {
-        // Refresh mails
-        mCurrentDay++;
-        CheckList();
-        AddDayList();
+//    void Update()
+//    {
+//        if (mDaylight.mCurrentPhase == Daylight.Phase.Midday && mDailyMailsCreated == true)
+//            mDailyMailsCreated = false;
+//    }
 
-        // For next days
-        for (int i = 0; i < Random.Range(mToSendNumber.Item1, mToSendNumber.Item2); i++)
-            CreateMail();
+//    #region Mails Creation
+//    public void CreateMail()
+//    {
+//        Mail mail;
+//        Sprite picture = mPictures[Random.Range(0, mPictures.Count)];
+//        string name = mFirstNames[Random.Range(0, mFirstNames.Count)] + " " + mLastNames[Random.Range(0, mLastNames.Count)];
+//        int sendDay = Random.Range(mDaylight.mCurrentDay, mDaylight.mCurrentDay + mCalendar.Count()) + 1;
+//        int duration = Random.Range(mDurationRange.x, mDurationRange.y);
 
-        mHasSend = true;
-    }
+//        if (Random.Range(1, 101) <= mPresetProbability)
+//        {
+//            mail = new Mail(new Order(), picture, "prefab mail - " + name, sendDay, duration + 99);
+//        }
+//        else
+//        {
+//            Order order = CreateOrder();
 
-    IEnumerator SendMail()
-    {
-        yield return new WaitForSeconds(3);
-    }
+//            mail = new Mail(order, picture, name, sendDay, duration);
+//            mail.mText = CreateDescription(mail);
 
-    public List<Mail> GetMailsOfState(Order.State[] state)
-    {
-        List<Mail> returnedMails = new List<Mail>();
+//        }
 
-        foreach (Mail mail in mMails)
-        {
-            if (state.Contains(mail.mOrder.mState))
-                returnedMails.Add(mail);
-        }
+//        mCalendar[sendDay % mCalendar.Count()].Add(mail);
+//    }
 
-        return returnedMails;
-    }
+//    public Order CreateOrder()
+//    {
+//        Order order = new Order();
 
-    public List<Mail> GetMailsOfState(Order.State state)
-    {
-        return GetMailsOfState(new Order.State[1] { state });
-    }
-}
+//        // Base
+//        if (mAvailableBases.Count > 0)
+//            order.AddStats(mAvailableBases[Random.Range(0, mAvailableBases.Count)]);
+
+//        // Ingredients
+//        if (mAvailableIngredients.Count > 0)
+//        {
+//            for (int i = 0; i < Random.Range(mIngredientAmountRange.x, mIngredientAmountRange.y); i++)
+//            {
+//                IngredientData ingredient = mAvailableIngredients[Random.Range(0, mAvailableIngredients.Count)];
+
+//                if (Inventory.msInstance.isTorrefactionUnlocked == true && Random.Range(1, 101) <= mTorrefiedProbability)
+//                    ingredient = ingredient.GetTorrefied();
+
+//                order.AddStats(ingredient);
+//            }
+//        }
+
+//        return order;
+//    }
+
+//    private string CreateDescription(Mail mail)
+//    {
+//        /* description pour tests */
+//        string test = "description mail, envoi jour " + mail.mSendDay + " et expiration jour " + (mail.mSendDay + mail.mDuration);
+
+//        if (mail.mOrder.mOrderData.mStats.Count == 0)
+//            return (test += "\n Aucune stat attendue dans la commande...");
+
+//        foreach (StatValue stat in mail.mOrder.mOrderData.mStats)
+//            test += "\n" + stat.mStat.ToString() + " : " + stat.mValue;
+
+//        return test;
+//    }
+
+//    #endregion Mails Creation
+
+//    public void StartDay()
+//    {
+//        // Refresh mails
+//        AddMailsToSend();
+
+//        // Refresh liste des bases et ingredients
+//        UpdateItemsLists();
+
+//        // Creation des mails pour les jours suivants
+//        for (int i = 0; i < Random.Range(mMailsToSendRange.x, mMailsToSendRange.y + 1); i++)
+//            CreateMail();
+
+//        mDailyMailsCreated = true;
+//    }
+
+//    private void UpdateItemsLists()
+//    {
+//        foreach (var item in Inventory.msInstance.mItems.Keys)
+//        {
+//            if (item is IngredientData)
+//            {
+//                IngredientData ingredient = (IngredientData) item;
+
+//                if (ingredient.mIsBase && !mAvailableBases.Contains(ingredient))
+//                    mAvailableBases.Add(ingredient);
+
+//                else if (!ingredient.mIsBase && mAvailableIngredients.Contains(ingredient))
+//                    mAvailableIngredients.Add(ingredient);
+//            }
+            
+//        }
+//    }
+
+//    private void AddMailsToSend()
+//    {
+//        // Ajout des mails a la liste des mails
+//        mMails[Order.State.NotSent].AddRange(mCalendar[mDaylight.mCurrentDay % 7]);
+//        mDailyMailsAmount = mMails[Order.State.NotSent].Count();
+
+//        // Temps d'envoi dans la journee
+//        int mailNumber = 1;
+//        foreach (Mail mail in mMails[Order.State.NotSent])
+//        {
+//            mail.mSendTime = mDaylight.mDayLength / (mDailyMailsAmount + 1) * mailNumber;
+//            mailNumber += 1;
+//            mail.UpdateExpiration(mDaylight);
+//        }
+
+//        // Tri des mails en fonction de leur heure d'envoi
+//        mMails[Order.State.NotSent].OrderBy(mail => mail.mSendTime);
+
+//        mCalendar[mDaylight.mCurrentDay % 7].Clear();
+//    }
+
+//    #region Coroutine
+
+//    // Ajoute les mails du calendrier à la liste et les supprime une fois par seconde
+//    IEnumerator WatchMails()
+//    {
+//        while (true) // Coroutine lancee une seule fois a partir du awake
+//        {
+//            // Envoi des mails
+//            CheckToSend();
+
+//            // Expiration des mails
+//            CheckExpired();
+
+//            yield return new WaitForSeconds(1);
+//        }
+//    }
+
+//    private void CheckToSend()
+//    {
+//        Mail firstMail;
+
+//        while (mMails[Order.State.NotSent].Count > 0)
+//        {
+//            firstMail = mMails[Order.State.NotSent].First();
+//            if (mDaylight.mDayTimeSpent >= firstMail.mSendTime)
+//            {
+//                ChangeOrderState(firstMail, Order.State.InBox);
+//                mOnMailSent?.Invoke(firstMail);
+//                Debug.Log("new mail");
+//            }
+//            else
+//                break;
+//        }
+//        mMails[Order.State.InBox].OrderBy(mail => mail.mExpiration);
+//    }
+
+//    private void CheckExpired()
+//    {
+//        Mail firstMail;
+
+//        float totalTimeSpent = mDaylight.mCurrentDay * mDaylight.mDayLength + mDaylight.mDayTimeSpent;
+
+//        foreach (Order.State state in mExpiringMailsStates)
+//        {
+//            while (mMails[state].Count > 0)
+//            {
+//                firstMail = mMails[state].First();
+//                if (totalTimeSpent >= firstMail.mExpiration)
+//                {
+//                    ChangeOrderState(firstMail, Order.State.Expired);
+//                    mOnMailExpired?.Invoke(firstMail);
+//                    Debug.Log("mail expired");
+//                }
+//                else
+//                    break;
+//            }
+//        }
+//    }
+
+//    #endregion Coroutine
+
+//    public void ChangeOrderState(Mail mail, Order.State newState)
+//    {
+//        if (mMails[newState].Contains(mail))
+//            return;
+
+//        mMails[newState].Add(mail);
+
+//        if (mMails[mail.mOrder.mState].Contains(mail))
+//            mMails[mail.mOrder.mState].Remove(mail);
+
+//        mail.mOrder.mState = newState;
+//    }
+
+//    // Getter mails
+//    public List<Mail> GetMailsOfState(Order.State[] states)
+//    {
+//        List<Mail> returnedMails = new List<Mail>();
+
+//        foreach (Order.State state in states)
+//            if (mMails.ContainsKey(state))
+//                returnedMails.AddRange(mMails[state]);
+
+//        return returnedMails;
+//    }
+//    public List<Mail> GetMailsOfState(Order.State state)
+//    {
+//        return GetMailsOfState(new Order.State[1] { state });
+//    }
+//}

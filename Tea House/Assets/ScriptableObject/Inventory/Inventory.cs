@@ -4,28 +4,30 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private List<ItemData> mUnlockedItems = new List<ItemData>();
-    [SerializeField] private int mItemStartingAmount = 5;
+    [SerializeField] private List<ItemData> mStartingItems = new List<ItemData>();
+    [SerializeField] private int mStartingItemsAmount = 5;
 
-    [SerializeField] public Dictionary<ItemData, int> mItems = new Dictionary<ItemData, int>();
+    // Items du joueur
+    private Dictionary<ItemData, int> mItems = new Dictionary<ItemData, int>();
 
-    public int mMoneyAmount;
+    [SerializeField] public int mMoneyAmount;
+
+    [SerializeField] public bool isTorrefactionUnlocked = true;
 
     #region Singleton
-    public static event Action<Inventory> mOnInventoryCreated;
 
     public static Inventory msInstance;
     void Awake()
     {
         msInstance = this;
-
-        foreach (var item in mUnlockedItems)
-            mItems.Add(item, mItemStartingAmount);
-
-        mOnInventoryCreated?.Invoke(this);
-
     }
     #endregion
+
+    private void Start()
+    {
+        foreach (var item in mStartingItems)
+            mItems.Add(item, mStartingItemsAmount);
+    }
 
     public void ClearInventory()
     {
@@ -33,24 +35,31 @@ public class Inventory : MonoBehaviour
             mItems[key] = 0;
     }
 
-    public void AddItem(ItemData _item, int _amount)
+    public void ChangeItemAmount(ItemData item, int amount)
     {
-        if (mItems.ContainsKey(_item))
-            mItems[_item] += _amount;
-        else
-            mItems[_item] = _amount;
+        mItems[item] += amount;
     }
 
-    public bool RemoveItem(ItemData _item, int _amount)
+    public void UnlockItem(ItemData item)
     {
-        if (mItems.ContainsKey(_item))
-        {
-            if (mItems[_item] < _amount)
-                return false;
+        item.mIsUnlocked = true;
+    }
 
-            mItems[_item] -= _amount;
-            return true;
+    public List<Type> GetItemsOfType<Type>() where Type : ItemData
+    {
+        List<Type> list = new List<Type>();
+
+        foreach (var item in mItems)
+        {
+            if (item.Key.mIsUnlocked == true && item.Key is Type)
+                list.Add((Type)item.Key);
         }
-        return false;
+
+        return list;
+    }
+
+    public int GetAmount(ItemData item)
+    {
+        return mItems[item];
     }
 }

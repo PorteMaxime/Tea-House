@@ -50,7 +50,7 @@ public class InventoryPageScript : MonoBehaviour
         GameObject creationRow = null;
         GameObject creationItem = null;
 
-        foreach (ItemData item in Inventory.msInstance.mItems.Keys)
+        foreach (ItemData item in Inventory.msInstance.GetItemsOfType<ItemData>())
         {
             if (mInventoryItems.ContainsKey(item))
             {
@@ -139,7 +139,7 @@ public class InventoryPageScript : MonoBehaviour
             textAmount = mInventoryItems[item].transform.Find("TextAmount").GetComponent<Text>();
 
             if (textAmount != null)
-                textAmount.text = "Stock : " + inv.mItems[item];
+                textAmount.text = "Stock : " + inv.GetAmount(item);
         }
     }
 }

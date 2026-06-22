@@ -1,20 +1,30 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Game", menuName = "Scriptable Objects/ingredientData")]
 public class IngredientData : ItemData
 {
-    public bool mIsBase;
     public GameObject mFragIngredient;
-    public IngredientData GetTorrefied()
+
+    public List<StatValue> GetTorrefiedStats()
     {
-        IngredientData torrefied = ScriptableObject.CreateInstance<IngredientData>();
+        List<StatValue> torrefiedStats = new List<StatValue>();
+        StatValue statValue;
 
-        torrefied.mWarmth +=          1;
-        torrefied.mFreshness +=       0;
-        torrefied.mEnergy +=          0;
-        torrefied.mRelaxation +=     -1;
-        torrefied.mPrestige +=        1;
+        for (int i = 0; i < mStats.Count; i++)
+        {
+            statValue = new StatValue();
+            statValue.mStat = mStats[i].mStat;
+            statValue.mValue = mStats[i].mValue;
 
-        return torrefied;
+            torrefiedStats.Add(statValue);
+
+            if (mStats[i].mValue > 0 && mStats[i].mStat != ItemData.Stat.Prestige)
+            {
+                torrefiedStats[i].mValue += 1;
+            }
+        }
+
+        return torrefiedStats;
     }
 }

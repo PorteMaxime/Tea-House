@@ -7,8 +7,8 @@ public class ComputerScript : MonoBehaviour
     public Dictionary<string, GameObject> mCanvas = new Dictionary<string, GameObject>();
     public GameObject mActiveCanvas;
 
-    [SerializeField] public InteractiveAreaScript interactionScript;
-    public bool isComputerOn = false;
+    [SerializeField] private InteractiveAreaScript interactionScript;
+    private bool isComputerOn = false;
 
     private CameraController mCameraController;
 
@@ -20,6 +20,7 @@ public class ComputerScript : MonoBehaviour
         foreach (Transform child in gameObject.transform)
         {
             mCanvas.Add(child.name, child.gameObject);
+            //child.gameObject.SetActive(true); // Uniquement pour les awake de chaque page
             child.gameObject.SetActive(false);
 
             if (mCanvas.Count() < 2)

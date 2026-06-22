@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
   m_Name: Jasmine
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  mName: Jasmin
-  mModel: {fileID: 0}
-  mWarmth: 0
-  mFreshness: 0
-  mRelaxation: 1
-  mEnergy: 0
-  mPrestige: 2
-  mPrice: 8
-  mIsBase: 0
+  mName: Jasmine
+  mPrefab: {fileID: 0}
+  mIsUnlocked: 1
+  mStats:
+  - mStat: 0
+    mValue: 0
+  - mStat: 1
+    mValue: 0
+  - mStat: 2
+    mValue: 1
+  - mStat: 3
+    mValue: 0
+  - mStat: 4
+    mValue: 2
+  mPrice: 7
   mFragIngredient: {fileID: 0}
