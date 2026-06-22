@@ -63,7 +63,7 @@ public class BlendingState : IWorkbench
             if (rightMixtureBowl == 4)
             {
                 mIsBlended = true;
-                mWorkbench.panelSawp.SetActive(true);
+                mWorkbench.mPanelSwap.SetActive(true);
                 leftMixtureBowl = 0;
                 rightMixtureBowl = 0;
 
@@ -96,6 +96,6 @@ public class BlendingState : IWorkbench
     }
     public void OnExit()
     {
-        mWorkbench.panelSawp.SetActive(false);
+        mWorkbench.mPanelSwap.SetActive(false);
     }
 }

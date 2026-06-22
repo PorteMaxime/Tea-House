@@ -32,6 +32,8 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMixtureRightBorn;
     public GameObject mMixtureLeftBorn;
 
+    public GameObject mPanelSwap;
+
     public GameObject mSpoon;
 
     public WorkbenchStateMachine stateMachine;
