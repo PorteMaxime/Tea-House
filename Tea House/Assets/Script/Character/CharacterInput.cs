@@ -12,7 +12,14 @@ public class CharacterInput : MonoBehaviour
     private float rotationSpeed = 360f;
     public bool mCanMove = true;
 
+    //Animator
     public Animator playerAnimator;
+    float idleTimer = 0f;
+    public float idleExtraDelay = 5f;
+
+    bool isSitting = false;
+    float sitIdleTimer = 0f;
+    public float sitExtraDelay = 6f;
 
     void Awake() => mInput = new Input_PlayerMovement();
     void OnEnable() => mInput.Enable();
@@ -46,7 +53,7 @@ public class CharacterInput : MonoBehaviour
 
         if (isMoving)
         {
-            playerAnimator.SetTrigger("Walk");
+            idleTimer = 0f;
 
             Vector2 dir2 = mInput.Character.Move.ReadValue<Vector2>();
             Vector3 camDir = mCameraOrigin.transform.forward;
@@ -60,6 +67,23 @@ public class CharacterInput : MonoBehaviour
             mRigidbody.linearVelocity = moveDirection * mSpeed;
         }
         else
+        {
             mRigidbody.linearVelocity = Vector3.zero;
+
+            idleTimer += Time.deltaTime;
+
+            if (idleTimer >= idleExtraDelay)
+            {
+                StartCoroutine(ExtraIdle());
+                idleTimer = 0f;
+            }
+        }
+    }
+    IEnumerator ExtraIdle()
+    {
+        playerAnimator.SetTrigger("IdleExtraTrigger");
+        yield return new WaitForSeconds(4f);
+
+        idleTimer = 0f;
     }
 }
