@@ -12,6 +12,7 @@ public class PacketCompleting : IPackaging
     }
     #endregion
 
+    public bool mIsChoosed = false;
     public bool mIsFilled = false;
     public bool mLabelPrinted = false;
     public bool mIsLabelled = false;
@@ -36,42 +37,96 @@ public class PacketCompleting : IPackaging
 
     public void OnUpdate()
     {
-        if (mPlayerInteract.Player.Select.IsPressed() == false) return;
+        if (mPlayerInteract.Player.Select.triggered == false) return;
 
-        if (mIsOpened == true && mIsFilled == false)
+        // Package Choosing
+        if(mIsFilled == false && mIsOpened == false && mIsLabelled == false)
+        {
+            mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Package", out RaycastHit packageChoosed);
+            if(packageChoosed.collider != null && (packageChoosed.collider != mMain.mOutputGO && packageChoosed.collider.transform.parent.gameObject != mMain.mOutputGO))
+            {
+                mMain.mChoosing.mChoosedPackage = packageChoosed.collider.gameObject;
+                mMain.mStateMachine.SwitchState(mMain.mChoosing);
+                return;
+            }
+        }
+
+        // Package Opening / Closing
+        mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), (string[])null, out RaycastHit package);
+        if(package.collider != null && (package.collider == mMain.mOutputGO || package.collider.transform.parent.gameObject == mMain.mOutputGO))
+        {
+            mMain.mStateMachine.SwitchState(mMain.mOpening);
+            return;
+        }
+
+        // Package Filling
+        if(mIsFilled == false && mIsOpened == true)
         {
             mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MixtureBowl", out RaycastHit bowl);
-            if (bowl.collider != null)
+            if(bowl.collider != null)
             {
                 mMain.mFilling.mBowl = bowl.collider.gameObject;
                 mMain.mStateMachine.SwitchState(mMain.mFilling);
                 return;
             }
         }
-        mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "PackageLid", out RaycastHit lid);
-        if (lid.collider != null && (mMain.mOpening.mLid != null ? lid.collider.gameObject == mMain.mOpening.mLid : true))
-        {
-            mMain.mStateMachine.SwitchState(mMain.mOpening);
-            return;
-        }
 
+        // Label Printing
         if(mLabelPrinted == false)
         {
             mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Printer", out RaycastHit printer);
-            if (printer.collider != null)
+            if(printer.collider != null)
             {
                 mMain.mStateMachine.SwitchState(mMain.mPrinting);
                 return;
             }
         }
-        else if(mLabelPrinted == true && mIsLabelled == false)
+
+        // Package Labelling
+        if(mLabelPrinted == true)
         {
             mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Label", out RaycastHit label);
-            if (label.collider != null)
+            if(label.collider != null)
             {
                 mMain.mStateMachine.SwitchState(mMain.mLabelling);
                 return;
             }
         }
+
+        // if (mIsOpened == true && mIsFilled == false)
+        // {
+        //     mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MixtureBowl", out RaycastHit bowl);
+        //     if (bowl.collider != null)
+        //     {
+        //         mMain.mFilling.mBowl = bowl.collider.gameObject;
+        //         mMain.mStateMachine.SwitchState(mMain.mFilling);
+        //         return;
+        //     }
+        // }
+        // mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "PackageLid", out RaycastHit lid);
+        // if (lid.collider != null && (mMain.mOpening.mLid != null ? lid.collider.gameObject == mMain.mOpening.mLid : true))
+        // {
+        //     mMain.mStateMachine.SwitchState(mMain.mOpening);
+        //     return;
+        // }
+
+        // if(mLabelPrinted == false)
+        // {
+        //     mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Printer", out RaycastHit printer);
+        //     if (printer.collider != null)
+        //     {
+        //         mMain.mStateMachine.SwitchState(mMain.mPrinting);
+        //         return;
+        //     }
+        // }
+        // else if(mLabelPrinted == true && mIsLabelled == false)
+        // {
+        //     mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Label", out RaycastHit label);
+        //     if (label.collider != null)
+        //     {
+        //         mMain.mStateMachine.SwitchState(mMain.mLabelling);
+        //         return;
+        //     }
+        // }
     }
 }

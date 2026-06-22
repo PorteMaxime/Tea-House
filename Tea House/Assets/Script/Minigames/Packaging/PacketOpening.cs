@@ -56,9 +56,19 @@ public class PacketOpening : IPackaging
         else
         {
             mPackageAnimator = mMain.mOutputGO.GetComponent<Animator>();
+            AnimatorStateInfo animatorInfo =  mPackageAnimator.GetCurrentAnimatorStateInfo(0);
+            if(animatorInfo.IsName("OpenBag") == false && (mPackageAnimator.IsInTransition(0) == false || (animatorInfo.normalizedTime < 1f) == false))
+            {
+                // mPackageAnimator.SetFloat("AnimSpeed", mIsOpened == true ? -1f : 1f);
+                // mPackageAnimator.SetTrigger("PlayAnim");
+                //mPackageAnimator.Play("OpenBag", 0, mIsOpened == true ? 1f : 0f);
+                mPackageAnimator.SetFloat("AnimSpeed", mIsOpened ? -1f : 1f);
+            
+                float startFrame = mIsOpened ? 1f : 0f;
+                mPackageAnimator.Play("OpenBag", 0, startFrame);
+            }
+            mMain.mStateMachine.SwitchState(mMain.mCompleting);
         }
-
-        
         
         if(mIsOpened == false)
         {
@@ -72,18 +82,29 @@ public class PacketOpening : IPackaging
     }
 
     public void OnUpdate()
-    {
-        if(mIsOpened == true && mLidClosedPlaceCollider.IsColliding(mLid) && mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
+    {        
+        if(mLid != null)
         {
-            mIsOpened = false;
-            mMain.mCompleting.mIsOpened = false;
-            mDragAndDrop.StopDragging();
-            mLid.transform.position = mLidClosedPlace.transform.position;
-            mLid.transform.rotation = mLidClosedPlace.transform.rotation;
+            if(mIsOpened == true && mLidClosedPlaceCollider.IsColliding(mLid) && mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
+            {
+                mIsOpened = false;
+                mMain.mCompleting.mIsOpened = false;
+                mDragAndDrop.StopDragging();
+                mLid.transform.position = mLidClosedPlace.transform.position;
+                mLid.transform.rotation = mLidClosedPlace.transform.rotation;
+            }
+            else if(mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
+                mDragAndDrop.StopDragging();
         }
-        else if(mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
-            mDragAndDrop.StopDragging();
-
+        else
+        {
+            AnimatorStateInfo animatorInfo =  mPackageAnimator.GetCurrentAnimatorStateInfo(0);
+            if(animatorInfo.IsName("OpenBag") == false && (mPackageAnimator.IsInTransition(0) == false || (animatorInfo.normalizedTime < 1f) == false))
+            {
+                
+            }
+        }
+        
         if(mDragAndDrop.IsDragging() == false)
         {
             if(mLidRB != null)

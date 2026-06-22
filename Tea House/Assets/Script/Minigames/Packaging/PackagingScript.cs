@@ -46,7 +46,7 @@ public class PackagingScript : MonoBehaviour
         mPrinting.mDebug = mDebug;
         mPrinting.mDebugData = mDebugData;
 
-        mStateMachine.SwitchState(mChoosing);
+        mStateMachine.SwitchState(mCompleting);
     }
     void Update()
     {

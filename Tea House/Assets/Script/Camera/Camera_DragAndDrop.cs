@@ -47,7 +47,7 @@ public class CameraDragAndDrop : ICameraControllerMod
         Vector3 dir = (worldPos - mMain.transform.position).normalized;
         float dist = Vector3.Distance(mMain.transform.position, new Vector3(mDraggedOriginX, worldPos.y, worldPos.z));
         worldPos = mMain.transform.position + dir * dist;
-        
+
         worldPos = worldPos - mDraggingOffset;
         mTargetPos = worldPos;
     }
