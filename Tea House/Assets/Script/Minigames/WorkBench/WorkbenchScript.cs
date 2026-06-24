@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
 public class WorkbenchScript : MonoBehaviour
 {
     public CameraController mCameraController;
+    public Camera_Raycast mCameraRaycast;
+    public CameraDragAndDrop mDragAndDrop;
+    public Camera_DepthView mCameraDepth;
     public PackagingScript mPackaging;
     public GameObject mMixtureBowlPackagingPos;
     public InteractiveAreaScript mInteractiveArea;
@@ -29,6 +32,8 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMixtureRightBorn;
     public GameObject mMixtureLeftBorn;
 
+    public GameObject mPanelSwap;
+
     public GameObject mSpoon;
 
     public WorkbenchStateMachine stateMachine;
@@ -48,6 +53,10 @@ public class WorkbenchScript : MonoBehaviour
     }
     void Start()
     {
+        mCameraRaycast = mCameraController.GetControllerMod<Camera_Raycast>();
+        mDragAndDrop = mCameraController.GetControllerMod<CameraDragAndDrop>();
+        mCameraDepth = mCameraController.GetControllerMod<Camera_DepthView>();
+        
         stateMachine = new WorkbenchStateMachine();
 
         selectItemState = new SelectItemState(this);
@@ -66,7 +75,7 @@ public class WorkbenchScript : MonoBehaviour
                 Quaternion targetRotation = mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);
                 cameraLookUp = true;
                 //moveDownCam = false;
-                mCameraController.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
+                mCameraDepth.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
             }
             else if (Mouse.current.position.ReadValue().y <= Screen.height - downPan && cameraLookUp == true)
             {
@@ -74,7 +83,7 @@ public class WorkbenchScript : MonoBehaviour
 
                 cameraLookUp = false;
                 //moveDownCam = true;
-                mCameraController.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
+                mCameraDepth.LerpingCamera(mCameraController.transform.position, targetRotation, 0.3f);
             }
 
             stateMachine.Update();

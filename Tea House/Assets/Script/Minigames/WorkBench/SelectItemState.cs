@@ -10,7 +10,6 @@ public class SelectItemState : IWorkbench
         mWorkbench = system;
     }
 
-    //bool moveDownCam = false;
     public void OnEnter()
     {
         //
@@ -19,23 +18,24 @@ public class SelectItemState : IWorkbench
     {
         if (mWorkbench.mCurrentItem == null)
         {
-            if(true)//inputPlayer
+            if(InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)//inputPlayer
             {
-                List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), new string[3] { "Storage", "MixtureBowl", "Spoon" });
+                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), new string[3] { "Storage", "MixtureBowl", "Spoon" }, out List<RaycastHit> hitDraggables);
 
                 if (hitDraggables.Count > 0)
                 {
-                    if (hitDraggables[0].TryGetComponent(out WorkBenchStorageScript workBenchStorageScript))
+                    GameObject hitGo = hitDraggables[0].collider.gameObject;
+                    if (hitGo.TryGetComponent(out WorkBenchStorageScript workBenchStorageScript))
                     {
                         InitIngredient(workBenchStorageScript.ingredient);
                         workBenchStorageScript.CheckIngredient();
-                        mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
+                        mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG);
                     }
-                    else if (hitDraggables[0] == mWorkbench.mMixtureBowl)
+                    else if (hitGo == mWorkbench.mMixtureBowl)
                     {
-                        mWorkbench.mCameraController.StartDragging(mWorkbench.mMixtureBowl);
+                        mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMixtureBowl);
                     }
-                    else if (hitDraggables[0] == mWorkbench.mSpoon)
+                    else if (hitGo == mWorkbench.mSpoon)
                     {
                         mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
                     }
@@ -44,33 +44,38 @@ public class SelectItemState : IWorkbench
         }
         else
         {
-            if (true)//inputPlayer
+            if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)//inputPlayer
             {
-                List<GameObject> hitDraggables = mWorkbench.mCameraController.GetRaycastHit(LayerMask.GetMask("Interactibles"), "Ingredient");
+                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Ingredient", out List<RaycastHit> hitDraggables);
 
                 if (hitDraggables.Count > 0)
                 {
-                    if (hitDraggables[0] == mWorkbench.currentItemG)
-                        mWorkbench.mCameraController.StartDragging(mWorkbench.currentItemG);
+                    GameObject hitGo = hitDraggables[0].collider.gameObject;
+                    if (hitGo == mWorkbench.currentItemG)
+                        mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG);
                 }
-
-                if (mWorkbench.mMortarBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
-                {
-                    Inventory.msInstance.ChangeItemAmount(mWorkbench.mCurrentItem, -1);
-                    mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
-                }
+            }
+            if (mWorkbench.mMortarBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
+            {
+                Inventory.msInstance.ChangeItemAmount(mWorkbench.mCurrentItem, -1);
+                mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
             }
         }
     }
     public void OnExit()
     {
-        mWorkbench.mCameraController.StopDragging();
+        mWorkbench.mDragAndDrop.StopDragging();
     }
 
 
     void InitIngredient(IngredientData _ingredient)
     {
         mWorkbench.mCurrentItem = _ingredient;
-        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mPrefab, mWorkbench.mMortarBowl.transform.position);
+        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mPrefab, Vector3.zero);
+
+        MeshRenderer mesh = mWorkbench.mMortarBowl.GetComponent<MeshRenderer>();
+        float distance = Vector3.Distance(mWorkbench.mCameraController.transform.position, mWorkbench.mMortarBowl.transform.position);
+
+        mWorkbench.currentItemG.transform.position = mWorkbench.mCameraRaycast.GetImpact(distance, mWorkbench.mMortarBowl);
     }
 }

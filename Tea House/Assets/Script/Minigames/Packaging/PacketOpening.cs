@@ -14,28 +14,52 @@ public class PacketOpening : IPackaging
     }
     #endregion
 
+    private Input_PlayerInteract mPlayerInteract = null;
+
     public GameObject mLid = null;
     private Rigidbody mLidRB = null;
 
     private GameObject mLidClosedPlace = null;
     private WorkingPoint mLidClosedPlaceCollider = null;
 
+    private Animator mPackageAnimator = null;
+
     public bool mIsOpened = false;
+
+    private CameraDragAndDrop mDragAndDrop = null;
 
     void Init()
     {
-        
+        mDragAndDrop = mMain.mCameraController.GetControllerMod<CameraDragAndDrop>();
+        mPlayerInteract = InputManager.Get().mPlayerInteract;
+        mPlayerInteract.Enable();
     }
 
     public void OnEnter()
     {
-        mLid = mMain.mOutputGO.transform.Find("Lid").gameObject;
-        mLidRB = mLid.GetComponent<Rigidbody>();
+        Transform lidTransform = mMain.mOutputGO.transform.Find("Lid");
+        if(lidTransform != null)
+        {
+            mLid = lidTransform.gameObject;
+            mLidRB = mLid.GetComponent<Rigidbody>();
 
-        mLidClosedPlace = mMain.mOutputGO.transform.Find("LidClosePlace").gameObject;
-        mLidClosedPlaceCollider = mLidClosedPlace.GetComponent<WorkingPoint>();
+            mLidClosedPlace = mMain.mOutputGO.transform.Find("LidClosePlace").gameObject;
+            mLidClosedPlaceCollider = mLidClosedPlace.GetComponent<WorkingPoint>();
 
-        mMain.mCameraController.StartDragging(mLid);
+            if(mDragAndDrop.StartDragging(mLid) == false)
+            {
+                mMain.mStateMachine.SwitchState(mMain.mCompleting);
+                Debug.Log("can't drag lid");
+                return;
+            }
+        }
+        else
+        {
+            mPackageAnimator = mMain.mOutputGO.GetComponent<Animator>();
+        }
+
+        
+        
         if(mIsOpened == false)
         {
             mIsOpened = true;
@@ -44,22 +68,26 @@ public class PacketOpening : IPackaging
     }
     public void OnExit()
     {
+        mDragAndDrop.StopDragging();
     }
 
     public void OnUpdate()
     {
-        if(mIsOpened == true && mLidClosedPlaceCollider.IsColliding(mLid))
+        if(mIsOpened == true && mLidClosedPlaceCollider.IsColliding(mLid) && mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
         {
             mIsOpened = false;
             mMain.mCompleting.mIsOpened = false;
+            mDragAndDrop.StopDragging();
             mLid.transform.position = mLidClosedPlace.transform.position;
-            mMain.mCameraController.StopDragging();
+            mLid.transform.rotation = mLidClosedPlace.transform.rotation;
         }
+        else if(mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
+            mDragAndDrop.StopDragging();
 
-        // if(mIsOpened == true && mMain.mCameraController.IsDragging() == false) mLidRB.isKinematic = false;
-        if(mMain.mCameraController.IsDragging() == false)
+        if(mDragAndDrop.IsDragging() == false)
         {
-            mLidRB.isKinematic = mIsOpened != true;
+            if(mLidRB != null)
+                mLidRB.isKinematic = mIsOpened != true;
             mMain.mStateMachine.SwitchState(mMain.mCompleting);
         }
     }

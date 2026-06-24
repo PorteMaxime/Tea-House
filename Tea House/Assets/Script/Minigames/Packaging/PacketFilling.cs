@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
 
 public class PacketFilling : IPackaging
 {
@@ -23,17 +24,25 @@ public class PacketFilling : IPackaging
     private Vector3 mRotationStartPos = Vector3.zero;
     private Vector3 mRotationEndPos = Vector3.zero;
 
+    private Input_PlayerInteract mPlayerInteract = null;
+    private CameraDragAndDrop mDragAndDrop = null;
+
     private void Init()
     {
+        mDragAndDrop = mMain.mCameraController.GetControllerMod<CameraDragAndDrop>();
+        mPlayerInteract = InputManager.Get().mPlayerInteract;
+        mPlayerInteract.Enable();
     }
     public void OnEnter()
     {
         mOldPosition = mBowl.transform.localPosition;
-        mMain.mCameraController.StartDragging(mBowl);
+        if(mDragAndDrop.StartDragging(mBowl) == false) mMain.mStateMachine.SwitchState(mMain.mCompleting);
 
         BoxCollider packageCollider = mMain.mOutputGO.transform.Find("Base").GetComponent<BoxCollider>();
         Vector3 minBound = packageCollider.bounds.min;
         Vector3 maxBound = packageCollider.bounds.max;
+
+        mBowl.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
         mRotationStartPos = new Vector3(0, maxBound.y, maxBound.z + mBowl.transform.position.z);
         mRotationEndPos = new Vector3(0, 0, minBound.z - mBowl.transform.position.z);
@@ -48,7 +57,10 @@ public class PacketFilling : IPackaging
 
     public void OnUpdate()
     {
-        if (mMain.mCameraController.IsDragging() == false)
+        if(mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
+            mDragAndDrop.StopDragging();
+
+        if (mDragAndDrop.IsDragging() == false)
             mMain.mStateMachine.SwitchState(mMain.mCompleting);
             
         if (mBowl.transform.position.z <= mRotationStartPos.z && mBowl.transform.position.z >= mRotationEndPos.z &&

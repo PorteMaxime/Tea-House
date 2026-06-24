@@ -17,6 +17,8 @@ public class PackagingScript : MonoBehaviour
     public GameObject mDebug = null;
     public IngredientData mDebugData = null;
 
+    private InteractiveAreaScript mIArea = null;
+
     public CameraController mCameraController = null;
     public WorkingPoint mWorkingPoint = null;
 
@@ -29,6 +31,7 @@ public class PackagingScript : MonoBehaviour
     {
         mCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         mWorkingPoint = transform.Find("WorkingPoint").GetComponent<WorkingPoint>();
+        mIArea = transform.Find("InteractiveArea").GetComponent<InteractiveAreaScript>();
         
         mStateMachine = new PackagingStateMachine();
         
@@ -47,7 +50,8 @@ public class PackagingScript : MonoBehaviour
     }
     void Update()
     {
-        mStateMachine.Update();
+        if(mIArea.isUsing == true)
+            mStateMachine.Update();
     }
 
     public GameObject Instantiate(GameObject prefab, Vector3 pos, Quaternion rot)

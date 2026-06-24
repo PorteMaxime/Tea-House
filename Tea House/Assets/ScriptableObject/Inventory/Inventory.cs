@@ -43,15 +43,6 @@ public class Inventory : MonoBehaviour
         mItems[item] += amount;
     }
 
-    public void ChangeItemAmount(string itemName, int amount)
-    {
-        foreach (ItemData item in mItems.Keys)
-        {
-            if (item.mName == itemName)
-                mItems[item] += amount;
-        }
-    }
-
     public void UnlockItem(ItemData item)
     {
         item.mIsUnlocked = true;

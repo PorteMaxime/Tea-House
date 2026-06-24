@@ -10,9 +10,8 @@ public class WorkbenchStateMachine
     public void ChangeState(IWorkbench newState)
     {
         mCurrentState?.OnExit();
-
+        Debug.Log(newState);
         mCurrentState = newState;
-        Debug.Log(mCurrentState);
         mCurrentState.OnEnter();
     }
 }
