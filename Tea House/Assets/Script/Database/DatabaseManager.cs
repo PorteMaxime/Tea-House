@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
@@ -85,14 +86,28 @@ public class DatabaseManager : MonoBehaviour
 
     public void SaveInventory()
     {
+        //foreach (var item in Inventory.msInstance.mItems)
+        //{
+            
+        //}
+
         //database.InsertOrReplace
     }
 
     public void LoadInventory()
     {
-        //object currentDay = database.Get<object>("SELECT amount, isUnlocked FROM Inventory WHERE name = 'Mint'");
+        var rows = database.Table<ItemTempInfos>().ToList();
 
-        
+        Inventory inventory = Inventory.msInstance;
+
+        foreach (var itemInfos in rows)
+        {
+            if (inventory.mItemsLookUp.TryGetValue(itemInfos.name, out var item) == true)
+            {
+                inventory.mItems[item] = itemInfos.amount;
+                item.mIsUnlocked = itemInfos.isUnlocked;
+            }
+        }
     }
 
     public void SaveMails()

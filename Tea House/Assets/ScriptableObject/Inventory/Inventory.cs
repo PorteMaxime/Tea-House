@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -9,7 +7,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private int mStartingItemsAmount = 5;
 
     // Items du joueur
-    private Dictionary<ItemData, int> mItems = new Dictionary<ItemData, int>();
+    public Dictionary<ItemData, int> mItems = new Dictionary<ItemData, int>();
+    public Dictionary<string, ItemData> mItemsLookUp = new Dictionary<string, ItemData>();
 
     [SerializeField] public int mMoneyAmount;
 
@@ -27,7 +26,10 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         foreach (var item in mGameItems)
+        {
             mItems.Add(item, mStartingItemsAmount);
+            mItemsLookUp.Add(item.mName, item);
+        }
     }
 
     public void ClearInventory()
