@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1833484119412835154}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: 9.72376, y: -0, z: -9.76725}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -60,12 +60,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MailCreator
   mDaylight: {fileID: 0}
-  mDatabaseManager: {fileID: 0}
-  mMailsPresets: []
   mImages:
   - {fileID: 21300000, guid: fc3375a342626b84b854fbc2b83f43b3, type: 3}
   - {fileID: 21300000, guid: f76adcedca9e2584db14b9d22a418989, type: 3}
   - {fileID: 21300000, guid: 6168bc0706358cf41896d7a20d8f052d, type: 3}
+  mFirstNames:
+  - "pr\xE9nom 1"
+  - "pr\xE9nom 2"
+  mLastNames:
+  - 'nom 1 '
+  - nom 2
 --- !u!114 &1524140342625153491
 MonoBehaviour:
   m_ObjectHideFlags: 0
