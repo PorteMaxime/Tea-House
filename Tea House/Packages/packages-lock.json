@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "com.gilzoide.sqlite-net": {
-      "version": "file:com.gilzoide.sqlite-net",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.unity.collab-proxy": {
       "version": "2.12.4",
       "depth": 0,
