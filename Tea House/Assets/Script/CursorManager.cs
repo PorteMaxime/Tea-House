@@ -26,31 +26,21 @@ public class CursorManager : MonoBehaviour
                 Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
                 break;
             case 1:
-                DoAnim1();
+                DoAnim(cursorTextureAnim1);
                 break;
             case 2:
-                DoAnim2();
+                DoAnim(cursorTextureAnim2);
                 break;
         }
     }
-    void DoAnim1()
+    void DoAnim(Texture2D[] cursorAnim)
     {
         frameTimer -= Time.deltaTime;
         if (frameTimer < 0)
         {
             frameTimer += frameRate;
             currentFrame = (currentFrame + 1) % frameCount;
-            Cursor.SetCursor(cursorTextureAnim1[currentFrame], Vector2.zero, CursorMode.Auto);
-        }
-    }
-    void DoAnim2()
-    {
-        frameTimer -= Time.deltaTime;
-        if (frameTimer < 0)
-        {
-            frameTimer += frameRate;
-            currentFrame = (currentFrame + 1) % frameCount;
-            Cursor.SetCursor(cursorTextureAnim2[currentFrame], Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(cursorAnim[currentFrame], Vector2.zero, CursorMode.Auto);
         }
     }
 }
