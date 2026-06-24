@@ -22,6 +22,7 @@ public class ItemTempInfos
 public class DatabaseManager : MonoBehaviour
 {
     [SerializeField] public Daylight mDaylight;
+    [SerializeField] public GameObject aaaa;
 
     SQLiteConnection database;
 
