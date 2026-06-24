@@ -13,6 +13,7 @@ public class MailRandomData
 [Table("Inventory")]
 public class ItemTempInfos
 {
+    [PrimaryKey]
     public string name { get; set; }
 
     public int amount { get; set; }
@@ -36,6 +37,7 @@ public class DatabaseManager : MonoBehaviour
     {
         //CreateTables();
         //LoadInventory();
+        //SaveInventory()
     }
 
     private void CreateTables()
@@ -86,12 +88,16 @@ public class DatabaseManager : MonoBehaviour
 
     public void SaveInventory()
     {
-        //foreach (var item in Inventory.msInstance.mItems)
-        //{
-            
-        //}
+        ItemTempInfos itemInfos = new ItemTempInfos();
 
-        //database.InsertOrReplace
+        foreach (var item in Inventory.msInstance.mItems)
+        {
+            itemInfos.name = item.Key.mName;
+            itemInfos.amount = item.Value;
+            itemInfos.isUnlocked = item.Key.mIsUnlocked;
+
+            database.InsertOrReplace(itemInfos);
+        }
     }
 
     public void LoadInventory()
