@@ -1000,6 +1000,18 @@ PrefabInstance:
       propertyPath: mDaylight
       value: 
       objectReference: {fileID: 1435202341}
+    - target: {fileID: 3807418820913744295, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mDatabaseManager
+      value: 
+      objectReference: {fileID: 1321376755}
+    - target: {fileID: 3807418820913744295, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mMailsPresets.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807418820913744295, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: 'mMailsPresets.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e4e7623f00ef4b4abf1a569156de910, type: 2}
     - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.36237
@@ -1415,6 +1427,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 401d147487e7813488771dc6d2edd60c, type: 3}
+--- !u!114 &1321376755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2735390859510243914, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
+  m_PrefabInstance: {fileID: 2459565526684557488}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2821d0f8cb6d8d4e96418f04cab1321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DatabaseManager
 --- !u!4 &1351852057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b6af2784b8a973a409a3363f12aedd1d, type: 3}
@@ -2710,10 +2733,6 @@ PrefabInstance:
       propertyPath: mMailCreator
       value: 
       objectReference: {fileID: 219230984}
-    - target: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
-      propertyPath: mDaySpeedMultiplier
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4902280044909388087, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -3732,6 +3751,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2135722746}
+    - target: {fileID: 8895679032786708201, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895679032786708201, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895679032786708201, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
