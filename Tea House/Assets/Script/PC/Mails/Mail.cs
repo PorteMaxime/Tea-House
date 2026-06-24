@@ -1,20 +1,28 @@
+using SQLite;
 using UnityEngine;
-
 
 public class Mail
 {
-    public int id;
+    [Column("id")]
+    public int id { get; set; }
 
     public static int mailID = 0;
 
     public Order mOrder;
     public Sprite mPicture;
-    public string mName;
-    public string mText;
-    public int mSendDay;
-    public float mSendTime;
-    public int mDuration;
-    public float mExpiration;
+
+    [Column("")]
+    public string mName { get; set; }
+    [Column("")]
+    public string mText { get; set; }
+    [Column("")]
+    public int mSendDay { get; set; }
+    [Column("")]
+    public float mSendTime { get; set; }
+    [Column("")]
+    public int mDuration { get; set; } = 0;
+    [Column("")]
+    public float mExpiration { get; set; }
 
     public Mail()
     {
