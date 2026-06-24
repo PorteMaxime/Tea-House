@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private List<ItemData> mStartingItems = new List<ItemData>();
+    [SerializeField] private List<ItemData> mGameItems = new List<ItemData>();
     [SerializeField] private int mStartingItemsAmount = 5;
 
     // Items du joueur
@@ -25,7 +26,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        foreach (var item in mStartingItems)
+        foreach (var item in mGameItems)
             mItems.Add(item, mStartingItemsAmount);
     }
 
@@ -38,6 +39,15 @@ public class Inventory : MonoBehaviour
     public void ChangeItemAmount(ItemData item, int amount)
     {
         mItems[item] += amount;
+    }
+
+    public void ChangeItemAmount(string itemName, int amount)
+    {
+        foreach (ItemData item in mItems.Keys)
+        {
+            if (item.mName == itemName)
+                mItems[item] += amount;
+        }
     }
 
     public void UnlockItem(ItemData item)

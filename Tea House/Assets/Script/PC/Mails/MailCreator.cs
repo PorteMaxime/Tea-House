@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.LowLevelPhysics2D.PhysicsShape;
 
 public class MailCreator : MonoBehaviour
 {
     [SerializeField] private Daylight mDaylight;
+    [SerializeField] private DatabaseManager mDatabaseManager;
 
     [SerializeField] private List<MailPreset> mMailsPresets = new List<MailPreset>();
 
@@ -14,9 +17,9 @@ public class MailCreator : MonoBehaviour
     private int mPresetProbability = 8;
     private int mTorrefiedProbability = 25;
 
+    // Informations pour créer les commandes
     [SerializeField] private List<Sprite> mImages;
-    [SerializeField] private List<string> mFirstNames;
-    [SerializeField] private List<string> mLastNames;
+    Dictionary<string, List<string>> mMailRandomContent;
 
     public List<Mail>[] mCalendar = new List<Mail>[7];
 
@@ -24,6 +27,12 @@ public class MailCreator : MonoBehaviour
     {
         for (int i = 0; i < mCalendar.Length; i++)
             mCalendar[i] = new List<Mail>();
+    }
+
+    public void Start()
+    {
+        // Chargement des donnees depuis la bdd
+        mMailRandomContent = mDatabaseManager.LoadMailRandomValues();
     }
 
     public void CreateDailyMails()
@@ -62,12 +71,13 @@ public class MailCreator : MonoBehaviour
     public void CreateMailData(Mail mail)
     {
         mail.mPicture = mImages[Random.Range(0, mImages.Count)];
-        mail.mName = mFirstNames[Random.Range(0, mFirstNames.Count)] + " " + mLastNames[Random.Range(0, mLastNames.Count)];
+        mail.mName = GetRandomValue("FirstName") + " " + GetRandomValue("LastName");
         mail.mSendDay = mDaylight.mCurrentDay + 1 + Random.Range(0, mCalendar.Length);
         
         if (mail.mDuration <= 0)
             mail.mDuration = Random.Range(mDurationRange.x, mDurationRange.y);
     }
+
     public void CreateMailDescription(Mail mail)
     {
         // Pour tests
@@ -84,9 +94,41 @@ public class MailCreator : MonoBehaviour
             mail.mText += "\n" + stat.mStat.ToString() + " : " + stat.mValue;
         /**/
 
+        // formule politesse ?
 
+        // date
 
+        // stats
 
+        // supplémentaire ?
+
+        mail.mText = "I " + GetRandomValue("Reason") + " " + GetRandomValue("Day+" + mail.mDuration.ToString()) + ".\n";
+        bool first = true;
+        foreach (StatValue stat in mail.mOrder.mOrderData.mStats)
+        {
+            if (stat.mValue <= 0)
+                continue;
+
+            if (first)
+            {
+                mail.mText += "I ";
+                first = false;
+            }
+            else
+                mail.mText += " I also ";
+
+            mail.mText += GetRandomValue("Necessity") + " " + "LOW/HIGH" + " " + stat.ToString() + "."; // SET LOW/HIGH
+
+            // SET "commande simple"
+        }
+    }
+
+    public string GetRandomValue(string type)
+    {
+        if (mMailRandomContent.TryGetValue(type, out List<string> value) != true)
+            return "(" + type + " not in database)";
+
+        return mMailRandomContent[type][Random.Range(0, mMailRandomContent[type].Count)];
     }
 
     public void CreateOrder(Mail mail)
