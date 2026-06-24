@@ -99,6 +99,8 @@ public class MailSystem : MonoBehaviour
                     mMailCanvasScript.RemoveMailPrefab(firstMail);
                     if (!mMailCanvasScript.mOrdersDictionary.Keys.Contains(firstMail))
                         mMailCanvasScript.CreateOrderPrefab(firstMail);
+                    else
+                        mMailCanvasScript.UpdatePrefabState(firstMail);
                 }
                 else
                     break;

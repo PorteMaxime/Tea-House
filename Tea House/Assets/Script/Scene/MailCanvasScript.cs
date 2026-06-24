@@ -53,6 +53,8 @@ public class MailCanvasScript : MonoBehaviour
 
         ToggleOrderContent(false);
 
+        ToggleFiltersContent(false);
+
         // Creation filtres
         foreach (Order.State state in mAvailableFilters)
         {
@@ -219,6 +221,9 @@ public class MailCanvasScript : MonoBehaviour
                 prefabText.GetComponent<Text>().text = mail.mText;
         }
 
+        if (!mCurrentFilters.Contains(mail.mOrder.mState))
+            prefab.SetActive(false);
+
         mOrdersDictionary.Add(mail, prefab);
     }
 
@@ -234,7 +239,7 @@ public class MailCanvasScript : MonoBehaviour
             DeSelectOrder();
     }
 
-    private void UpdatePrefabState(Mail mail)
+    public void UpdatePrefabState(Mail mail)
     {
         Transform temp = mOrdersDictionary[mail].transform.Find("ButtonShowOrder/TextState");
         if (temp != null)
@@ -244,8 +249,16 @@ public class MailCanvasScript : MonoBehaviour
         if (sendButton != null)
             sendButton.GetComponent<Button>().interactable = mail.mOrder.mState == Order.State.Accepted ? true : false;
 
-        //if (mCanvasFiltersPopup != null)
-        //    mCanvasFiltersPopup.SetActive(false);
+        UpdateOrdersVisibility();
+    }
+
+    public void TrySendOrder()
+    {
+        mMailSystem.ChangeOrderState(mSelectedOrder.Item1, Order.State.Completed);
+        UpdatePrefabState(mSelectedOrder.Item1);
+
+        mSelectedOrder = null;
+        ToggleOrderContent(false);
     }
 
     #region Filters
@@ -265,6 +278,16 @@ public class MailCanvasScript : MonoBehaviour
             text.text = state.ToString();
     }
 
+    public void ToggleFiltersContent()
+    {
+        ToggleFiltersContent(!mCanvasFiltersPopup.activeSelf);
+    }
+
+    public void ToggleFiltersContent(bool active)
+    {
+        mCanvasFiltersPopup.SetActive(active);
+    }
+
     public void ToggleFilter(Order.State state, bool active)
     {
         if (active == true && !mAvailableFilters.Contains(state))
@@ -272,9 +295,27 @@ public class MailCanvasScript : MonoBehaviour
         else if (mAvailableFilters.Contains(state))
             mAvailableFilters.Remove(state);
 
-        //UpdateMailsVisibility();
+        UpdateOrdersVisibility();
     }
 
+    private void UpdateOrdersVisibility()
+    {
+        bool isMailInFilter = false;
+
+        foreach (Mail mail in mOrdersDictionary.Keys)
+        {
+            if (mCurrentFilters.Contains(mail.mOrder.mState))
+            {
+                isMailInFilter = true;
+                mOrdersDictionary[mail].SetActive(true);
+            }
+            else
+                mOrdersDictionary[mail].SetActive(false);
+        }
+
+        if (!isMailInFilter)
+            DeSelectMail();
+    }
 
     #endregion Filters
 
