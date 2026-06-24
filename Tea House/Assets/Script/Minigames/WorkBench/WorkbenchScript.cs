@@ -70,6 +70,8 @@ public class WorkbenchScript : MonoBehaviour
     {
         if (mInteractiveArea.isUsing)
         {
+            CursorManager.instance.animIndex = 1;
+
             if (Mouse.current.position.ReadValue().y >= Screen.height - upPan && cameraLookUp == false)
             {
                 Quaternion targetRotation = mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);

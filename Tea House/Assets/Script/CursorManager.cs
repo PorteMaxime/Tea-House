@@ -2,11 +2,20 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
+    public static CursorManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public Texture2D defaultCursor;
+    public Texture2D[] cursorTextureAnim0;
     public Texture2D[] cursorTextureAnim1;
     public Texture2D[] cursorTextureAnim2;
     public float frameRate;
-    public int animIndex = 1;
+    public int animIndex = 0;
+    public int lastAnimIndex = 0;
 
     private int frameCount;
     private int currentFrame;
@@ -20,6 +29,15 @@ public class CursorManager : MonoBehaviour
 
     void Update()
     {
+        if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)
+        {
+            animIndex = 2;
+        }
+        if(lastAnimIndex != animIndex)
+        {
+            lastAnimIndex = animIndex;
+            frameTimer = 0;
+        }
         switch (animIndex)
         {
             case 0:

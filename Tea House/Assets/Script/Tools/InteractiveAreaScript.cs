@@ -4,7 +4,7 @@ using UnityEngine;
 public class InteractiveAreaScript : MonoBehaviour
 {
     private Input_PlayerInteract inputInteract;
-    [SerializeField] private bool canIntercat = false;
+    [SerializeField] public bool canIntercat = false;
     [SerializeField] public bool isUsing = false;
 
     private CameraController mCameraController = null;
