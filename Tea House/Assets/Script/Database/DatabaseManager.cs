@@ -35,7 +35,7 @@ public class DatabaseManager : MonoBehaviour
     void Start()
     {
         //CreateTables();
-        LoadInventory();
+        //LoadInventory();
     }
 
     private void CreateTables()
