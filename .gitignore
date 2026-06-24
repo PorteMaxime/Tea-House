@@ -1,20 +1,32 @@
-# --- Unity ---
+# =========================
+# Unity generated folders
+# =========================
+
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
-[Mm]emoryCaptures/
-[Aa]ssets/AssetStoreTools*
+[Uu]ser[Ss]ettings/
+MemoryCaptures/
+Recordings/
 
-# --- Ne pas ignorer les fichiers Meta de dossiers vides ---
-!/[Aa]ssets/**/*.meta
+# =========================
+# Asset meta data cache
+# =========================
 
-# --- Fichiers générés par l'IDE ---
+.DS_Store
+Thumbs.db
+
+# =========================
+# Visual Studio / Rider
+# =========================
+
 .vs/
-.vscode/
 .idea/
+.gradle/
+
 *.csproj
 *.unityproj
 *.sln
@@ -26,40 +38,52 @@
 *.booproj
 *.svd
 *.pdb
+*.mdb
 *.opendb
 *.VC.db
 
-# --- Unity Extensions ---
-/[Aa]ssets/Plugins/Editor/JetBrains*
-/[Aa]ssets/Plugins/Editor/UnityProjectGeneration*
+# Rider
+*.DotSettings.user
 
-# --- OS spécifiques ---
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-Icon?
-ehthumbs.db
-Thumbs.db
+# VS Code
+.vscode/
 
-# --- Fichiers de crash et logs ---
+# =========================
+# Unity auto-generated files
+# =========================
+
+Assets/AssetStoreTools*
+
+# =========================
+# Crash reports
+# =========================
+
 sysinfo.txt
-*.log
 
-# --- Builds ---
-/[Bb]uild/
-/[Bb]uilds/
-/[Ww]indowsPlayer/
-/[Mm]acOSPlayer/
-/[Ii]OSPlayer/
-/[Aa]ndroidPlayer/
+# =========================
+# Addressables
+# =========================
 
-# --- Dossiers de package utilisateur (si vous en utilisez) ---
-/Packages/com.unity.ext.test/
+ServerData/
 
-# --- Fichiers de configuration utilisateur (souvent source de conflits) ---
-/[UserSettings]/
-/[ProjectSettings]/ProjectVersion.txt
-# Note : On garde généralement ProjectSettings, mais ProjectVersion peut varier 
-# si l'équipe n'est pas sur la même version exacte (à éviter).
+# =========================
+# Generated packages
+# =========================
+
+Packages/packages-lock.json
+
+# =========================
+# Ignore build exports
+# =========================
+
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.exe
+
+# =========================
+# Ignore test/build caches
+# =========================
+
+Coverage/
