@@ -75,6 +75,7 @@ public class PackagingScript : MonoBehaviour
 
     public void SetIngredientData(IngredientData data)
     {
+        //GameObject.FindGameObjectWithTag()
         // TODO : Take the ingredient data from Workbench
     }
 }
