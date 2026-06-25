@@ -11,6 +11,7 @@ public class InteractiveAreaScript : MonoBehaviour
     private Camera_InteractionHighlight mCameraInteractionMod = null;
     private CameraDragAndDrop mDragAndDrop = null;
     private Camera_DepthView mCameraDepthMod = null;
+    public bool interactWithCamera = true;
     private void Awake()
     {
         inputInteract = InputManager.Get().mPlayerInteract;
@@ -48,16 +49,25 @@ public class InteractiveAreaScript : MonoBehaviour
 
     public void Enter()
     {
-        mCameraDepthMod.GoTo(transform.Find("CameraMovePoint").transform);
-        mCameraController.SetState(CameraController.CameraStates.Zoom);
+        if(interactWithCamera)
+        {
+            mCameraDepthMod.GoTo(transform.Find("CameraMovePoint").transform);
+            mCameraController.SetState(CameraController.CameraStates.Zoom);
+        }
+
         isUsing = true;
     }
 
     public void Quit()
     {
+        if (interactWithCamera)
+        {
+            mCameraDepthMod.Back();
+            mCameraController.SetState(CameraController.CameraStates.Orbital);
+        }
+
         mDragAndDrop.StopDragging();
-        mCameraDepthMod.Back();
-        mCameraController.SetState(CameraController.CameraStates.Orbital);
+
         isUsing = false;
     }
 
