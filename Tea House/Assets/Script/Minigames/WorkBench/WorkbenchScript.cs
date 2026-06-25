@@ -21,7 +21,7 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMixtureBowl;
     public IngredientData mCurrentItem = null;
     public GameObject currentItemG = null;
-    public List<IngredientData> mMixture;
+    public List<ItemData> mMixture;
     public IngredientData mBruiseIngrdient;
 
     public GameObject mMortarTopBorn;
@@ -49,7 +49,7 @@ public class WorkbenchScript : MonoBehaviour
     void Awake()
     {
         mBruiseIngrdient = ScriptableObject.CreateInstance<IngredientData>();
-        mMixture = new List<IngredientData>();
+        mMixture = new List<ItemData>();
     }
     void Start()
     {
