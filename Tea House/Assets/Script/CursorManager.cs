@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CursorManager : MonoBehaviour
 {
@@ -8,11 +10,14 @@ public class CursorManager : MonoBehaviour
     {
         instance = this;
     }
-
-    public Texture2D defaultCursor;
-    public Texture2D[] cursorTextureAnim0;
-    public Texture2D[] cursorTextureAnim1;
-    public Texture2D[] cursorTextureAnim2;
+    /*---*/
+    public Image cursorImage;
+    public GameObject cursorPos;
+    //
+    public Sprite defaultCursor;
+    public Sprite[] cursorTextureAnim0;
+    public Sprite[] cursorTextureAnim1;
+    public Sprite[] cursorTextureAnim2;
     public float frameRate;
     public int animIndex = 0;
     public int lastAnimIndex = 0;
@@ -23,16 +28,13 @@ public class CursorManager : MonoBehaviour
 
     void Start()
     {
-        Cursor.SetCursor(cursorTextureAnim1[0], Vector2.zero, CursorMode.Auto);
+        cursorImage.sprite = defaultCursor;
         frameCount = cursorTextureAnim1.Length;
+        Cursor.visible = false;
     }
 
     void Update()
     {
-        if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)
-        {
-            animIndex = 2;
-        }
         if(lastAnimIndex != animIndex)
         {
             lastAnimIndex = animIndex;
@@ -41,24 +43,31 @@ public class CursorManager : MonoBehaviour
         switch (animIndex)
         {
             case 0:
-                Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+                cursorImage.sprite = defaultCursor;
+                //pos -20/20
                 break;
             case 1:
                 DoAnim(cursorTextureAnim1);
+                cursorPos.transform.localScale = new Vector3(1f, 1f, 1f);
+                //pos -30/30
                 break;
             case 2:
                 DoAnim(cursorTextureAnim2);
+                cursorPos.transform.localScale = new Vector3(1f, 1f, 1f);
+                //pos -30/30
                 break;
         }
+
+        cursorPos.transform.position = Mouse.current.position.ReadValue();
     }
-    void DoAnim(Texture2D[] cursorAnim)
+    void DoAnim(Sprite[] cursorAnim)
     {
         frameTimer -= Time.deltaTime;
         if (frameTimer < 0)
         {
             frameTimer += frameRate;
             currentFrame = (currentFrame + 1) % frameCount;
-            Cursor.SetCursor(cursorAnim[currentFrame], Vector2.zero, CursorMode.Auto);
+            cursorImage.sprite = cursorAnim[currentFrame];
         }
     }
 }
