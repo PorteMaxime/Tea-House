@@ -21,38 +21,63 @@ public class PacketFilling : IPackaging
 
     private float mBowlAngle = 70f;
     private float mRotationSpeed = 5f;
-    private Vector3 mRotationStartPos = Vector3.zero;
-    private Vector3 mRotationEndPos = Vector3.zero;
+    // private Vector3 mRotationStartPos = Vector3.zero;
+    // private Vector3 mRotationEndPos = Vector3.zero;
 
     private Input_PlayerInteract mPlayerInteract = null;
     private CameraDragAndDrop mDragAndDrop = null;
+
+    private Vector4 mZBorns = Vector4.zero; // (bowlOriginZ, distanceBetweenBowlOriginAndPackage, nearestPackageCornerFromBowlOrigin, packageCenterZ)
+    private Vector4 mOppositeZBorns = Vector4.zero; // Mirrored values of the ZBorns => mirroring point is the package center z
+    private float mYBorn = 0f;
+    private Collider mBowlCollider = null;
 
     private void Init()
     {
         mDragAndDrop = mMain.mCameraController.GetControllerMod<CameraDragAndDrop>();
         mPlayerInteract = InputManager.Get().mPlayerInteract;
         mPlayerInteract.Enable();
+
+        Transform bowlPos = mMain.transform.Find("posMixtureBowl");
+        if(bowlPos != null)
+        {
+            mZBorns.x = bowlPos.position.z;
+            mOldPosition = bowlPos.position;
+        }
+        
+        Transform packagePos = mMain.transform.Find("WorkingPoint");
+        if(packagePos != null)
+            mZBorns.w = packagePos.position.z;
+        
+        mZBorns.y = mZBorns.w - mZBorns.x;
+
+        mOppositeZBorns.x = mZBorns.w + (mZBorns.w - mZBorns.x);
+        mOppositeZBorns.y = mZBorns.w + (mZBorns.w - mZBorns.y);
+        mOppositeZBorns.w = mZBorns.w;
     }
     public void OnEnter()
     {
-        mOldPosition = mBowl.transform.localPosition;
         if(mDragAndDrop.StartDragging(mBowl) == false) mMain.mStateMachine.SwitchState(mMain.mCompleting);
-
-        BoxCollider packageCollider = mMain.mOutputGO.transform.Find("Base").GetComponent<BoxCollider>();
-        Vector3 minBound = packageCollider.bounds.min;
-        Vector3 maxBound = packageCollider.bounds.max;
 
         mBowl.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
-        mRotationStartPos = new Vector3(0, maxBound.y, maxBound.z + mBowl.transform.position.z);
-        mRotationEndPos = new Vector3(0, 0, minBound.z - mBowl.transform.position.z);
+        Collider packageCollider = mMain.mOutputGO.GetComponent<Collider>();
+        if(packageCollider != null)
+        {
+            mZBorns.z = packageCollider.bounds.min.z;
+            mOppositeZBorns.y = mZBorns.w + (mZBorns.w - mZBorns.z);
+            mYBorn = packageCollider.bounds.max.y;
+        }
+
+        mBowlCollider = mBowl.GetComponent<Collider>();
     }
 
     public void OnExit()
     {
         mMain.mCompleting.mIsFilled = isFilled;
-        mBowl.transform.localPosition = mOldPosition;
         mBowl.transform.rotation = Quaternion.identity;
+        mBowl.transform.position = mOldPosition;
+        mBowl.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
     }
 
     public void OnUpdate()
@@ -62,18 +87,35 @@ public class PacketFilling : IPackaging
 
         if (mDragAndDrop.IsDragging() == false)
             mMain.mStateMachine.SwitchState(mMain.mCompleting);
-            
-        if (mBowl.transform.position.z <= mRotationStartPos.z && mBowl.transform.position.z >= mRotationEndPos.z &&
-            mBowl.transform.position.y >= mRotationStartPos.y)
-        {
-            float percentage = mBowl.transform.position.z >= mMain.mOutputGO.transform.position.z ? /*1 - (mBowl.transform.position.z / mRotationEndPos.z)*/0 : 1 - (mBowl.transform.position.z / mRotationEndPos.z);
-            float targetRotation = -mBowlAngle * percentage;
 
+        if(mBowlCollider == null) return;
+
+        if(mBowlCollider.bounds.min.y < mYBorn) return;
+        if(mBowlCollider.bounds.max.z < mZBorns.w)
+        {
+            // B to B
+            float percentage = 1 - (mZBorns.w - mBowlCollider.bounds.max.z) / mZBorns.y;
+            if(percentage > 1f) percentage = 1f;
+            else if(percentage < 0f) percentage = 0f;
+
+            float targetRotation = mBowlAngle * percentage;
             mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.Euler(targetRotation, 0f, 0f), mRotationSpeed * Time.deltaTime);
         }
+        // else if(mBowlCollider.bounds.min.z > mOppositeZBorns.w)
+        // {
+        //     // O to O
+        //     float percentage = 1 - (mBowlCollider.bounds.min.z - mOppositeZBorns.w) / mOppositeZBorns.y;Debug.Log(percentage);
+        //     if(percentage > 1f) percentage = 1f;
+        //     else if(percentage < 0f) percentage = 0f;
 
-        else if (mBowl.transform.position.y < mRotationStartPos.y || mBowl.transform.position.y > mRotationStartPos.y || mBowl.transform.position.z < mRotationEndPos.z)
+        //     float targetRotation = -mBowlAngle * percentage;
+        //     mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.Euler(targetRotation, 0f, 0f), mRotationSpeed * Time.deltaTime);
+        // }
+        else
+        {
+            // B to O
             mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.identity, mRotationSpeed * Time.deltaTime);
+        }
     }
 
     private IEnumerator HomeSweetHome() // Bring back Bowl

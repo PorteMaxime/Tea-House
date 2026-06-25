@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -375,7 +375,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -1072,9 +1072,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -0.7354296, y: 3.9011636, z: 0.90648836}
+    m_Target: {x: 1.6903635, y: 4.9016533, z: -0.60624146}
     speed: 2
-    m_Value: {x: -0.7354296, y: 3.9011636, z: 0.90648836}
+    m_Value: {x: 1.6903635, y: 4.9016533, z: -0.60624146}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1120,20 +1120,20 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.27530777, y: 0.52443445, z: -0.18366897, w: -0.7848299}
+    m_Target: {x: 0.32673818, y: -0.45363942, z: 0.18335183, w: 0.80871433}
     speed: 2
-    m_Value: {x: -0.27245128, y: 0.5360086, z: -0.18772915, w: -0.7766742}
+    m_Value: {x: 0.32940912, y: -0.45183364, z: 0.18420146, w: 0.8083352}
   m_Size:
-    m_Target: 0.24514031
+    m_Target: 0.8660254
     speed: 2
-    m_Value: 0.24514031
+    m_Value: 0.8660254
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_CameraSettings:
-    m_Speed: 2
-    m_SpeedNormalized: 1
+    m_Speed: 0.44078088
+    m_SpeedNormalized: 0.22000045
     m_SpeedMin: 0.001
     m_SpeedMax: 2
     m_EasingEnabled: 1
@@ -1202,20 +1202,19 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs:
-      - m_Data: -4942
+      - m_Data: 37052
       m_LastClickedID:
-        m_Data: -4942
+        m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -5158
-      - m_Data: -4942
-      - m_Data: -4938
-      - m_Data: -4822
-      - m_Data: -2694
-      - m_Data: 37124
+      - m_Data: -3788
+      - m_Data: -3672
+      - m_Data: -2592
+      - m_Data: -2582
+      - m_Data: -1608
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Canvas
-        m_OriginalName: Canvas
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
@@ -1223,10 +1222,10 @@ MonoBehaviour:
           width: 0
           height: 0
         m_UserData:
-          m_Data: 37124
+          m_Data: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 9}
@@ -1286,7 +1285,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script/Minigames/WorkBench
+    - Assets/Prefabs/Scene
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1296,24 +1295,24 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Script/Minigames/WorkBench
+  - Assets/Prefabs/Scene
   m_LastFoldersGridSize: 64
   m_LastProjectPath: D:\source\repos\Tea-House\Tea House
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 168}
+    scrollPos: {x: 0, y: 56}
     m_SelectedIDs:
-    - m_Data: 49376
+    - m_Data: 97134
     m_LastClickedID:
-      m_Data: 49376
+      m_Data: 97134
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 40900
-    - m_Data: 43812
-    - m_Data: 43818
-    - m_Data: 49364
+    - m_Data: 41168
+    - m_Data: 41182
+    - m_Data: 41188
+    - m_Data: 41242
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -1348,7 +1347,6 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 40900
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1376,8 +1374,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: -4942
-    m_LastClickedInstanceID: -4942
+    - m_Data: 37052
+    m_LastClickedInstanceID: 37052
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs:
     - m_Data: 0
@@ -1499,7 +1497,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 266
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

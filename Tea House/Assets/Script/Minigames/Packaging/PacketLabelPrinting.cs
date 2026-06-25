@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class PacketLabelPrinting : IPackaging
 
     private GameObject mLabelTextureGenerator = null;
     private GameObject mLabelGoPrefab = null;
+    private GameObject mLabelSpot = null;
 
     private Dictionary<Mail, GameObject> mOrders = new Dictionary<Mail, GameObject>();
 
@@ -34,12 +36,14 @@ public class PacketLabelPrinting : IPackaging
 
     private void Init()
     {
-        mPrinterViewPoint = mMain.transform.Find("Printer").transform.Find("ViewPoint").gameObject;
+        Transform printer = mMain.transform.Find("Printer");
+        mPrinterViewPoint = printer.transform.Find("ViewPoint").gameObject;
         mPrinterScreenUI = mPrinterViewPoint.transform.parent.Find("PrinterScreen").gameObject;
 
-        mPrinterScript = mMain.transform.Find("Printer").GetComponent<Printer_SelectOrder>();
+        mPrinterScript = printer.GetComponent<Printer_SelectOrder>();
 
         mLabelGoPrefab = Resources.Load<GameObject>("Printer/Label");
+        mLabelSpot = printer.Find("LabelSpot").gameObject;
 
         mLabelTextureGenerator = GameObject.Find("DynamicTextureGenerator").transform.Find("LabelTexture_Canva").gameObject;
         DynamicTextureManager.AddGenerator<LabelTextureGenerator>(DynamicTextureManager.DynamicTexture.Label, mLabelTextureGenerator);
@@ -131,12 +135,33 @@ public class PacketLabelPrinting : IPackaging
         GameObject label = GameObject.Instantiate(mLabelGoPrefab);
         label.transform.parent = mPrinterScript.gameObject.transform;
         label.transform.localRotation = Quaternion.identity;
-        label.transform.localPosition = new Vector3(0, 0.001f, 0.003f); // TODO : Find a better way to set the position of the label
+        label.transform.localPosition = new Vector3(0, 0.001f, 0);//new Vector3(0, 0.001f, 0.003f); // TODO : Find a better way to set the position of the label
 
         label.GetComponent<MeshRenderer>().material.mainTexture = labelTexture;
         mMain.mLabelling.mLabelGo = label;
         mIsPrinted = true;
         mMain.mCompleting.mLabelPrinted = true;
+
+
+        mMain.StartCoroutine(SlideLabel(label, mLabelSpot.transform.position, mLabelSpot.transform.rotation, 5f));
         mMain.mStateMachine.SwitchState(mMain.mCompleting);
     }
+
+    IEnumerator SlideLabel(GameObject labelGO, Vector3 targetPosition, Quaternion targetRotation, float duration)
+    {
+        float elapsedTime = 0;
+        Vector3 positionOrigine = labelGO.transform.position;
+        Quaternion rotationOrigine = labelGO.transform.rotation;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            labelGO.transform.position = Vector3.Lerp(positionOrigine, targetPosition, elapsedTime / duration);
+            labelGO.transform.rotation = Quaternion.Lerp(rotationOrigine, targetRotation, elapsedTime / duration);
+            yield return 0;
+        }
+
+        labelGO.transform.position = targetPosition;
+        labelGO.transform.rotation = targetRotation;
+    }
 }
+ 

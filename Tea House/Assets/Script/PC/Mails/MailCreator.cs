@@ -28,7 +28,7 @@ public class MailCreator : MonoBehaviour
 
     public void CreateDailyMails()
     {
-        for (int i = 0; i < Random.Range(1, 7); i++)
+        for (int i = 0; i < Random.Range(10, 70); i++)
             CreateMail();
     }
 
@@ -87,7 +87,6 @@ public class MailCreator : MonoBehaviour
 
         // Base
         List<BaseData> bases = Inventory.msInstance.GetItemsOfType<BaseData>();
-
         BaseData baseIngredient = bases[Random.Range(0, bases.Count)];
         mail.mText += "\n" + baseIngredient.mName;
 

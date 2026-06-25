@@ -30,6 +30,7 @@ public class PackagingScript : MonoBehaviour
     void Start()
     {
         mCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        mMailSystem = GameObject.FindGameObjectWithTag("MailManager").GetComponent<MailSystem>();
         mWorkingPoint = transform.Find("WorkingPoint").GetComponent<WorkingPoint>();
         mIArea = transform.Find("InteractiveArea").GetComponent<InteractiveAreaScript>();
         
