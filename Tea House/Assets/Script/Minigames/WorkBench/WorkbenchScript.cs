@@ -14,7 +14,9 @@ public class WorkbenchScript : MonoBehaviour
     public PackagingScript mPackaging;
     public GameObject mMixtureBowlPackagingPos;
     public InteractiveAreaScript mInteractiveArea;
+
     public GameObject mCameraPosPackaging;
+    public GameObject mCameraPosCuttingBoard;
 
     public GameObject mMortarBowl;
     public GameObject mMortarPilon;
@@ -41,6 +43,7 @@ public class WorkbenchScript : MonoBehaviour
     public SelectItemState selectItemState;
     public BruisingState bruisingState;
     public BlendingState blendingState;
+    public CuttingState cuttingState;
 
     //
     float upPan = Screen.height * 0.15f;
@@ -62,6 +65,7 @@ public class WorkbenchScript : MonoBehaviour
         selectItemState = new SelectItemState(this);
         bruisingState = new BruisingState(this);
         blendingState = new BlendingState(this);
+        cuttingState = new CuttingState(this);
 
         stateMachine.ChangeState(selectItemState);
     }
@@ -70,8 +74,6 @@ public class WorkbenchScript : MonoBehaviour
     {
         if (mInteractiveArea.isUsing)
         {
-            CursorManager.instance.animIndex = 1;
-
             if (Mouse.current.position.ReadValue().y >= Screen.height - upPan && cameraLookUp == false)
             {
                 Quaternion targetRotation = mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);

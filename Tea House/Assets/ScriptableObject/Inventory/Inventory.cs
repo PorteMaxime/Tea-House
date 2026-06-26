@@ -20,16 +20,19 @@ public class Inventory : MonoBehaviour
     void Awake()
     {
         msInstance = this;
-    }
-    #endregion
 
-    private void Start()
-    {
+        //Jar Start Before
         foreach (var item in mGameItems)
         {
             mItems.Add(item, mStartingItemsAmount);
             mItemsLookUp.Add(item.mName, item);
         }
+    }
+    #endregion
+
+    private void Start()
+    {
+
     }
 
     public void ClearInventory()

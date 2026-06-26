@@ -44,6 +44,7 @@ public class CursorManager : MonoBehaviour
         {
             case 0:
                 cursorImage.sprite = defaultCursor;
+                cursorPos.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 //pos -20/20
                 break;
             case 1:
