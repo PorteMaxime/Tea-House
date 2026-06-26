@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class MailSystem : MonoBehaviour
 {
-    private Dictionary<Order.State, List<Mail>> mMails = new Dictionary<Order.State, List<Mail>>();
+    public Dictionary<Order.State, List<Mail>> mMails = new Dictionary<Order.State, List<Mail>>();
 
     private Order.State[] mExpiringMailsStates = { Order.State.InBox, Order.State.Accepted };
 

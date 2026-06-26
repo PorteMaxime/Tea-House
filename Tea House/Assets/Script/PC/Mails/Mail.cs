@@ -1,24 +1,36 @@
+using SQLite;
 using UnityEngine;
-
 
 public class Mail
 {
-    public int id;
+    [PrimaryKey]
+    [Column("id")]
+    public int id { get; set; }
 
     public static int mailID = 0;
 
-    public Order mOrder;
+    [Ignore]
+    public Order mOrder { get; private set; }
     public Sprite mPicture;
-    public string mName;
-    public string mText;
-    public int mSendDay;
-    public float mSendTime;
-    public int mDuration;
-    public float mExpiration;
+
+    [Column("name")]
+    public string mName { get; set; }
+    [Column("text")]
+    public string mText { get; set; }
+    [Column("sendDay")]
+    public int mSendDay { get; set; }
+    [Column("sendTime")]
+    public float mSendTime { get; set; }
+    [Column("duration")]
+    public int mDuration { get; set; } = 0;
+    [Column("expiration")]
+    public float mExpiration { get; set; }
 
     public Mail()
     {
         id = mailID;
+
+        mailID += 1;
     }
 
     public void InitData(Order _order, Sprite _image, string _name, int _sendDay, int _duration)
@@ -33,5 +45,11 @@ public class Mail
     public void UpdateExpiration(Daylight daylight)
     {
         mExpiration = (mSendDay + mDuration) * daylight.mDayLength + mSendTime;
+    }
+
+    public void SetOrder(Order _order)
+    {
+        mOrder = _order;
+        mOrder.mailId = id;
     }
 }

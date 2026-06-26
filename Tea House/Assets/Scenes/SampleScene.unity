@@ -2350,6 +2350,14 @@ PrefabInstance:
       propertyPath: mDaylight
       value: 
       objectReference: {fileID: 1435202341}
+    - target: {fileID: 2735390859510243914, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
+      propertyPath: mMailSystem
+      value: 
+      objectReference: {fileID: 219230985}
+    - target: {fileID: 2735390859510243914, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
+      propertyPath: mMailCreator
+      value: 
+      objectReference: {fileID: 219230984}
     - target: {fileID: 3298393706160921457, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.08107
@@ -2407,6 +2415,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
+      propertyPath: mStartingItemsAmount
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: mGameItems.Array.size
       value: 10
@@ -2733,6 +2745,14 @@ PrefabInstance:
       propertyPath: mMailCreator
       value: 
       objectReference: {fileID: 219230984}
+    - target: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
+      propertyPath: mDatabaseManager
+      value: 
+      objectReference: {fileID: 1321376755}
+    - target: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
+      propertyPath: mDaySpeedMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4902280044909388087, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0

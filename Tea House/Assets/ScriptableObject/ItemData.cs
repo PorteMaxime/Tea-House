@@ -1,12 +1,26 @@
 using System;
 using System.Collections.Generic;
+using SQLite;
 using UnityEngine;
 
+[Table("Stat")]
 [System.Serializable]
 public class StatValue
 {
-    public ItemData.Stat mStat = 0;
-    public int mValue = 0;
+    // Id
+    private int mMailIdVar;
+    [Column("mailId")]
+    public int mMailId { get => mMailIdVar; set => mMailIdVar = value; }
+
+    // Stat
+    [SerializeField] private ItemData.Stat mStatVar;
+    [Column("stat")]
+    public ItemData.Stat mStat { get => mStatVar; set => mStatVar = value; }
+
+    // Valeur
+    [SerializeField] private int mValueVar;
+    [Column("value")]
+    public int mValue { get => mValueVar; set => mValueVar = value; }
 }
 
 public class ItemData : ScriptableObject

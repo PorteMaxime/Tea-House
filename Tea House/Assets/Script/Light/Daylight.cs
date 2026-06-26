@@ -22,6 +22,8 @@ public class Daylight : MonoBehaviour
     [SerializeField] private MailSystem mMailSystem;
     [SerializeField] private MailCreator mMailCreator;
 
+    [SerializeField] private DatabaseManager mDatabaseManager;
+
     public enum Phase
     {
         Morning,
@@ -44,6 +46,11 @@ public class Daylight : MonoBehaviour
 
         foreach (float phaseLength in mPhases.Values)
             mDayLength += phaseLength * (1 / mDaySpeedMultiplier);
+    }
+
+    public void Start()
+    {
+        mMailCreator.CreateDailyMails();
     }
 
     void Update()
@@ -73,6 +80,9 @@ public class Daylight : MonoBehaviour
 
                 mMailCreator.CreateDailyMails();
 
+                // Sauvegarder la journee
+                mDatabaseManager.SaveMails();
+                mDatabaseManager.SaveDaylight();
             }
             else
             {

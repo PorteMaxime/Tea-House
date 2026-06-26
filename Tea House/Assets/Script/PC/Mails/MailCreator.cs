@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEngine.LowLevelPhysics2D.PhysicsShape;
 
 public class MailCreator : MonoBehaviour
 {
@@ -55,8 +52,6 @@ public class MailCreator : MonoBehaviour
         else
         {
             mail = new Mail();
-
-            Mail.mailID += 1;
 
             CreateMailData(mail);
 
@@ -183,6 +178,6 @@ public class MailCreator : MonoBehaviour
             }
         }
 
-        mail.mOrder = order;
+        mail.SetOrder(order);
     }
 }

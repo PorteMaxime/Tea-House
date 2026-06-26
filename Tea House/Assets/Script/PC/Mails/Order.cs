@@ -1,22 +1,28 @@
 using System.Collections.Generic;
+using SQLite;
 using UnityEngine;
 
 public class Order
 {
     public enum State
     {
-        NotSent,
+        NotSent = 0,
 
-        InBox,
+        InBox = 1,
 
-        Accepted,
-        Rejected,
+        Accepted = 2,
+        Rejected = 3,
 
-        Completed,
-        Expired
+        Completed = 4,
+        Expired = 5,
     }
 
-    public State mState = State.NotSent;
+    // seulement utile pour la BDD
+    [Column("mailId")]
+    public int mailId { get; set; }
+
+    [Column("state")]
+    public State mState { get; set; } = State.NotSent;
 
     public IngredientData mOrderData = ScriptableObject.CreateInstance<IngredientData>();
 

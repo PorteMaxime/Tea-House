@@ -17,14 +17,13 @@ public class Inventory : MonoBehaviour
     #region Singleton
 
     public static Inventory msInstance;
+    
+    #endregion
+
     void Awake()
     {
         msInstance = this;
-    }
-    #endregion
 
-    private void Start()
-    {
         foreach (var item in mGameItems)
         {
             mItems.Add(item, mStartingItemsAmount);

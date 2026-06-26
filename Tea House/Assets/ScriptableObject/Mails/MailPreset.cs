@@ -38,6 +38,6 @@ public class MailPreset : ScriptableObject
         if (mPackageData != null)
             order.AddStats(mBase.mStats);
 
-        mail.mOrder = order;
+        mail.SetOrder(order);
     }
 }
