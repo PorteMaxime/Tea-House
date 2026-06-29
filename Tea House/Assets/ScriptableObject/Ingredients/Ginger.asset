@@ -28,3 +28,6 @@ MonoBehaviour:
     mValue: 0
   mPrice: 6
   mFragIngredient: {fileID: 0}
+  mAmountJar1: {fileID: 1488206898366149284, guid: 29bdfb1c47aacbb41a04d98c8a9df4c6, type: 3}
+  mAmountJar2: {fileID: 3270173040792375608, guid: db92456654ec442428217134bec45899, type: 3}
+  mAmountJar3: {fileID: 635397043757906090, guid: bb09b47ce9ce9c74ab7490b35bfe5551, type: 3}
