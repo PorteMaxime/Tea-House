@@ -16,9 +16,6 @@ public class Camera_DepthView : ICameraControllerMod
     private List<Transform> mDepth = new List<Transform>();
     private Transform mCurrentTarget;
 
-    private float mMoveSpeed = 5f;
-    private float mRotationSpeed = 5f;
-
     public void OnInit()
     {
         GoTo(mMain.transform.parent.Find("RootTransformOfMainCamera"));

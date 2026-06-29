@@ -16,8 +16,6 @@ public class PacketChoosingState : IPackaging
         mMain = main;
         Init();
     }
-
-    private bool mInitialized = false;
     #endregion
 
     private Input_PlayerInteract mPlayerInteract = null;
@@ -43,8 +41,6 @@ public class PacketChoosingState : IPackaging
 
         foreach (Transform package in mPackageSlot.transform)
             mPackages.Add(package.gameObject);
-
-        mInitialized = true;
     }
 
     public void OnEnter()
@@ -52,14 +48,18 @@ public class PacketChoosingState : IPackaging
         if (mChoosedPackage != null)
         {
             if(mMain.mOutputGO != null)
+            {
+                mMain.mInventory.ChangeItemAmount(mMain.mOutputGO.GetComponent<Associated_SO>().mItem, 1);
                 GameObject.Destroy(mMain.mOutputGO);
+            }
 
             GameObject package = mMain.Instantiate(mChoosedPackage.transform.parent.gameObject, mWorkingPoint.position, Quaternion.identity);
+            mMain.mInventory.ChangeItemAmount(mChoosedPackage.transform.parent.GetComponent<Associated_SO>().mItem, -1);
 
-            //mMain.ShareRender(packages[0], package);
             package.transform.parent = mMain.transform;
             package.transform.localScale *= 100f;
             mMain.mOutputGO = package;
+            mMain.mOutput = package.GetComponent<PackageScript>();
 
             Transform lid = package.transform.Find("Lid");
             if(lid != null)
@@ -84,6 +84,12 @@ public class PacketChoosingState : IPackaging
     public void OnExit()
     {
         mChoosedPackage = null;
+    }
+
+    public void OnReset()
+    {
+        mPackageSlot = null;
+        
     }
 
     public void OnUpdate()

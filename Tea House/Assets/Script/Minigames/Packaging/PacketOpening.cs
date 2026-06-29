@@ -47,8 +47,7 @@ public class PacketOpening : IPackaging
             mLidClosedPlaceCollider = mLidClosedPlace.GetComponent<WorkingPoint>();
 
             if(mDragAndDrop.StartDragging(mLid) == false)
-            {                
-                Debug.Log("can't drag lid");
+            {
                 mMain.mStateMachine.SwitchState(mMain.mCompleting);
                 return;
             }
@@ -67,7 +66,6 @@ public class PacketOpening : IPackaging
                 mPackageAnimator.Play("OpenBag", 0, startFrame);
 
                 mIsOpened = mIsOpened == true ? false : true;
-                Debug.Log(mIsOpened);
             }
             mMain.mStateMachine.SwitchState(mMain.mCompleting);
         }
@@ -77,6 +75,16 @@ public class PacketOpening : IPackaging
     public void OnExit()
     {
         mDragAndDrop.StopDragging();
+    }
+
+    public void OnReset()
+    {
+        mLid = null;
+        mLidRB = null;
+        mLidClosedPlace = null;
+        mLidClosedPlaceCollider = null;
+        mPackageAnimator = null;
+        mIsOpened = false;
     }
 
     public void OnUpdate()

@@ -248,6 +248,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c4ca153f8d716f645a8a21daa45e870f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2492151048236449076}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c4ca153f8d716f645a8a21daa45e870f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3228395491863166850}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c4ca153f8d716f645a8a21daa45e870f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2756575913841586800}
     - targetCorrespondingSourceObject: {fileID: 2314505919143015208, guid: c4ca153f8d716f645a8a21daa45e870f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 243087145825181389}
@@ -284,6 +290,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3228395491863166850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6894264622085290200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60fd2343c1e91794098884aa617ca5f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PackageScript
+  mIngredient: {fileID: 0}
+--- !u!114 &2756575913841586800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6894264622085290200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 968b93bc2f01e914da98c02d34d12e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Associated_SO
+  mItem: {fileID: 0}
 --- !u!1 &8318982124034881185 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2314505919143015208, guid: c4ca153f8d716f645a8a21daa45e870f, type: 3}

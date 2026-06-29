@@ -27,7 +27,7 @@ public class CameraDragAndDrop : ICameraControllerMod
     private float mDraggedOriginDistance = 0f;
 
     private Vector3 mTargetPos = Vector3.zero;
-    private float mMoveSpeed = 5f;
+    private float mMoveSpeed = 10f;
 
     #region Basics Methods
     public void OnInit()
@@ -48,8 +48,7 @@ public class CameraDragAndDrop : ICameraControllerMod
         float dist = Vector3.Distance(mMain.transform.position, new Vector3(mDraggedOriginX, worldPos.y, worldPos.z));
         worldPos = mMain.transform.position + dir * dist;
 
-        worldPos = worldPos - mDraggingOffset;
-        mTargetPos = worldPos;
+        mTargetPos = worldPos - mDraggingOffset;
     }
 
     public void OnFixedUpdate()

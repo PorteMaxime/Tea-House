@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PacketFilling : IPackaging
 {
@@ -14,10 +15,10 @@ public class PacketFilling : IPackaging
         Init();
     }
     #endregion
-    bool isFilled = false;
-
     public GameObject mBowl = null;
     private Vector3 mOldPosition = Vector3.zero;
+
+    public List<ItemData> mMixture = null;
 
     private float mBowlAngle = 70f;
     private float mRotationSpeed = 5f;
@@ -74,10 +75,13 @@ public class PacketFilling : IPackaging
 
     public void OnExit()
     {
-        mMain.mCompleting.mIsFilled = isFilled;
         mBowl.transform.rotation = Quaternion.identity;
         mBowl.transform.position = mOldPosition;
         mBowl.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+    }
+
+    public void OnReset()
+    {
     }
 
     public void OnUpdate()
@@ -90,8 +94,7 @@ public class PacketFilling : IPackaging
 
         if(mBowlCollider == null) return;
 
-        if(mBowlCollider.bounds.min.y < mYBorn) return;
-        if(mBowlCollider.bounds.max.z < mZBorns.w)
+        if(mBowlCollider.bounds.max.z < mZBorns.w && mBowlCollider.bounds.min.y >= mYBorn)
         {
             // B to B
             float percentage = 1 - (mZBorns.w - mBowlCollider.bounds.max.z) / mZBorns.y;
@@ -100,22 +103,13 @@ public class PacketFilling : IPackaging
 
             float targetRotation = mBowlAngle * percentage;
             mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.Euler(targetRotation, 0f, 0f), mRotationSpeed * Time.deltaTime);
-        }
-        // else if(mBowlCollider.bounds.min.z > mOppositeZBorns.w)
-        // {
-        //     // O to O
-        //     float percentage = 1 - (mBowlCollider.bounds.min.z - mOppositeZBorns.w) / mOppositeZBorns.y;Debug.Log(percentage);
-        //     if(percentage > 1f) percentage = 1f;
-        //     else if(percentage < 0f) percentage = 0f;
 
-        //     float targetRotation = -mBowlAngle * percentage;
-        //     mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.Euler(targetRotation, 0f, 0f), mRotationSpeed * Time.deltaTime);
-        // }
+            if(mBowlCollider.bounds.max.z > mZBorns.z && mMixture != null)
+                mMain.mOutput.AddStat(mMixture);
+        }
         else
-        {
             // B to O
             mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.identity, mRotationSpeed * Time.deltaTime);
-        }
     }
 
     private IEnumerator HomeSweetHome() // Bring back Bowl

@@ -15,8 +15,6 @@ public class PacketLabelPrinting : IPackaging
     }
     #endregion
 
-    private bool mIsPrinted = false;
-
     public GameObject mPrinterScreenUI = null;
     private GameObject mPrinterViewPoint = null;
 
@@ -29,8 +27,7 @@ public class PacketLabelPrinting : IPackaging
     private Printer_SelectOrder mPrinterScript = null;
     private GameObject mSelectedOrderGo = null;
 
-    public GameObject mDebug = null;
-    public IngredientData mDebugData = null;
+    public List<ItemData> mMixture = null;
 
     private Camera_DepthView mDepthView = null;
 
@@ -81,6 +78,13 @@ public class PacketLabelPrinting : IPackaging
         mDepthView.Back();
     }
 
+    public void OnReset()
+    {
+        mMixture = null;
+        mSelectedOrderGo = null;
+        mLabelSpot = null;
+    }
+
     public void OnUpdate()
     {
         if (mDepthView.IsMoving(0.001f) == false && mDepthView.IsRotating(0.001f) == false)
@@ -112,36 +116,49 @@ public class PacketLabelPrinting : IPackaging
                 break;
             }
         }
-
+        mMixture = new List<ItemData>
+        {
+            Resources.Load<BaseData>("GreenTea"),
+            Resources.Load<IngredientData>("Mint")
+        };
+        List<IngredientData> ingredients = new List<IngredientData>();
+        BaseData baseData = null;
+        
+        foreach(ItemData item in mMixture)
+        {
+            if(item is BaseData)
+                baseData = (BaseData)item;
+            else if(item is IngredientData)
+                ingredients.Add((IngredientData)item);
+        }
+        mMain.mOutput.mTargetMail = targetMail;
         // TODO : Generate Texture with targetMail data => Remove Debug Data
         return DynamicTextureManager.Generate(DynamicTextureManager.DynamicTexture.Label,
             targetMail.mPicture,
             "targetMail.mName",
-            mDebugData,
-            mDebugData,
-            mDebugData,
-            mDebugData
+            baseData,
+            ingredients.Count >= 1 ? ingredients[0] : null,
+            ingredients.Count >= 2 ? ingredients[1] : null,            
+            ingredients.Count >= 3 ? ingredients[2] : null
             );
     }
     #endregion  
 
     public void CreateLabel()
     {
-        if(mIsPrinted == true) return;
+        if(mMain.mCompleting.mLabelPrinted == true) return;
 
         RenderTexture labelTexture = PrintLabel();
         if(labelTexture == null) return;
-
+        
         GameObject label = GameObject.Instantiate(mLabelGoPrefab);
         label.transform.parent = mPrinterScript.gameObject.transform;
         label.transform.localRotation = Quaternion.identity;
-        label.transform.localPosition = new Vector3(0, 0.001f, 0);//new Vector3(0, 0.001f, 0.003f); // TODO : Find a better way to set the position of the label
+        label.transform.localPosition = new Vector3(0, 0.001f, 0);
 
         label.GetComponent<MeshRenderer>().material.mainTexture = labelTexture;
         mMain.mLabelling.mLabelGo = label;
-        mIsPrinted = true;
         mMain.mCompleting.mLabelPrinted = true;
-
 
         mMain.StartCoroutine(SlideLabel(label, mLabelSpot.transform.position, mLabelSpot.transform.rotation, 5f));
         mMain.mStateMachine.SwitchState(mMain.mCompleting);

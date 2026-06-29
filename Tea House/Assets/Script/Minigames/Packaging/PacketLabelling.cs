@@ -35,6 +35,12 @@ public class PacketLabelling : IPackaging
     {
     }
 
+    public void OnReset()
+    {
+        mLabelSpot = null;
+        mLabelSpotWP = null;
+    }
+
     public void OnUpdate()
     {
         // Leave state if the player release the label
