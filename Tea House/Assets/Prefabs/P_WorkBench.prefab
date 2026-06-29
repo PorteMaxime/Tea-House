@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 1056358323406998920}
   - component: {fileID: 6593325448040106239}
   - component: {fileID: 3106057113286703450}
-  - component: {fileID: 3731578292153557657}
   - component: {fileID: 8588869272997968412}
   m_Layer: 0
   m_Name: Scale
@@ -171,28 +170,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3731578292153557657
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387338996265335217}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1659067753517369566, guid: 03fda00fc83f0524189f24bf937b895a, type: 3}
 --- !u!65 &8588869272997968412
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -864,7 +841,6 @@ GameObject:
   - component: {fileID: 4431775530191774434}
   - component: {fileID: 2716895647784472390}
   - component: {fileID: 5937604786178931396}
-  - component: {fileID: 220720647943746098}
   - component: {fileID: 4991286495004369078}
   m_Layer: 8
   m_Name: MortarPilon
@@ -945,27 +921,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &220720647943746098
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4270792013188916868}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.10479492, y: 0.41917494, z: 0.104794964}
-  m_Center: {x: 0, y: 0.20958771, z: -0.00000013170167}
 --- !u!54 &4991286495004369078
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1496,7 +1451,6 @@ GameObject:
   - component: {fileID: 5109179672579919173}
   - component: {fileID: 2740204968461169758}
   - component: {fileID: 8207766196180976450}
-  - component: {fileID: 181377418892714165}
   - component: {fileID: 3256330282325671637}
   m_Layer: 8
   m_Name: MortarBowl
@@ -1582,27 +1536,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &181377418892714165
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6109382726890127359}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.0025790716, y: 0.002579072, z: 0.00215054}
-  m_Center: {x: -0.000000003259629, y: 1.164154e-10, z: 0.00107527}
 --- !u!54 &3256330282325671637
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1880,6 +1813,7 @@ MonoBehaviour:
   mMixtureBowlPackagingPos: {fileID: 0}
   mInteractiveArea: {fileID: 2305884666964297879}
   mCameraPosPackaging: {fileID: 0}
+  mCameraPosCuttingBoard: {fileID: 0}
   mMortarBowl: {fileID: 6109382726890127359}
   mMortarPilon: {fileID: 4270792013188916868}
   mMixtureBowl: {fileID: 8334617114975951884}

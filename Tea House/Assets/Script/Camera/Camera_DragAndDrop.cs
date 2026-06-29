@@ -55,7 +55,7 @@ public class CameraDragAndDrop : ICameraControllerMod
     public void OnFixedUpdate()
     {
         if(IsDragging() == false || mDraggingRB == null) return;
-        Debug.Log(mDragging.name);
+        //Debug.Log(mDragging.name);
         Vector3 moveVector = mTargetPos - mDraggingRB.position;
         moveVector *= mMoveSpeed;
         mDraggingRB.linearVelocity = moveVector;

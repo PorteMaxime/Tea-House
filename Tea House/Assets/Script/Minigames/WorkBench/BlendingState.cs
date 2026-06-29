@@ -24,13 +24,14 @@ public class BlendingState : IWorkbench
     {
         initSpoonPos = mWorkbench.mSpoon.transform.position;
         initSpoonRot = mWorkbench.mSpoon.transform.rotation;
+
     }
 
     public void OnUpdate()
     {
         if(isEmpty == false && mIsBlended == false)
         {
-            if(InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
+            if(InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)
             {
                 mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Spoon", out List<RaycastHit> hitDraggables);
 
