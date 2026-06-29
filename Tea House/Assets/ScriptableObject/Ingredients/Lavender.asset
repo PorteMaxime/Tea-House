@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lavender
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Lavender
-  mPrefab: {fileID: 0}
+  mPrefab: {fileID: 6014436071440350506, guid: 617ccea08d5bd6e4199d26e6165c4d3c, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStat: 0
@@ -28,3 +28,6 @@ MonoBehaviour:
     mValue: 0
   mPrice: 8
   mFragIngredient: {fileID: 0}
+  mAmountJar1: {fileID: 5486132186296425149, guid: 71e8ef13099c2ea41b0becaee5ea166d, type: 3}
+  mAmountJar2: {fileID: 2239751761719933281, guid: 7b405ddf176b5944f8e23c74bcdd7c49, type: 3}
+  mAmountJar3: {fileID: 5763111021785460518, guid: 0096340d60a725c4ea68e4c8f9edfd1b, type: 3}
