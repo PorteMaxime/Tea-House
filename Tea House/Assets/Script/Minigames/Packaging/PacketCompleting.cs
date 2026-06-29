@@ -133,8 +133,8 @@ public class PacketCompleting : IPackaging
             mLabelTrash.transform.GetChild(0).gameObject.SetActive(false);
             mLabelTrash.transform.GetChild(1).gameObject.SetActive(false);
         }
-    
-        if(mIsLabelled == true || mIsChoosed == true || mIsFilled == true || mIsOpened == true)
+        Debug.Log("Labelled: " + mIsLabelled + " | Choosed: " + mIsChoosed + " | Filled: " + mIsFilled + " | Opened: " + mIsOpened);
+        if(mIsLabelled == true && mIsChoosed == true && mIsFilled == true && mIsOpened == false)
         {
             if(mIsExporting == true)
             {
@@ -177,7 +177,7 @@ public class PacketCompleting : IPackaging
 
     public void ExportPackage()
     {
-        if(mIsLabelled == false || mIsChoosed == false || mIsFilled == false || mIsOpened == false) return;
+        if(mIsLabelled == false || mIsChoosed == false || mIsFilled == false || mIsOpened == true) return;
 
         if(mIsExporting == true)
         {

@@ -29,6 +29,8 @@ public class PackagingScript : MonoBehaviour
     public PackageScript mOutput = null;
     public GameObject mOutputGO = null;
 
+    public List<ItemData> mDebugList = new List<ItemData>();
+
     [SerializeField] public MailSystem mMailSystem = null;
 
     void Start()
@@ -60,6 +62,9 @@ public class PackagingScript : MonoBehaviour
         mPrinting = new PacketLabelPrinting(this);
 
         mStateMachine.SwitchState(mCompleting);
+
+        mPrinting.mMixture = mDebugList;
+        mFilling.mMixture = mDebugList;
     }
     void Update()
     {

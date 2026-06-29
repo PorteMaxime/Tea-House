@@ -62,7 +62,7 @@ public class PacketFilling : IPackaging
 
         mBowl.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
-        Collider packageCollider = mMain.mOutputGO.GetComponent<Collider>();
+        Collider packageCollider = mMain.mOutputGO.transform.GetChild(0).GetComponent<Collider>();
         if(packageCollider != null)
         {
             mZBorns.z = packageCollider.bounds.min.z;
@@ -105,7 +105,12 @@ public class PacketFilling : IPackaging
             mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.Euler(targetRotation, 0f, 0f), mRotationSpeed * Time.deltaTime);
 
             if(mBowlCollider.bounds.max.z > mZBorns.z && mMixture != null)
+            {
+                mMain.mOutputGO.transform.GetChild(0).GetComponent<Renderer>().material.color = Color.red;
                 mMain.mOutput.AddStat(mMixture);
+                mMain.mCompleting.mIsFilled = true;
+                mMain.mCompleting.mIsChoosed = true;
+            }
         }
         else
             // B to O

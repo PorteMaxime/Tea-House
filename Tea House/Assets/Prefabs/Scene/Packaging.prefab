@@ -3080,6 +3080,11 @@ MonoBehaviour:
   mInventory: {fileID: 0}
   mOutput: {fileID: 0}
   mOutputGO: {fileID: 0}
+  mDebugList:
+  - {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
+  - {fileID: 11400000, guid: a8d716ca5b5e12e4383db49619f670a7, type: 2}
+  - {fileID: 11400000, guid: 852fd030af483c94fae7fc8cac092837, type: 2}
+  - {fileID: 11400000, guid: 074e77102efb47c48b77b8f285982a83, type: 2}
   mMailSystem: {fileID: 0}
 --- !u!1001 &1761550818901671905
 PrefabInstance:
