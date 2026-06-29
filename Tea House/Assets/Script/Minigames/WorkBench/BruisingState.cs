@@ -110,7 +110,7 @@ public class BruisingState : IWorkbench
 
                 if (hitDraggables.Count > 0)
                 {
-                    mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarBowl);
+                    mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarBowl.transform.parent.gameObject);
                 }
             }
 
@@ -124,7 +124,7 @@ public class BruisingState : IWorkbench
 
                 //mWorkbench.mMortarBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0,1,0);
 
-                mWorkbench.RotateGameObject(mWorkbench.mMortarBowl, Quaternion.Euler(-250, 0, 0), 0.5f);
+                mWorkbench.RotateGameObject(mWorkbench.mMortarBowl.transform.parent.gameObject, Quaternion.Euler(-180, 0, 0), 0.5f);
 
                 timerStart = true;
             }
