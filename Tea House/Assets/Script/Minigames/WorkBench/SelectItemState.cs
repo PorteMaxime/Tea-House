@@ -57,9 +57,9 @@ public class SelectItemState : IWorkbench
                 {
                     Inventory.msInstance.ChangeItemAmount(mWorkbench.mCurrentItem, -1);
 
-                    //mWorkbench.currentItemG.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-                    //mWorkbench.currentItemG.GetComponent<Rigidbody>().useGravity = false;
-                    //mWorkbench.currentItemG.GetComponent<BoxCollider>().isTrigger = true;
+                    mWorkbench.currentItemG.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+                    mWorkbench.currentItemG.GetComponent<Rigidbody>().useGravity = false;
+                    mWorkbench.currentItemG.GetComponent<BoxCollider>().isTrigger = true;
 
                     mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
                 }

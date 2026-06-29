@@ -10,6 +10,14 @@ public class BruisingState : IWorkbench
     public BruisingState(WorkbenchScript system)
     {
         mWorkbench = system;
+
+        initBowlPos = mWorkbench.mMortarBowl.transform.position;
+        initBowlRot = mWorkbench.mMortarBowl.transform.rotation;
+
+        initMortarPos = mWorkbench.mMortarPilon.transform.position;
+        initMortarRot = mWorkbench.mMortarPilon.transform.rotation;
+
+        Debug.Log(initMortarPos);
     }
 
     Vector3 initBowlPos = Vector3.zero;
@@ -31,12 +39,6 @@ public class BruisingState : IWorkbench
 
     public void OnEnter()
     {
-        initBowlPos = mWorkbench.mMortarBowl.transform.position;
-        initBowlRot = mWorkbench.mMortarBowl.transform.rotation;
-
-        initMortarPos = mWorkbench.mMortarPilon.transform.position;
-        initMortarRot = mWorkbench.mMortarPilon.transform.rotation;
-
         mWorkbench.currentItemG.transform.position = mWorkbench.mMortarBowl.transform.position + ingredientPosOffset;
         isEmpty = false;
     }
@@ -89,6 +91,9 @@ public class BruisingState : IWorkbench
                 mWorkbench.mMortarPilon.transform.rotation = initMortarRot;
                 bottomMortar = 0;
                 topMortar = 0;
+
+                Debug.Log(initMortarPos);
+                Debug.Log(mWorkbench.mMortarPilon.transform.position);
 
             }
 
