@@ -2669,6 +2669,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84e5a2c40c3a68f47a7f2c8e8f2ee308, type: 3}
+--- !u!1 &1479789526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8692264002225609861, guid: 21c3c23f82e29c84fb44788c0bf0e2a8, type: 3}
+  m_PrefabInstance: {fileID: 4329999416370064250}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1479789528
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479789526}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!4 &1509825072 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 401d147487e7813488771dc6d2edd60c, type: 3}
@@ -3400,6 +3417,14 @@ PrefabInstance:
       propertyPath: mDaylight
       value: 
       objectReference: {fileID: 1435202341}
+    - target: {fileID: 2735390859510243914, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
+      propertyPath: mMailSystem
+      value: 
+      objectReference: {fileID: 219230985}
+    - target: {fileID: 2735390859510243914, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
+      propertyPath: mMailCreator
+      value: 
+      objectReference: {fileID: 219230984}
     - target: {fileID: 3298393706160921457, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.08107
@@ -3937,7 +3962,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8609895500867465977, guid: 21c3c23f82e29c84fb44788c0bf0e2a8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1786093233}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8692264002225609861, guid: 21c3c23f82e29c84fb44788c0bf0e2a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1479789528}
   m_SourcePrefab: {fileID: 100100000, guid: 21c3c23f82e29c84fb44788c0bf0e2a8, type: 3}
 --- !u!1001 &4943712731299416837
 PrefabInstance:
@@ -4437,6 +4465,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 7996184662912848925, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
     - {fileID: 1774719862458108843, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+    - {fileID: 1305184659278649319, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1408001121078869313, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
       insertIndex: -1
@@ -4458,6 +4487,18 @@ PrefabInstance:
       propertyPath: ingredient
       value: 
       objectReference: {fileID: 11400000, guid: ee5e025f750d0dd4a88b7dfbf41c9d6a, type: 2}
+    - target: {fileID: 4035627130443800508, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
+      propertyPath: m_Size.x
+      value: 2.6510875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035627130443800508, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
+      propertyPath: m_Center.x
+      value: 0.17445618
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035627130443800508, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
+      propertyPath: m_Center.z
+      value: -7.02815e-16
+      objectReference: {fileID: 0}
     - target: {fileID: 4199025174558405720, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
       propertyPath: ingredient
       value: 

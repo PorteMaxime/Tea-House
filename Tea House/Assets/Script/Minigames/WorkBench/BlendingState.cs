@@ -90,8 +90,10 @@ public class BlendingState : IWorkbench
             {
                 mWorkbench.mCameraDepth.LerpingCamera(mWorkbench.mCameraPosPackaging.transform.position, mWorkbench.mCameraPosPackaging.transform.rotation, 0.5f);
                 mWorkbench.LerpGameObject(mWorkbench.mMixtureBowl, mWorkbench.mMixtureBowlPackagingPos.transform.position, 0.5f);
+
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
-                player.transform.position = new Vector3(mWorkbench.mCameraPosPackaging.transform.position.x, player.transform.position.y, player.transform.position.z);
+                player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, mWorkbench.mCameraPosPackaging.transform.position.z);
+                //player.transform.position = Vector3.zero;
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
             }
         }
