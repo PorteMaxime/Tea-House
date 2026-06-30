@@ -11,8 +11,8 @@ public class BruisingState : IWorkbench
     {
         mWorkbench = system;
 
-        initBowlPos = mWorkbench.mMortarBowl.transform.position;
-        initBowlRot = mWorkbench.mMortarBowl.transform.rotation;
+        initBowlPos = mWorkbench.mMortarBowl.transform.parent.position;
+        initBowlRot = mWorkbench.mMortarBowl.transform.parent.rotation;
 
         initMortarPos = mWorkbench.mMortarPilon.transform.position;
         initMortarRot = mWorkbench.mMortarPilon.transform.rotation;
@@ -117,13 +117,17 @@ public class BruisingState : IWorkbench
             if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.mMortarBowl) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
             {
                 mWorkbench.blendingState.isEmpty = false;
-                mWorkbench.mMortarBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0);
+                //mWorkbench.mMortarBowl.transform.parent.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.75f, 0);
+                mWorkbench.mMortarBowl.transform.parent.gameObject.transform.position = Vector3.zero;
+
+
                 fragIngredient.transform.SetParent(mWorkbench.mMixtureBowl.transform);
                 fragIngredient.transform.localPosition = new Vector3(0.001f, 0.001f, 0);
                 fragIngredient.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
 
                 //mWorkbench.mMortarBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0,1,0);
 
+                //mWorkbench.LerpGameObject(mWorkbench.mMortarBotBorn.transform, fragIngredient);
                 mWorkbench.RotateGameObject(mWorkbench.mMortarBowl.transform.parent.gameObject, Quaternion.Euler(-180, 0, 0), 0.5f);
 
                 timerStart = true;
@@ -151,14 +155,11 @@ public class BruisingState : IWorkbench
 
     public void OnExit()
     {
-        Debug.Log("test");
         mWorkbench.mDragAndDrop.StopDragging();
 
-        mWorkbench.mMortarBowl.transform.rotation = Quaternion.Euler(0, 0, 180);
+        mWorkbench.mMortarBowl.transform.parent.position = initBowlPos;
+        mWorkbench.mMortarBowl.transform.parent.rotation = initBowlRot;
 
-        mWorkbench.mMortarBowl.transform.position = initBowlPos;
-        mWorkbench.mMortarBowl.transform.rotation = initBowlRot;
-        mWorkbench.mMortarBowl.GetComponent<Rigidbody>().isKinematic = true;
 
         isEmpty = true;
         mItemBruised = false;
