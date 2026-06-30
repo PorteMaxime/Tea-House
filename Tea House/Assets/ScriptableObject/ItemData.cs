@@ -38,6 +38,9 @@ public class ItemData : ScriptableObject
         Relaxation,
         Energy,
 
+        Sweetness,
+        Tanginess,
+
         Prestige
     }
 
@@ -49,6 +52,8 @@ public class ItemData : ScriptableObject
         {Stat.Freshness, Stat.Warmth},
         {Stat.Relaxation, Stat.Energy},
         {Stat.Energy, Stat.Relaxation},
+        {Stat.Sweetness, Stat.Tanginess},
+        {Stat.Tanginess, Stat.Sweetness},
     };
 
     public int mPrice;

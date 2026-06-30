@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class MailCreator : MonoBehaviour
 {
@@ -89,42 +91,109 @@ public class MailCreator : MonoBehaviour
             mail.mText += "\n" + stat.mStat.ToString() + " : " + stat.mValue;
         /**/
 
-        // formule politesse ?
+        // Formule de politesse
+        int politeRand = Random.Range(0, 5);
+        if (politeRand <= 1)
+            mail.mText = GetRandomValue("Greetings") + "\n";
 
-        // date
+        // Raison + pour quand
+        int forWhenRand = Random.Range(0, 5);
+        if (forWhenRand <= 1)
+            mail.mText += GetRandomValue("Reason") + ".\n";
+        else
+            mail.mText += GetRandomValue("Reason") + " " + GetRandomValue("Day+" + mail.mDuration.ToString()) + ".\n";
 
-        // stats
-
-        // supplémentaire ?
-
-        mail.mText = "I " + GetRandomValue("Reason") + " " + GetRandomValue("Day+" + mail.mDuration.ToString()) + ".\n";
+        // Ingredients
         bool first = true;
+        int rand;
         foreach (StatValue stat in mail.mOrder.mOrderData.mStats)
         {
-            if (stat.mValue <= 0)
+            if (stat.mValue <= 0 ||stat.mStat == ItemData.Stat.Prestige)
                 continue;
 
             if (first)
             {
-                mail.mText += "I ";
+                mail.mText += GetRandomValue("StatMain");
+                mail.mText = mail.mText.Replace("{isFirst}", "");
                 first = false;
             }
-            else
-                mail.mText += " I also ";
 
-            mail.mText += GetRandomValue("Necessity") + " " + "LOW/HIGH" + " " + stat.ToString() + "."; // SET LOW/HIGH
+            if (mail.mText.Contains("{Stat") != true)
+            {
+                if (mail.mText.Contains("{sub") == true)
+                {
+                    if (mail.mText.Contains("{sub}") == true)
+                        mail.mText = mail.mText.Replace("{sub}", " " + GetRandomValue("StatSub"));
+                    else if (mail.mText.Contains("{subSimple}") == true)
+                    {
+                        mail.mText = mail.mText.Replace("{subSimple}", " " + GetRandomValue("StatSub"));
+                        mail.mText = mail.mText.Replace("{Stat}", "{StatSimple}");
+                    }
+                }
+                else
+                {
+                    mail.mText += GetRandomValue("StatMain");
+                    mail.mText = mail.mText.Replace("{isFirst}", "also ");
+                }
+            }
 
-            // SET "commande simple"
+            rand = Random.Range(0, 5);
+            string StatLimit = stat.mValue > mail.mValueAmountLimit ? "StatHigh" : stat.mValue < mail.mValueAmountLimit ? "StatLow" : "";
+            string statAmount = "";
+
+            if (mail.mText.Contains("{Stat}"))
+            {
+                if (StatLimit != "" && rand <= 1)
+                    statAmount = GetRandomValue(StatLimit);
+                mail.mText = mail.mText.Replace("{Stat}", statAmount + stat.mStat.ToString());
+            }
+            else if (mail.mText.Contains("{StatSimple}"))
+            {
+                if (StatLimit != "" && rand <= 1)
+                    statAmount = GetRandomValue(StatLimit + "Simple");
+                mail.mText = mail.mText.Replace("{StatSimple}", statAmount + GetRandomValue(stat.mStat.ToString()));
+            }
         }
+        mail.mText = mail.mText.Replace("{sub}", "");
+        mail.mText = mail.mText.Replace("{subSimple}", "");
+
+        // Information supplémentaire
+        rand = Random.Range(0, 3);
+        if (rand <= 2)
+        {
+            mail.mText += "\n";
+
+            if (mail.mValueAmountLimit - 2 <= 1)
+                mail.mText += GetRandomValue("CommandLowAmount");
+            else if (mail.mValueAmountLimit - 2 >= 3)
+                mail.mText += GetRandomValue("CommandHighAmount");
+            else
+            {
+                foreach (StatValue stat in mail.mOrder.mOrderData.mStats)
+                {
+                    if (stat.mValue > mail.mValueAmountLimit)
+                    {
+                        mail.mText += GetRandomValue("CommandIntense");
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (forWhenRand <= 1)
+            mail.mText += "\n" + GetRandomValue("DayEnd") + GetRandomValue("Day+" + mail.mDuration.ToString());
+
+        // Formule de politesse
+        if (politeRand <= 1)
+        mail.mText += "\n" + GetRandomValue("Ending");
     }
 
-    public string GetRandomValue(string type)
+    private string GetRandomValue(string type)
     {
         if (mMailRandomContent.TryGetValue(type, out List<string> value) != true)
-            return "(" + type + " not in database)";
+            return "(" + type + " not found)";
 
         return mMailRandomContent[type][Random.Range(0, mMailRandomContent[type].Count)];
-
     }
 
     public void CreateOrder(Mail mail)
@@ -142,7 +211,11 @@ public class MailCreator : MonoBehaviour
         // Ingredients
         //mail.mText += "\n";
         List<IngredientData> ingredients = Inventory.msInstance.GetItemsOfType<IngredientData>();
-        for (int i = 0; i < Random.Range(mIngredientsAmount.x, mIngredientsAmount.y + 1); i++)
+
+        int ingredientAmount = Random.Range(mIngredientsAmount.x, mIngredientsAmount.y + 1);
+        mail.mValueAmountLimit = 2 + ingredientAmount;
+
+        for (int i = 0; i < ingredientAmount; i++)
         {
             IngredientData ingredient = ingredients[Random.Range(0, ingredients.Count)];
             //mail.mText += " " + ingredient.mName; // Pour tests

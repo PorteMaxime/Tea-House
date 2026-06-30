@@ -26,5 +26,9 @@ MonoBehaviour:
     mValueVar: 1
   - mStatVar: 4
     mValueVar: 0
+  - mStatVar: 5
+    mValueVar: 1
+  - mStatVar: 6
+    mValueVar: 0
   mPrice: 6
   mFragIngredient: {fileID: 0}

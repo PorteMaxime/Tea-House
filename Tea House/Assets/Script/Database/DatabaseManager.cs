@@ -10,6 +10,8 @@ public class MailRandomData
     public string type { get; set; }
 
     public string value { get; set; }
+
+    public int followingType { get; set; }
 }
 
 [Table("Inventory")]
@@ -21,9 +23,6 @@ public class ItemSave
     public int amount { get; set; }
     public bool isUnlocked { get; set; }
 }
-
-
-// money
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -61,8 +60,9 @@ public class DatabaseManager : MonoBehaviour
         database.CreateTable<MailRandomData>();
 
         // Daylight
-        database.Execute("CREATE TABLE Time (id int PRIMARY KEY, currentDay int);");
-        database.Execute("INSERT INTO Time VALUES (1, 0);");
+        database.Execute("CREATE TABLE Others (id string PRIMARY KEY, value int);");
+        database.Execute("INSERT INTO Others VALUES ('currentDay', 0);");
+        database.Execute("INSERT INTO Others VALUES ('money', 20);");
 
         // Mails
         database.CreateTable<Mail>();
@@ -92,14 +92,14 @@ public class DatabaseManager : MonoBehaviour
 
     public void LoadDaylight()
     {
-        int currentDay = database.ExecuteScalar<int>("SELECT currentDay FROM Time WHERE id = 1;");
+        int currentDay = database.ExecuteScalar<int>("SELECT value FROM Others WHERE id = 'currentDay';");
 
         mDaylight.mCurrentDay = currentDay;
     }
 
     public void SaveDaylight()
     {
-        database.Execute("UPDATE Time SET currentDay = " + mDaylight.mCurrentDay + " WHERE id = 1;");
+        database.Execute("UPDATE Others SET value = " + mDaylight.mCurrentDay + " WHERE id = 'currentDay';");
     }
 
     public void LoadInventory()
@@ -116,6 +116,10 @@ public class DatabaseManager : MonoBehaviour
                 item.mIsUnlocked = itemSave.isUnlocked;
             }
         }
+
+        int moneyAmount = database.ExecuteScalar<int>("SELECT value FROM Others WHERE id = 'money';");
+
+        inventory.mMoneyAmount = moneyAmount;
     }
 
     public void SaveInventory()
@@ -130,6 +134,8 @@ public class DatabaseManager : MonoBehaviour
 
             database.InsertOrReplace(itemSave);
         }
+
+        database.Execute("UPDATE Others SET value = " + Inventory.msInstance.mMoneyAmount + " WHERE id = 'money';");
     }
 
     public void LoadMails()

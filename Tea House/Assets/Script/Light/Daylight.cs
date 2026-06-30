@@ -81,8 +81,9 @@ public class Daylight : MonoBehaviour
                 mMailCreator.CreateDailyMails();
 
                 // Sauvegarder la journee
-                mDatabaseManager.SaveMails();
-                mDatabaseManager.SaveDaylight();
+                //mDatabaseManager.SaveMails();
+                //mDatabaseManager.SaveDaylight();
+                //mDatabaseManager.SaveInventory();
             }
             else
             {
