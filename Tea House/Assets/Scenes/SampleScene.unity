@@ -1861,10 +1861,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: MailManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1833484119412835154, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: m_TagString
+      value: MailManager
+      objectReference: {fileID: 0}
     - target: {fileID: 3807418820913744295, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
       propertyPath: mDaylight
       value: 
       objectReference: {fileID: 1435202341}
+    - target: {fileID: 3807418820913744295, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mDatabaseManager
+      value: 
+      objectReference: {fileID: 1718805485}
+    - target: {fileID: 3807418820913744295, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mMailsPresets.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807418820913744295, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: 'mMailsPresets.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e4e7623f00ef4b4abf1a569156de910, type: 2}
     - target: {fileID: 7642152416298563229, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.36237
@@ -2710,6 +2726,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2042890763}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1718805485 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2735390859510243914, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
+  m_PrefabInstance: {fileID: 2459565526684557488}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2821d0f8cb6d8d4e96418f04cab1321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DatabaseManager
 --- !u!1 &1724799758 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2204804345708648606, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
@@ -3432,7 +3459,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: mGameItems.Array.size
-      value: 11
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: 'mGameItems.Array.data[0]'
@@ -3478,6 +3505,26 @@ PrefabInstance:
       propertyPath: 'mGameItems.Array.data[10]'
       value: 
       objectReference: {fileID: 11400000, guid: 9330776661cfb424f93ef37d0d6fb93b, type: 2}
+    - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
+      propertyPath: 'mGameItems.Array.data[11]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 05c98f51cec1a24489719777829c3589, type: 2}
+    - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
+      propertyPath: 'mGameItems.Array.data[12]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 28e2b32729736af4f91acd4c3d80a699, type: 2}
+    - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
+      propertyPath: 'mGameItems.Array.data[13]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a2da01effe25137449d435dcd2432975, type: 2}
+    - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
+      propertyPath: 'mGameItems.Array.data[14]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1810977225240124fb09e22c86e16979, type: 2}
+    - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
+      propertyPath: 'mGameItems.Array.data[15]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1810977225240124fb09e22c86e16979, type: 2}
     - target: {fileID: 4208559114333191818, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.19276
@@ -3520,6 +3567,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5510030251023409613, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: m_Name
+      value: Inventory
+      objectReference: {fileID: 0}
+    - target: {fileID: 5510030251023409613, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
+      propertyPath: m_TagString
       value: Inventory
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3928,6 +3979,10 @@ PrefabInstance:
       propertyPath: mMailCreator
       value: 
       objectReference: {fileID: 219230984}
+    - target: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
+      propertyPath: mDatabaseManager
+      value: 
+      objectReference: {fileID: 1718805485}
     - target: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
       propertyPath: mDaySpeedMultiplier
       value: 2
