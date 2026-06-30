@@ -16,7 +16,7 @@ public class ChairScript : MonoBehaviour
     Quaternion initialRotation = Quaternion.identity;
 
     Vector3 targetPosition = new Vector3(-3.75f, 0.3f, 3.87f);
-    Quaternion targetRotation = Quaternion.Euler(0,90,0);
+    Quaternion targetRotation = Quaternion.Euler(0, 90, 0);
     Animator mPlayerAnimator;
     void Start()
     {
@@ -50,15 +50,14 @@ public class ChairScript : MonoBehaviour
     {
         isBusy = true;
 
-        initialPosition = mPlayer.transform.position;
-        initialRotation = mPlayer.transform.rotation;
-
         GetComponent<BoxCollider>().enabled = false;
+
         float elapsedTime = 0;
         float duration = 0.5f;
-        Vector3 positionOrigine = mPlayer.transform.position;
-        Quaternion rotationOrigine = mPlayer.transform.rotation;
 
+        Vector3 positionOrigine = initialPosition = mPlayer.transform.position;
+        Quaternion rotationOrigine = initialRotation = mPlayer.transform.rotation;
+        mPlayerAnimator.SetBool("IsWalking", true);
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
@@ -68,14 +67,13 @@ public class ChairScript : MonoBehaviour
         }
         mPlayer.transform.position = targetPosition;
         mPlayer.transform.rotation = targetRotation;
-        mPlayerAnimator.SetTrigger("SitDownTrigger");
 
-        yield return new WaitForSeconds(1.8f);
+        mPlayerAnimator.SetBool("IsWalking", false);
+
+        mPlayerAnimator.SetTrigger("SitDownTrigger");
+        AnimatorStateInfo stateInfo = mPlayerAnimator.GetCurrentAnimatorStateInfo(0);
 
         isSitting = true;
-        mPlayerAnimator.SetBool("IsSitting", isSitting);
-        mPlayer.transform.position = new Vector3(-4.13f, 0.3f, 3.87f);
-
 
         isBusy = false;
     }
@@ -88,13 +86,15 @@ public class ChairScript : MonoBehaviour
         mPlayerAnimator.SetBool("IsSitting", isSitting);
 
         mPlayer.transform.position = targetPosition;
+        mPlayerAnimator.CrossFade("Monoil_rig|Monoil_rig|Monoil_Sit 0", 0f);
 
         yield return new WaitForSeconds(1.8f);
 
         float elapsedTime = 0;
         float duration = 0.5f;
         Vector3 positionOrigine = mPlayer.transform.position;
-        //Quaternion rotationOrigine = mPlayer.transform.rotation;
+
+        mPlayerAnimator.SetBool("IsWalking", true);
 
         while (elapsedTime < duration)
         {
@@ -104,25 +104,10 @@ public class ChairScript : MonoBehaviour
             yield return 0;
         }
         mPlayer.transform.position = initialPosition;
-        //mPlayer.transform.rotation = initialRotation;
+
+        mPlayerAnimator.SetBool("IsWalking", false);
 
         GetComponent<BoxCollider>().enabled = true;
         isBusy = false;
-    }
-    IEnumerator mcMoveTo(Vector3 targetPosition, Quaternion targetRotation, float duration)
-    {
-        float elapsedTime = 0;
-        Vector3 positionOrigine = transform.position;
-        Quaternion rotationOrigine = transform.rotation;
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(positionOrigine, targetPosition, elapsedTime / duration);
-            transform.rotation = Quaternion.Lerp(rotationOrigine, targetRotation, elapsedTime / duration);
-            yield return 0;
-        }
-
-        transform.position = targetPosition;
-        transform.rotation = targetRotation;
     }
 }
