@@ -18,6 +18,7 @@ public class Order
     }
 
     // seulement utile pour la BDD
+    [PrimaryKey]
     [Column("mailId")]
     public int mailId { get; set; }
 

@@ -2421,7 +2421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: mGameItems.Array.size
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: 'mGameItems.Array.data[0]'
@@ -2463,6 +2463,14 @@ PrefabInstance:
       propertyPath: 'mGameItems.Array.data[9]'
       value: 
       objectReference: {fileID: 11400000, guid: 644a5961a1860504cbb375b8b0a3c8e1, type: 2}
+    - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
+      propertyPath: 'mGameItems.Array.data[10]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 33cfcb6da13905f4b9f6360a8b538f41, type: 2}
+    - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
+      propertyPath: 'mGameItems.Array.data[11]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 200d5b5364ec19b4eb868ff1237ee319, type: 2}
     - target: {fileID: 4208559114333191818, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.19276

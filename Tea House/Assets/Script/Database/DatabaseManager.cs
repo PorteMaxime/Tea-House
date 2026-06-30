@@ -9,8 +9,6 @@ public class MailRandomData
     public string type { get; set; }
 
     public string value { get; set; }
-
-    public int followingType { get; set; }
 }
 
 [Table("Inventory")]
@@ -34,10 +32,8 @@ public class DatabaseManager : MonoBehaviour
 
     private void Awake()
     {
-        if (!Application.persistentDataPath.Contains("Data.db"))
-        {
+        if (File.Exists($"{Application.persistentDataPath}/Data.db") != true)
             File.Copy($"{Application.streamingAssetsPath}/Save/Data.db", $"{Application.persistentDataPath}/Data.db");
-        }
 
         database = new SQLiteConnection($"{Application.persistentDataPath}/Data.db");
 
@@ -46,8 +42,6 @@ public class DatabaseManager : MonoBehaviour
 
     void Start()
     {
-        //CreateTables();
-
         // Chargement des données
         LoadDaylight();
 
@@ -72,7 +66,6 @@ public class DatabaseManager : MonoBehaviour
         // Mails
         database.CreateTable<Mail>();
         database.CreateTable<Order>();
-        database.Execute("CREATE UNIQUE INDEX IF NOT EXISTS uniqueIndex ON Order(mailId);");
         database.CreateTable<StatValue>();
         database.Execute("CREATE UNIQUE INDEX IF NOT EXISTS uniqueIndexes ON Stat(stat, mailId);");
 
