@@ -118,7 +118,7 @@ public class BruisingState : IWorkbench
             {
                 mWorkbench.blendingState.isEmpty = false;
                 //mWorkbench.mMortarBowl.transform.parent.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.75f, 0);
-                mWorkbench.mMortarBowl.transform.parent.gameObject.transform.position = Vector3.zero;
+                //mWorkbench.mMortarBowl.transform.parent.gameObject.transform.position = Vector3.zero;
 
 
                 fragIngredient.transform.SetParent(mWorkbench.mMixtureBowl.transform);
@@ -127,7 +127,7 @@ public class BruisingState : IWorkbench
 
                 //mWorkbench.mMortarBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0,1,0);
 
-                //mWorkbench.LerpGameObject(mWorkbench.mMortarBotBorn.transform, fragIngredient);
+                mWorkbench.LerpGameObject(mWorkbench.mMortarBowl.transform.parent.gameObject, mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.75f, 0), 0.5f);
                 mWorkbench.RotateGameObject(mWorkbench.mMortarBowl.transform.parent.gameObject, Quaternion.Euler(-180, 0, 0), 0.5f);
 
                 timerStart = true;
