@@ -22,6 +22,8 @@ TagManager:
   - Mortar
   - Chair
   - MainPanel
+  - MailManager
+  - Inventory
   layers:
   - Default
   - TransparentFX

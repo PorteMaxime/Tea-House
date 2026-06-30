@@ -66,7 +66,7 @@ public class Camera_Raycast : ICameraControllerMod
         else
             totalLayers = ~0;
 
-        Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
+        Debug.DrawRay(ray.origin, ray.direction * distance, Color.red, 2f);
 
         RaycastHit[] hits = Physics.RaycastAll(ray, distance, totalLayers);
 
@@ -110,7 +110,7 @@ public class Camera_Raycast : ICameraControllerMod
 
         RaycastHit[] hits = Physics.SphereCastAll(ray, radius, distance, totalLayers);
 
-        Debug.DrawRay(ray.origin, ray.direction * distance, Color.pink);
+        Debug.DrawRay(ray.origin, ray.direction * distance, Color.pink, 2f);
 
         bool hasTagFilter = tags != null && tags.Length > 0;
 
@@ -235,7 +235,7 @@ public class Camera_Raycast : ICameraControllerMod
 
         bool hasTagFilter = tags != null && tags.Length > 0;
 
-        Debug.DrawRay(ray.origin, ray.direction * distance, Color.green);
+        Debug.DrawRay(ray.origin, ray.direction * distance, Color.green, 2f);
         
         RaycastHit[] hitsInfo = Physics.RaycastAll(ray, distance, totalLayers);
 
@@ -274,7 +274,7 @@ public class Camera_Raycast : ICameraControllerMod
 
         bool hasTagFilter = tags != null && tags.Length > 0;
 
-        Debug.DrawRay(ray.origin, ray.direction * distance, Color.blue);
+        Debug.DrawRay(ray.origin, ray.direction * distance, Color.blue, 2f);
         
         RaycastHit[] hitsInfo = Physics.SphereCastAll(ray, radius, distance, totalLayers);
 

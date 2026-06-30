@@ -49,30 +49,46 @@ public class PacketOpening : IPackaging
             if(mDragAndDrop.StartDragging(mLid) == false)
             {
                 mMain.mStateMachine.SwitchState(mMain.mCompleting);
-                Debug.Log("can't drag lid");
                 return;
             }
+            if (mIsOpened == false)
+                mIsOpened = true;
         }
         else
         {
             mPackageAnimator = mMain.mOutputGO.GetComponent<Animator>();
+            AnimatorStateInfo animatorInfo =  mPackageAnimator.GetCurrentAnimatorStateInfo(0);
+            if(mPackageAnimator.IsInTransition(0) == false || (animatorInfo.normalizedTime < 1f) == false)
+            {
+                mPackageAnimator.SetFloat("AnimSpeed", mIsOpened == true ? -1f : 1f);
+            
+                float startFrame = mIsOpened ? 1f : 0f;
+                mPackageAnimator.Play("OpenBag", 0, startFrame);
+
+                mIsOpened = mIsOpened == true ? false : true;
+            }
+            mMain.mStateMachine.SwitchState(mMain.mCompleting);
         }
 
-        
-        
-        if(mIsOpened == false)
-        {
-            mIsOpened = true;
-            mMain.mCompleting.mIsOpened = true;
-        }
+        mMain.mCompleting.mIsOpened = mIsOpened;
     }
     public void OnExit()
     {
         mDragAndDrop.StopDragging();
     }
 
-    public void OnUpdate()
+    public void OnReset()
     {
+        mLid = null;
+        mLidRB = null;
+        mLidClosedPlace = null;
+        mLidClosedPlaceCollider = null;
+        mPackageAnimator = null;
+        mIsOpened = false;
+    }
+
+    public void OnUpdate()
+    {        
         if(mIsOpened == true && mLidClosedPlaceCollider.IsColliding(mLid) && mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
         {
             mIsOpened = false;
@@ -83,7 +99,7 @@ public class PacketOpening : IPackaging
         }
         else if(mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
             mDragAndDrop.StopDragging();
-
+        
         if(mDragAndDrop.IsDragging() == false)
         {
             if(mLidRB != null)

@@ -18,8 +18,8 @@ public class BlendingState : IWorkbench
     int rightMixtureBowl= 0;
     int leftMixtureBowl = 0;
     public bool isEmpty = true;
-    bool mIsBlended = false;
-    bool canSwap = false;
+    public bool mIsBlended = false;
+    public bool canSwap = false;
     public void OnEnter()
     {
         initSpoonPos = mWorkbench.mSpoon.transform.position;

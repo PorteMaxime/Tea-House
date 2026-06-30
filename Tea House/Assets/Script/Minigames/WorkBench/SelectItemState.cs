@@ -16,6 +16,12 @@ public class SelectItemState : IWorkbench
     }
     public void OnUpdate()
     {
+        if(Mouse.current.rightButton.IsPressed() == true)
+        {
+            mWorkbench.blendingState.canSwap = true;
+            mWorkbench.blendingState.mIsBlended = true;
+        }
+
         if (mWorkbench.mCurrentItem == null)
         {
             if(InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)//inputPlayer
