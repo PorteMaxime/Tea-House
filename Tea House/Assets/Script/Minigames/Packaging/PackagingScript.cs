@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
@@ -15,13 +16,8 @@ public class PackagingScript : MonoBehaviour
     public PacketLabelPrinting mPrinting = null;
     #endregion
 
-    // public GameObject mDebug = null;
-    // public IngredientData mDebugData = null;
-
     private InteractiveAreaScript mIArea = null;
-
     public CameraController mCameraController = null;
-    public WorkingPoint mWorkingPoint = null;
 
     private Dictionary<PackageData, List<GameObject>> mVisualPackages = new Dictionary<PackageData, List<GameObject>>();
     public Inventory mInventory = null;
@@ -31,13 +27,12 @@ public class PackagingScript : MonoBehaviour
 
     public List<ItemData> mDebugList = new List<ItemData>();
 
-    [SerializeField] public MailSystem mMailSystem = null;
+    public MailSystem mMailSystem = null;
 
     void Start()
     {
         mCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         mMailSystem = GameObject.FindGameObjectWithTag("MailManager").GetComponent<MailSystem>();
-        mWorkingPoint = transform.Find("WorkingPoint").GetComponent<WorkingPoint>();
         mIArea = transform.Find("InteractiveArea").GetComponent<InteractiveAreaScript>();
         
         mInventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
@@ -83,24 +78,6 @@ public class PackagingScript : MonoBehaviour
 
         if(mIArea.isUsing == true)
             mStateMachine.Update();
-    }
-
-    public GameObject Instantiate(GameObject prefab, Vector3 pos, Quaternion rot)
-    {
-        return GameObject.Instantiate(prefab, pos, rot);
-    }
-    public void Destroy(GameObject toDestroy)
-    {
-        GameObject.Destroy(toDestroy);
-    }
-
-    public void ShareRender(GameObject origin, GameObject target)
-    {
-        MeshFilter mesh = target.AddComponent<MeshFilter>();
-        mesh.sharedMesh = origin.GetComponent<MeshFilter>().mesh;
-
-        MeshRenderer meshRenderer = target.AddComponent<MeshRenderer>();
-        meshRenderer.sharedMaterials = origin.GetComponent<MeshRenderer>().materials;
     }
 
     public void SetIngredientData(List<ItemData> data)

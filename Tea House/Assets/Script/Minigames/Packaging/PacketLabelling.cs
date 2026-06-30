@@ -12,8 +12,6 @@ public class PacketLabelling : IPackaging
     }
     #endregion
 
-    private Dictionary<Mail, GameObject> mOrders = new Dictionary<Mail, GameObject>();
-
     public GameObject mLabelGo = null;
     private GameObject mLabelSpot = null;
     private WorkingPoint mLabelSpotWP = null;

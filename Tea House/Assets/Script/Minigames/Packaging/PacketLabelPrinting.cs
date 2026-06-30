@@ -15,8 +15,10 @@ public class PacketLabelPrinting : IPackaging
     }
     #endregion
 
+    private Camera_DepthView mDepthView = null;
+    
     public GameObject mPrinterScreenUI = null;
-    private GameObject mPrinterViewPoint = null;
+    private Transform mPrinterViewPoint = null;
 
     private GameObject mLabelTextureGenerator = null;
     private GameObject mLabelGoPrefab = null;
@@ -29,12 +31,10 @@ public class PacketLabelPrinting : IPackaging
 
     public List<ItemData> mMixture = null;
 
-    private Camera_DepthView mDepthView = null;
-
     private void Init()
     {
         Transform printer = mMain.transform.Find("Printer");
-        mPrinterViewPoint = printer.transform.Find("ViewPoint").gameObject;
+        mPrinterViewPoint = printer.transform.Find("ViewPoint");
         mPrinterScreenUI = mPrinterViewPoint.transform.parent.Find("PrinterScreen").gameObject;
 
         mPrinterScript = printer.GetComponent<Printer_SelectOrder>();
@@ -66,7 +66,7 @@ public class PacketLabelPrinting : IPackaging
         foreach (Mail mail in mails)
         {
             if (mOrders.ContainsKey(mail) == false)
-                mOrders.Add(mail, mPrinterScript.CreateButton());
+                mOrders.Add(mail, mPrinterScript.CreateButton(mail));
         }
     }
 

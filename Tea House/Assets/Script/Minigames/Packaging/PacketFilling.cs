@@ -15,18 +15,17 @@ public class PacketFilling : IPackaging
         Init();
     }
     #endregion
+
+    private Input_PlayerInteract mPlayerInteract = null;
+    private CameraDragAndDrop mDragAndDrop = null;
+
     public GameObject mBowl = null;
     private Vector3 mOldPosition = Vector3.zero;
 
     public List<ItemData> mMixture = null;
 
-    private float mBowlAngle = 70f;
-    private float mRotationSpeed = 5f;
-    // private Vector3 mRotationStartPos = Vector3.zero;
-    // private Vector3 mRotationEndPos = Vector3.zero;
-
-    private Input_PlayerInteract mPlayerInteract = null;
-    private CameraDragAndDrop mDragAndDrop = null;
+    private readonly float mBowlAngle = 70f;
+    private readonly float mRotationSpeed = 5f; 
 
     private Vector4 mZBorns = Vector4.zero; // (bowlOriginZ, distanceBetweenBowlOriginAndPackage, nearestPackageCornerFromBowlOrigin, packageCenterZ)
     private Vector4 mOppositeZBorns = Vector4.zero; // Mirrored values of the ZBorns => mirroring point is the package center z
@@ -75,8 +74,7 @@ public class PacketFilling : IPackaging
 
     public void OnExit()
     {
-        mBowl.transform.rotation = Quaternion.identity;
-        mBowl.transform.position = mOldPosition;
+        mBowl.transform.SetPositionAndRotation(mOldPosition, Quaternion.identity);
         mBowl.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
     }
 
@@ -115,11 +113,5 @@ public class PacketFilling : IPackaging
         else
             // B to O
             mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.identity, mRotationSpeed * Time.deltaTime);
-    }
-
-    private IEnumerator HomeSweetHome() // Bring back Bowl
-    {
-        // TODO : Bring back the bowl to its original position and rotation
-        yield return 0f;
     }
 }

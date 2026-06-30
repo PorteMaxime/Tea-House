@@ -22,11 +22,6 @@ public class PacketChoosingState : IPackaging
 
     private Transform mWorkingPoint = null;
 
-    private Camera_Raycast mRaycast = null;
-
-    private GameObject mPackageSlot = null;
-    private List<GameObject> mPackages = new List<GameObject>();
-
     public GameObject mChoosedPackage = null;
 
     private void Init()
@@ -35,12 +30,6 @@ public class PacketChoosingState : IPackaging
 
         mPlayerInteract = InputManager.Get().mPlayerInteract;
         mPlayerInteract.Enable();
-
-        mRaycast = mMain.mCameraController.GetControllerMod<Camera_Raycast>();
-        mPackageSlot = mMain.transform.Find("Packages").gameObject;
-
-        foreach (Transform package in mPackageSlot.transform)
-            mPackages.Add(package.gameObject);
     }
 
     public void OnEnter()
@@ -53,7 +42,7 @@ public class PacketChoosingState : IPackaging
                 GameObject.Destroy(mMain.mOutputGO);
             }
 
-            GameObject package = mMain.Instantiate(mChoosedPackage.transform.parent.gameObject, mWorkingPoint.position, Quaternion.identity);
+            GameObject package = GameObject.Instantiate(mChoosedPackage.transform.parent.gameObject, mWorkingPoint.position, Quaternion.identity);
             mMain.mInventory.ChangeItemAmount(mChoosedPackage.transform.parent.GetComponent<Associated_SO>().mItem, -1);
 
             package.transform.parent = mMain.transform;
@@ -88,8 +77,6 @@ public class PacketChoosingState : IPackaging
 
     public void OnReset()
     {
-        mPackageSlot = null;
-        
     }
 
     public void OnUpdate()

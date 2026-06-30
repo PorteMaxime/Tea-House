@@ -26,6 +26,7 @@ public class PacketCompleting : IPackaging
 
     private GameObject mExport = null;
     private bool mIsExporting = false;
+    private Transform mWorkbenchBowlPos = null;
 
     private void Init()
     {
@@ -35,6 +36,8 @@ public class PacketCompleting : IPackaging
 
         mLabelTrash = mMain.transform.Find("LabelTrash").gameObject;
         mExport = mMain.transform.Find("PackageExport").gameObject;
+
+        mWorkbenchBowlPos = GameObject.Find("Blending").transform.Find("posMixtureBowl").transform;
     }
     public void OnEnter()
     {
@@ -184,6 +187,8 @@ public class PacketCompleting : IPackaging
             mMain.mOutputGO.transform.position = Vector3.zero;
             mMain.mOutput.transform.parent = null;
             mMain.ResetFSM();
+
+            mMain.mFilling.mBowl.transform.position = mWorkbenchBowlPos.position;
 
             // TODO: Add export to the table
 
