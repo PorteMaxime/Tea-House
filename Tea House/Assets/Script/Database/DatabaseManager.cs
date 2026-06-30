@@ -1,9 +1,8 @@
 using SQLite;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
-using static ItemData;
 
 public class MailRandomData
 {
@@ -35,6 +34,12 @@ public class DatabaseManager : MonoBehaviour
 
     private void Awake()
     {
+        if (!Application.persistentDataPath.Contains("Data.db"))
+        {
+            Debug.Log("copy");
+            File.Copy($"{Application.streamingAssetsPath}/Save/Data.db", $"{Application.persistentDataPath}/Data.db");
+        }
+
         database = new SQLiteConnection($"{Application.persistentDataPath}/Data.db");
 
         Debug.Log("Database path : " + database.DatabasePath);
@@ -44,6 +49,7 @@ public class DatabaseManager : MonoBehaviour
     {
         //CreateTables();
 
+        // Chargement des données
         LoadDaylight();
 
         LoadInventory();

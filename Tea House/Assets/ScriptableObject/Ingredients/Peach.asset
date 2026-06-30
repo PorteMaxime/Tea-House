@@ -23,12 +23,12 @@ MonoBehaviour:
   - mStatVar: 2
     mValueVar: 0
   - mStatVar: 3
-    mValueVar: 0
+    mValueVar: 1
   - mStatVar: 4
     mValueVar: 2
   - mStatVar: 5
     mValueVar: 0
   - mStatVar: 6
     mValueVar: 0
-  mPrice: 0
+  mPrice: 1
   mFragIngredient: {fileID: 0}
