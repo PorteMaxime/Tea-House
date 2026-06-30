@@ -36,7 +36,6 @@ public class DatabaseManager : MonoBehaviour
     {
         if (!Application.persistentDataPath.Contains("Data.db"))
         {
-            Debug.Log("copy");
             File.Copy($"{Application.streamingAssetsPath}/Save/Data.db", $"{Application.persistentDataPath}/Data.db");
         }
 
