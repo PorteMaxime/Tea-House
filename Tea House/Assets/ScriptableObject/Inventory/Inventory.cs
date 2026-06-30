@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour
             mItemsLookUp.Add(item.mName, item);
         }
     }
+    #endregion
 
     public void ClearInventory()
     {

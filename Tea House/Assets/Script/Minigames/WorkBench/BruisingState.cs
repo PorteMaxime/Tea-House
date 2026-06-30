@@ -10,6 +10,14 @@ public class BruisingState : IWorkbench
     public BruisingState(WorkbenchScript system)
     {
         mWorkbench = system;
+
+        initBowlPos = mWorkbench.mMortarBowl.transform.position;
+        initBowlRot = mWorkbench.mMortarBowl.transform.rotation;
+
+        initMortarPos = mWorkbench.mMortarPilon.transform.position;
+        initMortarRot = mWorkbench.mMortarPilon.transform.rotation;
+
+        Debug.Log(initMortarPos);
     }
 
     Vector3 initBowlPos = Vector3.zero;
@@ -26,16 +34,11 @@ public class BruisingState : IWorkbench
     int topMortar = 0;
     int bottomMortar = 0;
 
-
+    float timerChangeState = 0f;
+    bool timerStart = false;
 
     public void OnEnter()
     {
-        initBowlPos = mWorkbench.mMortarBowl.transform.position;
-        initBowlRot = mWorkbench.mMortarBowl.transform.rotation;
-
-        initMortarPos = mWorkbench.mMortarPilon.transform.position;
-        initMortarRot = mWorkbench.mMortarPilon.transform.rotation;
-
         mWorkbench.currentItemG.transform.position = mWorkbench.mMortarBowl.transform.position + ingredientPosOffset;
         isEmpty = false;
     }
@@ -89,10 +92,13 @@ public class BruisingState : IWorkbench
                 bottomMortar = 0;
                 topMortar = 0;
 
+                Debug.Log(initMortarPos);
+                Debug.Log(mWorkbench.mMortarPilon.transform.position);
+
             }
 
         }
-        if(canMoveBowl == false && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame() && mItemBruised)
+        if(canMoveBowl == false && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame() && mItemBruised == true)
         {
             canMoveBowl = true;
         }
@@ -104,7 +110,7 @@ public class BruisingState : IWorkbench
 
                 if (hitDraggables.Count > 0)
                 {
-                    mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarBowl);
+                    mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarBowl.transform.parent.gameObject);
                 }
             }
 
@@ -115,6 +121,29 @@ public class BruisingState : IWorkbench
                 fragIngredient.transform.SetParent(mWorkbench.mMixtureBowl.transform);
                 fragIngredient.transform.localPosition = new Vector3(0.001f, 0.001f, 0);
                 fragIngredient.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
+
+                //mWorkbench.mMortarBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0,1,0);
+
+                mWorkbench.RotateGameObject(mWorkbench.mMortarBowl.transform.parent.gameObject, Quaternion.Euler(-180, 0, 0), 0.5f);
+
+                timerStart = true;
+            }
+        }
+
+        if(timerStart == true)
+        {
+            mWorkbench.mDragAndDrop.StopDragging();
+            timerChangeState += Time.deltaTime;
+
+            if (timerChangeState > 0.5f)
+            {
+
+            }
+            if (timerChangeState > 1f)
+            {
+                timerChangeState = 0;
+                timerStart = false;
+
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
             }
         }
@@ -122,6 +151,7 @@ public class BruisingState : IWorkbench
 
     public void OnExit()
     {
+        Debug.Log("test");
         mWorkbench.mDragAndDrop.StopDragging();
 
         mWorkbench.mMortarBowl.transform.rotation = Quaternion.Euler(0, 0, 180);

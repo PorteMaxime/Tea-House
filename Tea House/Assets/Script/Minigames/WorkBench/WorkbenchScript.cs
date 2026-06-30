@@ -14,14 +14,16 @@ public class WorkbenchScript : MonoBehaviour
     public PackagingScript mPackaging;
     public GameObject mMixtureBowlPackagingPos;
     public InteractiveAreaScript mInteractiveArea;
+
     public GameObject mCameraPosPackaging;
+    public GameObject mCameraPosCuttingBoard;
 
     public GameObject mMortarBowl;
     public GameObject mMortarPilon;
     public GameObject mMixtureBowl;
     public IngredientData mCurrentItem = null;
     public GameObject currentItemG = null;
-    public List<IngredientData> mMixture;
+    public List<ItemData> mMixture;
     public IngredientData mBruiseIngrdient;
 
     public GameObject mMortarTopBorn;
@@ -41,6 +43,7 @@ public class WorkbenchScript : MonoBehaviour
     public SelectItemState selectItemState;
     public BruisingState bruisingState;
     public BlendingState blendingState;
+    public CuttingState cuttingState;
 
     //
     float upPan = Screen.height * 0.15f;
@@ -49,7 +52,7 @@ public class WorkbenchScript : MonoBehaviour
     void Awake()
     {
         mBruiseIngrdient = ScriptableObject.CreateInstance<IngredientData>();
-        mMixture = new List<IngredientData>();
+        mMixture = new List<ItemData>();
     }
     void Start()
     {
@@ -62,6 +65,7 @@ public class WorkbenchScript : MonoBehaviour
         selectItemState = new SelectItemState(this);
         bruisingState = new BruisingState(this);
         blendingState = new BlendingState(this);
+        cuttingState = new CuttingState(this);
 
         stateMachine.ChangeState(selectItemState);
     }

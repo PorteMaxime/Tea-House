@@ -6,6 +6,10 @@ public class IngredientData : ItemData
 {
     public GameObject mFragIngredient;
 
+    public GameObject mAmountJar1;
+    public GameObject mAmountJar2;
+    public GameObject mAmountJar3;
+
     public List<StatValue> GetTorrefiedStats()
     {
         List<StatValue> torrefiedStats = new List<StatValue>();

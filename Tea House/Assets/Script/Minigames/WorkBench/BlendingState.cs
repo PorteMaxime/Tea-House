@@ -24,13 +24,14 @@ public class BlendingState : IWorkbench
     {
         initSpoonPos = mWorkbench.mSpoon.transform.position;
         initSpoonRot = mWorkbench.mSpoon.transform.rotation;
+
     }
 
     public void OnUpdate()
     {
         if(isEmpty == false && mIsBlended == false)
         {
-            if(InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
+            if(InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)
             {
                 mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Spoon", out List<RaycastHit> hitDraggables);
 
@@ -89,7 +90,8 @@ public class BlendingState : IWorkbench
             {
                 mWorkbench.mCameraDepth.LerpingCamera(mWorkbench.mCameraPosPackaging.transform.position, mWorkbench.mCameraPosPackaging.transform.rotation, 0.5f);
                 mWorkbench.LerpGameObject(mWorkbench.mMixtureBowl, mWorkbench.mMixtureBowlPackagingPos.transform.position, 0.5f);
-                //mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                player.transform.position = new Vector3(mWorkbench.mCameraPosPackaging.transform.position.x, player.transform.position.y, player.transform.position.z);
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
             }
         }
