@@ -24,6 +24,8 @@ public class Daylight : MonoBehaviour
 
     [SerializeField] private DatabaseManager mDatabaseManager;
 
+    [SerializeField] private LoadingScript mLoadingScript;
+
     public enum Phase
     {
         Morning,
@@ -69,21 +71,7 @@ public class Daylight : MonoBehaviour
             if (mCurrentPhase + 1 >= Phase.Count)
             {
                 // Journee suivante
-                transform.parent.rotation = Quaternion.Euler(new Vector3(0f, -45f, 0f));
-                mCurrentTime = mDayStartHour;
-                mCurrentDay += 1;
-                mDayTimeSpent = 0f;
-
-                ChangePhase(mPhases.Keys.First());
-
-                mMailSystem.AddMailsToSend();
-
-                mMailCreator.CreateDailyMails();
-
-                // Sauvegarder la journee
-                mDatabaseManager.SaveMails();
-                mDatabaseManager.SaveDaylight();
-                mDatabaseManager.SaveInventory();
+                ChangeDay();
             }
             else
             {
@@ -93,10 +81,32 @@ public class Daylight : MonoBehaviour
         }
     }
 
-    void ChangePhase(Phase phase)
+    private void ChangePhase(Phase phase)
     {
         mCurrentPhase = phase;
         mCurrentPhaseLength = mPhases[phase];
+    }
+
+    public void ChangeDay()
+    {
+        mLoadingScript.ShowLoading();
+
+        mCurrentTime = mDayStartHour;
+        mCurrentDay += 1;
+        mDayTimeSpent = 0f;
+
+        ChangePhase(mPhases.Keys.First());
+
+        mMailSystem.AddMailsToSend();
+
+        mMailCreator.CreateDailyMails();
+
+        // Sauvegarder la journee
+        mDatabaseManager.SaveMails();
+        mDatabaseManager.SaveDaylight();
+        mDatabaseManager.SaveInventory();
+        
+        mLoadingScript.HideLoading();
     }
 
     public string GetInGameTime()

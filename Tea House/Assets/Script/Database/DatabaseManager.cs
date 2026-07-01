@@ -29,6 +29,7 @@ public class DatabaseManager : MonoBehaviour
 
     [SerializeField] private MailSystem mMailSystem;
     [SerializeField] private MailCreator mMailCreator;
+    [SerializeField] private MailCanvasScript mMailCanvasScript;
 
     private void Awake()
     {
@@ -148,8 +149,24 @@ public class DatabaseManager : MonoBehaviour
         {
             mail.SetOrder(orders[mail.id]);
             mail.mOrder.mOrderData.mStats = stats[mail.id];
-            mMailSystem.mMails[mail.mOrder.mState].Add(mail);
+
+            if (mail.mSendDay <= mDaylight.mCurrentDay)
+            {
+                mMailSystem.mMails[mail.mOrder.mState].Add(mail);
+
+                if (mail.mOrder.mState == Order.State.InBox)
+                    mMailCanvasScript.CreateMailPrefab(mail);
+                else if (mail.mOrder.mState != Order.State.NotSent)
+                    mMailCanvasScript.CreateOrderPrefab(mail);
+            }
+            else
+                mMailCreator.mCalendar[mail.mSendDay % 7].Add(mail);
         }
+
+        mMailSystem.mMails[Order.State.NotSent] = mMailSystem.mMails[Order.State.NotSent].OrderBy(mail => mail.mSendTime).ToList();
+
+        mMailSystem.mMails[Order.State.Accepted] = mMailSystem.mMails[Order.State.Accepted].OrderBy(mail => mail.mExpiration).ToList();
+        mMailSystem.mMails[Order.State.InBox] = mMailSystem.mMails[Order.State.InBox].OrderBy(mail => mail.mExpiration).ToList();
     }
 
     public void SaveMails()

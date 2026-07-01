@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -148,6 +149,8 @@ public class MailCanvasScript : MonoBehaviour
         CreateOrderPrefab(mSelectedMail.Item1);
 
         RemoveMailPrefab(mSelectedMail.Item1);
+
+        mMailSystem.mMails[Order.State.Accepted] = mMailSystem.mMails[Order.State.Accepted].OrderBy(mail => mail.mExpiration).ToList();
     }
 
     public void RejectMail()
