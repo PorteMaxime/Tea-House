@@ -5061,7 +5061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3256330282325671637, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3256330282325671637, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
       propertyPath: m_CollisionDetection
