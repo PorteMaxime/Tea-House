@@ -40,6 +40,10 @@ public class SelectItemState : IWorkbench
                     {
                         mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
                     }
+                    else if (hitGo == mWorkbench.mCuttingBoard)
+                    {
+                        mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
+                    }
                 }
             }
             else

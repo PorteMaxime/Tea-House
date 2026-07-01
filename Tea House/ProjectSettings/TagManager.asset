@@ -24,6 +24,7 @@ TagManager:
   - MainPanel
   - MailManager
   - Inventory
+  - CuttingBoard
   layers:
   - Default
   - TransparentFX

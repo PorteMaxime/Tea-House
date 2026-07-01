@@ -44,21 +44,33 @@ public class BruisingState : IWorkbench
     }
     public void OnUpdate()
     {
-        if (isEmpty == false && mItemBruised == false)
+        if(InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
         {
-            if (InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
-            {
-                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MortarPilon", out List<RaycastHit> hitDraggables);
+            mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), new string[2] { "MortarPilon", "MortarBowl" }, out List<RaycastHit> hitDraggables);
 
-                if (hitDraggables.Count > 0)
+            if (hitDraggables.Count > 0)
+            {
+                GameObject hitGo = hitDraggables[0].collider.gameObject;
+                if (hitGo == mWorkbench.mMortarPilon)
                 {
-                    mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarPilon);
-                    mWorkbench.mMortarPilon.transform.rotation = Quaternion.identity;
+                    if (isEmpty == false && mItemBruised == false)
+                    {
+                        mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarPilon);
+                        mWorkbench.mMortarPilon.transform.rotation = Quaternion.identity;
+                    }
+                }
+                else if (hitGo == mWorkbench.mMortarBowl)
+                {
+                    if (isEmpty == false && mItemBruised == true && canMoveBowl == true)
+                    {
+                        mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarBowl.transform.parent.gameObject);
+                    }
                 }
             }
-            else if (InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame() == true && mWorkbench.mDragAndDrop.IsDragging() == true)
-                mWorkbench.mDragAndDrop.StopDragging();
 
+        }
+        else if(mWorkbench.mDragAndDrop.mDragging == mWorkbench.mMortarPilon)
+        {
             if (mWorkbench.mMortarPilon.transform.position.z <= mWorkbench.mMortarRightBorn.transform.position.z
                 && mWorkbench.mMortarPilon.transform.position.z >= mWorkbench.mMortarLeftBorn.transform.position.z)
             {
@@ -68,7 +80,6 @@ public class BruisingState : IWorkbench
                     {
                         topMortar++;
                     }
-
                 }
                 else if (mWorkbench.mMortarPilon.transform.position.y <= mWorkbench.mMortarBotBorn.transform.position.y)
                 {
@@ -76,12 +87,12 @@ public class BruisingState : IWorkbench
                     {
                         bottomMortar++;
                     }
-
                 }
             }
             if (bottomMortar == 4)
             {
                 fragIngredient = mWorkbench.InstantiateGameObject(mWorkbench.mCurrentItem.mFragIngredient, mWorkbench.mMortarBowl.transform.position + ingredientPosOffset, mWorkbench.mMortarBowl);
+                fragIngredient.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
                 mWorkbench.mBruiseIngrdient = mWorkbench.mCurrentItem;
                 mWorkbench.DestroyCurrentIngredient();
                 mItemBruised = true;
@@ -91,57 +102,42 @@ public class BruisingState : IWorkbench
                 mWorkbench.mMortarPilon.transform.rotation = initMortarRot;
                 bottomMortar = 0;
                 topMortar = 0;
-
-                Debug.Log(initMortarPos);
-                Debug.Log(mWorkbench.mMortarPilon.transform.position);
-
             }
-
         }
-        if(canMoveBowl == false && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame() && mItemBruised == true)
+        else if(InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
         {
-            canMoveBowl = true;
+            if (canMoveBowl == false && mItemBruised == true)
+            {
+                canMoveBowl = true;
+            }
+            mWorkbench.mDragAndDrop.StopDragging();
         }
+
         if (isEmpty == false && mItemBruised == true && canMoveBowl == true)
         {
-            if(InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
-            {
-                mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "MortarBowl", out List<RaycastHit> hitDraggables);
-
-                if (hitDraggables.Count > 0)
-                {
-                    mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMortarBowl.transform.parent.gameObject);
-                }
-            }
-
             if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.mMortarBowl) && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
             {
                 mWorkbench.blendingState.isEmpty = false;
-                //mWorkbench.mMortarBowl.transform.parent.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.75f, 0);
-                //mWorkbench.mMortarBowl.transform.parent.gameObject.transform.position = Vector3.zero;
 
-
-                fragIngredient.transform.SetParent(mWorkbench.mMixtureBowl.transform);
-                fragIngredient.transform.localPosition = new Vector3(0.001f, 0.001f, 0);
-                fragIngredient.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
-
-                //mWorkbench.mMortarBowl.transform.position = mWorkbench.mMixtureBowl.transform.position + new Vector3(0,1,0);
-
-                mWorkbench.LerpGameObject(mWorkbench.mMortarBowl.transform.parent.gameObject, mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.75f, 0), 0.5f);
+                mWorkbench.LerpGameObject(mWorkbench.mMortarBowl.transform.parent.gameObject, mWorkbench.mMixtureBowl.transform.position + new Vector3(0, 0.5f, 0), 0.5f);
                 mWorkbench.RotateGameObject(mWorkbench.mMortarBowl.transform.parent.gameObject, Quaternion.Euler(-180, 0, 0), 0.5f);
 
                 timerStart = true;
             }
         }
 
-        if(timerStart == true)
+        if (timerStart == true)
         {
             mWorkbench.mDragAndDrop.StopDragging();
             timerChangeState += Time.deltaTime;
 
             if (timerChangeState > 0.5f)
             {
+                fragIngredient.GetComponent<Rigidbody>().useGravity = true;
+                fragIngredient.GetComponent<Rigidbody>().isKinematic = false;
 
+                fragIngredient.transform.SetParent(mWorkbench.mMixtureBowl.transform);
+                fragIngredient.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
             }
             if (timerChangeState > 1f)
             {
@@ -160,6 +156,8 @@ public class BruisingState : IWorkbench
         mWorkbench.mMortarBowl.transform.parent.position = initBowlPos;
         mWorkbench.mMortarBowl.transform.parent.rotation = initBowlRot;
 
+        mWorkbench.mMortarPilon.transform.position = initMortarPos;
+        mWorkbench.mMortarPilon.transform.rotation = initMortarRot;
 
         isEmpty = true;
         mItemBruised = false;
