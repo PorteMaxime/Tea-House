@@ -37,6 +37,7 @@ public class DatabaseManager : MonoBehaviour
             File.Copy($"{Application.streamingAssetsPath}/Save/Data.db", $"{Application.persistentDataPath}/Data.db");
 
         database = new SQLiteConnection($"{Application.persistentDataPath}/Data.db");
+        database.CreateTable<Mail>();
 
         Debug.Log("Database path : " + database.DatabasePath);
     }
@@ -149,6 +150,7 @@ public class DatabaseManager : MonoBehaviour
         {
             mail.SetOrder(orders[mail.id]);
             mail.mOrder.mOrderData.mStats = stats[mail.id];
+            mail.mPicture = mMailCreator.mImages.FirstOrDefault(image => image.name == mail.mPictureName);
 
             if (mail.mSendDay <= mDaylight.mCurrentDay)
             {

@@ -11,8 +11,12 @@ public class Mail
 
     [Ignore]
     public Order mOrder { get; private set; }
-    public Sprite mPicture;
     public int mValueAmountLimit = 0;
+
+    public Sprite mPicture;
+    [Column("pictureName")]
+    public string mPictureName { get; set; }
+
 
     [Column("name")]
     public string mName { get; set; }
