@@ -40,10 +40,6 @@ public class SelectItemState : IWorkbench
                     {
                         mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
                     }
-                    else if (hitGo == mWorkbench.mCuttingBoard)
-                    {
-                        mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
-                    }
                 }
             }
             else
@@ -61,13 +57,17 @@ public class SelectItemState : IWorkbench
                 {
                     Inventory.msInstance.ChangeItemAmount(mWorkbench.mCurrentItem, -1);
 
-                    mWorkbench.currentItemG.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
                     mWorkbench.currentItemG.GetComponent<Rigidbody>().useGravity = false;
                     mWorkbench.currentItemG.GetComponent<BoxCollider>().isTrigger = true;
 
                     mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
                 }
+                else if (mWorkbench.mCuttingBoard.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
+                {
+                    mWorkbench.stateMachine.ChangeState(mWorkbench.cuttingState);
+                }
             }
+
 
         }
     }
@@ -75,7 +75,7 @@ public class SelectItemState : IWorkbench
     {
 
     }
-    void InitIngredient(IngredientData _ingredient)
+    void InitIngredient(IngredientItem _ingredient)
     {
         mWorkbench.mCurrentItem = _ingredient;
         mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mPrefab, Vector3.zero);

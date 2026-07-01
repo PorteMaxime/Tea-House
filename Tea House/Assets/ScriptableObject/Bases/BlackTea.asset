@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlackTea
   m_EditorClassIdentifier: Assembly-CSharp::BaseData
   mName: BlackTea
-  mPrefab: {fileID: 0}
+  mPrefab: {fileID: 4963316167775906141, guid: 14d3da77e0ee32544b63acfc197757f2, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStatVar: 0
@@ -32,3 +32,6 @@ MonoBehaviour:
     mValueVar: 1
   mPrice: 1
   mFragBase: {fileID: 0}
+  mAmountJar1: {fileID: 3095634141480058501, guid: 08b1cd9d7de333648b1c7c5b4ea1b4ed, type: 3}
+  mAmountJar2: {fileID: 7311211024133938127, guid: 234d96cacb8c5d145a926910386481d1, type: 3}
+  mAmountJar3: {fileID: 5748775022705648870, guid: 8c7be20a533c8194faf0d37bf0095c2d, type: 3}

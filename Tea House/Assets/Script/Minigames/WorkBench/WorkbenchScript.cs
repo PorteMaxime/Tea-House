@@ -21,10 +21,10 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMortarBowl;
     public GameObject mMortarPilon;
     public GameObject mMixtureBowl;
-    public IngredientData mCurrentItem = null;
+    public IngredientItem mCurrentItem = null;
     public GameObject currentItemG = null;
     public List<ItemData> mMixture;
-    public IngredientData mBruiseIngrdient;
+    public IngredientItem mBruiseIngrdient;
 
     public GameObject mMortarTopBorn;
     public GameObject mMortarBotBorn;
@@ -35,6 +35,8 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMixtureLeftBorn;
 
     public GameObject mCuttingBoard;
+
+    public GameObject mQteValideZone;
 
     public GameObject mPanelSwap;
 
@@ -97,7 +99,7 @@ public class WorkbenchScript : MonoBehaviour
 
     }
 
-    public void AddItemToMixture(IngredientData item)
+    public void AddItemToMixture(IngredientItem item)
     {
         mMixture.Add(item);
     }

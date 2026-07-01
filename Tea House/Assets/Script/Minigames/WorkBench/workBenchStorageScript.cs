@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class WorkBenchStorageScript : MonoBehaviour
 {
-    public IngredientData ingredient;
+    public IngredientItem ingredient;
+
     public GameObject ingredientAmountG;
     public int amount;
 

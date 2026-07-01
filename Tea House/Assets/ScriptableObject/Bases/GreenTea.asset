@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GreenTea
   m_EditorClassIdentifier: Assembly-CSharp::BaseData
   mName: GreenTea
-  mPrefab: {fileID: 0}
+  mPrefab: {fileID: 9201883189595016700, guid: 7ac058bf32c058a499c30dc9ae6257d5, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStatVar: 0
@@ -32,3 +32,6 @@ MonoBehaviour:
     mValueVar: 0
   mPrice: 2
   mFragBase: {fileID: 0}
+  mAmountJar1: {fileID: 6893858029711210473, guid: 1f1380936408b2a42ab46f244624f6da, type: 3}
+  mAmountJar2: {fileID: 2021011797376879915, guid: 8ca3f13b8f11d7c4e9d9e546c2796695, type: 3}
+  mAmountJar3: {fileID: 8988486090178565580, guid: 9e0d77855decd2947ab36254230f6c88, type: 3}
