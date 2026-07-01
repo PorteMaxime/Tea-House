@@ -34,6 +34,18 @@ public class Mail
         mailID += 1;
     }
 
+    public override string ToString()
+    {
+        return $"=== DEBUG MAIL (ID: {id}) ===\n" +
+            $"• Name: {mName}\n" +
+            $"• Text: {mText}\n" +
+            $"• Send Day: {mSendDay} | Send Time: {mSendTime}\n" +
+            $"• Duration: {mDuration} | Expiration: {mExpiration}\n" +
+            $"• Has Order: {(mOrder != null ? "Yes" : "No")}\n" +
+            $"• Has Sprite: {(mPicture != null ? "Yes" : "No")}\n" +
+            $"=============================";
+    }
+
     public void InitData(Order _order, Sprite _image, string _name, int _sendDay, int _duration)
     {
         mOrder = _order;

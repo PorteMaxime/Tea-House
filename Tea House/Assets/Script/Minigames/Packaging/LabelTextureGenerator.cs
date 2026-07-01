@@ -28,7 +28,6 @@ public class LabelTextureGenerator : AbstractDynamicTextureGenerator
     {
         // Is there enough parameters ? (6)
         if(args.Length <= 5 || args.Length > 6) return null;
-
         // Are they of the right type ?
         if (args[0] is Sprite == false || args[1] is string == false ||
             args[2] is BaseData == false ||

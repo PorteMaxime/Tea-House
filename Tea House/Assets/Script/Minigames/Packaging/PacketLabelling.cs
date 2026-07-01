@@ -51,6 +51,7 @@ public class PacketLabelling : IPackaging
         {
             mLabelGo.transform.parent = mMain.mOutputGO.transform;
 
+            mMain.mPrinting.LinkMailToOutput();
             mMain.mCompleting.mIsLabelled = true;
             mDragAndDrop.StopDragging();
             mLabelGo.GetComponent<Rigidbody>().isKinematic = true;

@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 3513560394092594057}
   - component: {fileID: 8543691218066558364}
   - component: {fileID: 6991899473807132673}
+  - component: {fileID: 1603034210481792637}
   m_Layer: 8
   m_Name: LabelPlace
   m_TagString: Untagged
@@ -117,7 +118,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
@@ -134,6 +135,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkingPoint
   mCollider: []
+--- !u!65 &1603034210481792637
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2229124267328197982}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.5, y: 29.881502, z: 7.5}
+  m_Center: {x: -1.26361465e-11, y: 14.440837, z: 0.000053069114}
 --- !u!1001 &3095311236742368257
 PrefabInstance:
   m_ObjectHideFlags: 0

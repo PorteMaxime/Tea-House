@@ -15,19 +15,19 @@ public class PackagingScript : MonoBehaviour
     public PacketLabelling mLabelling = null;
     public PacketLabelPrinting mPrinting = null;
     #endregion
-
+ 
     private InteractiveAreaScript mIArea = null;
-    public CameraController mCameraController = null;
+    [HideInInspector] public CameraController mCameraController = null;
 
     private Dictionary<PackageData, List<GameObject>> mVisualPackages = new Dictionary<PackageData, List<GameObject>>();
-    public Inventory mInventory = null;
+    [HideInInspector] public Inventory mInventory = null;
 
-    public PackageScript mOutput = null;
-    public GameObject mOutputGO = null;
+    [HideInInspector] public PackageScript mOutput = null;
+    [HideInInspector] public GameObject mOutputGO = null;
 
-    public List<ItemData> mDebugList = new List<ItemData>();
+    [HideInInspector] public List<ItemData> mDebugList = new List<ItemData>();
 
-    public MailSystem mMailSystem = null;
+    [HideInInspector] public MailSystem mMailSystem = null;
 
     void Start()
     {
@@ -96,6 +96,9 @@ public class PackagingScript : MonoBehaviour
         mFilling.OnReset();
         mLabelling.OnReset();
         mPrinting.OnReset();
+
+        mOutput = null;
+        mOutputGO = null;
 
         mStateMachine.SwitchState(mCompleting);
     }

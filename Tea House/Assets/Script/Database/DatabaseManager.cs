@@ -42,12 +42,12 @@ public class DatabaseManager : MonoBehaviour
 
     void Start()
     {
-        // Chargement des données
-        LoadDaylight();
+        // Chargement des donnï¿½es
+        // LoadDaylight();
 
-        LoadInventory();
+        // LoadInventory();
 
-        LoadMails();
+        // LoadMails();
     }
 
     private void CreateTables()

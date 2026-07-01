@@ -27,6 +27,7 @@ public class PacketCompleting : IPackaging
     private GameObject mExport = null;
     private bool mIsExporting = false;
     private Transform mWorkbenchBowlPos = null;
+    private PackageInventory mExportTarget = null;
 
     private void Init()
     {
@@ -38,6 +39,10 @@ public class PacketCompleting : IPackaging
         mExport = mMain.transform.Find("PackageExport").gameObject;
 
         mWorkbenchBowlPos = GameObject.Find("Blending").transform.Find("posMixtureBowl").transform;
+
+        Transform inv = GameObject.Find("Inventory_Station").transform;
+        Transform tray = inv.Find("SM_Tray"); 
+        mExportTarget = tray.GetComponent<PackageInventory>();
     }
     public void OnEnter()
     {
@@ -136,9 +141,9 @@ public class PacketCompleting : IPackaging
             mLabelTrash.transform.GetChild(0).gameObject.SetActive(false);
             mLabelTrash.transform.GetChild(1).gameObject.SetActive(false);
         }
-        Debug.Log("Labelled: " + mIsLabelled + " | Choosed: " + mIsChoosed + " | Filled: " + mIsFilled + " | Opened: " + mIsOpened);
-        if(mIsLabelled == true && mIsChoosed == true && mIsFilled == true && mIsOpened == false)
-        {
+        //Debug.Log("Labelled: " + mIsLabelled + " | Choosed: " + mIsChoosed + " | Filled: " + mIsFilled + " | Opened: " + mIsOpened);
+        if(mIsLabelled == true && mIsOpened == false)
+        {//  && mIsChoosed == true && mIsFilled == true
             if(mIsExporting == true)
             {
                 mExport.transform.GetChild(0).gameObject.SetActive(false);
@@ -179,18 +184,19 @@ public class PacketCompleting : IPackaging
     }
 
     public void ExportPackage()
-    {
-        if(mIsLabelled == false || mIsChoosed == false || mIsFilled == false || mIsOpened == true) return;
+    {//  || mIsChoosed == false || mIsFilled == false
+        if(mIsLabelled == false || mIsOpened == true) return;
 
         if(mIsExporting == true)
         {
             mMain.mOutputGO.transform.position = Vector3.zero;
             mMain.mOutput.transform.parent = null;
+            
+            // TODO: Add export to the table
+            mExportTarget.AddPackage(mMain.mOutput);
             mMain.ResetFSM();
 
             mMain.mFilling.mBowl.transform.position = mWorkbenchBowlPos.position;
-
-            // TODO: Add export to the table
 
             mIsExporting = false;
         }
