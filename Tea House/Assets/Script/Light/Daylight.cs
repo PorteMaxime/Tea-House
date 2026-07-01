@@ -24,7 +24,7 @@ public class Daylight : MonoBehaviour
 
     [SerializeField] private DatabaseManager mDatabaseManager;
 
-    [SerializeField] private LoadingScript mLoadingScript;
+    //[SerializeField] private LoadingScript mLoadingScript;
 
     public enum Phase
     {
@@ -89,7 +89,7 @@ public class Daylight : MonoBehaviour
 
     public void ChangeDay()
     {
-        mLoadingScript.ShowLoading();
+        //mLoadingScript.ShowLoading();
 
         mCurrentTime = mDayStartHour;
         mCurrentDay += 1;
@@ -106,7 +106,7 @@ public class Daylight : MonoBehaviour
         mDatabaseManager.SaveDaylight();
         mDatabaseManager.SaveInventory();
         
-        mLoadingScript.HideLoading();
+        //mLoadingScript.StopLoading();
     }
 
     public string GetInGameTime()
