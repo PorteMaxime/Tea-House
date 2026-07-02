@@ -15,7 +15,7 @@ public class MailCreator : MonoBehaviour
     private int mTorrefiedProbability = 25;
 
     // Informations pour cr�er les commandes
-    [SerializeField] private List<Sprite> mImages;
+    [SerializeField] public List<Sprite> mImages;
     Dictionary<string, List<string>> mMailRandomContent;
 
     public List<Mail>[] mCalendar = new List<Mail>[7];
@@ -65,7 +65,9 @@ public class MailCreator : MonoBehaviour
 
     public void CreateMailData(Mail mail)
     {
-        mail.mPicture = mImages[Random.Range(0, mImages.Count)];
+        Sprite mailSprite = mImages[Random.Range(0, mImages.Count)];
+        mail.mPicture = mailSprite;
+        mail.mPictureName = mailSprite.name;
         mail.mName = GetRandomValue("FirstName") + " " + GetRandomValue("LastName");
         mail.mSendDay = mDaylight.mCurrentDay + 1 + Random.Range(0, mCalendar.Length);
 

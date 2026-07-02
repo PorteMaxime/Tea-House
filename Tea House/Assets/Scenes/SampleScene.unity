@@ -1247,6 +1247,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2821d0f8cb6d8d4e96418f04cab1321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DatabaseManager
+--- !u!114 &1348514497 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3826198980629853728, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
+  m_PrefabInstance: {fileID: 4172009063449489341}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88c846b99482fe40bbd05f9f6e42c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!4 &1351852057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b6af2784b8a973a409a3363f12aedd1d, type: 3}
@@ -2020,6 +2031,10 @@ PrefabInstance:
       propertyPath: mMailCreator
       value: 
       objectReference: {fileID: 219230984}
+    - target: {fileID: 2735390859510243914, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
+      propertyPath: mMailCanvasScript
+      value: 
+      objectReference: {fileID: 2135722746}
     - target: {fileID: 3298393706160921457, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.08107
@@ -2456,6 +2471,10 @@ PrefabInstance:
       propertyPath: mMailCreator
       value: 
       objectReference: {fileID: 219230984}
+    - target: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
+      propertyPath: mLoadingScript
+      value: 
+      objectReference: {fileID: 1348514497}
     - target: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
       propertyPath: mDatabaseManager
       value: 
