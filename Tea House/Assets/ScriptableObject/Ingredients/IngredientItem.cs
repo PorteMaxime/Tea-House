@@ -10,4 +10,13 @@ public class IngredientItem : ItemData
     public GameObject mAmountJar3;
 
     public GameObject mFragIngredient;
+
+    public TransformType mType;
+
+    public enum TransformType
+    {
+        none,
+        bruising,
+        cutting
+    }
 }

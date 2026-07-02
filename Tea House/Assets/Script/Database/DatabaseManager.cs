@@ -30,6 +30,8 @@ public class DatabaseManager : MonoBehaviour
     [SerializeField] private MailSystem mMailSystem;
     [SerializeField] private MailCreator mMailCreator;
 
+    public bool isLoaded = false;
+
     private void Awake()
     {
         if (File.Exists($"{Application.persistentDataPath}/Data.db") != true)
@@ -48,6 +50,8 @@ public class DatabaseManager : MonoBehaviour
         LoadInventory();
 
         LoadMails();
+
+        isLoaded = true;
     }
 
     private void CreateTables()

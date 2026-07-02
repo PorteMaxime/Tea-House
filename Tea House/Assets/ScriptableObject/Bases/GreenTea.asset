@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GreenTea
   m_EditorClassIdentifier: Assembly-CSharp::BaseData
   mName: GreenTea
-  mPrefab: {fileID: 9201883189595016700, guid: 7ac058bf32c058a499c30dc9ae6257d5, type: 3}
+  mPrefab: {fileID: 6290192526801793409, guid: 9d127fcaeabc7894cbf3e5b259b9e4fb, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStatVar: 0
@@ -31,7 +31,9 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 0
   mPrice: 2
-  mFragBase: {fileID: 0}
-  mAmountJar1: {fileID: 6893858029711210473, guid: 1f1380936408b2a42ab46f244624f6da, type: 3}
-  mAmountJar2: {fileID: 2021011797376879915, guid: 8ca3f13b8f11d7c4e9d9e546c2796695, type: 3}
-  mAmountJar3: {fileID: 8988486090178565580, guid: 9e0d77855decd2947ab36254230f6c88, type: 3}
+  mIngredientGrab: {fileID: 0}
+  mAmountJar1: {fileID: 6997631468438231229, guid: 2290584c71fe581408b8a7904a4b8e15, type: 3}
+  mAmountJar2: {fileID: 126645315630856403, guid: 706928e7e1ecf5e4c9b0729bd1dc1ed3, type: 3}
+  mAmountJar3: {fileID: 9221557395558370167, guid: 8d497c6de4ee330418600ea4220a47bb, type: 3}
+  mFragIngredient: {fileID: 0}
+  mType: 0

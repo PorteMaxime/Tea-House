@@ -25,6 +25,7 @@ TagManager:
   - MailManager
   - Inventory
   - CuttingBoard
+  - DataBaseManager
   layers:
   - Default
   - TransparentFX

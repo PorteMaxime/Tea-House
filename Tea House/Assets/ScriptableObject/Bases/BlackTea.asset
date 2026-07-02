@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlackTea
   m_EditorClassIdentifier: Assembly-CSharp::BaseData
   mName: BlackTea
-  mPrefab: {fileID: 4963316167775906141, guid: 14d3da77e0ee32544b63acfc197757f2, type: 3}
+  mPrefab: {fileID: 5241442716923736636, guid: 6600c52d9f49b324d969d7733b1f91c4, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStatVar: 0
@@ -31,7 +31,9 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 1
   mPrice: 1
-  mFragBase: {fileID: 0}
-  mAmountJar1: {fileID: 3095634141480058501, guid: 08b1cd9d7de333648b1c7c5b4ea1b4ed, type: 3}
-  mAmountJar2: {fileID: 7311211024133938127, guid: 234d96cacb8c5d145a926910386481d1, type: 3}
-  mAmountJar3: {fileID: 5748775022705648870, guid: 8c7be20a533c8194faf0d37bf0095c2d, type: 3}
+  mIngredientGrab: {fileID: 0}
+  mAmountJar1: {fileID: 3071537283105047996, guid: a0ff86940e35b6e43b4465eac0c2a3ba, type: 3}
+  mAmountJar2: {fileID: 8006170475375151660, guid: 6ed1b0dd99fd8a14689009b05eb256fe, type: 3}
+  mAmountJar3: {fileID: 1150083970846884519, guid: aa0a6c9a12d343e46bf34d4f85b9f028, type: 3}
+  mFragIngredient: {fileID: 0}
+  mType: 0

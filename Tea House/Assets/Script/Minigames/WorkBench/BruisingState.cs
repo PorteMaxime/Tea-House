@@ -16,8 +16,6 @@ public class BruisingState : IWorkbench
 
         initMortarPos = mWorkbench.mMortarPilon.transform.position;
         initMortarRot = mWorkbench.mMortarPilon.transform.rotation;
-
-        Debug.Log(initMortarPos);
     }
 
     Vector3 initBowlPos = Vector3.zero;

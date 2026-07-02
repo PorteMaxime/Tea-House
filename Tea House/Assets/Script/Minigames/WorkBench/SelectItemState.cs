@@ -17,7 +17,7 @@ public class SelectItemState : IWorkbench
     }
     public void OnUpdate()
     {
-        if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)//inputPlayer
+        if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)
         {
             if (mWorkbench.mCurrentItem == null && mWorkbench.mDragAndDrop.IsDragging() == false)
             {

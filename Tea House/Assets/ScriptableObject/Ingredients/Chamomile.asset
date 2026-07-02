@@ -31,4 +31,9 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 0
   mPrice: 2
+  mIngredientGrab: {fileID: 0}
+  mAmountJar1: {fileID: 0}
+  mAmountJar2: {fileID: 0}
+  mAmountJar3: {fileID: 0}
   mFragIngredient: {fileID: 0}
+  mType: 2

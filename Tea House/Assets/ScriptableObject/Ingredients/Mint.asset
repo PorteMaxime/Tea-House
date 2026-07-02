@@ -31,4 +31,9 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 0
   mPrice: 9
+  mIngredientGrab: {fileID: 0}
+  mAmountJar1: {fileID: 0}
+  mAmountJar2: {fileID: 0}
+  mAmountJar3: {fileID: 0}
   mFragIngredient: {fileID: 744280317938301970, guid: a3c2b152675f6914983b69bab59beb1d, type: 3}
+  mType: 1
