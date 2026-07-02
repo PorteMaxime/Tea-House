@@ -82,7 +82,6 @@ public class PackagingScript : MonoBehaviour
 
     public void SetIngredientData(List<ItemData> data)
     {
-        // TODO : Take the ingredient data from Workbench
         GameObject.FindGameObjectWithTag("MixtureBowl").transform.parent = transform;
         mPrinting.mMixture = data;
         mFilling.mMixture = data;

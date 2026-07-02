@@ -27,7 +27,7 @@ public class PacketCompleting : IPackaging
     private GameObject mExport = null;
     private bool mIsExporting = false;
     private Transform mWorkbenchBowlPos = null;
-    private PackageInventory mExportTarget = null;
+    private Inventory_Station mExportTarget = null;
 
     private void Init()
     {
@@ -41,8 +41,7 @@ public class PacketCompleting : IPackaging
         mWorkbenchBowlPos = GameObject.Find("Blending").transform.Find("posMixtureBowl").transform;
 
         Transform inv = GameObject.Find("Inventory_Station").transform;
-        Transform tray = inv.Find("SM_Tray"); 
-        mExportTarget = tray.GetComponent<PackageInventory>();
+        mExportTarget = inv.GetComponent<Inventory_Station>();
     }
     public void OnEnter()
     {
@@ -192,7 +191,6 @@ public class PacketCompleting : IPackaging
             mMain.mOutputGO.transform.position = Vector3.zero;
             mMain.mOutput.transform.parent = null;
             
-            // TODO: Add export to the table
             mExportTarget.AddPackage(mMain.mOutput);
             mMain.ResetFSM();
 
