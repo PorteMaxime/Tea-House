@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mint
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Mint
-  mPrefab: {fileID: 5328470693043526887, guid: 1c9aa9e2afb49b049b8b006c15b6728f, type: 3}
+  mPrefab: {fileID: 2086405798350031596, guid: a6b9b8b42c0914942b1ba417d72aeea7, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStatVar: 0
@@ -32,8 +32,8 @@ MonoBehaviour:
     mValueVar: 0
   mPrice: 9
   mIngredientGrab: {fileID: 0}
-  mAmountJar1: {fileID: 0}
-  mAmountJar2: {fileID: 0}
-  mAmountJar3: {fileID: 0}
+  mAmountJar1: {fileID: 3361823228832995955, guid: 8c9aeb812261a3449ab135fca15abf18, type: 3}
+  mAmountJar2: {fileID: 5044555026525103796, guid: 3c38be8068eb333409adfddc278bc844, type: 3}
+  mAmountJar3: {fileID: 7937324257843233066, guid: 598bb7885fecf554e906917207efba9c, type: 3}
   mFragIngredient: {fileID: 744280317938301970, guid: a3c2b152675f6914983b69bab59beb1d, type: 3}
   mType: 1
