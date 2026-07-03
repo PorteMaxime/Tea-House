@@ -16,7 +16,9 @@ public class CuttingState : IWorkbench
 
     int posValidZone;
     int dir = -1;
-    float cursorSpeed = 100;
+    float cursorSpeed = 3;
+    int cursorBorn = 2;
+    int valideZoneMarge = 1;
     public void OnEnter()
     {
         initialPosCam = mWorkbench.mCameraController.transform.position;
@@ -33,32 +35,35 @@ public class CuttingState : IWorkbench
 
         if(dir == 1)
         {
-            if(mWorkbench.mQteCursor.transform.localPosition.y >= 45)
+            if(mWorkbench.mQteCursor.transform.localPosition.y >= cursorBorn)
             {
                 dir = -1;
             }
         }
         else if(dir == -1)
         {
-            if (mWorkbench.mQteCursor.transform.localPosition.y <= -45)
+            if (mWorkbench.mQteCursor.transform.localPosition.y <= -cursorBorn)
             {
                 dir = 1;
             }
         }
         mWorkbench.mQteCursor.transform.localPosition += new Vector3(0, cursorSpeed * dir * Time.deltaTime, 0);
-        Debug.Log(mWorkbench.mQteCursor.transform.localPosition);
 
-        if (InputManager.Get().mPlayerInteract.Player.Select.triggered && CursorOk() == false)
+        if (InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
         {
-            posValidZone = Random.Range(-40, 40);
+            if(CursorOk() == true)
+            {
+                Debug.Log("ok");
+            }
+            else
+            {
+                posValidZone = Random.Range(-175, 175);
 
-            mWorkbench.mQteValideZone.transform.localPosition = new Vector3(mWorkbench.mQteValideZone.transform.localPosition.x, posValidZone, mWorkbench.mQteValideZone.transform.localPosition.z);
+                mWorkbench.mQteValideZone.transform.localPosition = new Vector3(mWorkbench.mQteValideZone.transform.localPosition.x, (float)posValidZone/100, mWorkbench.mQteValideZone.transform.localPosition.z);
+            }
 
         }
-        else
-        {
-            Debug.Log("ok");
-        }
+
     }    
     public void OnExit()
     {
@@ -67,11 +72,15 @@ public class CuttingState : IWorkbench
     }
     bool CursorOk()
     {
-        if(mWorkbench.mQteCursor.transform.position.y <= mWorkbench.mQteValideZone.transform.position.y + 5
-            && mWorkbench.mQteCursor.transform.position.y >= mWorkbench.mQteValideZone.transform.position.y - 5)
+        if(mWorkbench.mQteCursor.transform.localPosition.y <= mWorkbench.mQteValideZone.transform.localPosition.y + 0.2
+            && mWorkbench.mQteCursor.transform.localPosition.y >= mWorkbench.mQteValideZone.transform.localPosition.y - 0.4)
         {
+            Debug.Log("cursorPos: " + mWorkbench.mQteCursor.transform.position.y);
+            Debug.Log("Valide: " + (mWorkbench.mQteValideZone.transform.position.y - 0.4));
             return true;
         }
+        Debug.Log("cursorPos: " + mWorkbench.mQteCursor.transform.position.y);
+        Debug.Log("Valide: " + (mWorkbench.mQteValideZone.transform.position.y - 0.4));
         return false;
     }
 }

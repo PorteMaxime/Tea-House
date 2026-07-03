@@ -55,16 +55,44 @@ public class SelectItemState : IWorkbench
             {
                 if (mWorkbench.mMortarBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
                 {
-                    Inventory.msInstance.ChangeItemAmount(mWorkbench.mCurrentItem, -1);
+                    if(mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.bruising)
+                    {
+                        Inventory.msInstance.ChangeItemAmount(mWorkbench.mCurrentItem, -1);
 
-                    mWorkbench.currentItemG.GetComponent<Rigidbody>().useGravity = false;
-                    mWorkbench.currentItemG.GetComponent<BoxCollider>().isTrigger = true;
+                        mWorkbench.currentItemG.GetComponent<Rigidbody>().useGravity = false;
+                        mWorkbench.currentItemG.GetComponent<BoxCollider>().isTrigger = true;
 
-                    mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
+                        mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
+                    }
+
                 }
                 else if (mWorkbench.mCuttingBoard.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
                 {
-                    mWorkbench.stateMachine.ChangeState(mWorkbench.cuttingState);
+                    if (mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.cutting)
+                    {
+                        mWorkbench.stateMachine.ChangeState(mWorkbench.cuttingState);
+                    }
+                    else
+                    {
+                        Debug.Log("No Cutting Item !");
+                    }
+                }
+                else if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
+                {
+                    if (mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.none)
+                    {
+                        mWorkbench.currentItemG.GetComponent<Rigidbody>().useGravity = true;
+                        mWorkbench.currentItemG.GetComponent<Rigidbody>().isKinematic = false;
+
+                        mWorkbench.currentItemG.transform.SetParent(mWorkbench.mMixtureBowl.transform);
+
+                        mWorkbench.mCurrentItem = null;
+                        mWorkbench.currentItemG = null;
+                    }
+                    else
+                    {
+                        Debug.Log("Item Need transformation !");
+                    }
                 }
             }
 
@@ -83,6 +111,5 @@ public class SelectItemState : IWorkbench
         float distance = Vector3.Distance(mWorkbench.mCameraController.transform.position, mWorkbench.mMortarBowl.transform.position) - 0.5f;
 
         mWorkbench.currentItemG.transform.position = mWorkbench.mCameraRaycast.GetImpact(distance, mWorkbench.mMortarBowl);
-
     }
 }
