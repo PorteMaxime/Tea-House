@@ -52,6 +52,8 @@ public class WorkbenchScript : MonoBehaviour
     public BlendingState blendingState;
     public CuttingState cuttingState;
 
+    public bool canPutInMixture = false;
+
     //
     float upPan = Screen.height * 0.15f;
     float downPan = Screen.height * 0.85f;

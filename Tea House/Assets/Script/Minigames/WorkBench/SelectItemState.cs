@@ -68,7 +68,7 @@ public class SelectItemState : IWorkbench
                 }
                 else if (mWorkbench.mCuttingBoard.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
                 {
-                    if (mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.cutting)
+                    if (mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.cutting && mWorkbench.cuttingState.isItemCut == false)
                     {
                         mWorkbench.stateMachine.ChangeState(mWorkbench.cuttingState);
                     }
@@ -79,7 +79,7 @@ public class SelectItemState : IWorkbench
                 }
                 else if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
                 {
-                    if (mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.none)
+                    if (mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.none || mWorkbench.canPutInMixture == true)
                     {
                         mWorkbench.currentItemG.GetComponent<Rigidbody>().useGravity = true;
                         mWorkbench.currentItemG.GetComponent<Rigidbody>().isKinematic = false;
@@ -88,6 +88,8 @@ public class SelectItemState : IWorkbench
 
                         mWorkbench.mCurrentItem = null;
                         mWorkbench.currentItemG = null;
+
+                        mWorkbench.canPutInMixture = false;
                     }
                     else
                     {

@@ -10,6 +10,7 @@ public class IngredientItem : ItemData
     public GameObject mAmountJar3;
 
     public GameObject mFragIngredient;
+    public GameObject mFragGrab;
 
     public TransformType mType;
 

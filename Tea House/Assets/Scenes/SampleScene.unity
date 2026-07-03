@@ -5900,7 +5900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3843850570017693970, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4035627130443800508, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
       propertyPath: m_Size.x

@@ -18,7 +18,8 @@ public class CuttingState : IWorkbench
     int dir = -1;
     float cursorSpeed = 3;
     int cursorBorn = 2;
-    int valideZoneMarge = 1;
+    int nbCutPoint = 0;
+    public bool isItemCut;
     public void OnEnter()
     {
         initialPosCam = mWorkbench.mCameraController.transform.position;
@@ -54,14 +55,33 @@ public class CuttingState : IWorkbench
             if(CursorOk() == true)
             {
                 Debug.Log("ok");
+                nbCutPoint++;
+                MoveValideZone();
             }
             else
             {
-                posValidZone = Random.Range(-175, 175);
-
-                mWorkbench.mQteValideZone.transform.localPosition = new Vector3(mWorkbench.mQteValideZone.transform.localPosition.x, (float)posValidZone/100, mWorkbench.mQteValideZone.transform.localPosition.z);
+                MoveValideZone();
             }
 
+        }
+        if(nbCutPoint == 1)
+        {
+            mWorkbench.currentItemG.GetComponent<MeshFilter>().mesh = mWorkbench.mCurrentItem.mFragIngredient.GetComponent<MeshFilter>().sharedMesh;
+        }
+        if(nbCutPoint == 4)
+        {
+            IngredientItem tempItem = mWorkbench.mCurrentItem;
+            mWorkbench.DestroyCurrentIngredient();
+
+            mWorkbench.mCurrentItem = tempItem;
+            mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(tempItem.mFragGrab, mWorkbench.mCuttingBoard.transform.position);
+            //mWorkbench.currentItemG.GetComponent<MeshFilter>().mesh = mWorkbench.mCurrentItem.mFragGrab.GetComponent<MeshFilter>().sharedMesh;
+
+            nbCutPoint = 0;
+            isItemCut = true;
+            mWorkbench.canPutInMixture = true;
+
+            mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
         }
 
     }    
@@ -82,5 +102,15 @@ public class CuttingState : IWorkbench
         Debug.Log("cursorPos: " + mWorkbench.mQteCursor.transform.position.y);
         Debug.Log("Valide: " + (mWorkbench.mQteValideZone.transform.position.y - 0.4));
         return false;
+    }
+
+    void MoveValideZone()
+    {
+        posValidZone = Random.Range(-175, 175);
+
+        mWorkbench.mQteValideZone.transform.localPosition = 
+            new Vector3(mWorkbench.mQteValideZone.transform.localPosition.x, 
+            (float)posValidZone / 100, 
+            mWorkbench.mQteValideZone.transform.localPosition.z);
     }
 }
