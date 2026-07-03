@@ -14,12 +14,8 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] public bool isTorrefactionUnlocked = true;
 
-    #region Singleton
-
     public static Inventory msInstance;
     
-    #endregion
-
     void Awake()
     {
         msInstance = this;

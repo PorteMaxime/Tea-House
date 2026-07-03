@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Jasmine
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Jasmine
-  mPrefab: {fileID: 0}
+  mPrefab: {fileID: 4853313851057041322, guid: de8077bd08f4bdf42aaa0572ef7760c7, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStatVar: 0
@@ -32,3 +32,6 @@ MonoBehaviour:
     mValueVar: 2
   mPrice: 7
   mFragIngredient: {fileID: 0}
+  mAmountJar1: {fileID: 6799881361010892946, guid: fae281ed2d82b3341af50ce8c49b3363, type: 3}
+  mAmountJar2: {fileID: 8594055693139799737, guid: b014c9cd75c0d254b854f5ac1a852b33, type: 3}
+  mAmountJar3: {fileID: 812632277191400347, guid: cc10c62da2b4e3c408e8570b96a10feb, type: 3}

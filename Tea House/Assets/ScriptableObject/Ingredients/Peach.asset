@@ -13,22 +13,21 @@ MonoBehaviour:
   m_Name: Peach
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Peach
-  mPrefab: {fileID: 0}
+  mPrefab: {fileID: 7814059019395156519, guid: 93fdc696af630f74f8b0c05bc093a44b, type: 3}
   mIsUnlocked: 0
   mStats:
-  - mStatVar: 0
-    mValueVar: 0
-  - mStatVar: 1
-    mValueVar: 0
-  - mStatVar: 2
-    mValueVar: 0
-  - mStatVar: 3
-    mValueVar: 1
-  - mStatVar: 4
-    mValueVar: 2
-  - mStatVar: 5
-    mValueVar: 0
-  - mStatVar: 6
-    mValueVar: 0
-  mPrice: 1
+  - mStat: 0
+    mValue: 0
+  - mStat: 1
+    mValue: 0
+  - mStat: 2
+    mValue: 0
+  - mStat: 3
+    mValue: 0
+  - mStat: 4
+    mValue: 0
+  mPrice: 0
   mFragIngredient: {fileID: 0}
+  mAmountJar1: {fileID: 5958749855929363553, guid: c57f8caa38fb55d448aab931a11edfdd, type: 3}
+  mAmountJar2: {fileID: 2636758757040711856, guid: 21b7a3b2ef855d345a225476c6beb10b, type: 3}
+  mAmountJar3: {fileID: 920412604985868399, guid: ba18ae0ace9bd35449db842218e61b11, type: 3}

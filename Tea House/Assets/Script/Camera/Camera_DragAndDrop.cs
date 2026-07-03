@@ -22,12 +22,15 @@ public class CameraDragAndDrop : ICameraControllerMod
     private Vector3 mDraggingOffset = Vector3.zero;
     private Rigidbody mDraggingRB = null;
     private GameObject mDragging = null;
-    private bool mDraggedRBWasKinematic = false;
+
     private float mDraggedOriginX = 0f;
     private float mDraggedOriginDistance = 0f;
 
     private Vector3 mTargetPos = Vector3.zero;
     private float mMoveSpeed = 10f;
+
+    private bool mUseGravity = false;
+    private bool mIsKinematic = false;
 
     #region Basics Methods
     public void OnInit()
@@ -82,7 +85,9 @@ public class CameraDragAndDrop : ICameraControllerMod
         mDraggingRB = target.GetComponent<Rigidbody>();
         if (mDraggingRB != null)
         {
-            mDraggedRBWasKinematic = mDraggingRB.isKinematic;
+            mIsKinematic = mDraggingRB.isKinematic;
+            mUseGravity = mDraggingRB.useGravity;
+
             mDraggingRB.interpolation = RigidbodyInterpolation.Interpolate;
             mDraggingRB.isKinematic = false;
             mDraggingRB.useGravity = false;
@@ -101,10 +106,13 @@ public class CameraDragAndDrop : ICameraControllerMod
         Rigidbody rb = mDragging.GetComponent<Rigidbody>();
         if (rb != null) 
         {
-            rb.useGravity = true;
+            rb.useGravity = mUseGravity;
+            rb.isKinematic = mIsKinematic;
             mDragging.transform.position = rb.position;
             mDraggingRB.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionX;
         }
+
+
         mDragging = null;
         mDraggingOffset = Vector3.zero;
         mDraggedOriginX = 0f;
