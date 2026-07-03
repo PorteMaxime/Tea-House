@@ -22,9 +22,14 @@ public class ComputerScript : MonoBehaviour
     void Start()
     {
         mCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        Canvas component;
 
         foreach (Transform child in gameObject.transform)
         {
+            child.gameObject.TryGetComponent<Canvas>(out component);
+            if (component == null)
+                continue;
+
             mCanvas.Add(child.name, child.gameObject);
             //child.gameObject.SetActive(true); // Uniquement pour les awake de chaque page
             child.gameObject.SetActive(false);
