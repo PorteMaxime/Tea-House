@@ -54,7 +54,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a9afa046425b6d445be1c4ce2beb8394, type: 2}
     - target: {fileID: 919132149155446097, guid: c02e294412bdbb54f81e9ea39306ef20, type: 3}
       propertyPath: m_Name
-      value: SM_PeachCut (1)
+      value: SM_PeachCut
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c02e294412bdbb54f81e9ea39306ef20, type: 3}
+      propertyPath: m_TagString
+      value: Grab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

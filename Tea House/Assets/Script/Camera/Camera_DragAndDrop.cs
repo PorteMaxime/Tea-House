@@ -67,8 +67,8 @@ public class CameraDragAndDrop : ICameraControllerMod
     public bool StartDragging(GameObject target)
     {
         if(target == null) return false;
-        if(CanDrag(target) == false) return false;
 
+        if (CanDrag(target) == false) return false;
         MeshRenderer mesh = target.GetComponent<MeshRenderer>();
         
         return StartDragging(target, mesh.bounds.center - target.transform.position);
@@ -136,6 +136,7 @@ public class CameraDragAndDrop : ICameraControllerMod
             target.transform.tag,
             out List<RaycastHit> hits
              );
+
         return IsDragging() == false && hits.Any(hit => hit.collider.gameObject == target);
     }
 }

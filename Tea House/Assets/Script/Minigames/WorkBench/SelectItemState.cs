@@ -10,7 +10,6 @@ public class SelectItemState : IWorkbench
     {
         mWorkbench = system;
     }
-
     public void OnEnter()
     {
         //
@@ -30,11 +29,12 @@ public class SelectItemState : IWorkbench
                     {
                         InitIngredient(workBenchStorageScript.ingredient);
                         workBenchStorageScript.CheckIngredient();
+
                         mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG);
                     }
                     else if (hitGo == mWorkbench.mMixtureBowl)
                     {
-                         mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMixtureBowl);
+                        mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMixtureBowl);
                     }
                     else if (hitGo == mWorkbench.mSpoon)
                     {
@@ -44,7 +44,13 @@ public class SelectItemState : IWorkbench
             }
             else
             {
-                mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG);
+                //if (mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG))
+                //{
+                //    if (mWorkbench.cuttingState.isItemCut)
+                //    {
+
+                //    }
+                //}
             }
         }
         else
@@ -74,7 +80,7 @@ public class SelectItemState : IWorkbench
                     }
                     else
                     {
-                        Debug.Log("No Cutting Item !");
+                        Debug.Log("Can't cut this !");
                     }
                 }
                 else if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
@@ -107,11 +113,11 @@ public class SelectItemState : IWorkbench
     }
     void InitIngredient(IngredientItem _ingredient)
     {
-        mWorkbench.mCurrentItem = _ingredient;
-        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mPrefab, Vector3.zero);
-
         float distance = Vector3.Distance(mWorkbench.mCameraController.transform.position, mWorkbench.mMortarBowl.transform.position) - 0.5f;
+        Vector3 ingredientPos = mWorkbench.mCameraRaycast.GetImpact(distance, mWorkbench.mMortarBowl);
 
-        mWorkbench.currentItemG.transform.position = mWorkbench.mCameraRaycast.GetImpact(distance, mWorkbench.mMortarBowl);
+        mWorkbench.mCurrentItem = _ingredient;
+        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mPrefab, ingredientPos);
+
     }
 }

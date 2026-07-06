@@ -132,7 +132,6 @@ MonoBehaviour:
   ingredient: {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
   ingredientAmountG: {fileID: 3509301208037097922}
   amount: 0
-  debug: 0
 --- !u!136 &9168848843076562811
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -167,7 +166,7 @@ GameObject:
   - component: {fileID: 8156667629411919943}
   - component: {fileID: 7564840156282291700}
   - component: {fileID: 6591301055415549711}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ingredientAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}

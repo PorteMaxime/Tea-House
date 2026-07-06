@@ -13,17 +13,23 @@ public class CuttingState : IWorkbench
 
     Vector3 initialPosCam;
     Quaternion initialRotCam;
+    Vector3 initialPosKnife;
+    Quaternion initialRotKnife;
 
     int posValidZone;
     int dir = -1;
     float cursorSpeed = 3;
-    int cursorBorn = 2;
+    float cursorBorn = 1.75f;
     int nbCutPoint = 0;
     public bool isItemCut;
+    int cuttingPointIndex = 0;
     public void OnEnter()
     {
         initialPosCam = mWorkbench.mCameraController.transform.position;
         initialRotCam = mWorkbench.mCameraController.transform.rotation;
+
+        initialPosKnife = mWorkbench.mCameraController.transform.position;
+        initialRotKnife = mWorkbench.mCameraController.transform.rotation;
 
         mWorkbench.mCuttingPanel.SetActive(true);
 
@@ -57,6 +63,8 @@ public class CuttingState : IWorkbench
                 Debug.Log("ok");
                 nbCutPoint++;
                 MoveValideZone();
+                mWorkbench.Cut(cuttingPointIndex);
+                cuttingPointIndex++;
             }
             else
             {
@@ -64,22 +72,16 @@ public class CuttingState : IWorkbench
             }
 
         }
-        if(nbCutPoint == 1)
-        {
-            mWorkbench.currentItemG.GetComponent<MeshFilter>().mesh = mWorkbench.mCurrentItem.mFragIngredient.GetComponent<MeshFilter>().sharedMesh;
-        }
+
         if(nbCutPoint == 4)
         {
-            IngredientItem tempItem = mWorkbench.mCurrentItem;
-            mWorkbench.DestroyCurrentIngredient();
 
-            mWorkbench.mCurrentItem = tempItem;
-            mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(tempItem.mFragGrab, mWorkbench.mCuttingBoard.transform.position);
-            //mWorkbench.currentItemG.GetComponent<MeshFilter>().mesh = mWorkbench.mCurrentItem.mFragGrab.GetComponent<MeshFilter>().sharedMesh;
+            mWorkbench.currentItemG.GetComponent<MeshFilter>().mesh = mWorkbench.mCurrentItem.mFragIngredient.GetComponent<MeshFilter>().sharedMesh;
 
             nbCutPoint = 0;
             isItemCut = true;
             mWorkbench.canPutInMixture = true;
+            cuttingPointIndex = 0;
 
             mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
         }

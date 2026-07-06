@@ -35,6 +35,8 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMixtureLeftBorn;
 
     public GameObject mCuttingBoard;
+    public GameObject mKnife;
+    public List<GameObject> mCuttingPoints;
 
     public GameObject mQteValideZone;
     public GameObject mQteCursor;
@@ -160,5 +162,35 @@ public class WorkbenchScript : MonoBehaviour
         }
 
         _go.transform.position = targetPosition;
+    }
+    public void Cut(int cuttingPointIndex)
+    {
+        StartCoroutine(cCut(cuttingPointIndex));
+    }
+    public IEnumerator cCut(int cuttingPointIndex)
+    {
+        mCuttingPanel.SetActive(false);
+
+        Vector3 topPos = mCuttingPoints[cuttingPointIndex].transform.position;
+
+        mKnife.transform.rotation = mCuttingPoints[cuttingPointIndex].transform.rotation;
+        mKnife.transform.position = topPos;
+
+        float duration = 0.5f;
+        float elapsedTime = 0;
+
+        Vector3 positionOrigine = mKnife.transform.position;
+        Vector3 targetPosition = new Vector3(topPos.x, topPos.y - 0.2f, topPos.z);
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            mKnife.transform.position = Vector3.Lerp(positionOrigine, targetPosition, elapsedTime / duration);
+            yield return 0;
+        }
+        mKnife.transform.position = targetPosition;
+
+        if(cuttingPointIndex != mCuttingPoints.Count - 1)
+            mCuttingPanel.SetActive(true);
     }
 }
