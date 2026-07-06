@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor.Analytics;
 
 public class Inventory_Station : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class Inventory_Station : MonoBehaviour
 
     void Update()
     {
-        mUI.gameObject.SetActive(mIArea.isUsing && (mCameraDepth.IsMoving(0.00001f) == false));
+        mUI.gameObject.GetComponent<Canvas>().enabled = (mIArea.isUsing && (mCameraDepth.IsMoving(0.00001f) == false));
         if(mLastPackageNumber != mPackages.Count) RefreshPackage();
     }
 
@@ -37,6 +38,15 @@ public class Inventory_Station : MonoBehaviour
         mPackages.Add(package);
         mPackInv.AddPackage(package);
         mUI.AddPackage(package);
+    }
+    public PackageScript GetPackage(Mail orderMail)
+    {
+        foreach(PackageScript package in mPackages)
+        {
+            if(package.mTargetMail == orderMail)
+                return package;
+        }
+        return null;
     }
 
     private void RefreshPackage()

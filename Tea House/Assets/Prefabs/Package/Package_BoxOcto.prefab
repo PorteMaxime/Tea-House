@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968b93bc2f01e914da98c02d34d12e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Associated_SO
-  mItem: {fileID: 0}
+  mItem: {fileID: 11400000, guid: a2da01effe25137449d435dcd2432975, type: 2}
 --- !u!4 &3278189893593902058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ace8c16310bddac4f9ea930bb5577a2a, type: 3}
@@ -427,7 +427,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

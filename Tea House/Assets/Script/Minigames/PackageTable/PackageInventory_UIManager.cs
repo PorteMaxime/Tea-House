@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Android.Gradle.Manifest;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 
 public class PackageInventory_UIManager : MonoBehaviour
 {
-    public class UI_Slot
+    private class UI_Slot
     {
         #region Usage Icon
         static public Color usedColor = Color.gray;
@@ -53,15 +54,26 @@ public class PackageInventory_UIManager : MonoBehaviour
         }
     }
 
-    public List<UI_Slot> mSlots = new List<UI_Slot>();
-    public List<PackageScript> mPackages = null;
+    private List<UI_Slot> mSlots = new List<UI_Slot>();
+    private List<PackageScript> mPackages = null;
+
+    private InteractiveAreaScript mIArea = null;
+    private InteractiveAreaScript mComputerIArea = null;
+    private ComputerScript mComputerScript = null;
+    private MailCanvasScript mMailCanva = null;
 
 
     void Start()
     {
         Transform slotsUI = transform.Find("Dynamic/Slots");
         foreach(Transform slot in slotsUI)
-            mSlots.Add(new UI_Slot(slot));            
+            mSlots.Add(new UI_Slot(slot));
+        mIArea = transform.parent.Find("InteractiveArea").GetComponent<InteractiveAreaScript>();
+
+        Transform computerSpace = GameObject.Find("Computer_Space").transform;
+        mComputerIArea = computerSpace.Find("InteractiveArea").GetComponent<InteractiveAreaScript>();
+        mComputerScript = computerSpace.Find("ComputerCanvas").GetComponent<ComputerScript>();
+        mMailCanva = GameObject.FindGameObjectWithTag("MailManager").GetComponent<MailCanvasScript>();
     }
 
     public void LinkPackageList(List<PackageScript> packageList) => mPackages = packageList;
@@ -131,6 +143,19 @@ public class PackageInventory_UIManager : MonoBehaviour
     public void PackageToComputer(int packageIndex)
     {
         // TODO: Send to computer => get result + send
-        Debug.Log("SEND TO COMPUTER");
+        StartCoroutine(ToComputer(packageIndex));
+    }
+
+    IEnumerator ToComputer(int packageIndex)
+    {
+        Coroutine coroutine = mIArea.GoTo(mComputerIArea);
+        if(coroutine != null)
+            yield return coroutine;
+        while(mComputerIArea.isUsing == false)
+            yield return 0;
+        while(mComputerScript.mActiveCanvas != mComputerScript.mCanvas["CanvasHome"])
+            yield return 0;
+        mComputerScript.ChangeInterface("CanvasOrders");
+        mMailCanva.SelectOrder(mPackages[packageIndex].mTargetMail);
     }
 }

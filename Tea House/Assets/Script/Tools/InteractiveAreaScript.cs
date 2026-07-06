@@ -1,11 +1,14 @@
+using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class InteractiveAreaScript : MonoBehaviour
 {
     private Input_PlayerInteract inputInteract;
+    static private GameObject mPlayer = null;
     [SerializeField] public bool canIntercat = false;
     [SerializeField] public bool isUsing = false;
+    [SerializeField] public bool isSliding = false;
 
     private CameraController mCameraController = null;
     private Camera_InteractionHighlight mCameraInteractionMod = null;
@@ -15,6 +18,7 @@ public class InteractiveAreaScript : MonoBehaviour
     private void Awake()
     {
         inputInteract = InputManager.Get().mPlayerInteract;
+        mPlayer = GameObject.FindGameObjectWithTag("Player");
     }
     private void OnEnable()
     {
@@ -87,5 +91,31 @@ public class InteractiveAreaScript : MonoBehaviour
             isUsing = false;
             mCameraInteractionMod.RemoveInteractionTarget(this);
         }
+    }
+
+    public Coroutine GoTo(InteractiveAreaScript otherIArea)
+    {
+        if(isUsing == false || otherIArea == null) return null;
+        Quit();
+        otherIArea.Enter();
+        
+        isSliding = true;
+        return StartCoroutine(SlideToInteractiveArea(mPlayer, otherIArea, 0.5f));
+    }
+
+    IEnumerator SlideToInteractiveArea(GameObject gameObject, InteractiveAreaScript targetIArea, float duration)
+    {
+        float elapsedTime = 0;
+        Vector3 positionOrigine = gameObject.transform.position;
+        Vector3 targetPos = new Vector3(targetIArea.transform.position.x, mPlayer.transform.position.y, targetIArea.transform.position.z);
+        while(elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            gameObject.transform.position = Vector3.Lerp(positionOrigine, targetPos, elapsedTime / duration);
+            yield return 0;
+        }
+
+        gameObject.transform.position = targetPos;
+        isSliding = false;
     }
 }

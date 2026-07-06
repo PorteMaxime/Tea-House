@@ -19,4 +19,10 @@ public class PackageScript : MonoBehaviour
         foreach(ItemData item in items)
             AddStat(item);
     }
+
+    public int GetCompletionScore()
+    {
+        // TODO: Add scoring system
+        return 0;
+    }
 }

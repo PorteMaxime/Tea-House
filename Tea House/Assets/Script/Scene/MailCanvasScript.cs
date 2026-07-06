@@ -44,6 +44,9 @@ public class MailCanvasScript : MonoBehaviour
     [SerializeField] private List<Order.State> mAvailableFilters;
     private List<Order.State> mCurrentFilters;
 
+
+    private Inventory_Station mPackInv = null;
+
     //
 
     void Awake()
@@ -64,6 +67,11 @@ public class MailCanvasScript : MonoBehaviour
         mCurrentFilters = mAvailableFilters;
     }
 
+    void Start()
+    {
+        mPackInv = GameObject.Find("Inventory_Station").GetComponent<Inventory_Station>();
+    }
+
     #region Page Mails
 
     public void SelectMail(Mail mail)
@@ -71,7 +79,7 @@ public class MailCanvasScript : MonoBehaviour
         if (!mMailsDictionary.ContainsKey(mail))
             return;
 
-        // Si le mail est déjà sélectionné
+        // Si le mail est dï¿½jï¿½ sï¿½lectionnï¿½
         if (mSelectedMail != null && mail == mSelectedMail.Item1)
             return;
 
@@ -82,7 +90,7 @@ public class MailCanvasScript : MonoBehaviour
         if (temp != null && temp.gameObject.activeSelf == true)
             temp.gameObject.SetActive(false);
 
-        // Mise à jour informations mail
+        // Mise ï¿½ jour informations mail
         mMailImageProfile.GetComponent<Image>().sprite = mail.mPicture;
         mMailTextSubject.GetComponent<Text>().text = mail.mText;
         mMailTextSender.GetComponent<Text>().text = mail.mName;
@@ -171,7 +179,7 @@ public class MailCanvasScript : MonoBehaviour
         if (!mOrdersDictionary.ContainsKey(mail))
             return;
 
-        // Si l'order est déjà sélectionné
+        // Si l'order est dï¿½jï¿½ sï¿½lectionnï¿½
         if (mSelectedOrder != null && mail == mSelectedOrder.Item1)
             return;
 
@@ -184,7 +192,7 @@ public class MailCanvasScript : MonoBehaviour
         if (temp != null)
             temp.GetComponent<Text>().text = mail.mText;
 
-        // Active ou désactive le bouton "envoyer"
+        // Active ou dï¿½sactive le bouton "envoyer"
         Transform sendButton = mCanvasOrderContent.transform.Find("ButtonSend");
         if (sendButton != null)
             sendButton.GetComponent<Button>().interactable = mail.mOrder.mState == Order.State.Accepted ? true : false;
@@ -257,6 +265,12 @@ public class MailCanvasScript : MonoBehaviour
 
     public void TrySendOrder()
     {
+        PackageScript package = mPackInv.GetPackage(mSelectedOrder.Item1);
+        if(package == null) return; // Not completed
+
+        int score = package.GetCompletionScore(); // => function to complete with scoring system
+        Destroy(package.gameObject);
+        // TODO: Consequences of completion
         mMailSystem.ChangeOrderState(mSelectedOrder.Item1, Order.State.Completed);
         UpdatePrefabState(mSelectedOrder.Item1);
 
