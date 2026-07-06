@@ -44,13 +44,18 @@ public class SelectItemState : IWorkbench
             }
             else
             {
-                //if (mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG))
-                //{
-                //    if (mWorkbench.cuttingState.isItemCut)
-                //    {
+                if (mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG))
+                {
+                    if (mWorkbench.cuttingState.canGrabItem == true && InputManager.Get().mPlayerInteract.Player.Select.triggered)
+                    {
+                        IngredientItem tempItem = mWorkbench.mCurrentItem;
+                        mWorkbench.DestroyCurrentIngredient();
 
-                //    }
-                //}
+                        mWorkbench.mCurrentItem = tempItem;
+                        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(tempItem.mFragGrab, mWorkbench.mCuttingBoard.transform.position);
+                        mWorkbench.cuttingState.canGrabItem = false;
+                    }
+                }
             }
         }
         else

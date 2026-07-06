@@ -23,6 +23,7 @@ public class CuttingState : IWorkbench
     int nbCutPoint = 0;
     public bool isItemCut;
     int cuttingPointIndex = 0;
+    public bool canGrabItem = false;
     public void OnEnter()
     {
         initialPosCam = mWorkbench.mCameraController.transform.position;
@@ -82,7 +83,7 @@ public class CuttingState : IWorkbench
             isItemCut = true;
             mWorkbench.canPutInMixture = true;
             cuttingPointIndex = 0;
-
+            canGrabItem = true;
             mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
         }
 
@@ -112,7 +113,7 @@ public class CuttingState : IWorkbench
 
         mWorkbench.mQteValideZone.transform.localPosition = 
             new Vector3(mWorkbench.mQteValideZone.transform.localPosition.x, 
-            (float)posValidZone / 100, 
+            (float)posValidZone / 100,
             mWorkbench.mQteValideZone.transform.localPosition.z);
     }
 }
