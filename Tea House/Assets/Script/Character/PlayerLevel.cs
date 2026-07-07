@@ -25,7 +25,7 @@ public class PlayerLevel : MonoBehaviour
 
         CheckLevel();
     }
-    public void CheckLevel() 
+    public void CheckLevel()
     {
         if(level == 1)
         {
