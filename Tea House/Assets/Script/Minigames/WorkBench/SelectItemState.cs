@@ -101,6 +101,8 @@ public class SelectItemState : IWorkbench
                         mWorkbench.currentItemG = null;
 
                         mWorkbench.canPutInMixture = false;
+
+                        mWorkbench.cuttingState.isItemCut = false;
                     }
                     else
                     {

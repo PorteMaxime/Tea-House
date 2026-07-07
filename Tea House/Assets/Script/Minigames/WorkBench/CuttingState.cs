@@ -98,12 +98,11 @@ public class CuttingState : IWorkbench
         if(mWorkbench.mQteCursor.transform.localPosition.y <= mWorkbench.mQteValideZone.transform.localPosition.y + 0.2
             && mWorkbench.mQteCursor.transform.localPosition.y >= mWorkbench.mQteValideZone.transform.localPosition.y - 0.4)
         {
-            Debug.Log("cursorPos: " + mWorkbench.mQteCursor.transform.position.y);
-            Debug.Log("Valide: " + (mWorkbench.mQteValideZone.transform.position.y - 0.4));
+
             return true;
         }
-        Debug.Log("cursorPos: " + mWorkbench.mQteCursor.transform.position.y);
-        Debug.Log("Valide: " + (mWorkbench.mQteValideZone.transform.position.y - 0.4));
+        //Debug.Log("cursorPos: " + mWorkbench.mQteCursor.transform.position.y);
+        //Debug.Log("Valide: " + (mWorkbench.mQteValideZone.transform.position.y - 0.4));
         return false;
     }
 
