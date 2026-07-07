@@ -5130,7 +5130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26212aba9b2497a479568a73dcf2e181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PackagieInventory_UIManager
-  mPackages: []
 --- !u!1 &9121956412638345372
 GameObject:
   m_ObjectHideFlags: 0
@@ -5371,6 +5370,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 21517855f400619498a106e5507e115d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c4062d76244b6bd4b87b9ca5b1854908, type: 2}
     - target: {fileID: -5754084199372789682, guid: 21517855f400619498a106e5507e115d, type: 3}
       propertyPath: m_Mesh
       value: 

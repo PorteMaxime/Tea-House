@@ -94,6 +94,10 @@ public class CameraDragAndDrop : ICameraControllerMod
             mDraggingRB.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionX;
         }
 
+        MeshCollider meshCollider = target.GetComponent<MeshCollider>();
+        if(meshCollider != null)
+            meshCollider.enabled = false;
+
         mDragging = target;
         mDraggingOffset = offset;
         return true;
@@ -111,6 +115,10 @@ public class CameraDragAndDrop : ICameraControllerMod
             mDragging.transform.position = rb.position;
             mDraggingRB.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionX;
         }
+
+        MeshCollider meshCollider = mDragging.GetComponent<MeshCollider>();
+        if(meshCollider != null)
+            meshCollider.enabled = true;
 
 
         mDragging = null;
