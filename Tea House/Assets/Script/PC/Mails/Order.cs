@@ -6,15 +6,15 @@ public class Order
 {
     public enum State
     {
-        NotSent = 0,
+        NotSent,
 
-        InBox = 1,
+        InBox,
 
-        Accepted = 2,
-        Rejected = 3,
+        Accepted,
+        Rejected,
 
-        Completed = 4,
-        Expired = 5,
+        Completed,
+        Expired,
     }
 
     // seulement utile pour la BDD

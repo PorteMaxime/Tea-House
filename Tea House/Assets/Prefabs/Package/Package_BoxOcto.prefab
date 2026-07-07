@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 3513560394092594057}
   - component: {fileID: 8543691218066558364}
   - component: {fileID: 6991899473807132673}
+  - component: {fileID: 1603034210481792637}
   m_Layer: 8
   m_Name: LabelPlace
   m_TagString: Untagged
@@ -117,7 +118,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
@@ -134,6 +135,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorkingPoint
   mCollider: []
+--- !u!65 &1603034210481792637
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2229124267328197982}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.5, y: 29.881502, z: 7.5}
+  m_Center: {x: -1.26361465e-11, y: 14.440837, z: 0.000053069114}
 --- !u!1001 &3095311236742368257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -198,6 +220,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4463895010634113322, guid: ace8c16310bddac4f9ea930bb5577a2a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7fe55944f2b1f7642924b0ce3087eb21, type: 2}
     - target: {fileID: 919132149155446097, guid: ace8c16310bddac4f9ea930bb5577a2a, type: 3}
       propertyPath: m_Name
       value: Package_BoxOcto
@@ -218,6 +244,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: PackageLid
       objectReference: {fileID: 0}
+    - target: {fileID: 7418098771544918504, guid: ace8c16310bddac4f9ea930bb5577a2a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7fe55944f2b1f7642924b0ce3087eb21, type: 2}
     - target: {fileID: 7861854473326295642, guid: ace8c16310bddac4f9ea930bb5577a2a, type: 3}
       propertyPath: m_Name
       value: Base
@@ -342,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968b93bc2f01e914da98c02d34d12e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Associated_SO
-  mItem: {fileID: 0}
+  mItem: {fileID: 11400000, guid: a2da01effe25137449d435dcd2432975, type: 2}
 --- !u!4 &3278189893593902058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ace8c16310bddac4f9ea930bb5577a2a, type: 3}
@@ -397,7 +427,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

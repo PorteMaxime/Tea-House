@@ -75,6 +75,8 @@ public class PacketLabelPrinting : IPackaging
         InputManager.Get().mPlayerInteract.Player.Open.Enable();
         mPrinterScreenUI.SetActive(false);
         
+        if(mSelectedOrderGo != null)
+            mSelectedOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(false);
         mDepthView.Back();
     }
 
@@ -82,7 +84,6 @@ public class PacketLabelPrinting : IPackaging
     {
         mMixture = null;
         mSelectedOrderGo = null;
-        mLabelSpot = null;
     }
 
     public void OnUpdate()
@@ -98,7 +99,7 @@ public class PacketLabelPrinting : IPackaging
     public void SelectOrder(GameObject newOrderGo)
     {
         if (mSelectedOrderGo != null) mSelectedOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(false);
-
+        
         newOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(true);
         mSelectedOrderGo = newOrderGo;
     }
@@ -131,7 +132,6 @@ public class PacketLabelPrinting : IPackaging
             else if(item is IngredientData)
                 ingredients.Add((IngredientData)item);
         }
-        mMain.mOutput.mTargetMail = targetMail;
         // TODO : Generate Texture with targetMail data => Remove Debug Data
         return DynamicTextureManager.Generate(DynamicTextureManager.DynamicTexture.Label,
             targetMail.mPicture,
@@ -142,12 +142,29 @@ public class PacketLabelPrinting : IPackaging
             ingredients.Count >= 3 ? ingredients[2] : null
             );
     }
+
+    public void LinkMailToOutput()
+    {
+        if(mMain.mOutput == null) return;
+
+        Mail targetMail = null;
+        foreach(Mail mail in mOrders.Keys)
+        {
+            if (mOrders[mail] == mSelectedOrderGo)
+            {
+                targetMail = mail;
+                break;
+            }
+        }
+
+        mMain.mOutput.mTargetMail = targetMail;
+    }
     #endregion  
 
     public void CreateLabel()
     {
         if(mMain.mCompleting.mLabelPrinted == true) return;
-
+    
         RenderTexture labelTexture = PrintLabel();
         if(labelTexture == null) return;
         
@@ -159,7 +176,7 @@ public class PacketLabelPrinting : IPackaging
         label.GetComponent<MeshRenderer>().material.mainTexture = labelTexture;
         mMain.mLabelling.mLabelGo = label;
         mMain.mCompleting.mLabelPrinted = true;
-
+        
         mMain.StartCoroutine(SlideLabel(label, mLabelSpot.transform.position, mLabelSpot.transform.rotation, 5f));
         mMain.mStateMachine.SwitchState(mMain.mCompleting);
     }

@@ -54,7 +54,6 @@ public class ComputerScript : MonoBehaviour
 
     public void StartComputer()
     {
-
         ChangeInterface("CanvasHome");
     }
 

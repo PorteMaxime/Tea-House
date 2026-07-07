@@ -32,6 +32,7 @@ public class Printer_SelectOrder : MonoBehaviour
     public void Print()
     {
         if (mPacketLabelPrinting == null) Init();
+
         mPacketLabelPrinting.CreateLabel();
     }
 
@@ -53,7 +54,7 @@ public class Printer_SelectOrder : MonoBehaviour
         if(desc.Length > 30)
             desc = desc.Substring(0, 30) + "...";
         mailGo.transform.Find("Order_Description").GetComponent<TextMeshProUGUI>().text = desc;
-
+        
         mailGo.transform.Find("Order_Button").GetComponent<Button>().onClick.AddListener(() => SelectOrder(mailGo));
 
         return mailGo;
