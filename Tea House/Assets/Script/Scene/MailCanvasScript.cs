@@ -259,8 +259,11 @@ public class MailCanvasScript : MonoBehaviour
         mMailSystem.ChangeOrderState(mSelectedOrder.Item1, Order.State.Completed);
         UpdatePrefabState(mSelectedOrder.Item1);
 
-        mSelectedOrder = null;
-        ToggleOrderContent(false);
+        if (!mCurrentFilters.Contains(Order.State.Completed))
+        {
+            mSelectedOrder = null;
+            ToggleOrderContent(false);
+        }
     }
 
     #region Filters
