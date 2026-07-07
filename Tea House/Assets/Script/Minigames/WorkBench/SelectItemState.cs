@@ -10,14 +10,13 @@ public class SelectItemState : IWorkbench
     {
         mWorkbench = system;
     }
-
     public void OnEnter()
     {
         //
     }
     public void OnUpdate()
     {
-        if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)//inputPlayer
+        if (InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)
         {
             if (mWorkbench.mCurrentItem == null && mWorkbench.mDragAndDrop.IsDragging() == false)
             {
@@ -30,11 +29,12 @@ public class SelectItemState : IWorkbench
                     {
                         InitIngredient(workBenchStorageScript.ingredient);
                         workBenchStorageScript.CheckIngredient();
+
                         mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG);
                     }
                     else if (hitGo == mWorkbench.mMixtureBowl)
                     {
-                         mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMixtureBowl);
+                        mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMixtureBowl);
                     }
                     else if (hitGo == mWorkbench.mSpoon)
                     {
@@ -44,7 +44,18 @@ public class SelectItemState : IWorkbench
             }
             else
             {
-                mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG);
+                if (mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG))
+                {
+                    if (mWorkbench.cuttingState.canGrabItem == true && InputManager.Get().mPlayerInteract.Player.Select.triggered)
+                    {
+                        IngredientItem tempItem = mWorkbench.mCurrentItem;
+                        mWorkbench.DestroyCurrentIngredient();
+
+                        mWorkbench.mCurrentItem = tempItem;
+                        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(tempItem.mFragGrab, mWorkbench.mCuttingBoard.transform.position);
+                        mWorkbench.cuttingState.canGrabItem = false;
+                    }
+                }
             }
         }
         else
@@ -55,15 +66,51 @@ public class SelectItemState : IWorkbench
             {
                 if (mWorkbench.mMortarBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
                 {
-                    Inventory.msInstance.ChangeItemAmount(mWorkbench.mCurrentItem, -1);
+                    if(mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.bruising)
+                    {
+                        Inventory.msInstance.ChangeItemAmount(mWorkbench.mCurrentItem, -1);
 
-                    mWorkbench.currentItemG.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-                    mWorkbench.currentItemG.GetComponent<Rigidbody>().useGravity = false;
-                    mWorkbench.currentItemG.GetComponent<BoxCollider>().isTrigger = true;
+                        mWorkbench.currentItemG.GetComponent<Rigidbody>().useGravity = false;
+                        mWorkbench.currentItemG.GetComponent<BoxCollider>().isTrigger = true;
 
-                    mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
+                        mWorkbench.stateMachine.ChangeState(mWorkbench.bruisingState);
+                    }
+
+                }
+                else if (mWorkbench.mCuttingBoard.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
+                {
+                    if (mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.cutting && mWorkbench.cuttingState.isItemCut == false)
+                    {
+                        mWorkbench.stateMachine.ChangeState(mWorkbench.cuttingState);
+                    }
+                    else
+                    {
+                        Debug.Log("Can't cut this !");
+                    }
+                }
+                else if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
+                {
+                    if (mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.none || mWorkbench.canPutInMixture == true)
+                    {
+                        mWorkbench.currentItemG.GetComponent<Rigidbody>().useGravity = true;
+                        mWorkbench.currentItemG.GetComponent<Rigidbody>().isKinematic = false;
+
+                        mWorkbench.currentItemG.transform.SetParent(mWorkbench.mMixtureBowl.transform);
+
+                        mWorkbench.mCurrentItem = null;
+                        mWorkbench.currentItemG = null;
+
+                        mWorkbench.canPutInMixture = false;
+
+                        mWorkbench.cuttingState.isItemCut = false;
+                    }
+                    else
+                    {
+                        Debug.Log("Item Need transformation !");
+                    }
                 }
             }
+
 
         }
     }
@@ -71,14 +118,13 @@ public class SelectItemState : IWorkbench
     {
 
     }
-    void InitIngredient(IngredientData _ingredient)
+    void InitIngredient(IngredientItem _ingredient)
     {
-        mWorkbench.mCurrentItem = _ingredient;
-        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mPrefab, Vector3.zero);
-
         float distance = Vector3.Distance(mWorkbench.mCameraController.transform.position, mWorkbench.mMortarBowl.transform.position) - 0.5f;
+        Vector3 ingredientPos = mWorkbench.mCameraRaycast.GetImpact(distance, mWorkbench.mMortarBowl);
 
-        mWorkbench.currentItemG.transform.position = mWorkbench.mCameraRaycast.GetImpact(distance, mWorkbench.mMortarBowl);
+        mWorkbench.mCurrentItem = _ingredient;
+        mWorkbench.currentItemG = mWorkbench.InstantiateGameObject(_ingredient.mPrefab, ingredientPos);
 
     }
 }

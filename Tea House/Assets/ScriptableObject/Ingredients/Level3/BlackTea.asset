@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f979dc826b0b73543a53b268f757f816, type: 3}
+  m_Name: BlackTea
+  m_EditorClassIdentifier: Assembly-CSharp::BaseData
+  mName: BlackTea
+  mPrefab: {fileID: 5241442716923736636, guid: 6600c52d9f49b324d969d7733b1f91c4, type: 3}
+  mIsUnlocked: 0
+  mStats:
+  - mStatVar: 0
+    mValueVar: 2
+  - mStatVar: 1
+    mValueVar: 0
+  - mStatVar: 2
+    mValueVar: 0
+  - mStatVar: 3
+    mValueVar: 1
+  - mStatVar: 4
+    mValueVar: 0
+  - mStatVar: 5
+    mValueVar: 0
+  - mStatVar: 6
+    mValueVar: 1
+  mPrice: 1
+  mIngredientGrab: {fileID: 0}
+  mAmountJar1: {fileID: 3071537283105047996, guid: a0ff86940e35b6e43b4465eac0c2a3ba, type: 3}
+  mAmountJar2: {fileID: 8006170475375151660, guid: 6ed1b0dd99fd8a14689009b05eb256fe, type: 3}
+  mAmountJar3: {fileID: 1150083970846884519, guid: aa0a6c9a12d343e46bf34d4f85b9f028, type: 3}
+  mFragIngredient: {fileID: 0}
+  mFragGrab: {fileID: 0}
+  mType: 0

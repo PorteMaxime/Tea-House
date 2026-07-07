@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
+  m_Name: Mint
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientData
+  mName: Mint
+  mPrefab: {fileID: 2086405798350031596, guid: a6b9b8b42c0914942b1ba417d72aeea7, type: 3}
+  mIsUnlocked: 0
+  mStats:
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 1
+    mValueVar: 2
+  - mStatVar: 2
+    mValueVar: 0
+  - mStatVar: 3
+    mValueVar: 0
+  - mStatVar: 4
+    mValueVar: 0
+  - mStatVar: 5
+    mValueVar: 0
+  - mStatVar: 6
+    mValueVar: 0
+  mPrice: 9
+  mIngredientGrab: {fileID: 0}
+  mAmountJar1: {fileID: 3361823228832995955, guid: 8c9aeb812261a3449ab135fca15abf18, type: 3}
+  mAmountJar2: {fileID: 5044555026525103796, guid: 3c38be8068eb333409adfddc278bc844, type: 3}
+  mAmountJar3: {fileID: 7937324257843233066, guid: 598bb7885fecf554e906917207efba9c, type: 3}
+  mFragIngredient: {fileID: 744280317938301970, guid: a3c2b152675f6914983b69bab59beb1d, type: 3}
+  mFragGrab: {fileID: 0}
+  mType: 2

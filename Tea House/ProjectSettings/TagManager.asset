@@ -24,6 +24,10 @@ TagManager:
   - MainPanel
   - MailManager
   - Inventory
+  - CuttingBoard
+  - DataBaseManager
+  - Grab
+  - Jars
   layers:
   - Default
   - TransparentFX

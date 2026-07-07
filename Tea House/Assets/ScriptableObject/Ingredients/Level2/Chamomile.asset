@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
+  m_Name: Chamomile
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientData
+  mName: Chamomile
+  mPrefab: {fileID: 38112414207970131, guid: 5d3cabade654be3448dd164f13cea95b, type: 3}
+  mIsUnlocked: 0
+  mStats:
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 1
+    mValueVar: 0
+  - mStatVar: 2
+    mValueVar: 1
+  - mStatVar: 3
+    mValueVar: 0
+  - mStatVar: 4
+    mValueVar: 0
+  - mStatVar: 5
+    mValueVar: 0
+  - mStatVar: 6
+    mValueVar: 0
+  mPrice: 2
+  mIngredientGrab: {fileID: 0}
+  mAmountJar1: {fileID: 8895966285790522229, guid: 112b938deb14405429b6ad8447321f5f, type: 3}
+  mAmountJar2: {fileID: 8774654462186808709, guid: 148457fcc67191b4cad02ef70e84f5eb, type: 3}
+  mAmountJar3: {fileID: 8606078776989410600, guid: abae3e4e89044644ba55bd49c916539b, type: 3}
+  mFragIngredient: {fileID: 0}
+  mFragGrab: {fileID: 0}
+  mType: 2

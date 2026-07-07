@@ -272,10 +272,13 @@ public class MailCanvasScript : MonoBehaviour
         Destroy(package.gameObject);
         // TODO: Consequences of completion
         mMailSystem.ChangeOrderState(mSelectedOrder.Item1, Order.State.Completed);
+
         UpdatePrefabState(mSelectedOrder.Item1);
 
         mSelectedOrder = null;
         ToggleOrderContent(false);
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLevel>().Addxp(10);
     }
 
     #region Filters

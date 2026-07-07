@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Experimental.AI;
+using UnityEngine.InputSystem;
 
 public class CuttingState : IWorkbench
 {
@@ -12,21 +13,106 @@ public class CuttingState : IWorkbench
 
     Vector3 initialPosCam;
     Quaternion initialRotCam;
+    Vector3 initialPosKnife;
+    Quaternion initialRotKnife;
 
+    int posValidZone;
+    int dir = -1;
+    float cursorSpeed = 3;
+    float cursorBorn = 1.75f;
+    int nbCutPoint = 0;
+    public bool isItemCut;
+    int cuttingPointIndex = 0;
+    public bool canGrabItem = false;
     public void OnEnter()
     {
         initialPosCam = mWorkbench.mCameraController.transform.position;
         initialRotCam = mWorkbench.mCameraController.transform.rotation;
 
+        initialPosKnife = mWorkbench.mCameraController.transform.position;
+        initialRotKnife = mWorkbench.mCameraController.transform.rotation;
+
+        mWorkbench.mCuttingPanel.SetActive(true);
+
         mWorkbench.mCameraDepth.LerpingCamera(mWorkbench.mCameraPosCuttingBoard.transform.position, mWorkbench.mCameraPosCuttingBoard.transform.rotation, 0.5f);
+
+        mWorkbench.currentItemG.transform.position = mWorkbench.mCuttingBoard.transform.position;
     }
     public void OnUpdate()
     {
+
+        if(dir == 1)
+        {
+            if(mWorkbench.mQteCursor.transform.localPosition.y >= cursorBorn)
+            {
+                dir = -1;
+            }
+        }
+        else if(dir == -1)
+        {
+            if (mWorkbench.mQteCursor.transform.localPosition.y <= -cursorBorn)
+            {
+                dir = 1;
+            }
+        }
+        mWorkbench.mQteCursor.transform.localPosition += new Vector3(0, cursorSpeed * dir * Time.deltaTime, 0);
+
+        if (InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
+        {
+            if(CursorOk() == true)
+            {
+                Debug.Log("ok");
+                nbCutPoint++;
+                MoveValideZone();
+                mWorkbench.Cut(cuttingPointIndex);
+                cuttingPointIndex++;
+            }
+            else
+            {
+                MoveValideZone();
+            }
+
+        }
+
+        if(nbCutPoint == 4)
+        {
+
+            mWorkbench.currentItemG.GetComponent<MeshFilter>().mesh = mWorkbench.mCurrentItem.mFragIngredient.GetComponent<MeshFilter>().sharedMesh;
+
+            nbCutPoint = 0;
+            isItemCut = true;
+            mWorkbench.canPutInMixture = true;
+            cuttingPointIndex = 0;
+            canGrabItem = true;
+            mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
+        }
 
     }    
     public void OnExit()
     {
         mWorkbench.mCameraDepth.LerpingCamera(initialPosCam, initialRotCam, 0.5f);
+        mWorkbench.mCuttingPanel.SetActive(false);
+    }
+    bool CursorOk()
+    {
+        if(mWorkbench.mQteCursor.transform.localPosition.y <= mWorkbench.mQteValideZone.transform.localPosition.y + 0.2
+            && mWorkbench.mQteCursor.transform.localPosition.y >= mWorkbench.mQteValideZone.transform.localPosition.y - 0.4)
+        {
+
+            return true;
+        }
+        //Debug.Log("cursorPos: " + mWorkbench.mQteCursor.transform.position.y);
+        //Debug.Log("Valide: " + (mWorkbench.mQteValideZone.transform.position.y - 0.4));
+        return false;
     }
 
+    void MoveValideZone()
+    {
+        posValidZone = Random.Range(-175, 175);
+
+        mWorkbench.mQteValideZone.transform.localPosition = 
+            new Vector3(mWorkbench.mQteValideZone.transform.localPosition.x, 
+            (float)posValidZone / 100,
+            mWorkbench.mQteValideZone.transform.localPosition.z);
+    }
 }

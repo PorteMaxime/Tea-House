@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
+  m_Name: Jasmine
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientData
+  mName: Jasmine
+  mPrefab: {fileID: 7587948154604308548, guid: f23ec614fcb6578459eb0f7cb3a1ff7f, type: 3}
+  mIsUnlocked: 0
+  mStats:
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 1
+    mValueVar: 0
+  - mStatVar: 2
+    mValueVar: 1
+  - mStatVar: 3
+    mValueVar: 0
+  - mStatVar: 4
+    mValueVar: 1
+  - mStatVar: 5
+    mValueVar: 0
+  - mStatVar: 6
+    mValueVar: 2
+  mPrice: 7
+  mIngredientGrab: {fileID: 0}
+  mAmountJar1: {fileID: 6799881361010892946, guid: fae281ed2d82b3341af50ce8c49b3363, type: 3}
+  mAmountJar2: {fileID: 8594055693139799737, guid: b014c9cd75c0d254b854f5ac1a852b33, type: 3}
+  mAmountJar3: {fileID: 812632277191400347, guid: cc10c62da2b4e3c408e8570b96a10feb, type: 3}
+  mFragIngredient: {fileID: 0}
+  mFragGrab: {fileID: 0}
+  mType: 2

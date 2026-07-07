@@ -284,16 +284,16 @@ public class Camera_Raycast : ICameraControllerMod
             if (hasTagFilter == false)
                     hits.Add(hitInfo);
             else
+            {
+                for (int i = 0; i < tags.Length; i++)
                 {
-                    for (int i = 0; i < tags.Length; i++)
+                    if (go.CompareTag(tags[i]))
                     {
-                        if (go.CompareTag(tags[i]))
-                        {
-                            hits.Add(hitInfo);
-                            break;
-                        }
+                        hits.Add(hitInfo);
+                        break;
                     }
                 }
+            }
         }
 
         return;
