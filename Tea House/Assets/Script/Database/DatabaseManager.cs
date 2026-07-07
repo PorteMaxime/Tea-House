@@ -49,11 +49,10 @@ public class DatabaseManager : MonoBehaviour
     async void Start()
     {
         // Chargement des données
-        LoadingScript.msInstance.StartLoading();
+        LoadingScript.msInstance.StartLoading(false, 1, 1);
 
         try
         {
-            LoadingScript.msInstance.mCanvasGroup.alpha = 1;
             await LoadGame();
         }
         finally

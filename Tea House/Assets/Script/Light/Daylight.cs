@@ -81,7 +81,7 @@ public class Daylight : MonoBehaviour
 
     public async Task ChangeDay()
     {
-        LoadingScript.msInstance.StartLoading();
+        LoadingScript.msInstance.StartLoading(true, 0, 0);
 
         mCurrentTime = mDayStartHour;
         mCurrentDay += 1;
