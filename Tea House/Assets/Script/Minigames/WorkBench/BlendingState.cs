@@ -9,6 +9,9 @@ public class BlendingState : IWorkbench
     public BlendingState(WorkbenchScript system)
     {
         mWorkbench = system;
+
+        initSpoonPos = mWorkbench.mSpoon.transform.position;
+        initSpoonRot = mWorkbench.mSpoon.transform.rotation;
     }
 
 
@@ -22,8 +25,7 @@ public class BlendingState : IWorkbench
     public bool canSwap = false;
     public void OnEnter()
     {
-        initSpoonPos = mWorkbench.mSpoon.transform.position;
-        initSpoonRot = mWorkbench.mSpoon.transform.rotation;
+
 
     }
 

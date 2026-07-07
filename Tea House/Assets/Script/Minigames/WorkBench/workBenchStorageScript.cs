@@ -1,30 +1,48 @@
+using System.Collections;
 using UnityEngine;
 
 public class WorkBenchStorageScript : MonoBehaviour
 {
-    public IngredientData ingredient;
+    public IngredientItem ingredient;
+
     public GameObject ingredientAmountG;
     public int amount;
 
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
 
+    private DatabaseManager databaseManager;
+
     void Start()
     {
         meshFilter = ingredientAmountG.GetComponent<MeshFilter>();
         meshRenderer = ingredientAmountG.GetComponent<MeshRenderer>();
 
-        CheckIngredient();
+        databaseManager = GameObject.FindGameObjectWithTag("DataBaseManager").GetComponent<DatabaseManager>();
+
+        StartCoroutine(DBLoad());
     }
 
     public void CheckIngredient()
     {
         amount = Inventory.msInstance.GetAmount(ingredient);
+
+
         UpdateAmount();
     }
 
     void UpdateAmount()
     {
+        if (ingredient.mIsUnlocked == true)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         if (amount > 10)
         {
             ShareIngredientRender(ingredient.mAmountJar1);
@@ -48,5 +66,14 @@ public class WorkBenchStorageScript : MonoBehaviour
     {
         meshFilter.mesh = _gameObject.GetComponent<MeshFilter>().sharedMesh;
         meshRenderer.material = _gameObject.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
+    IEnumerator DBLoad()
+    {
+        while(databaseManager.isLoaded == false)
+        {
+            yield return null;
+        }
+        CheckIngredient();
     }
 }

@@ -266,16 +266,23 @@ public class MailCanvasScript : MonoBehaviour
     public void TrySendOrder()
     {
         PackageScript package = mPackInv.GetPackage(mSelectedOrder.Item1);
-        if(package == null) return; // Not completed
+        if (package == null)
+        {
+            Debug.Log("Order can't be send");
+            return; // Not completed
+        }
 
         int score = package.GetCompletionScore(); // => function to complete with scoring system
         Destroy(package.gameObject);
         // TODO: Consequences of completion
         mMailSystem.ChangeOrderState(mSelectedOrder.Item1, Order.State.Completed);
+
         UpdatePrefabState(mSelectedOrder.Item1);
 
         mSelectedOrder = null;
         ToggleOrderContent(false);
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLevel>().Addxp(10);
     }
 
     #region Filters

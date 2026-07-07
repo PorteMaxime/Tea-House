@@ -21,7 +21,7 @@ public class CameraDragAndDrop : ICameraControllerMod
 
     private Vector3 mDraggingOffset = Vector3.zero;
     private Rigidbody mDraggingRB = null;
-    private GameObject mDragging = null;
+    public GameObject mDragging = null;
 
     private float mDraggedOriginX = 0f;
     private float mDraggedOriginDistance = 0f;
@@ -144,6 +144,7 @@ public class CameraDragAndDrop : ICameraControllerMod
             target.transform.tag,
             out List<RaycastHit> hits
              );
+
         return IsDragging() == false && hits.Any(hit => hit.collider.gameObject == target);
     }
 }

@@ -17,8 +17,6 @@ public class CharacterInput : MonoBehaviour
     float idleTimer = 0f;
     public float idleExtraDelay = 5f;
 
-    bool isSitting = false;
-    float sitIdleTimer = 0f;
     public float sitExtraDelay = 6f;
 
     void Awake() => mInput = new Input_PlayerMovement();

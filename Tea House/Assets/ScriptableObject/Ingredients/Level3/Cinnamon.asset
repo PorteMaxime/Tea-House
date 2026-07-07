@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
+  m_Name: Cinnamon
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientData
+  mName: Cinnamon
+  mPrefab: {fileID: 1191592359346174821, guid: 2eae0901ffb26ba45aa38aa755adb217, type: 3}
+  mIsUnlocked: 0
+  mStats:
+  - mStatVar: 0
+    mValueVar: 2
+  - mStatVar: 1
+    mValueVar: 0
+  - mStatVar: 2
+    mValueVar: 0
+  - mStatVar: 3
+    mValueVar: 0
+  - mStatVar: 4
+    mValueVar: 0
+  - mStatVar: 5
+    mValueVar: 1
+  - mStatVar: 6
+    mValueVar: 1
+  mPrice: 3
+  mIngredientGrab: {fileID: 0}
+  mAmountJar1: {fileID: 2228715544752922258, guid: f81808a33dbfa5f4997a3352598c9b79, type: 3}
+  mAmountJar2: {fileID: 5113334274895614552, guid: 5ff7cef58841f1541aef179ac413af74, type: 3}
+  mAmountJar3: {fileID: 8038875873391802765, guid: 92b137f073b773e4599f4498b3a33ef9, type: 3}
+  mFragIngredient: {fileID: 0}
+  mFragGrab: {fileID: 0}
+  mType: 2

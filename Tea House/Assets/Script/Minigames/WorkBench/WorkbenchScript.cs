@@ -21,10 +21,10 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMortarBowl;
     public GameObject mMortarPilon;
     public GameObject mMixtureBowl;
-    public IngredientData mCurrentItem = null;
+    public IngredientItem mCurrentItem = null;
     public GameObject currentItemG = null;
     public List<ItemData> mMixture;
-    public IngredientData mBruiseIngrdient;
+    public IngredientItem mBruiseIngrdient;
 
     public GameObject mMortarTopBorn;
     public GameObject mMortarBotBorn;
@@ -34,7 +34,16 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMixtureRightBorn;
     public GameObject mMixtureLeftBorn;
 
+    public GameObject mCuttingBoard;
+    public GameObject mKnife;
+    public List<GameObject> mCuttingPoints;
+
+    public GameObject mQteValideZone;
+    public GameObject mQteCursor;
+
     public GameObject mPanelSwap;
+    public GameObject mMainPanel;
+    public GameObject mCuttingPanel;
 
     public GameObject mSpoon;
 
@@ -44,6 +53,8 @@ public class WorkbenchScript : MonoBehaviour
     public BruisingState bruisingState;
     public BlendingState blendingState;
     public CuttingState cuttingState;
+
+    public bool canPutInMixture = false;
 
     //
     float upPan = Screen.height * 0.15f;
@@ -74,6 +85,7 @@ public class WorkbenchScript : MonoBehaviour
     {
         if (mInteractiveArea.isUsing)
         {
+            mMainPanel.SetActive(false);
             if (Mouse.current.position.ReadValue().y >= Screen.height - upPan && cameraLookUp == false)
             {
                 Quaternion targetRotation = mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);
@@ -92,10 +104,14 @@ public class WorkbenchScript : MonoBehaviour
 
             stateMachine.Update();
         }
+        else
+        {
+            mMainPanel.SetActive(true);
+        }
 
     }
 
-    public void AddItemToMixture(IngredientData item)
+    public void AddItemToMixture(IngredientItem item)
     {
         mMixture.Add(item);
     }
@@ -146,5 +162,35 @@ public class WorkbenchScript : MonoBehaviour
         }
 
         _go.transform.position = targetPosition;
+    }
+    public void Cut(int cuttingPointIndex)
+    {
+        StartCoroutine(cCut(cuttingPointIndex));
+    }
+    public IEnumerator cCut(int cuttingPointIndex)
+    {
+        mCuttingPanel.SetActive(false);
+
+        Vector3 topPos = mCuttingPoints[cuttingPointIndex].transform.position;
+
+        mKnife.transform.rotation = mCuttingPoints[cuttingPointIndex].transform.rotation;
+        mKnife.transform.position = topPos;
+
+        float duration = 0.5f;
+        float elapsedTime = 0;
+
+        Vector3 positionOrigine = mKnife.transform.position;
+        Vector3 targetPosition = new Vector3(topPos.x, topPos.y - 0.2f, topPos.z);
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            mKnife.transform.position = Vector3.Lerp(positionOrigine, targetPosition, elapsedTime / duration);
+            yield return 0;
+        }
+        mKnife.transform.position = targetPosition;
+
+        if(cuttingPointIndex != mCuttingPoints.Count - 1)
+            mCuttingPanel.SetActive(true);
     }
 }

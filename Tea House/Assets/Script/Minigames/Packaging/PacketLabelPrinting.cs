@@ -88,7 +88,7 @@ public class PacketLabelPrinting : IPackaging
 
     public void OnUpdate()
     {
-        if (mDepthView.IsMoving(0.001f) == false && mDepthView.IsRotating(0.001f) == false)
+        if (mDepthView.IsMoving(0) == true && mDepthView.IsRotating(0) == true)
             mPrinterScreenUI.SetActive(true);
 
         if (InputManager.Get().mPlayerInteract.Player.Close.triggered == true)
