@@ -2,6 +2,7 @@ using SQLite;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MailRandomData
@@ -25,7 +26,8 @@ public class DatabaseManager : MonoBehaviour
 {
     [SerializeField] private Daylight mDaylight;
 
-    private SQLiteConnection database;
+    private SQLiteConnection mDatabase;
+    bool mIsDatabaseInUse = false;
 
     [SerializeField] private MailSystem mMailSystem;
     [SerializeField] private MailCreator mMailCreator;
@@ -36,50 +38,56 @@ public class DatabaseManager : MonoBehaviour
         if (File.Exists($"{Application.persistentDataPath}/Data.db") != true)
             File.Copy($"{Application.streamingAssetsPath}/Save/Data.db", $"{Application.persistentDataPath}/Data.db");
 
-        database = new SQLiteConnection($"{Application.persistentDataPath}/Data.db");
-        database.CreateTable<Mail>();
+        mDatabase = new SQLiteConnection($"{Application.persistentDataPath}/Data.db");
+        mDatabase.CreateTable<Mail>();
 
-        Debug.Log("Database path : " + database.DatabasePath);
+        Debug.Log("Database path : " + mDatabase.DatabasePath);
     }
 
-    void Start()
+    async void Start()
     {
         // Chargement des données
-        LoadDaylight();
+        LoadingScript.msInstance.StartLoading();
 
-        LoadInventory();
-
-        LoadMails();
+        try
+        {
+            LoadingScript.msInstance.mCanvasGroup.alpha = 1;
+            await LoadGame();
+        }
+        finally
+        {
+            LoadingScript.msInstance.StopLoading();
+        }
     }
 
     private void CreateTables()
     {
-        if (database == null)
+        if (mDatabase == null)
             return;
 
         // Creation commandes
-        database.CreateTable<MailRandomData>();
+        mDatabase.CreateTable<MailRandomData>();
 
         // Daylight
-        database.Execute("CREATE TABLE Others (id string PRIMARY KEY, value int);");
-        database.Execute("INSERT INTO Others VALUES ('currentDay', 0);");
-        database.Execute("INSERT INTO Others VALUES ('money', 20);");
+        mDatabase.Execute("CREATE TABLE Others (id string PRIMARY KEY, value int);");
+        mDatabase.Execute("INSERT INTO Others VALUES ('currentDay', 0);");
+        mDatabase.Execute("INSERT INTO Others VALUES ('money', 20);");
 
         // Mails
-        database.CreateTable<Mail>();
-        database.CreateTable<Order>();
-        database.CreateTable<StatValue>();
-        database.Execute("CREATE UNIQUE INDEX IF NOT EXISTS uniqueIndexes ON Stat(stat, mailId);");
+        mDatabase.CreateTable<Mail>();
+        mDatabase.CreateTable<Order>();
+        mDatabase.CreateTable<StatValue>();
+        mDatabase.Execute("CREATE UNIQUE INDEX IF NOT EXISTS uniqueIndexes ON Stat(stat, mailId);");
 
         // Inventaire
-        database.CreateTable<ItemSave>();
+        mDatabase.CreateTable<ItemSave>();
     }
 
     public Dictionary<string, List<string>> LoadMailRandomValues()
     {
         Dictionary<string, List<string>> randomValues = new Dictionary<string, List<string>>();
 
-        foreach (MailRandomData singleResult in database.Query<MailRandomData>("SELECT * FROM MailRandomData;"))
+        foreach (MailRandomData singleResult in mDatabase.Query<MailRandomData>("SELECT * FROM MailRandomData;"))
         {
             if (!randomValues.ContainsKey(singleResult.type))
                 randomValues.Add(singleResult.type, new List<string>());
@@ -90,23 +98,88 @@ public class DatabaseManager : MonoBehaviour
         return randomValues;
     }
 
-    public void LoadDaylight()
+    public async Task LoadGame()
     {
-        int currentDay = database.ExecuteScalar<int>("SELECT value FROM Others WHERE id = 'currentDay';");
+        if (mIsDatabaseInUse == true)
+            return;
+
+        mIsDatabaseInUse = true;
+
+        try
+        {
+            await LoadDaylight();
+
+            await LoadInventory();
+
+            await LoadMails();
+        }
+        finally
+        {
+            mIsDatabaseInUse = false;
+        }
+    }
+
+    public async Task SaveGame()
+    {
+        if (mIsDatabaseInUse == true)
+            return;
+
+        mIsDatabaseInUse = true;
+
+        try
+        {
+            await SaveDaylight();
+
+            await SaveInventory();
+
+            await SaveMails();
+        }
+        finally
+        {
+            mIsDatabaseInUse = false;
+        }
+    }
+
+    public async Task LoadDaylight()
+    {
+        int currentDay = 0;
+
+        await Task.Run(() =>
+        {
+            string query = "SELECT value FROM Others WHERE id = 'currentDay';";
+            currentDay = mDatabase.ExecuteScalar<int>(query);
+        });
 
         mDaylight.mCurrentDay = currentDay;
     }
 
-    public void SaveDaylight()
+    public async Task SaveDaylight()
     {
-        database.Execute("UPDATE Others SET value = " + mDaylight.mCurrentDay + " WHERE id = 'currentDay';");
+        int day = mDaylight.mCurrentDay;
+
+        await Task.Run(() =>
+        {
+            string query = "UPDATE Others SET value = ? WHERE id = 'currentDay';";
+            mDatabase.Execute(query, day);
+        });
     }
 
-    public void LoadInventory()
+    public async Task LoadInventory()
     {
-        var rows = database.Table<ItemSave>();
+        int moneyAmount = 0;
+        List<ItemSave> rows = null;
+        
+        await Task.Run(() =>
+        {
+            string query = "SELECT value FROM Others WHERE id = 'money';";
+            moneyAmount = mDatabase.ExecuteScalar<int>(query);
+
+            rows = mDatabase.Table<ItemSave>().ToList();
+        });
 
         Inventory inventory = Inventory.msInstance;
+
+        inventory.mMoneyAmount = moneyAmount;
 
         foreach (var itemSave in rows)
         {
@@ -116,40 +189,60 @@ public class DatabaseManager : MonoBehaviour
                 item.mIsUnlocked = itemSave.isUnlocked;
             }
         }
-
-        int moneyAmount = database.ExecuteScalar<int>("SELECT value FROM Others WHERE id = 'money';");
-
-        inventory.mMoneyAmount = moneyAmount;
     }
 
-    public void SaveInventory()
+    public async Task SaveInventory()
     {
-        ItemSave itemSave = new ItemSave();
+        var tempItems = Inventory.msInstance.mItems.ToList();
 
-        foreach (var item in Inventory.msInstance.mItems)
+        int money = Inventory.msInstance.mMoneyAmount;
+
+        await Task.Run(() =>
         {
-            itemSave.name = item.Key.mName;
-            itemSave.amount = item.Value;
-            itemSave.isUnlocked = item.Key.mIsUnlocked;
+            ItemSave itemSave = new ItemSave();
 
-            database.InsertOrReplace(itemSave);
-        }
+            foreach (var item in tempItems)
+            {
+                itemSave.name = item.Key.mName;
+                itemSave.amount = item.Value;
+                itemSave.isUnlocked = item.Key.mIsUnlocked;
 
-        database.Execute("UPDATE Others SET value = " + Inventory.msInstance.mMoneyAmount + " WHERE id = 'money';");
+                mDatabase.InsertOrReplace(itemSave);
+            }
+
+            string query = "UPDATE Others SET value = ? WHERE id = 'money';";
+            mDatabase.Execute(query, money);
+        });
     }
 
-    public void LoadMails()
+    public async Task LoadMails()
     {
-        var mails = database.Table<Mail>().OrderBy(mail => mail.id).ToList();
-        var orders = database.Table<Order>().ToList().GroupBy(order => order.mailId).ToDictionary(g => g.Key, g => g.Last());
-        var stats = database.Table<StatValue>().ToList().GroupBy(stat => stat.mMailId).ToDictionary(g => g.Key, g => g.ToList());
+        List<Mail> mails = await Task.Run(LoadMailsDatabase);
 
-        Mail.mailID = mails.Count();
+        LoadMailsUnity(mails);
+    }
+
+    private List<Mail> LoadMailsDatabase()
+    {
+        var mails = mDatabase.Table<Mail>().OrderBy(mail => mail.id).ToList();
+        var orders = mDatabase.Table<Order>().ToList().GroupBy(order => order.mailId).ToDictionary(g => g.Key, g => g.Last());
+        var stats = mDatabase.Table<StatValue>().ToList().GroupBy(stat => stat.mMailId).ToDictionary(g => g.Key, g => g.ToList());
 
         foreach (Mail mail in mails)
         {
             mail.SetOrder(orders[mail.id]);
-            mail.mOrder.mOrderData.mStats = stats[mail.id];
+            mail.mOrder.mOrderData = stats[mail.id];
+        }
+
+        return mails;
+    }
+
+    private void LoadMailsUnity(List<Mail> mails)
+    {
+        Mail.mailID = mails.Count();
+
+        foreach (Mail mail in mails)
+        {
             mail.mPicture = mMailCreator.mImages.FirstOrDefault(image => image.name == mail.mPictureName);
 
             if (mail.mSendDay <= mDaylight.mCurrentDay)
@@ -171,25 +264,37 @@ public class DatabaseManager : MonoBehaviour
         mMailSystem.mMails[Order.State.InBox] = mMailSystem.mMails[Order.State.InBox].OrderBy(mail => mail.mExpiration).ToList();
     }
 
-    public void SaveMails()
+    public async Task SaveMails()
     {
-        foreach (List<Mail> mails in mMailSystem.mMails.Values)
-            foreach (Mail mail in mails)
-                SaveMail(mail);
+        List<Mail> mails = GetMails();
 
-        foreach (List<Mail> mails in mMailCreator.mCalendar)
-            foreach (Mail mail in mails)
-                SaveMail(mail);
+        await Task.Run(() => SaveMailsDatabase(mails));
     }
 
-    private void SaveMail(Mail mail)
+    private List<Mail> GetMails()
     {
-        database.InsertOrReplace(mail);
-        database.InsertOrReplace(mail.mOrder);
-        foreach (StatValue stat in mail.mOrder.mOrderData.mStats)
+        List<Mail> mails = new List<Mail>();
+
+        foreach (List<Mail> list in mMailSystem.mMails.Values)
+            mails.AddRange(list);
+
+        foreach (List<Mail> list in mMailCreator.mCalendar)
+            mails.AddRange(list);
+
+        return mails;
+    }
+
+    private void SaveMailsDatabase(List<Mail> mails)
+    {
+        foreach (Mail mail in mails)
         {
-            string query = "INSERT OR REPLACE INTO Stat (mailId, stat, value) VALUES (?, ?, ?);";
-            database.Execute(query, mail.id, stat.mStat, stat.mValue);
+            mDatabase.InsertOrReplace(mail);
+            mDatabase.InsertOrReplace(mail.mOrder);
+            foreach (StatValue stat in mail.mOrder.mOrderData)
+            {
+                string query = "INSERT OR REPLACE INTO Stat (mailId, stat, value) VALUES (?, ?, ?);";
+                mDatabase.Execute(query, mail.id, stat.mStat, stat.mValue);
+            }
         }
     }
 }

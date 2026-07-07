@@ -106,7 +106,7 @@ public class MailCreator : MonoBehaviour
         // Ingredients
         bool first = true;
         int rand;
-        foreach (StatValue stat in mail.mOrder.mOrderData.mStats)
+        foreach (StatValue stat in mail.mOrder.mOrderData)
         {
             if (stat.mValue <= 0 ||stat.mStat == ItemData.Stat.Prestige)
                 continue;
@@ -138,7 +138,7 @@ public class MailCreator : MonoBehaviour
             }
 
             rand = Random.Range(0, 5);
-            string StatLimit = stat.mValue > mail.mValueAmountLimit ? "StatHigh" : stat.mValue < mail.mValueAmountLimit ? "StatLow" : "";
+            string StatLimit = stat.mValue > mail.mOrder.mLimitHighAmount ? "StatHigh" : stat.mValue < mail.mOrder.mLimitHighAmount ? "StatLow" : "";
             string statAmount = "";
 
             if (mail.mText.Contains("{Stat}"))
@@ -163,15 +163,15 @@ public class MailCreator : MonoBehaviour
         {
             mail.mText += "\n";
 
-            if (mail.mValueAmountLimit - 2 <= 1)
+            if (mail.mOrder.mLimitHighAmount - 2 <= 1)
                 mail.mText += GetRandomValue("CommandLowAmount");
-            else if (mail.mValueAmountLimit - 2 >= 3)
+            else if (mail.mOrder.mLimitHighAmount - 2 >= 3)
                 mail.mText += GetRandomValue("CommandHighAmount");
             else
             {
-                foreach (StatValue stat in mail.mOrder.mOrderData.mStats)
+                foreach (StatValue stat in mail.mOrder.mOrderData)
                 {
-                    if (stat.mValue > mail.mValueAmountLimit)
+                    if (stat.mValue > mail.mOrder.mLimitHighAmount)
                     {
                         mail.mText += GetRandomValue("CommandIntense");
                         break;
@@ -200,6 +200,8 @@ public class MailCreator : MonoBehaviour
     {
         Order order = new Order();
 
+        mail.SetOrder(order);
+
         // Base
         List<BaseData> bases = Inventory.msInstance.GetItemsOfType<BaseData>();
 
@@ -213,7 +215,7 @@ public class MailCreator : MonoBehaviour
         List<IngredientData> ingredients = Inventory.msInstance.GetItemsOfType<IngredientData>();
 
         int ingredientAmount = Random.Range(mIngredientsAmount.x, mIngredientsAmount.y + 1);
-        mail.mValueAmountLimit = 2 + ingredientAmount;
+        mail.mOrder.mLimitHighAmount += ingredientAmount;
 
         for (int i = 0; i < ingredientAmount; i++)
         {
@@ -233,24 +235,22 @@ public class MailCreator : MonoBehaviour
             //mail.mText += " ; "; // Pour tests
         }
 
-        for (int i = 0; i < order.mOrderData.mStats.Count; i++)
+        for (int i = 0; i < order.mOrderData.Count; i++)
         {
-            if (order.mOrderData.mStats[i].mValue != 0)
+            if (order.mOrderData[i].mValue != 0)
             {
-                int oppositeStat = ItemData.GetOppositeIndex(order.mOrderData.mStats[i].mStat);
+                int oppositeStat = ItemData.GetOppositeIndex(order.mOrderData[i].mStat);
 
-                if (oppositeStat >= 0 && order.mOrderData.mStats[oppositeStat].mValue != 0)
+                if (oppositeStat >= 0 && order.mOrderData[oppositeStat].mValue != 0)
                 {
                     int rand = Random.Range(0, 2);
 
                     if (rand == 0)
-                        order.mOrderData.mStats[i].mValue = 0;
+                        order.mOrderData[i].mValue = 0;
                     else
-                        order.mOrderData.mStats[oppositeStat].mValue = 0;
+                        order.mOrderData[oppositeStat].mValue = 0;
                 }
             }
         }
-
-        mail.SetOrder(order);
     }
 }

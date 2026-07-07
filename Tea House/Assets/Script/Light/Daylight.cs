@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Daylight : MonoBehaviour
@@ -17,14 +18,13 @@ public class Daylight : MonoBehaviour
 
     [SerializeField] private TimeSpan mDayStartHour = new TimeSpan(8, 0, 0);
     [SerializeField] private float mDaySpeedMultiplier = 1; // 1 seconde irl = 1h en jeu
+    [SerializeField] public bool mStopTime = false;
     public TimeSpan mCurrentTime;
 
     [SerializeField] private MailSystem mMailSystem;
     [SerializeField] private MailCreator mMailCreator;
 
     [SerializeField] private DatabaseManager mDatabaseManager;
-
-    //[SerializeField] private LoadingScript mLoadingScript;
 
     public enum Phase
     {
@@ -52,11 +52,15 @@ public class Daylight : MonoBehaviour
 
     public void Start()
     {
-        mMailCreator.CreateDailyMails();
+        if (mCurrentDay <= 0)
+            mMailCreator.CreateDailyMails();
     }
 
-    void Update()
+    async void Update()
     {
+        if (mStopTime == true)
+            return;
+
         float timeSpent = Time.deltaTime * mDaySpeedMultiplier;
 
         mPhaseTimeSpent += timeSpent;
@@ -71,7 +75,7 @@ public class Daylight : MonoBehaviour
             if (mCurrentPhase + 1 >= Phase.Count)
             {
                 // Journee suivante
-                ChangeDay();
+                await ChangeDay();
             }
             else
             {
@@ -81,15 +85,9 @@ public class Daylight : MonoBehaviour
         }
     }
 
-    private void ChangePhase(Phase phase)
+    public async Task ChangeDay()
     {
-        mCurrentPhase = phase;
-        mCurrentPhaseLength = mPhases[phase];
-    }
-
-    public void ChangeDay()
-    {
-        //mLoadingScript.ShowLoading();
+        LoadingScript.msInstance.StartLoading();
 
         mCurrentTime = mDayStartHour;
         mCurrentDay += 1;
@@ -102,11 +100,15 @@ public class Daylight : MonoBehaviour
         mMailCreator.CreateDailyMails();
 
         // Sauvegarder la journee
-        mDatabaseManager.SaveMails();
-        mDatabaseManager.SaveDaylight();
-        mDatabaseManager.SaveInventory();
-        
-        //mLoadingScript.StopLoading();
+        await mDatabaseManager.SaveGame();
+
+        LoadingScript.msInstance.StopLoading();
+    }
+
+    private void ChangePhase(Phase phase)
+    {
+        mCurrentPhase = phase;
+        mCurrentPhaseLength = mPhases[phase];
     }
 
     public string GetInGameTime()

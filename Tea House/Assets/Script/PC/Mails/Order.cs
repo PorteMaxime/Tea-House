@@ -1,9 +1,13 @@
-using System.Collections.Generic;
 using SQLite;
-using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 public class Order
 {
+    [PrimaryKey]
+    [Column("mailId")]
+    public int mailId { get; set; }
+
     public enum State
     {
         NotSent,
@@ -17,21 +21,28 @@ public class Order
         Expired,
     }
 
-    // seulement utile pour la BDD
-    [PrimaryKey]
-    [Column("mailId")]
-    public int mailId { get; set; }
-
     [Column("state")]
     public State mState { get; set; } = State.NotSent;
 
-    public IngredientData mOrderData = ScriptableObject.CreateInstance<IngredientData>();
+    public int mLimitHighAmount = 2;
+
+    public List<StatValue> mOrderData = new List<StatValue>();
+
+    public Order()
+    {
+        foreach (ItemData.Stat stat in (ItemData.Stat[])Enum.GetValues(typeof(ItemData.Stat)))
+        {
+            StatValue statValue = new StatValue();
+            statValue.mStat = stat;
+            mOrderData.Add(statValue);
+        }
+    }
 
     public void AddStats(List<StatValue> newStats)
     {
-        for (int i = 0; i < mOrderData.mStats.Count; i++)
+        for (int i = 0; i < mOrderData.Count; i++)
         {
-            mOrderData.mStats[i].mValue += newStats[i].mValue;
+            mOrderData[i].mValue += newStats[i].mValue;
         }
     }
 }
