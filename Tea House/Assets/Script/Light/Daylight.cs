@@ -47,13 +47,7 @@ public class Daylight : MonoBehaviour
         ChangePhase(mPhases.Keys.First());
 
         foreach (float phaseLength in mPhases.Values)
-            mDayLength += phaseLength * (1 / mDaySpeedMultiplier);
-    }
-
-    public void Start()
-    {
-        if (mCurrentDay <= 0)
-            mMailCreator.CreateDailyMails();
+            mDayLength += phaseLength;
     }
 
     async void Update()
@@ -116,6 +110,7 @@ public class Daylight : MonoBehaviour
         return mCurrentTime.ToString(@"hh\:mm");
     }
 
+    // Temps passé sans le multiplicateur
     public float GetTotalTimeSpent()
     {
         return mCurrentDay * mDayLength + mDayTimeSpent;

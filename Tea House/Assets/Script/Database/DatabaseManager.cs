@@ -57,6 +57,10 @@ public class DatabaseManager : MonoBehaviour
         finally
         {
             LoadingScript.msInstance.StopLoading();
+
+            // Création de mails si c'est le premier jour
+            if (mDaylight.mCurrentDay <= 0)
+                mMailCreator.CreateDailyMails();
         }
     }
 

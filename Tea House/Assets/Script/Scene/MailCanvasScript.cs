@@ -58,10 +58,9 @@ public class MailCanvasScript : MonoBehaviour
 
         // Creation filtres
         foreach (Order.State state in mAvailableFilters)
-        {
             CreateFilterPrefab(state);
-        }
-        mCurrentFilters = mAvailableFilters;
+
+        mCurrentFilters = new List<Order.State> { Order.State.Accepted };
     }
 
     #region Page Mails
@@ -273,7 +272,11 @@ public class MailCanvasScript : MonoBehaviour
         Toggle prefabToggle = prefab.transform.Find("ToggleFilter").GetComponent<Toggle>();
 
         if (prefabToggle != null)
+        {
+            if (state == Order.State.Accepted)
+                prefabToggle.isOn = true;
             prefabToggle.onValueChanged.AddListener((bool clicked) => ToggleFilter(state, clicked));
+        }
 
         Text text = prefabToggle.transform.Find("Label").GetComponent<Text>();
 
@@ -293,10 +296,10 @@ public class MailCanvasScript : MonoBehaviour
 
     public void ToggleFilter(Order.State state, bool active)
     {
-        if (active == true && !mAvailableFilters.Contains(state))
-            mAvailableFilters.Add(state);
-        else if (mAvailableFilters.Contains(state))
-            mAvailableFilters.Remove(state);
+        if (active == true && !mCurrentFilters.Contains(state))
+            mCurrentFilters.Add(state);
+        else if (mCurrentFilters.Contains(state))
+            mCurrentFilters.Remove(state);
 
         UpdateOrdersVisibility();
     }

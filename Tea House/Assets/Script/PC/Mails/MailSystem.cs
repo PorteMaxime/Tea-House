@@ -32,10 +32,11 @@ public class MailSystem : MonoBehaviour
         mMails[Order.State.NotSent].AddRange(mMailCreator.mCalendar[mDaylight.mCurrentDay % 7]);
 
         // Heure/minute d'envoi dans la journee
+        int mailsAmount = mMails[Order.State.NotSent].Count() + 1;
         int mailNumber = 1;
         foreach (Mail mail in mMails[Order.State.NotSent])
         {
-            mail.mSendTime = mDaylight.mDayLength / (mMails[Order.State.NotSent].Count() + 1) * mailNumber;
+            mail.mSendTime = mDaylight.mDayLength / mailsAmount * mailNumber;
             mailNumber += 1;
             mail.UpdateExpiration(mDaylight);
         }
