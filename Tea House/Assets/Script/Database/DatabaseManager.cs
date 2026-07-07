@@ -33,6 +33,8 @@ public class DatabaseManager : MonoBehaviour
     [SerializeField] private MailCreator mMailCreator;
     [SerializeField] private MailCanvasScript mMailCanvasScript;
 
+    public bool mIsLoaded = false;
+
     private void Awake()
     {
         if (File.Exists($"{Application.persistentDataPath}/Data.db") != true)
@@ -61,6 +63,8 @@ public class DatabaseManager : MonoBehaviour
             // Création de mails si c'est le premier jour
             if (mDaylight.mCurrentDay <= 0)
                 mMailCreator.CreateDailyMails();
+
+            mIsLoaded = true;
         }
     }
 
