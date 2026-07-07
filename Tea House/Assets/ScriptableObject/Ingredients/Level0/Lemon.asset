@@ -18,13 +18,17 @@ MonoBehaviour:
   mStats:
   - mStatVar: 0
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 1
+    mValueVar: 1
+  - mStatVar: 2
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 3
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 4
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 5
+    mValueVar: 2
+  - mStatVar: 6
     mValueVar: 0
   mPrice: 0
   mIngredientGrab: {fileID: 0}

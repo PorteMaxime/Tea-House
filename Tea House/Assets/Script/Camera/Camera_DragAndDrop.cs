@@ -31,6 +31,7 @@ public class CameraDragAndDrop : ICameraControllerMod
 
     private bool mUseGravity = false;
     private bool mIsKinematic = false;
+    private bool mWasMeshColliding = false;
 
     #region Basics Methods
     public void OnInit()
@@ -96,7 +97,10 @@ public class CameraDragAndDrop : ICameraControllerMod
 
         MeshCollider meshCollider = target.GetComponent<MeshCollider>();
         if(meshCollider != null)
+        {
+            mWasMeshColliding = meshCollider.enabled;
             meshCollider.enabled = false;
+        }
 
         mDragging = target;
         mDraggingOffset = offset;
@@ -118,7 +122,7 @@ public class CameraDragAndDrop : ICameraControllerMod
 
         MeshCollider meshCollider = mDragging.GetComponent<MeshCollider>();
         if(meshCollider != null)
-            meshCollider.enabled = true;
+            meshCollider.enabled = mWasMeshColliding;
 
 
         mDragging = null;
