@@ -158,6 +158,7 @@ public class WorkbenchScript : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             _go.transform.position = Vector3.Lerp(positionOrigine, targetPosition, elapsedTime / duration);
+            Physics.SyncTransforms();
             yield return 0;
         }
 

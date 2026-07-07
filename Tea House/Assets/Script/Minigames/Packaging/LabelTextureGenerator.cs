@@ -25,7 +25,7 @@ public class LabelTextureGenerator : AbstractDynamicTextureGenerator
     }
 
     public override RenderTexture Generate(params object[] args)
-    {
+    {            
         // Is there enough parameters ? (6)
         if(args.Length <= 5 || args.Length > 6) return null;
         // Are they of the right type ?

@@ -25,7 +25,7 @@ public class PackagingScript : MonoBehaviour
     [HideInInspector] public PackageScript mOutput = null;
     [HideInInspector] public GameObject mOutputGO = null;
 
-    [HideInInspector] public List<ItemData> mDebugList = new List<ItemData>();
+    public List<ItemData> mDebugList = new List<ItemData>();
 
     [HideInInspector] public MailSystem mMailSystem = null;
 
@@ -82,7 +82,20 @@ public class PackagingScript : MonoBehaviour
 
     public void SetIngredientData(List<ItemData> data)
     {
-        GameObject.FindGameObjectWithTag("MixtureBowl").transform.parent = transform;
+        GameObject bowl = GameObject.FindGameObjectWithTag("MixtureBowl");
+        bowl.transform.parent = transform;
+        bowl.GetComponent<Rigidbody>().isKinematic = true;
+
+        List<Vector3> offsets = new List<Vector3>();
+        foreach(Transform child in bowl.transform)
+        {
+            Rigidbody rb = child.GetComponent<Rigidbody>();
+            if(child.CompareTag("WorkingPoint") == true || rb == null) continue;
+
+            rb.isKinematic = true;
+            child.GetComponent<Collider>().enabled = false;
+        }
+
         mPrinting.mMixture = data;
         mFilling.mMixture = data;
     }

@@ -99,14 +99,13 @@ public class PacketLabelPrinting : IPackaging
     public void SelectOrder(GameObject newOrderGo)
     {
         if (mSelectedOrderGo != null) mSelectedOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(false);
-        
+
         newOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(true);
         mSelectedOrderGo = newOrderGo;
     }
     public RenderTexture PrintLabel()
     {
         if (mSelectedOrderGo == null) return null;
-
         // Generate Texture + Label
         Mail targetMail = null;
         foreach(Mail mail in mOrders.Keys)
