@@ -10,30 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
-  m_Name: Mint
+  m_Name: Orange
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  mName: Mint
-  mPrefab: {fileID: 2086405798350031596, guid: a6b9b8b42c0914942b1ba417d72aeea7, type: 3}
-  mIsUnlocked: 1
+  mName: Dried Orange
+  mPrefab: {fileID: 1169831623523084331, guid: e130eb29afc0a3d479330e798ad35ba1, type: 3}
+  mIsUnlocked: 0
   mStats:
   - mStatVar: 0
     mValueVar: 0
   - mStatVar: 1
-    mValueVar: 2
+    mValueVar: 1
   - mStatVar: 2
     mValueVar: 0
   - mStatVar: 3
-    mValueVar: 0
+    mValueVar: 1
   - mStatVar: 4
     mValueVar: 0
   - mStatVar: 5
     mValueVar: 0
   - mStatVar: 6
     mValueVar: 0
-  mPrice: 9
+  mPrice: 5
   mIngredientGrab: {fileID: 0}
-  mAmountJar1: {fileID: 3361823228832995955, guid: 8c9aeb812261a3449ab135fca15abf18, type: 3}
-  mAmountJar2: {fileID: 5044555026525103796, guid: 3c38be8068eb333409adfddc278bc844, type: 3}
-  mAmountJar3: {fileID: 7937324257843233066, guid: 598bb7885fecf554e906917207efba9c, type: 3}
+  mAmountJar1: {fileID: 1875786729671370868, guid: 25f800c524f78e84280658f98cd4d58d, type: 3}
+  mAmountJar2: {fileID: 2358351959534723861, guid: d1e4c7847f95d3046acb2c7153e9a2f0, type: 3}
+  mAmountJar3: {fileID: 7880377246119503659, guid: 4c0cff0e0efdf7646bc2ea566ba76f3f, type: 3}
   mFragIngredient: {fileID: 744280317938301970, guid: a3c2b152675f6914983b69bab59beb1d, type: 3}
-  mType: 2
+  mFragGrab: {fileID: 0}
+  mType: 1

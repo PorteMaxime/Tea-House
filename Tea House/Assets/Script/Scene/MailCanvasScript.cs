@@ -255,6 +255,9 @@ public class MailCanvasScript : MonoBehaviour
     public void TrySendOrder()
     {
         mMailSystem.ChangeOrderState(mSelectedOrder.Item1, Order.State.Completed);
+
+        CheckOrderResult();
+
         UpdatePrefabState(mSelectedOrder.Item1);
 
         mSelectedOrder = null;
@@ -320,5 +323,10 @@ public class MailCanvasScript : MonoBehaviour
     #endregion Filters
 
     #endregion Page Orders
+
+    public void CheckOrderResult()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLevel>().Addxp(10);
+    }
 
 }

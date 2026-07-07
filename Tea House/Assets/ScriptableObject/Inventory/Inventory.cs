@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] public bool isTorrefactionUnlocked = true;
 
     public static Inventory msInstance;
-    
+
     void Awake()
     {
         msInstance = this;
@@ -27,7 +27,6 @@ public class Inventory : MonoBehaviour
         }
 
     }
-
     public void ClearInventory()
     {
         foreach (ItemData key in mItems.Keys)

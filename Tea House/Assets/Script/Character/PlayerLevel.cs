@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerLevel : MonoBehaviour
 {
-    int level = 0;
-    int xpAmount = 0;
-    int xpNextLevel = 10;
+    public int level = 0;
+    public int xpAmount = 0;
+    public int xpNextLevel = 10;
 
     public List<ItemData> itemLevel1;
     public List<ItemData> itemLevel2;
@@ -14,47 +14,58 @@ public class PlayerLevel : MonoBehaviour
     public List<ItemData> itemLevel4;
     public List<ItemData> itemLevel5;
 
-    public void CheckLevel() 
+    public void Addxp(int amount)
     {
-        if(xpAmount >= xpNextLevel)
+        xpAmount += amount;
+        while(xpAmount >= xpNextLevel)
         {
             level++;
+            xpAmount -= xpNextLevel;
+        }
 
-            if(level == 1)
+        CheckLevel();
+    }
+    public void CheckLevel() 
+    {
+        if(level == 1)
+        {
+            Debug.Log("test");
+            foreach(ItemData item in itemLevel1)
             {
-                foreach(ItemData item in itemLevel1)
-                {
-                    item.mIsUnlocked = true;
-                }
-            }
-            else if(level == 2)
-            {
-                foreach (ItemData item in itemLevel2)
-                {
-                    item.mIsUnlocked = true;
-                }
-            }
-            else if (level == 3)
-            {
-                foreach (ItemData item in itemLevel3)
-                {
-                    item.mIsUnlocked = true;
-                }
-            }
-            else if (level == 4)
-            {
-                foreach (ItemData item in itemLevel4)
-                {
-                    item.mIsUnlocked = true;
-                }
-            }
-            else if (level == 5)
-            {
-                foreach (ItemData item in itemLevel5)
-                {
-                    item.mIsUnlocked = true;
-                }
+                Debug.Log(item.name);
+                item.mIsUnlocked = true;
             }
         }
+        else if(level == 2)
+        {
+            foreach (ItemData item in itemLevel2)
+            {
+                item.mIsUnlocked = true;
+            }
+        }
+        else if (level == 3)
+        {
+            foreach (ItemData item in itemLevel3)
+            {
+                item.mIsUnlocked = true;
+            }
+        }
+        else if (level == 4)
+        {
+            foreach (ItemData item in itemLevel4)
+            {
+                item.mIsUnlocked = true;
+            }
+        }
+        else if (level == 5)
+        {
+            foreach (ItemData item in itemLevel5)
+            {
+                item.mIsUnlocked = true;
+            }
+        }
+
+        JarsScript.instance.UpdateJars();
+
     }
 }

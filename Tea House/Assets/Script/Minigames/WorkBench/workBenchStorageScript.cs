@@ -25,14 +25,24 @@ public class WorkBenchStorageScript : MonoBehaviour
 
     public void CheckIngredient()
     {
-
         amount = Inventory.msInstance.GetAmount(ingredient);
+
 
         UpdateAmount();
     }
 
     void UpdateAmount()
     {
+        if (ingredient.mIsUnlocked == true)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         if (amount > 10)
         {
             ShareIngredientRender(ingredient.mAmountJar1);

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Lemon
   mPrefab: {fileID: 7708491798363613225, guid: 8d3ed9f1fd6bf2f4daab09b5c2e39bd8, type: 3}
-  mIsUnlocked: 0
+  mIsUnlocked: 1
   mStats:
   - mStatVar: 0
     mValueVar: 0

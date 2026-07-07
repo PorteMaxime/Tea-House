@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Peach
   mPrefab: {fileID: 6133319570607198218, guid: c74e23ca4ca2fb34db704c22e369582b, type: 3}
-  mIsUnlocked: 0
+  mIsUnlocked: 1
   mStats:
   - mStatVar: 0
     mValueVar: 0

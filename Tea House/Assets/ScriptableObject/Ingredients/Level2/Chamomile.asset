@@ -10,31 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
-  m_Name: Orange
+  m_Name: Chamomile
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  mName: Dried Orange
-  mPrefab: {fileID: 1169831623523084331, guid: e130eb29afc0a3d479330e798ad35ba1, type: 3}
-  mIsUnlocked: 1
+  mName: Chamomile
+  mPrefab: {fileID: 38112414207970131, guid: 5d3cabade654be3448dd164f13cea95b, type: 3}
+  mIsUnlocked: 0
   mStats:
   - mStatVar: 0
     mValueVar: 0
   - mStatVar: 1
-    mValueVar: 1
-  - mStatVar: 2
     mValueVar: 0
-  - mStatVar: 3
+  - mStatVar: 2
     mValueVar: 1
+  - mStatVar: 3
+    mValueVar: 0
   - mStatVar: 4
     mValueVar: 0
   - mStatVar: 5
     mValueVar: 0
   - mStatVar: 6
     mValueVar: 0
-  mPrice: 5
+  mPrice: 2
   mIngredientGrab: {fileID: 0}
-  mAmountJar1: {fileID: 1875786729671370868, guid: 25f800c524f78e84280658f98cd4d58d, type: 3}
-  mAmountJar2: {fileID: 2358351959534723861, guid: d1e4c7847f95d3046acb2c7153e9a2f0, type: 3}
-  mAmountJar3: {fileID: 7880377246119503659, guid: 4c0cff0e0efdf7646bc2ea566ba76f3f, type: 3}
-  mFragIngredient: {fileID: 744280317938301970, guid: a3c2b152675f6914983b69bab59beb1d, type: 3}
+  mAmountJar1: {fileID: 8895966285790522229, guid: 112b938deb14405429b6ad8447321f5f, type: 3}
+  mAmountJar2: {fileID: 8774654462186808709, guid: 148457fcc67191b4cad02ef70e84f5eb, type: 3}
+  mAmountJar3: {fileID: 8606078776989410600, guid: abae3e4e89044644ba55bd49c916539b, type: 3}
+  mFragIngredient: {fileID: 0}
   mFragGrab: {fileID: 0}
-  mType: 1
+  mType: 2
