@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -53,6 +54,8 @@ public class WorkbenchScript : MonoBehaviour
     public BruisingState bruisingState;
     public BlendingState blendingState;
     public CuttingState cuttingState;
+
+    public GameObject MixtureBowlCollider;
 
     public bool canPutInMixture = false;
 
@@ -192,5 +195,49 @@ public class WorkbenchScript : MonoBehaviour
 
         if(cuttingPointIndex != mCuttingPoints.Count - 1)
             mCuttingPanel.SetActive(true);
+    }
+    public void PutInMixtureBoawl()
+    {
+        StartCoroutine(cPutInMixtureBowl());
+    }
+
+    IEnumerator cPutInMixtureBowl()
+    {
+        MixtureBowlCollider.SetActive(true);
+
+        currentItemG.transform.position = new Vector3(mMixtureBowl.transform.position.x, mMixtureBowl.transform.position.y + 1, mMixtureBowl.transform.position.z);
+
+        if (currentItemG.transform.GetChild(0) == null)
+        {
+            currentItemG.GetComponent<Rigidbody>().useGravity = true;
+            currentItemG.GetComponent<Rigidbody>().isKinematic = false;
+
+            currentItemG.transform.SetParent(mMixtureBowl.transform);
+        }
+        else
+        {
+            int nbChild = currentItemG.transform.childCount;
+            for (int i = 0; i < nbChild; i++)
+            {
+                currentItemG.transform.GetChild(nbChild - 1 - i).GetComponent<Rigidbody>().useGravity = true;
+                currentItemG.transform.GetChild(nbChild - 1 - i).GetComponent<Rigidbody>().isKinematic = false;
+                currentItemG.transform.GetChild(nbChild - 1 - i).AddComponent<BoxCollider>().size = new Vector3(0.5f, 0.5f, 0.5f);
+                currentItemG.transform.GetChild(nbChild - 1 - i).transform.SetParent(mMixtureBowl.transform);
+            }
+
+        }
+
+        blendingState.isEmpty = false;
+        mCurrentItem = null;
+        currentItemG = null;
+
+        canPutInMixture = false;
+
+        cuttingState.isItemCut = false;
+
+
+        yield return new WaitForSeconds(5f);
+
+        MixtureBowlCollider.SetActive(false);
     }
 }

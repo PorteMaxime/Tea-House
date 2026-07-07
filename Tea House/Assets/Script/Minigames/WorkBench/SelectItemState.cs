@@ -32,10 +32,10 @@ public class SelectItemState : IWorkbench
 
                         mWorkbench.mDragAndDrop.StartDragging(mWorkbench.currentItemG);
                     }
-                    else if (hitGo == mWorkbench.mMixtureBowl)
-                    {
-                        mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMixtureBowl);
-                    }
+                    //else if (hitGo == mWorkbench.mMixtureBowl)
+                    //{
+                    //    mWorkbench.mDragAndDrop.StartDragging(mWorkbench.mMixtureBowl);
+                    //}
                     else if (hitGo == mWorkbench.mSpoon)
                     {
                         mWorkbench.stateMachine.ChangeState(mWorkbench.blendingState);
@@ -92,18 +92,7 @@ public class SelectItemState : IWorkbench
                 {
                     if (mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.none || mWorkbench.canPutInMixture == true)
                     {
-                        mWorkbench.currentItemG.GetComponent<Rigidbody>().useGravity = true;
-                        mWorkbench.currentItemG.GetComponent<Rigidbody>().isKinematic = false;
-
-                        mWorkbench.currentItemG.transform.SetParent(mWorkbench.mMixtureBowl.transform);
-
-                        mWorkbench.blendingState.isEmpty = false;
-                        mWorkbench.mCurrentItem = null;
-                        mWorkbench.currentItemG = null;
-
-                        mWorkbench.canPutInMixture = false;
-
-                        mWorkbench.cuttingState.isItemCut = false;
+                        mWorkbench.PutInMixtureBoawl();
                     }
                     else
                     {
