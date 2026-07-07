@@ -9,6 +9,9 @@ public class CuttingState : IWorkbench
     public CuttingState(WorkbenchScript script)
     {
         mWorkbench = script;
+
+        //initialPosKnife = mWorkbench.mKnife.transform.position;
+        initialRotKnife = mWorkbench.mKnife.transform.rotation;
     }
 
     Vector3 initialPosCam;
@@ -19,7 +22,7 @@ public class CuttingState : IWorkbench
     int posValidZone;
     int dir = -1;
     float cursorSpeed = 3;
-    float cursorBorn = 1.75f;
+    float cursorBorn = 2f;
     int nbCutPoint = 0;
     public bool isItemCut;
     int cuttingPointIndex = 0;
@@ -28,9 +31,6 @@ public class CuttingState : IWorkbench
     {
         initialPosCam = mWorkbench.mCameraController.transform.position;
         initialRotCam = mWorkbench.mCameraController.transform.rotation;
-
-        initialPosKnife = mWorkbench.mCameraController.transform.position;
-        initialRotKnife = mWorkbench.mCameraController.transform.rotation;
 
         mWorkbench.mCuttingPanel.SetActive(true);
 
@@ -61,7 +61,6 @@ public class CuttingState : IWorkbench
         {
             if(CursorOk() == true)
             {
-                Debug.Log("ok");
                 nbCutPoint++;
                 MoveValideZone();
                 mWorkbench.Cut(cuttingPointIndex);
@@ -84,6 +83,10 @@ public class CuttingState : IWorkbench
             mWorkbench.canPutInMixture = true;
             cuttingPointIndex = 0;
             canGrabItem = true;
+
+            mWorkbench.mKnife.transform.localPosition = initialPosKnife;
+            mWorkbench.mKnife.transform.rotation = initialRotKnife;
+
             mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
         }
 
@@ -101,14 +104,12 @@ public class CuttingState : IWorkbench
 
             return true;
         }
-        //Debug.Log("cursorPos: " + mWorkbench.mQteCursor.transform.position.y);
-        //Debug.Log("Valide: " + (mWorkbench.mQteValideZone.transform.position.y - 0.4));
         return false;
     }
 
     void MoveValideZone()
     {
-        posValidZone = Random.Range(-175, 175);
+        posValidZone = Random.Range(-150, 150);
 
         mWorkbench.mQteValideZone.transform.localPosition = 
             new Vector3(mWorkbench.mQteValideZone.transform.localPosition.x, 

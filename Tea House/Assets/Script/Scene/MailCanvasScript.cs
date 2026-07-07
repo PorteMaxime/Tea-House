@@ -266,7 +266,11 @@ public class MailCanvasScript : MonoBehaviour
     public void TrySendOrder()
     {
         PackageScript package = mPackInv.GetPackage(mSelectedOrder.Item1);
-        if(package == null) return; // Not completed
+        if (package == null)
+        {
+            Debug.Log("Order can't be send");
+            return; // Not completed
+        }
 
         int score = package.GetCompletionScore(); // => function to complete with scoring system
         Destroy(package.gameObject);

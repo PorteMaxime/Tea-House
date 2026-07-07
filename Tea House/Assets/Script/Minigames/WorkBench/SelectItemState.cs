@@ -97,6 +97,7 @@ public class SelectItemState : IWorkbench
 
                         mWorkbench.currentItemG.transform.SetParent(mWorkbench.mMixtureBowl.transform);
 
+                        mWorkbench.blendingState.isEmpty = false;
                         mWorkbench.mCurrentItem = null;
                         mWorkbench.currentItemG = null;
 
