@@ -12,12 +12,6 @@ public class ComputerScript : MonoBehaviour
 
     private CameraController mCameraController;
 
-    //Animator
-    public GameObject mChair;
-    bool isSitting = false;
-    float sitIdleTimer = 0f;
-    public float sitExtraDelay = 6f;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -65,7 +59,6 @@ public class ComputerScript : MonoBehaviour
 
     public void StartComputer()
     {
-
         ChangeInterface("CanvasHome");
     }
 

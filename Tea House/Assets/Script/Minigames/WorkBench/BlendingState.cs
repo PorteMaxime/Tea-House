@@ -9,6 +9,9 @@ public class BlendingState : IWorkbench
     public BlendingState(WorkbenchScript system)
     {
         mWorkbench = system;
+
+        initSpoonPos = mWorkbench.mSpoon.transform.position;
+        initSpoonRot = mWorkbench.mSpoon.transform.rotation;
     }
 
 
@@ -18,19 +21,19 @@ public class BlendingState : IWorkbench
     int rightMixtureBowl= 0;
     int leftMixtureBowl = 0;
     public bool isEmpty = true;
-    bool mIsBlended = false;
-    bool canSwap = false;
+    public bool mIsBlended = false;
+    public bool canSwap = false;
     public void OnEnter()
     {
-        initSpoonPos = mWorkbench.mSpoon.transform.position;
-        initSpoonRot = mWorkbench.mSpoon.transform.rotation;
+
+
     }
 
     public void OnUpdate()
     {
         if(isEmpty == false && mIsBlended == false)
         {
-            if(InputManager.Get().mPlayerInteract.Player.Select.triggered == true)
+            if(InputManager.Get().mPlayerInteract.Player.Select.IsPressed() == true)
             {
                 mWorkbench.mCameraRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Spoon", out List<RaycastHit> hitDraggables);
 
@@ -89,7 +92,11 @@ public class BlendingState : IWorkbench
             {
                 mWorkbench.mCameraDepth.LerpingCamera(mWorkbench.mCameraPosPackaging.transform.position, mWorkbench.mCameraPosPackaging.transform.rotation, 0.5f);
                 mWorkbench.LerpGameObject(mWorkbench.mMixtureBowl, mWorkbench.mMixtureBowlPackagingPos.transform.position, 0.5f);
-                //mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
+
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, mWorkbench.mCameraPosPackaging.transform.position.z);
+                mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
+                
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
             }
         }

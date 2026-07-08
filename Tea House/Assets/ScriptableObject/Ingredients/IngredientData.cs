@@ -2,10 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Game", menuName = "Scriptable Objects/ingredientData")]
-public class IngredientData : ItemData
+public class IngredientData : IngredientItem
 {
-    public GameObject mFragIngredient;
-
     public List<StatValue> GetTorrefiedStats()
     {
         List<StatValue> torrefiedStats = new List<StatValue>();

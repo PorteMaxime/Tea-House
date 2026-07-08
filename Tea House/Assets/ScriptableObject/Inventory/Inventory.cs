@@ -4,7 +4,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private List<ItemData> mGameItems = new List<ItemData>();
-    [SerializeField] private int mStartingItemsAmount = 5;
+    [SerializeField] private int mStartingItemsAmount = 20;
 
     // Items du joueur
     public Dictionary<ItemData, int> mItems = new Dictionary<ItemData, int>();
@@ -14,11 +14,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] public bool isTorrefactionUnlocked = true;
 
-    #region Singleton
-
     public static Inventory msInstance;
-    
-    #endregion
 
     void Awake()
     {
@@ -29,8 +25,8 @@ public class Inventory : MonoBehaviour
             mItems.Add(item, mStartingItemsAmount);
             mItemsLookUp.Add(item.mName, item);
         }
-    }
 
+    }
     public void ClearInventory()
     {
         foreach (ItemData key in mItems.Keys)

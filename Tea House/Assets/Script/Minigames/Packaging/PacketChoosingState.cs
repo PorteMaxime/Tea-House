@@ -15,18 +15,13 @@ public class PacketChoosingState : IPackaging
         mMain = main;
         Init();
     }
-
-    private bool mInitialized = false;
     #endregion
 
     private Input_PlayerInteract mPlayerInteract = null;
 
     private Transform mWorkingPoint = null;
 
-    private Camera_Raycast mRaycast = null;
-
-    private GameObject mPackageSlot = null;
-    private List<GameObject> mPackages = new List<GameObject>();
+    public GameObject mChoosedPackage = null;
 
     private void Init()
     {
@@ -34,55 +29,57 @@ public class PacketChoosingState : IPackaging
 
         mPlayerInteract = InputManager.Get().mPlayerInteract;
         mPlayerInteract.Enable();
-
-        mRaycast = mMain.mCameraController.GetControllerMod<Camera_Raycast>();
-        mPackageSlot = mMain.transform.Find("Packages").gameObject;
-
-        foreach (Transform package in mPackageSlot.transform)
-            mPackages.Add(package.gameObject);
-
-        mInitialized = true;
     }
 
     public void OnEnter()
     {
-        
+        if (mChoosedPackage != null)
+        {
+            if(mMain.mOutputGO != null)
+            {
+                mMain.mInventory.ChangeItemAmount(mMain.mOutputGO.GetComponent<Associated_SO>().mItem, 1);
+                GameObject.Destroy(mMain.mOutputGO);
+            }
+
+            GameObject package = GameObject.Instantiate(mChoosedPackage.transform.parent.gameObject, mWorkingPoint.position, Quaternion.identity);
+            mMain.mInventory.ChangeItemAmount(mChoosedPackage.transform.parent.GetComponent<Associated_SO>().mItem, -1);
+
+            package.transform.parent = mMain.transform;
+            package.transform.localScale *= 100f;
+            mMain.mOutputGO = package;
+            mMain.mOutput = package.GetComponent<PackageScript>();
+
+            Transform lid = package.transform.Find("Lid");
+            if(lid != null)
+            {    
+                GameObject packageLid = lid.gameObject;
+                if(packageLid != null)
+                {
+                    Rigidbody rb = packageLid.GetComponent<Rigidbody>();
+                    if(rb == null) 
+                        rb = packageLid.AddComponent<Rigidbody>();
+                    rb.useGravity = true;
+                    rb.isKinematic = true;
+                }
+
+                if (packageLid != null && packageLid.GetComponent<WorkingPoint>() == null)
+                    packageLid.AddComponent<WorkingPoint>();
+            }
+            mMain.mStateMachine.SwitchState(mMain.mCompleting);
+        }
     }
 
     public void OnExit()
+    {
+        mChoosedPackage = null;
+    }
+
+    public void OnReset()
     {
     }
 
     public void OnUpdate()
     {
-        if (mInitialized == false) Init();
-
-        if (mPlayerInteract.Player.Select.triggered == false) return;
-
-        mRaycast.MouseRaycast(Mathf.Infinity, LayerMask.GetMask("Interactibles"), "Package", out RaycastHit currentPackage);
-
-        if (currentPackage.collider != null)
-        {
-            GameObject package = mMain.Instantiate(currentPackage.transform.parent.gameObject, mWorkingPoint.position, Quaternion.identity);
-
-            //mMain.ShareRender(packages[0], package);
-            package.transform.parent = mMain.transform;
-            package.transform.localScale = Vector3.one;
-            mMain.mOutputGO = package;
-
-            GameObject packageLid = package.transform.Find("Lid").gameObject;
-            if(packageLid != null && packageLid.GetComponent<Rigidbody>() == null)
-            {
-                Rigidbody rb = packageLid.AddComponent<Rigidbody>();
-                rb.useGravity = true;
-                rb.isKinematic = true;
-            }
-
-            if (packageLid != null && packageLid.GetComponent<WorkingPoint>() == null)
-                packageLid.AddComponent<WorkingPoint>();
-
-            //mMain.mOutput = package.GetComponent<PackageScript>();
-            mMain.mStateMachine.SwitchState(mMain.mCompleting);
-        }
+        
     }
 }

@@ -9,6 +9,7 @@ public class Mail
     [Column("id")]
     public int id { get; set; }
 
+    public Sprite mPicture;
     [Column("pictureName")]
     public string mPictureName { get; set; }
 
@@ -32,13 +33,25 @@ public class Mail
 
     public Order mOrder;
 
-    public Sprite mPicture;
+    [HideInInspector] public bool mIsPrinted = false;
 
     public Mail()
     {
         id = mailID;
 
         mailID += 1;
+    }
+
+    public override string ToString()
+    {
+        return $"=== DEBUG MAIL (ID: {id}) ===\n" +
+            $"• Name: {mName}\n" +
+            $"• Text: {mText}\n" +
+            $"• Send Day: {mSendDay} | Send Time: {mSendTime}\n" +
+            $"• Duration: {mDuration} | Expiration: {mExpiration}\n" +
+            $"• Has Order: {(mOrder != null ? "Yes" : "No")}\n" +
+            $"• Has Sprite: {(mPicture != null ? "Yes" : "No")}\n" +
+            $"=============================";
     }
 
     public void UpdateExpiration(Daylight daylight)

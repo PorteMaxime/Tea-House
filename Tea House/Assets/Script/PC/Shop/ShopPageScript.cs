@@ -290,6 +290,7 @@ public class ShopPageScript : MonoBehaviour
 			foreach (ItemData item in mShopItems.Keys)
 			{
 				Inventory.msInstance.ChangeItemAmount(item, mShopItems[item].mAmount);
+                Debug.Log("card : " + mShopItems[item].mAmount);
             }
 
 			EmptyCart();

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,15 +15,17 @@ public class WorkbenchScript : MonoBehaviour
     public PackagingScript mPackaging;
     public GameObject mMixtureBowlPackagingPos;
     public InteractiveAreaScript mInteractiveArea;
+
     public GameObject mCameraPosPackaging;
+    public GameObject mCameraPosCuttingBoard;
 
     public GameObject mMortarBowl;
     public GameObject mMortarPilon;
     public GameObject mMixtureBowl;
-    public IngredientData mCurrentItem = null;
+    public IngredientItem mCurrentItem = null;
     public GameObject currentItemG = null;
-    public List<IngredientData> mMixture;
-    public IngredientData mBruiseIngrdient;
+    public List<ItemData> mMixture;
+    public IngredientItem mBruiseIngrdient;
 
     public GameObject mMortarTopBorn;
     public GameObject mMortarBotBorn;
@@ -32,7 +35,16 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMixtureRightBorn;
     public GameObject mMixtureLeftBorn;
 
+    public GameObject mCuttingBoard;
+    public GameObject mKnife;
+    public List<GameObject> mCuttingPoints;
+
+    public GameObject mQteValideZone;
+    public GameObject mQteCursor;
+
     public GameObject mPanelSwap;
+    public GameObject mMainPanel;
+    public GameObject mCuttingPanel;
 
     public GameObject mSpoon;
 
@@ -41,6 +53,11 @@ public class WorkbenchScript : MonoBehaviour
     public SelectItemState selectItemState;
     public BruisingState bruisingState;
     public BlendingState blendingState;
+    public CuttingState cuttingState;
+
+    public GameObject MixtureBowlCollider;
+
+    public bool canPutInMixture = false;
 
     //
     float upPan = Screen.height * 0.15f;
@@ -49,7 +66,7 @@ public class WorkbenchScript : MonoBehaviour
     void Awake()
     {
         mBruiseIngrdient = ScriptableObject.CreateInstance<IngredientData>();
-        mMixture = new List<IngredientData>();
+        mMixture = new List<ItemData>();
     }
     void Start()
     {
@@ -62,6 +79,7 @@ public class WorkbenchScript : MonoBehaviour
         selectItemState = new SelectItemState(this);
         bruisingState = new BruisingState(this);
         blendingState = new BlendingState(this);
+        cuttingState = new CuttingState(this);
 
         stateMachine.ChangeState(selectItemState);
     }
@@ -70,6 +88,7 @@ public class WorkbenchScript : MonoBehaviour
     {
         if (mInteractiveArea.isUsing)
         {
+            mMainPanel.SetActive(false);
             if (Mouse.current.position.ReadValue().y >= Screen.height - upPan && cameraLookUp == false)
             {
                 Quaternion targetRotation = mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);
@@ -88,10 +107,14 @@ public class WorkbenchScript : MonoBehaviour
 
             stateMachine.Update();
         }
+        else
+        {
+            mMainPanel.SetActive(true);
+        }
 
     }
 
-    public void AddItemToMixture(IngredientData item)
+    public void AddItemToMixture(IngredientItem item)
     {
         mMixture.Add(item);
     }
@@ -138,9 +161,89 @@ public class WorkbenchScript : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             _go.transform.position = Vector3.Lerp(positionOrigine, targetPosition, elapsedTime / duration);
+            Physics.SyncTransforms();
             yield return 0;
         }
 
         _go.transform.position = targetPosition;
+    }
+    public void Cut(int cuttingPointIndex)
+    {
+        StartCoroutine(cCut(cuttingPointIndex));
+    }
+    public IEnumerator cCut(int cuttingPointIndex)
+    {
+        mCuttingPanel.SetActive(false);
+
+        Vector3 topPos = mCuttingPoints[cuttingPointIndex].transform.position;
+
+        mKnife.transform.rotation = mCuttingPoints[cuttingPointIndex].transform.rotation;
+        mKnife.transform.position = topPos;
+
+        float duration = 0.5f;
+        float elapsedTime = 0;
+
+        Vector3 positionOrigine = mKnife.transform.position;
+        Vector3 targetPosition = new Vector3(topPos.x, topPos.y - 0.2f, topPos.z);
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            mKnife.transform.position = Vector3.Lerp(positionOrigine, targetPosition, elapsedTime / duration);
+            yield return 0;
+        }
+        mKnife.transform.position = targetPosition;
+
+        if(cuttingPointIndex != mCuttingPoints.Count - 1)
+            mCuttingPanel.SetActive(true);
+    }
+    public void PutInMixtureBoawl()
+    {
+        StartCoroutine(cPutInMixtureBowl());
+    }
+
+    IEnumerator cPutInMixtureBowl()
+    {
+        MixtureBowlCollider.SetActive(true);
+
+        currentItemG.transform.position = new Vector3(mMixtureBowl.transform.position.x, mMixtureBowl.transform.position.y + 0.25f, mMixtureBowl.transform.position.z);
+
+        if (currentItemG.transform.GetChild(0) == null)
+        {
+            currentItemG.GetComponent<Rigidbody>().useGravity = true;
+            currentItemG.GetComponent<Rigidbody>().isKinematic = false;
+
+            currentItemG.transform.SetParent(mMixtureBowl.transform);
+        }
+        else
+        {
+            int nbChild = currentItemG.transform.childCount;
+            currentItemG.GetComponent<BoxCollider>().enabled = false;
+            for (int i = 0; i < nbChild; i++)
+            {
+                currentItemG.transform.GetChild(nbChild - 1 - i).GetComponent<Rigidbody>().useGravity = true;
+                currentItemG.transform.GetChild(nbChild - 1 - i).GetComponent<Rigidbody>().isKinematic = false;
+                if(currentItemG.transform.GetChild(nbChild - 1 - i).TryGetComponent<BoxCollider>(out BoxCollider bc))
+                {
+                    bc.enabled = true;
+                }
+                else
+                {
+                    currentItemG.transform.GetChild(nbChild - 1 - i).AddComponent<BoxCollider>().size = new Vector3(0.0008f, 0.0008f, 0.0008f);
+                }
+                    currentItemG.transform.GetChild(nbChild - 1 - i).transform.SetParent(mMixtureBowl.transform);
+            }
+
+        }
+        mMixture.Add(mCurrentItem);
+        DestroyCurrentIngredient();
+        blendingState.isEmpty = false;
+
+        cuttingState.isItemCut = false;
+
+        yield return new WaitForSeconds(1f);
+
+
+        MixtureBowlCollider.SetActive(false);
     }
 }

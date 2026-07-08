@@ -14,7 +14,7 @@ public class MailCreator : MonoBehaviour
     private int mPresetProbability = 8;
     private int mTorrefiedProbability = 25;
 
-    // Informations pour créer les commandes
+    // Informations pour crï¿½er les commandes
     [SerializeField] public List<Sprite> mImages;
     Dictionary<string, List<string>> mMailRandomContent;
 
@@ -34,7 +34,7 @@ public class MailCreator : MonoBehaviour
 
     public void CreateDailyMails()
     {
-        for (int i = 0; i < Random.Range(1, 7); i++)
+        for (int i = 0; i < Random.Range(10, 70); i++)
             CreateMail();
     }
 
@@ -157,7 +157,7 @@ public class MailCreator : MonoBehaviour
         mail.mText = mail.mText.Replace("{sub}", "");
         mail.mText = mail.mText.Replace("{subSimple}", "");
 
-        // Information supplémentaire
+        // Information supplï¿½mentaire
         rand = Random.Range(0, 3);
         if (rand <= 2)
         {
@@ -204,7 +204,6 @@ public class MailCreator : MonoBehaviour
 
         // Base
         List<BaseData> bases = Inventory.msInstance.GetItemsOfType<BaseData>();
-
         BaseData baseIngredient = bases[Random.Range(0, bases.Count)];
         //mail.mText = baseIngredient.mName; // Pour tests
 

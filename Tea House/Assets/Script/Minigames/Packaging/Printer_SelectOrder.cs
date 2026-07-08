@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,10 +32,11 @@ public class Printer_SelectOrder : MonoBehaviour
     public void Print()
     {
         if (mPacketLabelPrinting == null) Init();
+
         mPacketLabelPrinting.CreateLabel();
     }
 
-    public GameObject CreateButton()
+    public GameObject CreateButton(Mail mail)
     {
         if (mPacketLabelPrinting == null) Init();
 
@@ -43,6 +45,16 @@ public class Printer_SelectOrder : MonoBehaviour
         currentMailPos.z = 0f;
         mailGo.transform.position = currentMailPos;
 
+        mailGo.transform.Find("Order_Picture").GetComponent<Image>().sprite = mail.mPicture;
+        string name = mail.mName;
+        if(name.Length > 11)
+            name = name.Substring(0, 11) + "...";
+        mailGo.transform.Find("Order_Number").GetComponent<TextMeshProUGUI>().text = name;
+        string desc = mail.mText.Replace("\n", " ").Replace("\r", " ");
+        if(desc.Length > 30)
+            desc = desc.Substring(0, 30) + "...";
+        mailGo.transform.Find("Order_Description").GetComponent<TextMeshProUGUI>().text = desc;
+        
         mailGo.transform.Find("Order_Button").GetComponent<Button>().onClick.AddListener(() => SelectOrder(mailGo));
 
         return mailGo;

@@ -25,20 +25,23 @@ public class LabelTextureGenerator : AbstractDynamicTextureGenerator
     }
 
     public override RenderTexture Generate(params object[] args)
-    {
+    {            
+        Debug.Log((args[0] is Sprite == false) + " | " + (args[1] is string == false) + " | " +
+            (args[2] is BaseData == false) + " | " +
+            (args[3] is IngredientData == false && args[3] != null) + " | " + (args[4] is IngredientData == false && args[4] != null) + " | " + (args[5] is IngredientData == false && args[5] != null)
+            );
         // Is there enough parameters ? (6)
         if(args.Length <= 5 || args.Length > 6) return null;
-
         // Are they of the right type ?
         if (args[0] is Sprite == false || args[1] is string == false ||
-            args[2] is IngredientData == false ||
-            args[3] is IngredientData == false || args[4] is IngredientData == false || args[5] is IngredientData == false
+            args[2] is BaseData == false ||
+            (args[3] is IngredientData == false && args[3] != null) || (args[4] is IngredientData == false && args[4] != null) || (args[5] is IngredientData == false && args[5] != null)
             ) return null;
 
         // Cast arguments in the right type
         Sprite mailPicture = (Sprite)args[0];
         string mailNumber = (string)args[1];
-        IngredientData baseData = (IngredientData)args[2];
+        BaseData baseData = (BaseData)args[2];
         IngredientData ingredient1 = (IngredientData)args[3];
         IngredientData ingredient2 = (IngredientData)args[4];
         IngredientData ingredient3 = (IngredientData)args[5];
@@ -55,16 +58,16 @@ public class LabelTextureGenerator : AbstractDynamicTextureGenerator
     }
 
     private RenderTexture MakeTexture(Sprite mailPicture, string mailNumber,
-        IngredientData baseData,
+        BaseData baseData,
         IngredientData ingredientData1, IngredientData ingredientData2, IngredientData ingredientData3)
     {
         // Texture Init
         mPicture.sprite = mailPicture;
         mNumber.text = mailNumber;
         mBase.text = baseData.mName;
-        mIngredients[0].text = ingredientData1.mName;
-        mIngredients[1].text = ingredientData2.mName;
-        mIngredients[2].text = ingredientData3.mName;
+        mIngredients[0].text = ingredientData1 != null ? ingredientData1.mName : "";
+        mIngredients[1].text = ingredientData2 != null ? ingredientData2.mName : "";
+        mIngredients[2].text = ingredientData3 != null ? ingredientData3.mName : "";
 
         // Texture Generation
         RenderTexture render = new RenderTexture(850, 1024, 16);

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47621d33680f8e545886c5f04a6dc713, type: 3}
+  m_Name: DriedBerries
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientData
+  mName: Dried Berries
+  mPrefab: {fileID: 6493873279887380395, guid: 8310c6307127a7349b72cd8d15da42f8, type: 3}
+  mIsUnlocked: 0
+  mStats:
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 1
+    mValueVar: 1
+  - mStatVar: 2
+    mValueVar: 0
+  - mStatVar: 3
+    mValueVar: 0
+  - mStatVar: 4
+    mValueVar: 1
+  - mStatVar: 5
+    mValueVar: 0
+  - mStatVar: 6
+    mValueVar: 1
+  mPrice: 4
+  mIngredientGrab: {fileID: 0}
+  mAmountJar1: {fileID: 7016159198137661615, guid: e505f819b1678de47b42e5b8d2a48c60, type: 3}
+  mAmountJar2: {fileID: 1826906287248450898, guid: d5e77d2ac548f864fa28596c9f5b4cfb, type: 3}
+  mAmountJar3: {fileID: 8255513959330259652, guid: 143d8d5147800ad4a8f93045c3f3650b, type: 3}
+  mFragIngredient: {fileID: 0}
+  mFragGrab: {fileID: 0}
+  mType: 0

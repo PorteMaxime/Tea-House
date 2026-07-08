@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
@@ -13,25 +15,37 @@ public class PackagingScript : MonoBehaviour
     public PacketLabelling mLabelling = null;
     public PacketLabelPrinting mPrinting = null;
     #endregion
-
-    public GameObject mDebug = null;
-    public IngredientData mDebugData = null;
-
+ 
     private InteractiveAreaScript mIArea = null;
+    [HideInInspector] public CameraController mCameraController = null;
 
-    public CameraController mCameraController = null;
-    public WorkingPoint mWorkingPoint = null;
+    private Dictionary<PackageData, List<GameObject>> mVisualPackages = new Dictionary<PackageData, List<GameObject>>();
+    [HideInInspector] public Inventory mInventory = null;
 
-    public PackageScript mOutput = null;
-    public GameObject mOutputGO = null;
+    [HideInInspector] public PackageScript mOutput = null;
+    [HideInInspector] public GameObject mOutputGO = null;
 
-    [SerializeField] public MailSystem mMailSystem = null;
+    public List<ItemData> mDebugList = new List<ItemData>();
+
+    [HideInInspector] public MailSystem mMailSystem = null;
 
     void Start()
     {
         mCameraController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
-        mWorkingPoint = transform.Find("WorkingPoint").GetComponent<WorkingPoint>();
+        mMailSystem = GameObject.FindGameObjectWithTag("MailManager").GetComponent<MailSystem>();
         mIArea = transform.Find("InteractiveArea").GetComponent<InteractiveAreaScript>();
+        
+        mInventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+        Transform visualGeneralPackage = transform.Find("Packages");
+        foreach(Transform packageType in visualGeneralPackage)
+        {
+            List<GameObject> packagesGOs = new List<GameObject>();
+            foreach(Transform package in packageType)
+                packagesGOs.Add(package.gameObject);
+            Associated_SO packageSO = packageType.GetComponent<Associated_SO>();
+            if(packageSO != null && packageSO.mItem != null && packageSO.mItem is PackageData)
+                mVisualPackages[(PackageData)packageSO.mItem] = packagesGOs;
+        }
         
         mStateMachine = new PackagingStateMachine();
         
@@ -42,38 +56,66 @@ public class PackagingScript : MonoBehaviour
         mLabelling = new PacketLabelling(this);
         mPrinting = new PacketLabelPrinting(this);
 
-        // TODO : Remove Debug
-        mPrinting.mDebug = mDebug;
-        mPrinting.mDebugData = mDebugData;
+        mStateMachine.SwitchState(mCompleting);
 
-        mStateMachine.SwitchState(mChoosing);
+        mPrinting.mMixture = mDebugList;
+        mFilling.mMixture = mDebugList;
     }
     void Update()
     {
+        foreach(PackageData item in mVisualPackages.Keys)
+        {
+            int amount = mInventory.GetAmount(item);
+            for(int i = 0; i < amount; i++)
+            {
+                if(i >= mVisualPackages[item].Count)
+                    break;
+                mVisualPackages[item][i].SetActive(true);
+            }
+            for(int i = amount; i < mVisualPackages[item].Count; i++)
+                mVisualPackages[item][i].SetActive(false);
+        }
+
         if(mIArea.isUsing == true)
             mStateMachine.Update();
     }
 
-    public GameObject Instantiate(GameObject prefab, Vector3 pos, Quaternion rot)
+    public void SetIngredientData(List<ItemData> data)
     {
-        return GameObject.Instantiate(prefab, pos, rot);
-    }
-    public void Destroy(GameObject toDestroy)
-    {
-        GameObject.Destroy(toDestroy);
+        GameObject bowl = GameObject.FindGameObjectWithTag("MixtureBowl");
+        bowl.transform.parent = transform;
+        bowl.GetComponent<Rigidbody>().isKinematic = true;
+
+        List<Vector3> offsets = new List<Vector3>();
+        foreach(Transform child in bowl.transform)
+        {
+            Rigidbody rb = child.GetComponent<Rigidbody>();
+            if(child.CompareTag("WorkingPoint") == true || rb == null) continue;
+
+            rb.isKinematic = true;
+            child.GetComponent<Collider>().enabled = false;
+        }
+
+        mPrinting.mMixture = data;
+        mFilling.mMixture = data;
     }
 
-    public void ShareRender(GameObject origin, GameObject target)
+    public void ResetFSM()
     {
-        MeshFilter mesh = target.AddComponent<MeshFilter>();
-        mesh.sharedMesh = origin.GetComponent<MeshFilter>().mesh;
+        mChoosing.OnReset();
+        mOpening.OnReset();
+        mCompleting.OnReset();
+        mFilling.OnReset();
+        mLabelling.OnReset();
+        mPrinting.OnReset();
 
-        MeshRenderer meshRenderer = target.AddComponent<MeshRenderer>();
-        meshRenderer.sharedMaterials = origin.GetComponent<MeshRenderer>().materials;
+        mOutput = null;
+        mOutputGO = null;
+
+        mStateMachine.SwitchState(mCompleting);
     }
 
-    public void SetIngredientData(IngredientData data)
-    {
-        // TODO : Take the ingredient data from Workbench
-    }
+    public void ThrowLabel() => mCompleting.ThrowLabel();
+
+    public void ExportPackage() => mCompleting.ExportPackage();
 }
