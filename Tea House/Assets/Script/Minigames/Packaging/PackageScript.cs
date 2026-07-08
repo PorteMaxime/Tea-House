@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PackageScript : MonoBehaviour
 {
-    public IngredientData mIngredient; // Total of stats
-    public Mail mTargetMail;
+    public IngredientData mIngredient = null; // Total of stats
+    public Mail mTargetMail = null;
 
     public void AddStat(ItemData item)
     {
