@@ -45,5 +45,12 @@ public class ParentingXRAY : MonoBehaviour
         MeshRenderer[] meshRenderers = target.GetComponentsInChildren<MeshRenderer>();
         foreach(MeshRenderer mesh in meshRenderers)
             mesh.enabled = toShow;
+
+        SkinnedMeshRenderer skinnedMeshR = target.GetComponent<SkinnedMeshRenderer>();
+        if(skinnedMeshR != null) skinnedMeshR.enabled = toShow;
+
+        SkinnedMeshRenderer[] skinnedMeshRenderers = target.GetComponentsInChildren<SkinnedMeshRenderer>();
+        foreach(SkinnedMeshRenderer mesh in skinnedMeshRenderers)
+            mesh.enabled = toShow;
     }
 }

@@ -70,7 +70,7 @@ public class WorkBenchStorageScript : MonoBehaviour
 
     IEnumerator DBLoad()
     {
-        while(databaseManager.isLoaded == false)
+        while(databaseManager.mIsLoaded == false)
         {
             yield return null;
         }
