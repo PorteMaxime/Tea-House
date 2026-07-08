@@ -201,7 +201,7 @@ public class MailCanvasScript : MonoBehaviour
     {
         mCanvasOrderContent.SetActive(active);
 
-        mOrdersScrollView.GetComponent<RectTransform>().offsetMax = new Vector2(active ? -901 : -40, -120);
+        mOrdersScrollView.GetComponent<RectTransform>().offsetMax = new Vector2(active ? -1051 : -40, -120);
     }
 
     public void CreateOrderPrefab(Mail mail)
@@ -272,7 +272,7 @@ public class MailCanvasScript : MonoBehaviour
     {
         GameObject prefab = Instantiate(mFilterPrefab, mCanvasFiltersContent.transform, false);
 
-        Toggle prefabToggle = prefab.transform.Find("ToggleFilter").GetComponent<Toggle>();
+        Toggle prefabToggle = prefab.transform.Find("PanelFilter/ToggleFilter").GetComponent<Toggle>();
 
         if (prefabToggle != null)
         {

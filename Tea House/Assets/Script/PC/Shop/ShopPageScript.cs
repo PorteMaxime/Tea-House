@@ -30,11 +30,11 @@ public class ShopPageScript : MonoBehaviour
 
     private void Awake()
     {
-        Transform temp = transform.Find("CanvasShopContent/CanvasShopItems");
+        Transform temp = transform.Find("CanvasShopItems");
         if (temp != null)
             mCanvasShopItems = temp.gameObject;
 
-        temp = transform.Find("CanvasShopContent/TextMoney");
+        temp = transform.Find("TextMoney");
         if (temp != null)
             mCurrentMoney = temp.gameObject.GetComponent<Text>();
 
