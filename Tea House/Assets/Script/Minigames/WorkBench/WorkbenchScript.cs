@@ -235,6 +235,7 @@ public class WorkbenchScript : MonoBehaviour
             }
 
         }
+
         mMixture.Add(mCurrentItem);
         blendingState.isEmpty = false;
         mCurrentItem = null;
