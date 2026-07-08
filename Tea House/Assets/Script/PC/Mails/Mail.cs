@@ -31,6 +31,8 @@ public class Mail
     [Column("expiration")]
     public float mExpiration { get; set; }
 
+    [HideInInspector] public bool mIsPrinted = false;
+
     public Mail()
     {
         id = mailID;

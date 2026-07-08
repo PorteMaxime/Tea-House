@@ -33,7 +33,7 @@ public class PacketFilling : IPackaging
     private float mYBorn = 0f;
     private Collider mBowlCollider = null;
 
-    private GameObject mFillingRamps = null;
+    private GameObject mFunnel = null;
     private Coroutine mFillingCoroutine = null;
 
     private void Init()
@@ -59,8 +59,8 @@ public class PacketFilling : IPackaging
         mOppositeZBorns.y = mZBorns.w + (mZBorns.w - mZBorns.y);
         mOppositeZBorns.w = mZBorns.w;
 
-        mFillingRamps = mMain.transform.Find("Ramps").gameObject;
-        mFillingRamps.SetActive(false);
+        mFunnel = mMain.transform.Find("Funnel").gameObject;
+        mFunnel.SetActive(false);
     }
     public void OnEnter()
     {
@@ -127,7 +127,8 @@ public class PacketFilling : IPackaging
 
     private IEnumerator FillPackage(GameObject bowl, Quaternion targetRotation, float duration)
     {
-        mFillingRamps.SetActive(true);
+        mFunnel.SetActive(true);
+        mFunnel.transform.position = new Vector3(mMain.mOutputGO.transform.position.x, mMain.mOutputGO.transform.Find("LabelPlace").transform.position.y, mMain.mOutputGO.transform.position.z);
         Tuple<BoxCollider, MeshCollider> packageColliders = new Tuple<BoxCollider, MeshCollider>(mMain.mOutputGO.transform.GetChild(0).GetComponent<BoxCollider>(), mMain.mOutputGO.transform.GetChild(0).GetComponent<MeshCollider>());
         packageColliders.Item1.enabled = false;
         packageColliders.Item2.enabled = true;
@@ -167,9 +168,12 @@ public class PacketFilling : IPackaging
             childRBs.Add(rb);
             rb.isKinematic = false;
             rb.useGravity = true;
-            child.parent = null;
-            child.GetComponent<Collider>().isTrigger = false;
+            Collider childCollider = child.gameObject.GetComponent<Collider>();
+            childCollider.isTrigger = false;
+            childCollider.enabled = true;
         }
+        foreach(Rigidbody rb in childRBs)
+            rb.transform.parent = null;
 
         yield return new WaitForSeconds(5f);
 
@@ -179,7 +183,7 @@ public class PacketFilling : IPackaging
 
         // Destroy elements
         foreach(Rigidbody rb in childRBs) GameObject.Destroy(rb.gameObject);
-        mFillingRamps.SetActive(false);
+        mFunnel.SetActive(false);
         packageColliders.Item1.enabled = true;
         packageColliders.Item2.enabled = false;
 
