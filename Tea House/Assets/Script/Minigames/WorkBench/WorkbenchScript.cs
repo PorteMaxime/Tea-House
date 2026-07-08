@@ -38,6 +38,7 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mCuttingBoard;
     public GameObject mKnife;
     public List<GameObject> mCuttingPoints;
+    public Transform posIngredientGrab;
 
     public GameObject mQteValideZone;
     public GameObject mQteCursor;

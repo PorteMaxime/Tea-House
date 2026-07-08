@@ -21,9 +21,8 @@ public class PlayerLevel : MonoBehaviour
         {
             level++;
             xpAmount -= xpNextLevel;
+            CheckLevel();
         }
-
-        CheckLevel();
     }
     public void CheckLevel()
     {

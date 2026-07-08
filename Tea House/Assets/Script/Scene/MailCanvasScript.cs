@@ -265,15 +265,15 @@ public class MailCanvasScript : MonoBehaviour
 
     public void TrySendOrder()
     {
-        PackageScript package = mPackInv.GetPackage(mSelectedOrder.Item1);
-        if (package == null)
-        {
-            Debug.Log("Order can't be send");
-            return; // Not completed
-        }
+        //PackageScript package = mPackInv.GetPackage(mSelectedOrder.Item1);
+        //if (package == null)
+        //{
+        //    Debug.Log("Order can't be send");
+        //    return; // Not completed
+        //}
 
-        int score = package.GetCompletionScore(); // => function to complete with scoring system
-        Destroy(package.gameObject);
+        //int score = package.GetCompletionScore(); // => function to complete with scoring system
+        //Destroy(package.gameObject);
         // TODO: Consequences of completion
         mMailSystem.ChangeOrderState(mSelectedOrder.Item1, Order.State.Completed);
 
@@ -282,7 +282,7 @@ public class MailCanvasScript : MonoBehaviour
         mSelectedOrder = null;
         ToggleOrderContent(false);
 
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLevel>().Addxp(10);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLevel>().Addxp(100);
     }
 
     #region Filters

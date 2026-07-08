@@ -10,7 +10,7 @@ public class CuttingState : IWorkbench
     {
         mWorkbench = script;
 
-        //initialPosKnife = mWorkbench.mKnife.transform.position;
+        initialPosKnife = mWorkbench.mKnife.transform.position;
         initialRotKnife = mWorkbench.mKnife.transform.rotation;
     }
 
@@ -36,7 +36,9 @@ public class CuttingState : IWorkbench
 
         mWorkbench.mCameraDepth.LerpingCamera(mWorkbench.mCameraPosCuttingBoard.transform.position, mWorkbench.mCameraPosCuttingBoard.transform.rotation, 0.5f);
 
-        mWorkbench.currentItemG.transform.position = mWorkbench.mCuttingBoard.transform.position;
+        mWorkbench.currentItemG.transform.localPosition = mWorkbench.posIngredientGrab.position;
+        //mWorkbench.currentItemG.transform.localPosition = new Vector3(-3.67f, 1.24f, -3.15f);
+        mWorkbench.currentItemG.GetComponent<MeshFilter>().mesh = mWorkbench.mCurrentItem.mCuttingBoardIngredient.GetComponent<MeshFilter>().sharedMesh;
     }
     public void OnUpdate()
     {
