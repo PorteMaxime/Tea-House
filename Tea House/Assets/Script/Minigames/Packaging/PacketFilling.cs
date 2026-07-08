@@ -208,6 +208,7 @@ public class PacketFilling : IPackaging
                 if(wp.IsColliding(rb.gameObject))
                     rb.gameObject.SetActive(false);
             }
+            currentTime += Time.deltaTime;
             yield return 0f;
         }
     }

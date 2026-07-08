@@ -172,6 +172,7 @@ public class PacketLabelPrinting : IPackaging
         mMain.mLabelling.mLabelGo = label;
         mMain.mCompleting.mLabelPrinted = true;
 
+        LinkMailToOutput();
         mMain.mOutput.mTargetMail.mIsPrinted = true;
         
         
