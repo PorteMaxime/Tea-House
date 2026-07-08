@@ -2492,7 +2492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: mGameItems.Array.size
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: 'mGameItems.Array.data[0]'
@@ -2557,7 +2557,7 @@ PrefabInstance:
     - target: {fileID: 176478890425865559, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: 'mGameItems.Array.data[15]'
       value: 
-      objectReference: {fileID: 11400000, guid: 1810977225240124fb09e22c86e16979, type: 2}
+      objectReference: {fileID: 11400000, guid: b8729b71cdf34f84183d402f0521d888, type: 2}
     - target: {fileID: 4208559114333191818, guid: 47b17d754b471824d90e38daaa8c4771, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.19276
@@ -3180,6 +3180,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1034614107713081924, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+      propertyPath: m_Radius
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 1408001121078869313, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.1
@@ -3224,8 +3228,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Packaging
       objectReference: {fileID: 0}
-    - target: {fileID: 4985049913008541394, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 1946278875684340665, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946278875684340665, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00948
+      objectReference: {fileID: 0}
+    - target: {fileID: 1946278875684340665, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
