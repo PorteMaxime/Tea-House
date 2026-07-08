@@ -223,8 +223,15 @@ public class WorkbenchScript : MonoBehaviour
             {
                 currentItemG.transform.GetChild(nbChild - 1 - i).GetComponent<Rigidbody>().useGravity = true;
                 currentItemG.transform.GetChild(nbChild - 1 - i).GetComponent<Rigidbody>().isKinematic = false;
-                currentItemG.transform.GetChild(nbChild - 1 - i).AddComponent<BoxCollider>().size = new Vector3(0.001f, 0.001f, 0.001f);
-                currentItemG.transform.GetChild(nbChild - 1 - i).transform.SetParent(mMixtureBowl.transform);
+                if(currentItemG.transform.GetChild(nbChild - 1 - i).TryGetComponent<BoxCollider>(out BoxCollider bc))
+                {
+                    bc.enabled = true;
+                }
+                else
+                {
+                    currentItemG.transform.GetChild(nbChild - 1 - i).AddComponent<BoxCollider>().size = new Vector3(0.0008f, 0.0008f, 0.0008f);
+                }
+                    currentItemG.transform.GetChild(nbChild - 1 - i).transform.SetParent(mMixtureBowl.transform);
             }
 
         }
@@ -235,7 +242,7 @@ public class WorkbenchScript : MonoBehaviour
 
         cuttingState.isItemCut = false;
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
         MixtureBowlCollider.SetActive(false);
     }
