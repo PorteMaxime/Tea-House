@@ -302,7 +302,12 @@ public class MailCanvasScript : MonoBehaviour
         if (active == true && !mCurrentFilters.Contains(state))
             mCurrentFilters.Add(state);
         else if (mCurrentFilters.Contains(state))
+        {
             mCurrentFilters.Remove(state);
+
+            if (mSelectedOrder != null && !mCurrentFilters.Contains(mSelectedOrder.Item1.mOrder.mState))
+                DeSelectOrder();
+        }
 
         UpdateOrdersVisibility();
     }
