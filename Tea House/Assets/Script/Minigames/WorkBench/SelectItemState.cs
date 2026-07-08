@@ -92,6 +92,7 @@ public class SelectItemState : IWorkbench
                 {
                     if (mWorkbench.mCurrentItem.mType == IngredientItem.TransformType.none || mWorkbench.canPutInMixture == true)
                     {
+                        mWorkbench.canPutInMixture = false;
                         mWorkbench.PutInMixtureBoawl();
                     }
                     else

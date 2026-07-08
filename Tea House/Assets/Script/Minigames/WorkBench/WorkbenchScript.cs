@@ -205,7 +205,7 @@ public class WorkbenchScript : MonoBehaviour
     {
         MixtureBowlCollider.SetActive(true);
 
-        currentItemG.transform.position = new Vector3(mMixtureBowl.transform.position.x, mMixtureBowl.transform.position.y + 1, mMixtureBowl.transform.position.z);
+        currentItemG.transform.position = new Vector3(mMixtureBowl.transform.position.x, mMixtureBowl.transform.position.y + 0.25f, mMixtureBowl.transform.position.z);
 
         if (currentItemG.transform.GetChild(0) == null)
         {
@@ -217,24 +217,22 @@ public class WorkbenchScript : MonoBehaviour
         else
         {
             int nbChild = currentItemG.transform.childCount;
+            currentItemG.GetComponent<BoxCollider>().enabled = false;
             for (int i = 0; i < nbChild; i++)
             {
                 currentItemG.transform.GetChild(nbChild - 1 - i).GetComponent<Rigidbody>().useGravity = true;
                 currentItemG.transform.GetChild(nbChild - 1 - i).GetComponent<Rigidbody>().isKinematic = false;
-                currentItemG.transform.GetChild(nbChild - 1 - i).AddComponent<BoxCollider>().size = new Vector3(0.5f, 0.5f, 0.5f);
+                currentItemG.transform.GetChild(nbChild - 1 - i).AddComponent<BoxCollider>().size = new Vector3(0.001f, 0.001f, 0.001f);
                 currentItemG.transform.GetChild(nbChild - 1 - i).transform.SetParent(mMixtureBowl.transform);
             }
 
         }
-
+        mMixture.Add(mCurrentItem);
         blendingState.isEmpty = false;
         mCurrentItem = null;
         currentItemG = null;
 
-        canPutInMixture = false;
-
         cuttingState.isItemCut = false;
-
 
         yield return new WaitForSeconds(5f);
 
