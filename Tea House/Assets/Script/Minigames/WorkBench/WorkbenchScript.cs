@@ -236,13 +236,13 @@ public class WorkbenchScript : MonoBehaviour
 
         }
         mMixture.Add(mCurrentItem);
+        DestroyCurrentIngredient();
         blendingState.isEmpty = false;
-        mCurrentItem = null;
-        currentItemG = null;
 
         cuttingState.isItemCut = false;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
+
 
         MixtureBowlCollider.SetActive(false);
     }
