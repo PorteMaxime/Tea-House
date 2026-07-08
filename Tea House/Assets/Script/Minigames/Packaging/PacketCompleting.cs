@@ -173,6 +173,7 @@ public class PacketCompleting : IPackaging
             else if(mLabelPrinted == true)
                 label = mMain.transform.Find("Printer/Label(Clone)");
 
+            mMain.mOutput.mTargetMail.mIsPrinted = true;
             GameObject.Destroy(label.gameObject);
             mIsThrowing = false;
             mLabelPrinted = false;

@@ -65,6 +65,7 @@ public class PacketLabelPrinting : IPackaging
         List<Mail> mails =  mMain.mMailSystem.GetMailsOfState(Order.State.Accepted);
         foreach (Mail mail in mails)
         {
+            if(mail.mIsPrinted == true) continue;
             if (mOrders.ContainsKey(mail) == false)
                 mOrders.Add(mail, mPrinterScript.CreateButton(mail));
         }
@@ -116,17 +117,11 @@ public class PacketLabelPrinting : IPackaging
                 break;
             }
         }
-        // mMixture = new List<ItemData>
-        // {
-        //     Resources.Load<BaseData>("GreenTea"),
-        //     Resources.Load<IngredientData>("Mint")
-        // };
+        
         List<IngredientData> ingredients = new List<IngredientData>();
         BaseData baseData = null;
-        Debug.Log("Hello: " + mMixture.Count);
         foreach(ItemData item in mMixture)
         {
-            Debug.Log(item.mName);
             if(item is BaseData)
                 baseData = (BaseData)item;
             else if(item is IngredientData)
@@ -167,7 +162,7 @@ public class PacketLabelPrinting : IPackaging
     
         RenderTexture labelTexture = PrintLabel();
         if(labelTexture == null) return;
-        Debug.Log("Bye");
+        
         GameObject label = GameObject.Instantiate(mLabelGoPrefab);
         label.transform.parent = mPrinterScript.gameObject.transform;
         label.transform.localRotation = Quaternion.identity;
@@ -176,6 +171,9 @@ public class PacketLabelPrinting : IPackaging
         label.GetComponent<MeshRenderer>().material.mainTexture = labelTexture;
         mMain.mLabelling.mLabelGo = label;
         mMain.mCompleting.mLabelPrinted = true;
+
+        mMain.mOutput.mTargetMail.mIsPrinted = true;
+        
         
         mMain.StartCoroutine(SlideLabel(label, mLabelSpot.transform.position, mLabelSpot.transform.rotation, 5f));
         mMain.mStateMachine.SwitchState(mMain.mCompleting);
