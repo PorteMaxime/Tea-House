@@ -99,14 +99,13 @@ public class PacketLabelPrinting : IPackaging
     public void SelectOrder(GameObject newOrderGo)
     {
         if (mSelectedOrderGo != null) mSelectedOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(false);
-        
+
         newOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(true);
         mSelectedOrderGo = newOrderGo;
     }
     public RenderTexture PrintLabel()
     {
         if (mSelectedOrderGo == null) return null;
-
         // Generate Texture + Label
         Mail targetMail = null;
         foreach(Mail mail in mOrders.Keys)
@@ -117,16 +116,17 @@ public class PacketLabelPrinting : IPackaging
                 break;
             }
         }
-        mMixture = new List<ItemData>
-        {
-            Resources.Load<BaseData>("GreenTea"),
-            Resources.Load<IngredientData>("Mint")
-        };
+        // mMixture = new List<ItemData>
+        // {
+        //     Resources.Load<BaseData>("GreenTea"),
+        //     Resources.Load<IngredientData>("Mint")
+        // };
         List<IngredientData> ingredients = new List<IngredientData>();
         BaseData baseData = null;
-        
+        Debug.Log("Hello: " + mMixture.Count);
         foreach(ItemData item in mMixture)
         {
+            Debug.Log(item.mName);
             if(item is BaseData)
                 baseData = (BaseData)item;
             else if(item is IngredientData)
@@ -135,7 +135,7 @@ public class PacketLabelPrinting : IPackaging
         // TODO : Generate Texture with targetMail data => Remove Debug Data
         return DynamicTextureManager.Generate(DynamicTextureManager.DynamicTexture.Label,
             targetMail.mPicture,
-            "targetMail.mName",
+            targetMail.mName,
             baseData,
             ingredients.Count >= 1 ? ingredients[0] : null,
             ingredients.Count >= 2 ? ingredients[1] : null,            
@@ -167,7 +167,7 @@ public class PacketLabelPrinting : IPackaging
     
         RenderTexture labelTexture = PrintLabel();
         if(labelTexture == null) return;
-        
+        Debug.Log("Bye");
         GameObject label = GameObject.Instantiate(mLabelGoPrefab);
         label.transform.parent = mPrinterScript.gameObject.transform;
         label.transform.localRotation = Quaternion.identity;

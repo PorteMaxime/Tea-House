@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using System;
 
 public class PacketFilling : IPackaging
 {
@@ -32,6 +33,9 @@ public class PacketFilling : IPackaging
     private float mYBorn = 0f;
     private Collider mBowlCollider = null;
 
+    private GameObject mFillingRamps = null;
+    private Coroutine mFillingCoroutine = null;
+
     private void Init()
     {
         mDragAndDrop = mMain.mCameraController.GetControllerMod<CameraDragAndDrop>();
@@ -54,6 +58,9 @@ public class PacketFilling : IPackaging
         mOppositeZBorns.x = mZBorns.w + (mZBorns.w - mZBorns.x);
         mOppositeZBorns.y = mZBorns.w + (mZBorns.w - mZBorns.y);
         mOppositeZBorns.w = mZBorns.w;
+
+        mFillingRamps = mMain.transform.Find("Ramps").gameObject;
+        mFillingRamps.SetActive(false);
     }
     public void OnEnter()
     {
@@ -84,6 +91,8 @@ public class PacketFilling : IPackaging
 
     public void OnUpdate()
     {
+        if(mFillingCoroutine != null) return;
+
         if(mPlayerInteract.Player.Select.WasReleasedThisFrame() == true)
             mDragAndDrop.StopDragging();
 
@@ -92,7 +101,7 @@ public class PacketFilling : IPackaging
 
         if(mBowlCollider == null) return;
 
-        if(mBowlCollider.bounds.max.z < mZBorns.w && mBowlCollider.bounds.min.y >= mYBorn)
+        if(mBowl.transform.position.z < mZBorns.w && mBowlCollider.bounds.min.y >= mYBorn)
         {
             // B to B
             float percentage = 1 - (mZBorns.w - mBowlCollider.bounds.max.z) / mZBorns.y;
@@ -102,9 +111,10 @@ public class PacketFilling : IPackaging
             float targetRotation = mBowlAngle * percentage;
             mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.Euler(targetRotation, 0f, 0f), mRotationSpeed * Time.deltaTime);
 
-            if(mBowlCollider.bounds.max.z > mZBorns.z && mMixture != null)
+            if(mBowl.transform.position.z > mZBorns.z && mMixture != null)
             {
-                mMain.mOutputGO.transform.GetChild(0).GetComponent<Renderer>().material.color = Color.red;
+                mDragAndDrop.StopDragging();
+                mFillingCoroutine = mMain.StartCoroutine(FillPackage(mBowl, Quaternion.Euler(130f, 0, 0), 1f));
                 mMain.mOutput.AddStat(mMixture);
                 mMain.mCompleting.mIsFilled = true;
                 mMain.mCompleting.mIsChoosed = true;
@@ -113,5 +123,67 @@ public class PacketFilling : IPackaging
         else
             // B to O
             mBowl.transform.rotation = Quaternion.Lerp(mBowl.transform.rotation, Quaternion.identity, mRotationSpeed * Time.deltaTime);
+    }
+
+    private IEnumerator FillPackage(GameObject bowl, Quaternion targetRotation, float duration)
+    {
+        mFillingRamps.SetActive(true);
+        Tuple<BoxCollider, MeshCollider> packageColliders = new Tuple<BoxCollider, MeshCollider>(mMain.mOutputGO.transform.GetChild(0).GetComponent<BoxCollider>(), mMain.mOutputGO.transform.GetChild(0).GetComponent<MeshCollider>());
+        packageColliders.Item1.enabled = false;
+        packageColliders.Item2.enabled = true;
+
+        SkinnedMeshRenderer skinnedMeshRenderer = bowl.GetComponent<SkinnedMeshRenderer>();
+        if(skinnedMeshRenderer != null)
+        {
+            Mesh bakedMesh = new Mesh();
+            skinnedMeshRenderer.BakeMesh(bakedMesh);
+        
+            // 2. On l'assigne au MeshCollider
+            packageColliders.Item2.sharedMesh = null;
+            packageColliders.Item2.sharedMesh = bakedMesh;
+        }
+        
+        // Rotate Bowl
+        float elapsedTime = 0;
+        Quaternion rotationOrigine = bowl.transform.rotation;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            bowl.transform.rotation = Quaternion.Lerp(rotationOrigine, targetRotation, elapsedTime / duration);
+            yield return 0;
+        }
+
+        // Enable Physic
+        BoxCollider bowlBox = bowl.GetComponent<BoxCollider>();
+        bowlBox.enabled = false;
+        bowl.GetComponent<MeshCollider>().enabled = true;
+
+        List<Rigidbody> childRBs = new List<Rigidbody>();
+        foreach(Transform child in bowl.transform)
+        {
+            Rigidbody rb = child.GetComponent<Rigidbody>();
+            if(child.CompareTag("WorkingPoint") == true || rb == null) continue;
+
+            childRBs.Add(rb);
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            child.parent = null;
+            child.GetComponent<Collider>().isTrigger = false;
+        }
+
+        yield return new WaitForSeconds(5f);
+
+        // Disable Physic
+        bowl.transform.rotation = targetRotation;
+        bowlBox.enabled = true;
+
+        // Destroy elements
+        foreach(Rigidbody rb in childRBs) GameObject.Destroy(rb.gameObject);
+        mFillingRamps.SetActive(false);
+        packageColliders.Item1.enabled = true;
+        packageColliders.Item2.enabled = false;
+
+        mFillingCoroutine = null;
+        mMain.mStateMachine.SwitchState(mMain.mCompleting);
     }
 }

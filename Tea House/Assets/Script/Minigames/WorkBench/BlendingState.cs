@@ -95,7 +95,9 @@ public class BlendingState : IWorkbench
 
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, mWorkbench.mCameraPosPackaging.transform.position.z);
-                //player.transform.position = Vector3.zero;
+                Debug.Log(mWorkbench.mMixture.Count);
+                mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
+                
                 mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
             }
         }
