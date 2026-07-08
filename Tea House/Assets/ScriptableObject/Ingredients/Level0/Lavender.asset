@@ -35,7 +35,7 @@ MonoBehaviour:
   mAmountJar1: {fileID: 5486132186296425149, guid: 71e8ef13099c2ea41b0becaee5ea166d, type: 3}
   mAmountJar2: {fileID: 2239751761719933281, guid: 7b405ddf176b5944f8e23c74bcdd7c49, type: 3}
   mAmountJar3: {fileID: 5763111021785460518, guid: 0096340d60a725c4ea68e4c8f9edfd1b, type: 3}
-  mFragIngredient: {fileID: 277429270071239436, guid: 5263bbaf95dc0204e8366014c12e6768, type: 3}
-  mFragGrab: {fileID: 7539200293367009025, guid: e565de07b0252b145be406d37318a43e, type: 3}
-  mCuttingBoardIngredient: {fileID: 919132149155446097, guid: b56fda4537954f643a728c9c93b73f3b, type: 3}
+  mFragIngredient: {fileID: 1064822467224113163, guid: 5263bbaf95dc0204e8366014c12e6768, type: 3}
+  mFragGrab: {fileID: 4515559405829578807, guid: b2a4a8e6c0d8fe34587e6e984434fd99, type: 3}
+  mCuttingBoardIngredient: {fileID: 2026889042933448359, guid: e02813a86994cb548947a0e322cddcc8, type: 3}
   mType: 2

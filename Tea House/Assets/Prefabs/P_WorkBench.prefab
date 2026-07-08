@@ -1158,7 +1158,6 @@ GameObject:
   - component: {fileID: 7819896041919622237}
   - component: {fileID: 479019137910053093}
   - component: {fileID: 5025963623751674064}
-  - component: {fileID: 4116271236721933006}
   m_Layer: 8
   m_Name: CuttingBoard
   m_TagString: CuttingBoard
@@ -1242,27 +1241,6 @@ MeshRenderer:
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &5025963623751674064
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4237556006067324798}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.004644734, y: 0.010254876, z: 0.00059235585}
-  m_Center: {x: 0, y: -0.00005186071, z: 0.000295009}
---- !u!65 &4116271236721933006
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2738,6 +2716,7 @@ MonoBehaviour:
   - {fileID: 8781490248050011445}
   - {fileID: 3362525800795389379}
   - {fileID: 4358135350499874795}
+  posIngredientGrab: {fileID: 0}
   mQteValideZone: {fileID: 0}
   mQteCursor: {fileID: 0}
   mPanelSwap: {fileID: 0}

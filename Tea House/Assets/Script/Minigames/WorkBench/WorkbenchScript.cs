@@ -38,7 +38,6 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mCuttingBoard;
     public GameObject mKnife;
     public List<GameObject> mCuttingPoints;
-    public Transform posIngredientGrab;
 
     public GameObject mQteValideZone;
     public GameObject mQteCursor;
@@ -195,8 +194,11 @@ public class WorkbenchScript : MonoBehaviour
         }
         mKnife.transform.position = targetPosition;
 
-        if(cuttingPointIndex != mCuttingPoints.Count - 1)
+        if (cuttingPointIndex != mCuttingPoints.Count - 1)
             mCuttingPanel.SetActive(true);
+
+        //mKnife.transform.position = cuttingState.initialPosKnife;
+        //mKnife.transform.rotation = cuttingState.initialRotKnife;
     }
     public void PutInMixtureBoawl()
     {
