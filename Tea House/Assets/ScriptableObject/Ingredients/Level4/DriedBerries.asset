@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Dried Berries
   mPrefab: {fileID: 6493873279887380395, guid: 8310c6307127a7349b72cd8d15da42f8, type: 3}
-  mIsUnlocked: 0
+  mIsUnlocked: 1
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -37,4 +37,5 @@ MonoBehaviour:
   mAmountJar3: {fileID: 8255513959330259652, guid: 143d8d5147800ad4a8f93045c3f3650b, type: 3}
   mFragIngredient: {fileID: 0}
   mFragGrab: {fileID: 0}
+  mCuttingBoardIngredient: {fileID: 0}
   mType: 0

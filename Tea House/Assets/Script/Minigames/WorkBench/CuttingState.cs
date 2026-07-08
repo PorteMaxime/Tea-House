@@ -87,8 +87,8 @@ public class CuttingState : IWorkbench
             cuttingPointIndex = 0;
             canGrabItem = true;
 
-            mWorkbench.mKnife.transform.localPosition = initialPosKnife;
-            mWorkbench.mKnife.transform.rotation = initialRotKnife;
+            //mWorkbench.mKnife.transform.localPosition = initialPosKnife;
+            //mWorkbench.mKnife.transform.rotation = initialRotKnife;
 
             mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
         }

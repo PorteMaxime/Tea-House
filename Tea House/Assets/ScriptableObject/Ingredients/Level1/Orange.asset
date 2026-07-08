@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Dried Orange
   mPrefab: {fileID: 1169831623523084331, guid: e130eb29afc0a3d479330e798ad35ba1, type: 3}
-  mIsUnlocked: 0
+  mIsUnlocked: 1
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -37,4 +37,5 @@ MonoBehaviour:
   mAmountJar3: {fileID: 7880377246119503659, guid: 4c0cff0e0efdf7646bc2ea566ba76f3f, type: 3}
   mFragIngredient: {fileID: 744280317938301970, guid: a3c2b152675f6914983b69bab59beb1d, type: 3}
   mFragGrab: {fileID: 0}
+  mCuttingBoardIngredient: {fileID: 0}
   mType: 1

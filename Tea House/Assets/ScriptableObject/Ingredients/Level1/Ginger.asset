@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Ginger
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Ginger
-  mPrefab: {fileID: 1020617393741615766, guid: c5a5c448e4679274ab1926f0e9fbf349, type: 3}
-  mIsUnlocked: 0
+  mPrefab: {fileID: 1572811026207813877, guid: cccc2e77ac847e040a7490e3b1fa8085, type: 3}
+  mIsUnlocked: 1
   mStats:
   - mStatVar: 0
     mValueVar: 2
@@ -35,6 +35,7 @@ MonoBehaviour:
   mAmountJar1: {fileID: 1488206898366149284, guid: 29bdfb1c47aacbb41a04d98c8a9df4c6, type: 3}
   mAmountJar2: {fileID: 3270173040792375608, guid: db92456654ec442428217134bec45899, type: 3}
   mAmountJar3: {fileID: 635397043757906090, guid: bb09b47ce9ce9c74ab7490b35bfe5551, type: 3}
-  mFragIngredient: {fileID: 0}
-  mFragGrab: {fileID: 0}
+  mFragIngredient: {fileID: 4759871270601494826, guid: 4c7b1e63f2a69f14db8757dcc737d347, type: 3}
+  mFragGrab: {fileID: 7266452018271454725, guid: 3047a5ca5c4ca2d43b31ea2c2191c5e2, type: 3}
+  mCuttingBoardIngredient: {fileID: 5243382335202372631, guid: 5398bbd0c19b40a448b9259d2a34edb7, type: 3}
   mType: 2

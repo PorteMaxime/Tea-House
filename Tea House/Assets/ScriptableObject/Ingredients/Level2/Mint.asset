@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Mint
   mPrefab: {fileID: 2086405798350031596, guid: a6b9b8b42c0914942b1ba417d72aeea7, type: 3}
-  mIsUnlocked: 0
+  mIsUnlocked: 1
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -37,4 +37,5 @@ MonoBehaviour:
   mAmountJar3: {fileID: 7937324257843233066, guid: 598bb7885fecf554e906917207efba9c, type: 3}
   mFragIngredient: {fileID: 744280317938301970, guid: a3c2b152675f6914983b69bab59beb1d, type: 3}
   mFragGrab: {fileID: 0}
+  mCuttingBoardIngredient: {fileID: 0}
   mType: 2
