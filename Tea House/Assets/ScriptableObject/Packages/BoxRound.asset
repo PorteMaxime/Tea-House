@@ -14,16 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PackageData
   mName: Round Tea Box
   mPrefab: {fileID: 0}
+  mIcon: {fileID: 21300000, guid: 187cf0b844f7a0144a23b62c623f44ef, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStatVar: 0
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 1
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 2
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 3
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 4
     mValueVar: 0
-  mPrice: 0
+  - mStatVar: 5
+    mValueVar: 0
+  - mStatVar: 6
+    mValueVar: 0
+  mPrice: 20

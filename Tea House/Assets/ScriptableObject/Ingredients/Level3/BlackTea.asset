@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BaseData
   mName: Black Tea
   mPrefab: {fileID: 5241442716923736636, guid: 6600c52d9f49b324d969d7733b1f91c4, type: 3}
+  mIcon: {fileID: 21300000, guid: af6e956dc3e15d24cb0409b18132313b, type: 3}
   mIsUnlocked: 0
   mStats:
   - mStatVar: 0
@@ -30,7 +31,7 @@ MonoBehaviour:
     mValueVar: 0
   - mStatVar: 6
     mValueVar: 1
-  mPrice: 1
+  mPrice: 20
   mIngredientGrab: {fileID: 0}
   mAmountJar1: {fileID: 3071537283105047996, guid: a0ff86940e35b6e43b4465eac0c2a3ba, type: 3}
   mAmountJar2: {fileID: 8006170475375151660, guid: 6ed1b0dd99fd8a14689009b05eb256fe, type: 3}

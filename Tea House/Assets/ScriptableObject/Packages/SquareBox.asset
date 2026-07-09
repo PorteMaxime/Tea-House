@@ -14,16 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PackageData
   mName: Square Tea Box
   mPrefab: {fileID: 0}
+  mIcon: {fileID: 21300000, guid: 092c6b2ea7d77a649b59e3ddc5f150ac, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStatVar: 0
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 1
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 2
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 3
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 4
     mValueVar: 0
-  mPrice: 0
+  - mStatVar: 5
+    mValueVar: 0
+  - mStatVar: 6
+    mValueVar: 0
+  mPrice: 20

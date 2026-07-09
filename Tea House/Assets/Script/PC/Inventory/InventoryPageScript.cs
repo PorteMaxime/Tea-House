@@ -121,7 +121,7 @@ public class InventoryPageScript : MonoBehaviour
                 for (int i = 1; i < mPageSize.x; i++)
                 {
                     GameObject filler = new GameObject("filler" + i, typeof(RectTransform));
-                    filler.transform.parent = creationRow.transform;
+                    filler.transform.SetParent(creationRow.transform, false);
                     filler.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth, 1);
                 }
             }

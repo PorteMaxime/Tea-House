@@ -14,16 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PackageData
   mName: Octogonal Tea Box
   mPrefab: {fileID: 0}
+  mIcon: {fileID: 21300000, guid: db8303e525258d644aa4bc658867f59b, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStatVar: 0
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 1
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 2
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 3
     mValueVar: 0
-  - mStatVar: 0
+  - mStatVar: 4
     mValueVar: 0
-  mPrice: 0
+  - mStatVar: 5
+    mValueVar: 0
+  - mStatVar: 6
+    mValueVar: 0
+  mPrice: 30

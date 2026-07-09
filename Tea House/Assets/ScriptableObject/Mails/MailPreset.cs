@@ -11,6 +11,8 @@ public class MailPreset : ScriptableObject
     [SerializeField] private string mText = "";
     [SerializeField] private int mDuration = 0;
 
+    public int mPresetLevel = 1;
+
     public Mail CreateMail()
     {
         Mail mail = new Mail();
