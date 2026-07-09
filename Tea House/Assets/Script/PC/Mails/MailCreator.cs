@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class MailCreator : MonoBehaviour
@@ -7,6 +8,7 @@ public class MailCreator : MonoBehaviour
     [SerializeField] private DatabaseManager mDatabaseManager;
 
     [SerializeField] private List<MailPreset> mMailsPresets = new List<MailPreset>();
+    //private Dictionary<int, List<MailPreset>> mMailsPresetsB = new Dictionary<int, List<MailPreset>>();
 
     private Vector2Int mIngredientsAmount = new Vector2Int(1, 3);
     private Vector2Int mDurationRange = new Vector2Int(2, 7);
@@ -45,6 +47,8 @@ public class MailCreator : MonoBehaviour
         // Si preset mail
         if (Random.Range(0, 101) <= mPresetProbability && mMailsPresets.Count > 0)
         {
+            // get all as int / random in all ?
+
             mail = mMailsPresets[Random.Range(0, mMailsPresets.Count)].CreateMail();
 
             CreateMailData(mail);
@@ -99,9 +103,15 @@ public class MailCreator : MonoBehaviour
         // Raison + pour quand
         int forWhenRand = Random.Range(0, 5);
         if (forWhenRand <= 1)
+        {
             mail.mText += GetRandomValue("Reason") + ".\n";
+            mail.mText = Regex.Replace(mail.mText, @"\{long\([^)]*\)\}", "");
+        }
         else
+        {
             mail.mText += GetRandomValue("Reason") + " " + GetRandomValue("Day+" + mail.mDuration.ToString()) + ".\n";
+            mail.mText = Regex.Replace(mail.mText, @"\{long\(\)\}", "");
+        }
 
         // Ingredients
         bool first = true;
@@ -180,7 +190,10 @@ public class MailCreator : MonoBehaviour
         }
 
         if (forWhenRand <= 1)
-            mail.mText += "\n" + GetRandomValue("DayEnd") + GetRandomValue("Day+" + mail.mDuration.ToString());
+        {
+            mail.mText += "\n" + GetRandomValue("DayEnd");
+            mail.mText = mail.mText.Replace("{day}", GetRandomValue("Day+" + mail.mDuration.ToString()));
+        }
 
         // Formule de politesse
         if (politeRand <= 1)
