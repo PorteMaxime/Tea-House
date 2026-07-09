@@ -137,20 +137,17 @@ public class MailCreator : MonoBehaviour
                 }
             }
 
-            rand = Random.Range(0, 5);
             string StatLimit = stat.mValue > mail.mOrder.mLimitHighAmount ? "StatHigh" : stat.mValue < mail.mOrder.mLimitHighAmount ? "StatLow" : "";
             string statAmount = "";
 
             if (mail.mText.Contains("{Stat}"))
             {
-                if (StatLimit != "" && rand <= 1)
-                    statAmount = GetRandomValue(StatLimit);
+                statAmount = GetRandomValue(StatLimit);
                 mail.mText = mail.mText.Replace("{Stat}", statAmount + stat.mStat.ToString());
             }
             else if (mail.mText.Contains("{StatSimple}"))
             {
-                if (StatLimit != "" && rand <= 1)
-                    statAmount = GetRandomValue(StatLimit + "Simple");
+                statAmount = GetRandomValue(StatLimit + "Simple");
                 mail.mText = mail.mText.Replace("{StatSimple}", statAmount + GetRandomValue(stat.mStat.ToString()));
             }
         }

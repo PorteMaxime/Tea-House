@@ -130,7 +130,11 @@ public class ShopPageScript : MonoBehaviour
             creationItem = Instantiate(mShopItemPrefab, creationRow.transform, false);
 			mShopItems.Add(item, (creationItem, null, 0));
 
-			Transform priceText = creationItem.transform.Find("TextPrice");
+            GameObject image = creationItem.transform.Find("ImageItemOutside/ImageItem").gameObject;
+            if (image != null)
+                image.GetComponent<Image>().sprite = item.mIcon;
+
+            Transform priceText = creationItem.transform.Find("TextPrice");
 			if (priceText != null)
 				priceText.GetComponent<Text>().text = item.mPrice + " $";
 
@@ -145,6 +149,23 @@ public class ShopPageScript : MonoBehaviour
             changeAmount = creationItem.transform.Find("CanvasAddRemove/ButtonAdd");
             if (changeAmount != null)
                 changeAmount.GetComponent<Button>().onClick.AddListener(() => ChangeItemAmount(item, 1));
+
+            if (itemNumber % mPageSize.x == 0)
+            {
+                float itemWidth = creationItem.GetComponent<RectTransform>().rect.width;
+
+                for (int i = 1; i < mPageSize.x; i++)
+                {
+                    GameObject filler = new GameObject("filler" + i, typeof(RectTransform));
+                    filler.transform.parent = creationRow.transform;
+                    filler.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth, 1);
+                }
+            }
+            else
+            {
+                Destroy(creationRow.transform.Find("filler" + itemNumber % mPageSize.x).gameObject);
+                creationItem.transform.SetSiblingIndex((int)(itemNumber % mPageSize.x));
+            }
 
             itemNumber += 1;
 		}
@@ -193,6 +214,10 @@ public class ShopPageScript : MonoBehaviour
             if (mShopItems[item].cartItem == null)
 			{
                 tempItem.cartItem = Instantiate(mCartItemPrefab, mCartItems.transform, false);
+
+                GameObject image = tempItem.cartItem.transform.Find("PanelItem/ImageItemOutside/ImageItem").gameObject;
+                if (image != null)
+                    image.GetComponent<Image>().sprite = item.mIcon;
 
                 Button changeAmount = tempItem.cartItem.transform.Find("PanelItem/ButtonRemove").GetComponent<Button>();
                 changeAmount.onClick.AddListener(() => ChangeItemAmount(item, -1));
@@ -289,8 +314,3 @@ public class ShopPageScript : MonoBehaviour
 		return mCartCost <= Inventory.msInstance.mMoneyAmount;
 	}
 }
-
-/* A faire :
- * - Mettre l'image de l'item dans le shop et le panier -> CreateItems() + ChangeCartItemAmount()
- * - ...
-*/

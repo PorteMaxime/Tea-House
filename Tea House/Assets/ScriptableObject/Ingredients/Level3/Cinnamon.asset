@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Cinnamon
   mPrefab: {fileID: 1191592359346174821, guid: 2eae0901ffb26ba45aa38aa755adb217, type: 3}
+  mIcon: {fileID: 21300000, guid: b808eb34663beef4b821ad1edc3b45e9, type: 3}
   mIsUnlocked: 0
   mStats:
   - mStatVar: 0

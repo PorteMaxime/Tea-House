@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f979dc826b0b73543a53b268f757f816, type: 3}
   m_Name: GreenTea
   m_EditorClassIdentifier: Assembly-CSharp::BaseData
-  mName: GreenTea
+  mName: Green Tea
   mPrefab: {fileID: 6290192526801793409, guid: 9d127fcaeabc7894cbf3e5b259b9e4fb, type: 3}
   mIsUnlocked: 1
   mStats:
@@ -36,4 +36,5 @@ MonoBehaviour:
   mAmountJar2: {fileID: 126645315630856403, guid: 706928e7e1ecf5e4c9b0729bd1dc1ed3, type: 3}
   mAmountJar3: {fileID: 9221557395558370167, guid: 8d497c6de4ee330418600ea4220a47bb, type: 3}
   mFragIngredient: {fileID: 0}
+  mFragGrab: {fileID: 0}
   mType: 0

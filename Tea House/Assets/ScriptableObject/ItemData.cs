@@ -28,6 +28,8 @@ public class ItemData : ScriptableObject
     public string mName;
     public GameObject mPrefab;
 
+    public Sprite mIcon;
+
     public bool mIsUnlocked;
 
     public enum Stat

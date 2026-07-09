@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df3495da0bfb6747a35f18a4da682e2, type: 3}
   m_Name: BoxOcto
   m_EditorClassIdentifier: Assembly-CSharp::PackageData
-  mName: Box Octo
+  mName: Octogonal Tea Box
   mPrefab: {fileID: 0}
   mIsUnlocked: 1
   mStats:
-  - mStat: 0
-    mValue: 0
-  - mStat: 1
-    mValue: 0
-  - mStat: 2
-    mValue: 0
-  - mStat: 3
-    mValue: 0
-  - mStat: 4
-    mValue: 0
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 0
+    mValueVar: 0
   mPrice: 0

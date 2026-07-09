@@ -106,9 +106,30 @@ public class InventoryPageScript : MonoBehaviour
             creationItem = Instantiate(mInventoryItemPrefab, creationRow.transform, false);
             mInventoryItems.Add(item, creationItem);
 
+            GameObject image = creationItem.transform.Find("ImageItemOutside/ImageItem").gameObject;
+            if (image != null)
+                image.GetComponent<Image>().sprite = item.mIcon;
+
             GameObject ItemText = creationItem.transform.Find("TextName").gameObject;
             if (ItemText != null)
                 ItemText.GetComponent<Text>().text = item.mName;
+
+            if (itemNumber % mPageSize.x == 0)
+            {
+                float itemWidth = creationItem.GetComponent<RectTransform>().rect.width;
+
+                for (int i = 1; i < mPageSize.x; i++)
+                {
+                    GameObject filler = new GameObject("filler" + i, typeof(RectTransform));
+                    filler.transform.parent = creationRow.transform;
+                    filler.GetComponent<RectTransform>().sizeDelta = new Vector2(itemWidth, 1);
+                }
+            }
+            else
+            {
+                Destroy(creationRow.transform.Find("filler" + itemNumber % mPageSize.x).gameObject);
+                creationItem.transform.SetSiblingIndex((int)(itemNumber % mPageSize.x));
+            }
 
             itemNumber += 1;
         }
@@ -143,8 +164,3 @@ public class InventoryPageScript : MonoBehaviour
         }
     }
 }
-
-/* A faire :
- * - Mettre les images des items
- * - ...
-*/

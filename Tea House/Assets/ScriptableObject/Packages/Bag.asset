@@ -14,16 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PackageData
   mName: Bag
   mPrefab: {fileID: 0}
+  mIcon: {fileID: 21300000, guid: 5bf5fb509cc1df348a27f82727377a9a, type: 3}
   mIsUnlocked: 1
   mStats:
-  - mStat: 0
-    mValue: 0
-  - mStat: 1
-    mValue: 0
-  - mStat: 2
-    mValue: 0
-  - mStat: 3
-    mValue: 0
-  - mStat: 4
-    mValue: 0
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 0
+    mValueVar: 0
   mPrice: 0

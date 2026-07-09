@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Lavender
   mPrefab: {fileID: 5637038462160063318, guid: 28c2809efc23cc14cbdfef3c8debe4fd, type: 3}
+  mIcon: {fileID: 21300000, guid: 86c1190388d5a2846aeca5f15b070ba6, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStatVar: 0
