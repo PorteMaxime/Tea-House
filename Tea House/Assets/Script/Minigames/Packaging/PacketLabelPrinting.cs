@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Emit;
 using UnityEngine;
 
@@ -57,7 +58,7 @@ public class PacketLabelPrinting : IPackaging
         foreach (Mail mail in mOrders.Keys)
         {
             if(mail == null) mOrders.Remove(mail);
-            if (mail.mOrder.mState != Order.State.Accepted)
+            if (mail.mOrder.mState != Order.State.Accepted || mail.mIsPrinted == true)
             {
                 GameObject.Destroy(mOrders[mail]);
                 toRemove.Add(mail);
@@ -69,7 +70,8 @@ public class PacketLabelPrinting : IPackaging
         List<Mail> mails =  mMain.mMailSystem.GetMailsOfState(Order.State.Accepted);
         foreach (Mail mail in mails)
         {
-            if(mail.mIsPrinted == true) continue;
+            if(mail.mIsPrinted == true)
+                continue;
             if (mOrders.ContainsKey(mail) == false)
                 mOrders.Add(mail, mPrinterScript.CreateButton(mail));
         }
@@ -177,7 +179,10 @@ public class PacketLabelPrinting : IPackaging
         mMain.mCompleting.mLabelPrinted = true;
 
         LinkMailToOutput();
+        string debug = $"{mMain.mOutput.mTargetMail.mIsPrinted} | ";
         mMain.mOutput.mTargetMail.mIsPrinted = true;
+        debug += $"{mMain.mOutput.mTargetMail.mIsPrinted}";
+        Debug.Log(debug);
         
         
         mMain.StartCoroutine(SlideLabel(label, mLabelSpot.transform.position, mLabelSpot.transform.rotation, 5f));

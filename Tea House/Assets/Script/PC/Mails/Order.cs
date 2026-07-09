@@ -76,6 +76,55 @@ public class Order
     ///     0 sinon
     /// 2 point pour le prestige si pas de demande dans la commande => valeur max de prestige a 2
     /// 
+    public float EvaluateResult2(PackageScript suggestion, out float maxObtainable)
+    {
+        int evaluationLimit = mLimitHighAmount;
+        maxObtainable = 0;
+        string debug = "";
+        foreach(ItemData item in suggestion.mIngredients)
+        {
+            if(item is IngredientData)
+                evaluationLimit++;
+            maxObtainable += 3;
+        }
+        //Debug.Log(debug);
+        float totalResult = 0;
+        debug = "";
+        for(int i = 0; i < mOrderData.Count; i++)
+        {
+            StatValue suggestionStat = suggestion.mTotal.mStats[i];
+            if(suggestionStat.mStat == ItemData.Stat.Prestige) // TODO: Verify if prestige is asked
+            {
+                int prestige = suggestionStat.mValue;
+                if(prestige > 2)
+                    prestige = 2;
+                totalResult += prestige;
+                continue;
+            }
+
+            StatValue orderStat = mOrderData[i];
+            if(orderStat.mValue == 0) continue;
+
+            //maxObtainable++;
+            bool isHigh = orderStat.mValue >= evaluationLimit;
+            //debug += orderStat.mStat + ": " + orderStat.mValue + "=" + isHigh + " / " + suggestionStat.mValue + "=" + (suggestionStat.mValue >= evaluationLimit) + " | ";
+            
+            if((suggestionStat.mValue >= evaluationLimit) == isHigh)
+            {
+                totalResult++;
+                debug += "(suggestionStat.mValue >= evaluationLimit) == isHigh";
+            }
+            
+            int diff = 2 - Math.Abs(suggestionStat.mValue - orderStat.mValue);
+            if(diff > 2) 
+                diff = 2;
+            totalResult += diff;
+            debug += diff;
+        }
+        //Debug.Log(debug);
+
+        return totalResult > maxObtainable ? totalResult = maxObtainable : totalResult;
+    }
     public float EvaluateResult(PackageScript suggestion, out float maxObtainable)
     {
         int evaluationLimit = mLimitHighAmount;
