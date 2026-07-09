@@ -175,6 +175,8 @@ public class MailCanvasScript : MonoBehaviour
 
     public void SelectOrder(Mail mail)
     {
+        Debug.Log("test");
+
         if (!mOrdersDictionary.ContainsKey(mail))
             return;
 

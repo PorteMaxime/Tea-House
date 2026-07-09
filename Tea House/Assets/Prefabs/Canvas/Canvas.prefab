@@ -5015,6 +5015,7 @@ GameObject:
   - component: {fileID: 7730510050362606969}
   - component: {fileID: 4281290972871655235}
   - component: {fileID: 5456073389569016149}
+  - component: {fileID: 3390404115411091737}
   m_Layer: 5
   m_Name: MainPanel
   m_TagString: MainPanel
@@ -5070,6 +5071,18 @@ MonoBehaviour:
   mMoneyAmount: {fileID: 785856931840162935}
   mTimer: {fileID: 6799780412025495193}
   mNote: {fileID: 2533300474217845249}
+--- !u!225 &3390404115411091737
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7485564782371121579}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &7832943201101272971
 GameObject:
   m_ObjectHideFlags: 0
