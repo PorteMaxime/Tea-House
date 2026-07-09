@@ -142,12 +142,14 @@ public class MailCreator : MonoBehaviour
 
             if (mail.mText.Contains("{Stat}"))
             {
-                statAmount = GetRandomValue(StatLimit);
+                if (StatLimit != "")
+                    statAmount = GetRandomValue(StatLimit);
                 mail.mText = mail.mText.Replace("{Stat}", statAmount + stat.mStat.ToString());
             }
             else if (mail.mText.Contains("{StatSimple}"))
             {
-                statAmount = GetRandomValue(StatLimit + "Simple");
+                if (StatLimit != "")
+                    statAmount = GetRandomValue(StatLimit + "Simple");
                 mail.mText = mail.mText.Replace("{StatSimple}", statAmount + GetRandomValue(stat.mStat.ToString()));
             }
         }
