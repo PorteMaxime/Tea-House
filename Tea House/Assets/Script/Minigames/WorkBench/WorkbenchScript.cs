@@ -16,7 +16,8 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMixtureBowlPackagingPos;
     public InteractiveAreaScript mInteractiveArea;
 
-    public GameObject mCameraPosPackaging;
+    public InteractiveAreaScript mPackagingIArea;
+    //public GameObject mCameraPosPackaging;
     public GameObject mCameraPosCuttingBoard;
 
     public GameObject mMortarBowl;

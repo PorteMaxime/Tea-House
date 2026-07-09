@@ -97,7 +97,8 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         if(isUsing == false || otherIArea == null) return null;
         Quit();
-        otherIArea.Enter();
+        mCameraDepthMod.GoTo(otherIArea.transform.GetChild(0));
+        mCameraController.SetState(CameraController.CameraStates.Zoom);
         
         isSliding = true;
         return StartCoroutine(SlideToInteractiveArea(mPlayer, otherIArea, 0.5f));
@@ -117,5 +118,7 @@ public class InteractiveAreaScript : MonoBehaviour
 
         gameObject.transform.position = targetPos;
         isSliding = false;
+        mCameraDepthMod.Back();
+        targetIArea.Enter();
     }
 }

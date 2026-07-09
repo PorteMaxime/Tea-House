@@ -307,6 +307,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2998e815737864d469637b2896db7726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MailSystem
+--- !u!114 &222071332 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 75449315523746749, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+  m_PrefabInstance: {fileID: 6781908833951815434}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d1e6b75f295084b97db5bac231681f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractiveAreaScript
 --- !u!1 &276124178 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1360379395090381376, guid: 0a951a409213101409900dbdcc41c459, type: 3}
@@ -3473,6 +3484,10 @@ PrefabInstance:
       propertyPath: mQteValideZone
       value: 
       objectReference: {fileID: 70103664}
+    - target: {fileID: 4515451851522425227, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
+      propertyPath: mPackagingIArea
+      value: 
+      objectReference: {fileID: 222071332}
     - target: {fileID: 4515451851522425227, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
       propertyPath: mCameraController
       value: 

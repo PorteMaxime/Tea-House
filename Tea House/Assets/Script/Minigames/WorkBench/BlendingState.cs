@@ -90,19 +90,22 @@ public class BlendingState : IWorkbench
         {
             if(Mouse.current.leftButton.isPressed)
             {
-                mWorkbench.mCameraDepth.LerpingCamera(mWorkbench.mCameraPosPackaging.transform.position, mWorkbench.mCameraPosPackaging.transform.rotation, 0.5f);
-                mWorkbench.LerpGameObject(mWorkbench.mMixtureBowl, mWorkbench.mMixtureBowlPackagingPos.transform.position, 0.5f);
-
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, mWorkbench.mCameraPosPackaging.transform.position.z);
-                mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
-                
-                mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
+                SwitchToPackaging();
             }
         }
     }
     public void OnExit()
     {
         mWorkbench.mPanelSwap.SetActive(false);
+    }
+
+    private void SwitchToPackaging()
+    {
+        mWorkbench.LerpGameObject(mWorkbench.mMixtureBowl, mWorkbench.mMixtureBowlPackagingPos.transform.position, 0.5f);
+        mWorkbench.mInteractiveArea.GoTo(mWorkbench.mPackagingIArea);
+
+        mWorkbench.mPackaging.SetIngredientData(mWorkbench.mMixture);
+                
+        mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
     }
 }
