@@ -35,7 +35,7 @@ MonoBehaviour:
   mAmountJar1: {fileID: 6799881361010892946, guid: fae281ed2d82b3341af50ce8c49b3363, type: 3}
   mAmountJar2: {fileID: 8594055693139799737, guid: b014c9cd75c0d254b854f5ac1a852b33, type: 3}
   mAmountJar3: {fileID: 812632277191400347, guid: cc10c62da2b4e3c408e8570b96a10feb, type: 3}
-  mFragIngredient: {fileID: 0}
-  mFragGrab: {fileID: 919132149155446097, guid: f951336b16616f24383ec22e20f924b6, type: 3}
+  mFragIngredient: {fileID: 4041635124199039779, guid: ac6ef1ec8b16898419f7dae3f8fd18c2, type: 3}
+  mFragGrab: {fileID: 6659387170048281851, guid: a0c2f58a043ac1248856acbee53b7f1a, type: 3}
   mCuttingBoardIngredient: {fileID: 3001755108836661581, guid: e4963dcbe954a94498d5da6c77146ab9, type: 3}
   mType: 2

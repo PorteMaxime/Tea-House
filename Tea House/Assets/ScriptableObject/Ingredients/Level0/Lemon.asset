@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lemon
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Lemon
-  mPrefab: {fileID: 7708491798363613225, guid: 8d3ed9f1fd6bf2f4daab09b5c2e39bd8, type: 3}
+  mPrefab: {fileID: 5684835340048231715, guid: 237d0e4221267d8448cf3721b2005b41, type: 3}
   mIsUnlocked: 1
   mStats:
   - mStatVar: 0
@@ -37,4 +37,5 @@ MonoBehaviour:
   mAmountJar3: {fileID: 2882629181238737429, guid: 9036e9c924d9a0b40953df25e9b0ed7c, type: 3}
   mFragIngredient: {fileID: 0}
   mFragGrab: {fileID: 0}
+  mCuttingBoardIngredient: {fileID: 0}
   mType: 0

@@ -75,4 +75,6 @@ public class ItemData : ScriptableObject
 
         return (int)opposites[stat];
     }
+
+    public GameObject mInfosPage;
 }
