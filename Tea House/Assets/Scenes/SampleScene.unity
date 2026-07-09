@@ -2623,6 +2623,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 785856931840162935, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
+      propertyPath: m_margin.z
+      value: 57.26773
+      objectReference: {fileID: 0}
+    - target: {fileID: 785856931840162935, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
+      propertyPath: m_TextWrappingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3630047264415227874, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -2809,7 +2817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7485564782371121579, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

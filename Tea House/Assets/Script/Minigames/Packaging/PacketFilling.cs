@@ -2,7 +2,6 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System;
 
@@ -115,7 +114,7 @@ public class PacketFilling : IPackaging
             {
                 mDragAndDrop.StopDragging();
                 mFillingCoroutine = mMain.StartCoroutine(FillPackage(mBowl, Quaternion.Euler(130f, 0, 0), 1f));
-                mMain.mOutput.AddStat(mMixture);
+                mMain.mOutput.AddIngredient(mMixture);
                 mMain.mCompleting.mIsFilled = true;
                 mMain.mCompleting.mIsChoosed = true;
             }

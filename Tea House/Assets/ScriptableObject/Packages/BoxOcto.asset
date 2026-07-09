@@ -16,14 +16,18 @@ MonoBehaviour:
   mPrefab: {fileID: 0}
   mIsUnlocked: 1
   mStats:
-  - mStat: 0
-    mValue: 0
-  - mStat: 1
-    mValue: 0
-  - mStat: 2
-    mValue: 0
-  - mStat: 3
-    mValue: 0
-  - mStat: 4
-    mValue: 0
+  - mStatVar: 0
+    mValueVar: 0
+  - mStatVar: 1
+    mValueVar: 0
+  - mStatVar: 2
+    mValueVar: 0
+  - mStatVar: 3
+    mValueVar: 0
+  - mStatVar: 4
+    mValueVar: 0
+  - mStatVar: 5
+    mValueVar: 0
+  - mStatVar: 6
+    mValueVar: 0
   mPrice: 0

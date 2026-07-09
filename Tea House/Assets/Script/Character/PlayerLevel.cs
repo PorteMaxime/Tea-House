@@ -29,10 +29,10 @@ public class PlayerLevel : MonoBehaviour
     {
         if(level == 1)
         {
-            Debug.Log("test");
+            //Debug.Log("test");
             foreach(ItemData item in itemLevel1)
             {
-                Debug.Log(item.name);
+                //Debug.Log(item.name);
                 item.mIsUnlocked = true;
             }
         }

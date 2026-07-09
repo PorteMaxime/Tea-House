@@ -48,7 +48,7 @@ public class DatabaseManager : MonoBehaviour
 
     async void Start()
     {
-        // Chargement des données
+        // Chargement des donnï¿½es
         LoadingScript.msInstance.StartLoading(false, 1, 1);
 
         try
@@ -59,7 +59,7 @@ public class DatabaseManager : MonoBehaviour
         {
             LoadingScript.msInstance.StopLoading();
 
-            // Création de mails si c'est le premier jour
+            // Crï¿½ation de mails si c'est le premier jour
             if (mDaylight.mCurrentDay <= 0)
                 mMailCreator.CreateDailyMails();
 

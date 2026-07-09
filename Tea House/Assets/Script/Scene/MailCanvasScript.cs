@@ -153,6 +153,8 @@ public class MailCanvasScript : MonoBehaviour
     {
         mMailSystem.ChangeOrderState(mSelectedMail.Item1, Order.State.Accepted);
 
+        Debug.Log(mSelectedMail.Item1.mOrder);
+
         CreateOrderPrefab(mSelectedMail.Item1);
 
         RemoveMailPrefab(mSelectedMail.Item1);
@@ -270,10 +272,23 @@ public class MailCanvasScript : MonoBehaviour
             Debug.Log("Order can't be send");
             return; // Not completed
         }
-
-        int score = package.GetCompletionScore(); // => function to complete with scoring system
-        Destroy(package.gameObject);
+        package.MakeTotal();
+        
         // TODO: Consequences of completion
+        float result = package.mTargetMail.mOrder.EvaluateResult(package, out float maxObtainable); // Add Prestige
+        float winnedMoney = 0;
+        foreach(ItemData item in package.mIngredients)
+            winnedMoney += item.mPrice;
+
+        float mult = (result / maxObtainable * 0.5f) + 1f; // TODO: Adjust with right win multipliers (0.25f)
+        winnedMoney *= mult;
+        
+        Debug.Log(result + " | " + maxObtainable + " | " + mult + " | " + winnedMoney);
+        Debug.Log(package.mTargetMail.mOrder);
+
+        Destroy(package.gameObject);
+        mPackInv.RemovePackage(package);
+
         mMailSystem.ChangeOrderState(mSelectedOrder.Item1, Order.State.Completed);
 
         UpdatePrefabState(mSelectedOrder.Item1);
@@ -283,7 +298,8 @@ public class MailCanvasScript : MonoBehaviour
             mSelectedOrder = null;
             ToggleOrderContent(false);
         }
-        
+
+        Inventory.msInstance.mMoneyAmount += (int)Mathf.Round(winnedMoney);
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLevel>().Addxp(10);
     }
 

@@ -29,8 +29,8 @@ MonoBehaviour:
   - mStatVar: 5
     mValueVar: 0
   - mStatVar: 6
-    mValueVar: 0
-  mPrice: 0
+    mValueVar: 5
+  mPrice: 1
   mIngredientGrab: {fileID: 0}
   mAmountJar1: {fileID: 5958749855929363553, guid: c57f8caa38fb55d448aab931a11edfdd, type: 3}
   mAmountJar2: {fileID: 2636758757040711856, guid: 21b7a3b2ef855d345a225476c6beb10b, type: 3}

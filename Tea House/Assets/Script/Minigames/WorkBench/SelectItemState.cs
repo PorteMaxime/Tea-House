@@ -85,7 +85,7 @@ public class SelectItemState : IWorkbench
                     }
                     else
                     {
-                        Debug.Log("Can't cut this !");
+                        //Debug.Log("Can't cut this !");
                     }
                 }
                 else if (mWorkbench.mMixtureBowl.transform.GetChild(0).GetComponent<WorkingPoint>().IsColliding(mWorkbench.currentItemG))
@@ -97,7 +97,7 @@ public class SelectItemState : IWorkbench
                     }
                     else
                     {
-                        Debug.Log("Item Need transformation !");
+                        //Debug.Log("Item Need transformation !");
                     }
                 }
             }

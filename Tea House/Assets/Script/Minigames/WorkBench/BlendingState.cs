@@ -82,7 +82,7 @@ public class BlendingState : IWorkbench
         }
         if(canSwap == false && mIsBlended == true && InputManager.Get().mPlayerInteract.Player.Select.WasReleasedThisFrame())
         {
-            Debug.Log("canSwap");
+            //Debug.Log("canSwap");
             canSwap = true;
         }
 

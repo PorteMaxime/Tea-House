@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PackageInventory_UIManager : MonoBehaviour
 {
-    private class UI_Slot
+    public class UI_Slot
     {
         #region Usage Icon
         static public Color usedColor = Color.gray;
@@ -52,8 +52,8 @@ public class PackageInventory_UIManager : MonoBehaviour
         }
     }
 
-    private List<UI_Slot> mSlots = new List<UI_Slot>();
-    private List<PackageScript> mPackages = null;
+    public List<UI_Slot> mSlots = new List<UI_Slot>();
+    public List<PackageScript> mPackages = null;
 
     private InteractiveAreaScript mIArea = null;
     private InteractiveAreaScript mComputerIArea = null;
@@ -76,54 +76,27 @@ public class PackageInventory_UIManager : MonoBehaviour
 
     public void LinkPackageList(List<PackageScript> packageList) => mPackages = packageList;
 
-    public void AddPackage(PackageScript package)
-    {
-        int index = mPackages.IndexOf(package);
-        if(index == -1)
-        {
-            Debug.Log("Error AddPackage in UI");
-            return;
-        }
-        UI_Slot slot = mSlots[index];
-        slot.Reset();
-        slot.mUsedIcon.color = UI_Slot.usedColor;
-        slot.mOrderName.text = package.mTargetMail.mName;
-
-        slot.mThrowListener = () => ThrowPackage(index);
-        slot.mThrowButton.onClick.AddListener(slot.mThrowListener);
-        slot.mToComputerListener = () => PackageToComputer(index);
-        slot.mToComputerButton.onClick.AddListener(slot.mToComputerListener);
-        RefreshPackage();
-    }
-
     public void RefreshPackage()
     {
-        for(int i = mPackages.Count - 1; i >= 0; i--)
+        for(int i = mSlots.Count - 1; i >= 0; i--)
         {
-            int index = i;
-            if(mPackages[index] != null)
+            mSlots[i].Reset();
+            if(i < mPackages.Count && mPackages[i] != null)
             {
-                UI_Slot slot = mSlots[index];
-                slot.Reset();
+                UI_Slot slot = mSlots[i];
                 slot.mUsedIcon.color = UI_Slot.usedColor;
-                slot.mOrderName.text = mPackages[index].mTargetMail.mName;
+                slot.mOrderName.text = mPackages[i].mTargetMail.mName;
 
-                slot.mThrowListener = () => ThrowPackage(index);
+                int toCall = i;
+                slot.mThrowListener = () => ThrowPackage(toCall);
                 slot.mThrowButton.onClick.AddListener(slot.mThrowListener);
-                slot.mToComputerListener = () => PackageToComputer(index);
+                slot.mToComputerListener = () => PackageToComputer(toCall);
                 slot.mToComputerButton.onClick.AddListener(slot.mToComputerListener);
             }
             else
             {
-                UI_Slot slot = mSlots[index];
-                slot.Reset();
-                mPackages.RemoveAt(index);
+                //mPackages.RemoveAt(i);
             }
-        }
-        for(int i = mPackages.Count; i < mSlots.Count; i++)
-        {
-                UI_Slot slot = mSlots[i];
-                slot.Reset();
         }
     }
 
@@ -140,6 +113,7 @@ public class PackageInventory_UIManager : MonoBehaviour
 
     public void PackageToComputer(int packageIndex)
     {
+        Debug.Log(packageIndex);
         // TODO: Send to computer => get result + send
         StartCoroutine(ToComputer(packageIndex));
     }

@@ -53,14 +53,18 @@ public class PacketLabelPrinting : IPackaging
         mDepthView.GoTo(mPrinterViewPoint.transform);
         InputManager.Get().mPlayerInteract.Player.Open.Disable();
 
+        List<Mail> toRemove = new List<Mail>();
         foreach (Mail mail in mOrders.Keys)
         {
+            if(mail == null) mOrders.Remove(mail);
             if (mail.mOrder.mState != Order.State.Accepted)
             {
                 GameObject.Destroy(mOrders[mail]);
-                mOrders.Remove(mail);
+                toRemove.Add(mail);
             }
         }
+        foreach(Mail remove in toRemove)
+            mOrders.Remove(remove);
 
         List<Mail> mails =  mMain.mMailSystem.GetMailsOfState(Order.State.Accepted);
         foreach (Mail mail in mails)
