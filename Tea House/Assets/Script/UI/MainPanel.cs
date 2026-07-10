@@ -17,7 +17,7 @@ public class MainPanel : MonoBehaviour
     {
         if (gameObject.activeSelf == false)
             return;
-        mMoneyAmount.text = "Money : " + Inventory.msInstance.mMoneyAmount.ToString() + "$";
+        mMoneyAmount.text = Inventory.msInstance.mMoneyAmount.ToString();
         mTimer.text = mDayLight.GetInGameTime();
     }
 }

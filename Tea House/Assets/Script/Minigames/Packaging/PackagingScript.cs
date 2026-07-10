@@ -115,7 +115,7 @@ public class PackagingScript : MonoBehaviour
         mStateMachine.SwitchState(mCompleting);
     }
 
-    public void ThrowLabel() => mCompleting.ThrowLabel();
+    public void ThrowLabel(bool toDo) => mCompleting.ThrowLabel(toDo);
 
-    public void ExportPackage() => mCompleting.ExportPackage();
+    public void ExportPackage(bool toDo) => mCompleting.ExportPackage(toDo);
 }

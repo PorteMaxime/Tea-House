@@ -42,10 +42,8 @@ public class Camera_InteractionHighlight : ICameraControllerMod
 
         if (mInteractionFields.Count == 0)
         {
-            // TODO : ZOOMED => TO ORBITAL
             mMain.GetControllerMod<Camera_DepthView>().Back();
             mMain.SetState(CameraController.CameraStates.Orbital);
-            //StopDragging();
         }
     }
     public bool CanInteractWith(InteractiveAreaScript target)

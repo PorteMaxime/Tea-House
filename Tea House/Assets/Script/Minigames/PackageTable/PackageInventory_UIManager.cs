@@ -105,19 +105,15 @@ public class PackageInventory_UIManager : MonoBehaviour
     {
         if(packageIndex < mPackages.Count)
         {
-            GameObject package = mPackages[packageIndex].gameObject;
+            PackageScript package = mPackages[packageIndex];
             mPackages[packageIndex] = null;
-            Destroy(package);
+            package.mTargetMail.mIsPrinted = false;
+            Destroy(package.gameObject);
         }
         RefreshPackage();
     }
 
-    public void PackageToComputer(int packageIndex)
-    {
-        Debug.Log(packageIndex);
-        // TODO: Send to computer => get result + send
-        StartCoroutine(ToComputer(packageIndex));
-    }
+    public void PackageToComputer(int packageIndex) => StartCoroutine(ToComputer(packageIndex));
 
     IEnumerator ToComputer(int packageIndex)
     {
