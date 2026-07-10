@@ -7,8 +7,8 @@ public class MailCreator : MonoBehaviour
     [SerializeField] private Daylight mDaylight;
     [SerializeField] private DatabaseManager mDatabaseManager;
 
-    [SerializeField] private List<MailPreset> mMailsPresets = new List<MailPreset>();
-    //private Dictionary<int, List<MailPreset>> mMailsPresetsB = new Dictionary<int, List<MailPreset>>();
+    //[SerializeField] private List<MailPreset> mMailsPresets = new List<MailPreset>();
+    private Dictionary<int, List<MailPreset>> mMailsPresets = new Dictionary<int, List<MailPreset>>();
 
     private Vector2Int mIngredientsAmount = new Vector2Int(1, 3);
     private Vector2Int mDurationRange = new Vector2Int(2, 7);
@@ -32,6 +32,17 @@ public class MailCreator : MonoBehaviour
     {
         // Chargement des donnees depuis la bdd
         mMailRandomContent = mDatabaseManager.LoadMailRandomValues();
+
+        // Recuperation des presets de mails
+        MailPreset[] mailsPresets = Resources.LoadAll<MailPreset>("MailsPresets");
+
+        foreach (MailPreset mail in mailsPresets)
+        {
+            if (!mMailsPresets.ContainsKey(mail.mPresetLevel))
+                mMailsPresets.Add(mail.mPresetLevel, new List<MailPreset>());
+
+            mMailsPresets[mail.mPresetLevel].Add(mail);
+        }
     }
 
     public void CreateDailyMails()
@@ -47,9 +58,16 @@ public class MailCreator : MonoBehaviour
         // Si preset mail
         if (Random.Range(0, 101) <= mPresetProbability && mMailsPresets.Count > 0)
         {
-            // get all as int / random in all ?
+            int playerLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLevel>().level;
 
-            mail = mMailsPresets[Random.Range(0, mMailsPresets.Count)].CreateMail();
+            List<MailPreset> availableMails = new List<MailPreset>();
+
+            foreach (var pair in mMailsPresets)
+                if (pair.Key <= playerLevel)
+                    availableMails.AddRange(pair.Value);
+
+            mail = availableMails[Random.Range(0, availableMails.Count)].CreateMail();
+
 
             CreateMailData(mail);
         }
@@ -72,7 +90,8 @@ public class MailCreator : MonoBehaviour
         Sprite mailSprite = mImages[Random.Range(0, mImages.Count)];
         mail.mPicture = mailSprite;
         mail.mPictureName = mailSprite.name;
-        mail.mName = GetRandomValue("FirstName") + " " + GetRandomValue("LastName");
+        if (mail.mName == "")
+            mail.mName = GetRandomValue("FirstName") + " " + GetRandomValue("LastName");
         mail.mSendDay = mDaylight.mCurrentDay + 1 + Random.Range(0, mCalendar.Length);
 
         if (mail.mDuration <= 0)

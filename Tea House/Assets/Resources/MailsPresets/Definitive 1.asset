@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c1ca02648c86548bbd1f4f8434a12b, type: 3}
+  m_Name: Definitive 1
+  m_EditorClassIdentifier: Assembly-CSharp::MailPreset
+  mName: xX_SpicedTea_Xx
+  mData:
+  - mStatVar: 0
+    mValueVar: 5
+  - mStatVar: 1
+    mValueVar: 0
+  - mStatVar: 2
+    mValueVar: 0
+  - mStatVar: 3
+    mValueVar: 0
+  - mStatVar: 4
+    mValueVar: 0
+  - mStatVar: 5
+    mValueVar: 1
+  - mStatVar: 6
+    mValueVar: 0
+  mText: 'Hey !
+
+    I need some tea, in at max 5 days.
+
+    I want something spicy,
+    like, really spicy !
+
+    And I also want to get a tiiiny bit of tanginess. But
+    the spicyness is the most important thing !
+
+
+    Bye.'
+  mDuration: 5
+  mPresetLevel: 1

@@ -4,11 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewMailPreset", menuName = "Scriptable Objects/MailPreset")]
 public class MailPreset : ScriptableObject
 {
-    [SerializeField] private BaseData mBase;
-    [SerializeField] private List<IngredientData> mIngredients = new List<IngredientData>();
-    [SerializeField] private PackageData mPackageData;
+    [SerializeField] private string mName = "Bob";
 
-    [SerializeField] private string mText = "";
+    [SerializeField] private List<StatValue> mData = new List<StatValue>();
+
+    [SerializeField] [TextArea] private string mText = "Hi. I'm Bob.";
     [SerializeField] private int mDuration = 0;
 
     public int mPresetLevel = 1;
@@ -17,6 +17,7 @@ public class MailPreset : ScriptableObject
     {
         Mail mail = new Mail();
 
+        mail.mName = mName;
         mail.mText = mText;
         mail.mDuration = mDuration;
 
@@ -29,16 +30,7 @@ public class MailPreset : ScriptableObject
     {
         Order order = new Order();
 
-        if (mBase != null)
-            order.AddStats(mBase.mStats);
-
-        foreach (IngredientData ingredient in mIngredients)
-        {
-            order.AddStats(ingredient.mStats);
-        }
-
-        if (mPackageData != null)
-            order.AddStats(mBase.mStats);
+        order.mOrderData = mData;
 
         mail.SetOrder(order);
     }

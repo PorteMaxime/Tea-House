@@ -12,12 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c1ca02648c86548bbd1f4f8434a12b, type: 3}
   m_Name: Preset Test
   m_EditorClassIdentifier: Assembly-CSharp::MailPreset
-  mBase: {fileID: 11400000, guid: 074e77102efb47c48b77b8f285982a83, type: 2}
-  mIngredients:
-  - {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  - {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  - {fileID: 11400000, guid: ae67c9a402f85a5498d0a2309cfd4395, type: 2}
-  mPackageData: {fileID: 0}
-  mText: "Ceci est un mail de test, dur\xE9e de 10 jours, contient : Green tea, Mint
-    x3"
+  mName: test nom
+  mData:
+  - mStatVar: 0
+    mValueVar: 5
+  - mStatVar: 1
+    mValueVar: 0
+  - mStatVar: 2
+    mValueVar: 5
+  - mStatVar: 3
+    mValueVar: 0
+  - mStatVar: 4
+    mValueVar: 5
+  - mStatVar: 5
+    mValueVar: 0
+  - mStatVar: 6
+    mValueVar: 5
+  mText: "Ceci est un mail de test, dur\xE9e de 10 jours, contient :warmth, relaxation,
+    sweetness et prestige x5"
   mDuration: 10
+  mPresetLevel: 1
