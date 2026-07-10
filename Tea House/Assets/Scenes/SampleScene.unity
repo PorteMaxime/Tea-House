@@ -6075,6 +6075,10 @@ PrefabInstance:
       propertyPath: mMailCreator
       value: 
       objectReference: {fileID: 219230984}
+    - target: {fileID: 2735390859510243914, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
+      propertyPath: mMailCanvasScript
+      value: 
+      objectReference: {fileID: 2135722746}
     - target: {fileID: 3298393706160921457, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.54592
@@ -6430,6 +6434,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -44.44586
       objectReference: {fileID: 0}
+    - target: {fileID: 3826198980629853728, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
+      propertyPath: mDaylight
+      value: 
+      objectReference: {fileID: 1435202341}
     - target: {fileID: 5639566522263888000, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
       propertyPath: m_IsActive
       value: 0
