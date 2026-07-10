@@ -1155,6 +1155,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 644a5961a1860504cbb375b8b0a3c8e1, type: 2}
   itemLevel5:
   - {fileID: 11400000, guid: 852fd030af483c94fae7fc8cac092837, type: 2}
+--- !u!114 &694355205 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3699390301419172163, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+  m_PrefabInstance: {fileID: 7778896174472154821}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &705107500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,6 +1246,17 @@ Light:
   m_CorrespondingSourceObject: {fileID: 2274463650786246165, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
   m_PrefabInstance: {fileID: 4943712731299416837}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &803597888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3550725415811428986, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+  m_PrefabInstance: {fileID: 7778896174472154821}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
 --- !u!1 &871874764 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7164011568742595116, guid: 0a951a409213101409900dbdcc41c459, type: 3}
@@ -1277,6 +1299,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 187869321}
     - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mTextOrderContent
+      value: 
+      objectReference: {fileID: 803597888}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
       propertyPath: mCanvasMailContent
       value: 
       objectReference: {fileID: 1399115514}
@@ -1300,6 +1326,10 @@ PrefabInstance:
       propertyPath: mMailsScrollViewContent
       value: 
       objectReference: {fileID: 7778896174472154822}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mSendButtonOrderContent
+      value: 
+      objectReference: {fileID: 694355205}
     - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
       propertyPath: mOrdersScrollViewContent
       value: 

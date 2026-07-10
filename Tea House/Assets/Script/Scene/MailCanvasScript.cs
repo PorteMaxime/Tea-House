@@ -33,6 +33,8 @@ public class MailCanvasScript : MonoBehaviour
     [SerializeField] private GameObject mOrdersScrollViewContent;
 
     [SerializeField] private GameObject mCanvasOrderContent;
+    [SerializeField] private Text mTextOrderContent;
+    [SerializeField] private Button mSendButtonOrderContent;
 
     private Tuple<Mail, GameObject> mSelectedOrder = null;
     public Dictionary<Mail, GameObject> mOrdersDictionary = new Dictionary<Mail, GameObject>();
@@ -179,7 +181,7 @@ public class MailCanvasScript : MonoBehaviour
         if (!mOrdersDictionary.ContainsKey(mail))
             return;
 
-        // Si l'order est d�j� s�lectionn�
+        // Si l'order est deja selectionne
         if (mSelectedOrder != null && mail == mSelectedOrder.Item1)
             return;
 
@@ -187,14 +189,10 @@ public class MailCanvasScript : MonoBehaviour
 
         mOrderImageProfile.GetComponent<Image>().sprite = mail.mPicture;
 
-        Transform temp = mCanvasOrderContent.transform.Find("TextMailContent");
-        if (temp != null)
-            temp.GetComponent<Text>().text = mail.mText;
+        mTextOrderContent.text = mail.mText;
 
-        // Active ou d�sactive le bouton "envoyer"
-        Transform sendButton = mCanvasOrderContent.transform.Find("ButtonSend");
-        if (sendButton != null)
-            sendButton.GetComponent<Button>().interactable = mail.mOrder.mState == Order.State.Accepted ? true : false;
+        // Active ou desactive le bouton "envoyer"
+        mSendButtonOrderContent.interactable = mail.mOrder.mState == Order.State.Accepted ? true : false;
 
         ToggleOrderContent(true);
     }
@@ -255,9 +253,7 @@ public class MailCanvasScript : MonoBehaviour
         if (temp != null)
             temp.GetComponent<Text>().text = mail.mOrder.mState.ToString();
 
-        Transform sendButton = mCanvasOrderContent.transform.Find("ButtonSend");
-        if (sendButton != null)
-            sendButton.GetComponent<Button>().interactable = mail.mOrder.mState == Order.State.Accepted ? true : false;
+        mSendButtonOrderContent.interactable = mail.mOrder.mState == Order.State.Accepted ? true : false;
 
         UpdateOrdersVisibility();
     }
