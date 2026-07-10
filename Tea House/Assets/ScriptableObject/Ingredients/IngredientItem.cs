@@ -11,6 +11,7 @@ public class IngredientItem : ItemData
 
     public GameObject mFragIngredient;
     public GameObject mFragGrab;
+    public GameObject mCuttingBoardIngredient;
 
     public TransformType mType;
 
