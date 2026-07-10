@@ -105,6 +105,26 @@ public class DatabaseManager : MonoBehaviour
         return randomValues;
     }
 
+    public async Task CleanDatabase()
+    {
+        int currentDay = mDaylight.mCurrentDay;
+
+        List<Mail> toDelete = mMailSystem.mMails.Values.SelectMany(mails => mails).Where(mail => currentDay > mail.mSendDay + mail.mDuration).ToList();
+
+        await Task.Run(() =>
+        {
+            string ids = string.Join(",", toDelete.Select(mail => mail.id));
+
+            string queryStats = "DELETE FROM Stat WHERE mailId in (" + ids + ");";
+            string queryOrders = "DELETE FROM 'Order' WHERE mailId in (" + ids + ");";
+            string queryMails = "DELETE FROM Mail WHERE id in (" + ids + ");";
+
+            mDatabase.Execute(queryStats);
+            mDatabase.Execute(queryOrders);
+            mDatabase.Execute(queryMails);
+        });
+    }
+
     public async Task LoadGame()
     {
         if (mIsDatabaseInUse == true)
@@ -140,6 +160,8 @@ public class DatabaseManager : MonoBehaviour
             await SaveInventory();
 
             await SaveMails();
+
+            await CleanDatabase();
         }
         finally
         {
