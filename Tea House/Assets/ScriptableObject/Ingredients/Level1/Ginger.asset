@@ -15,6 +15,8 @@ MonoBehaviour:
   mName: Ginger
   mPrefab: {fileID: 1572811026207813877, guid: cccc2e77ac847e040a7490e3b1fa8085, type: 3}
   mIsUnlocked: 1
+  sprite: {fileID: 21300000, guid: 10964b91664908646a73f43e5780b258, type: 3}
+  infoPage: {fileID: 21300000, guid: ff82251955fbb6148916005081b797df, type: 3}
   mStats:
   - mStatVar: 0
     mValueVar: 2
@@ -31,6 +33,7 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 0
   mPrice: 6
+  mInfosPage: {fileID: 0}
   mIngredientGrab: {fileID: 0}
   mAmountJar1: {fileID: 1488206898366149284, guid: 29bdfb1c47aacbb41a04d98c8a9df4c6, type: 3}
   mAmountJar2: {fileID: 3270173040792375608, guid: db92456654ec442428217134bec45899, type: 3}

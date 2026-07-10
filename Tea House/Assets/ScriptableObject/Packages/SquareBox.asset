@@ -15,6 +15,7 @@ MonoBehaviour:
   mName: Square Box
   mPrefab: {fileID: 0}
   mIsUnlocked: 1
+  sprite: {fileID: 21300000, guid: 1a5f2db6345bdd141a07e734dc7ab089, type: 3}
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -27,3 +28,4 @@ MonoBehaviour:
   - mStatVar: 0
     mValueVar: 0
   mPrice: 0
+  mInfosPage: {fileID: 0}

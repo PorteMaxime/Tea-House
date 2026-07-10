@@ -15,6 +15,8 @@ MonoBehaviour:
   mName: Lavender
   mPrefab: {fileID: 443525240605445967, guid: 72d6b9fc363c15e41a0761944ac067f5, type: 3}
   mIsUnlocked: 1
+  sprite: {fileID: 21300000, guid: bde075fb45ed20e4098c913ec2a2f0de, type: 3}
+  infoPage: {fileID: 21300000, guid: 4ee8b16fb59de014e8f2f82aab3acc97, type: 3}
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -31,6 +33,7 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 0
   mPrice: 8
+  mInfosPage: {fileID: 0}
   mIngredientGrab: {fileID: 0}
   mAmountJar1: {fileID: 5486132186296425149, guid: 71e8ef13099c2ea41b0becaee5ea166d, type: 3}
   mAmountJar2: {fileID: 2239751761719933281, guid: 7b405ddf176b5944f8e23c74bcdd7c49, type: 3}

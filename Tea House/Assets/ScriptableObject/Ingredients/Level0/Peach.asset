@@ -15,6 +15,8 @@ MonoBehaviour:
   mName: Peach
   mPrefab: {fileID: 6133319570607198218, guid: c74e23ca4ca2fb34db704c22e369582b, type: 3}
   mIsUnlocked: 1
+  sprite: {fileID: 21300000, guid: 304100929c5c29d4bb7f7da158cb3fe8, type: 3}
+  infoPage: {fileID: 21300000, guid: 8d7004ca6ae6ed745a54440d8d7e6d59, type: 3}
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -31,6 +33,7 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 0
   mPrice: 0
+  mInfosPage: {fileID: 0}
   mIngredientGrab: {fileID: 0}
   mAmountJar1: {fileID: 5958749855929363553, guid: c57f8caa38fb55d448aab931a11edfdd, type: 3}
   mAmountJar2: {fileID: 2636758757040711856, guid: 21b7a3b2ef855d345a225476c6beb10b, type: 3}

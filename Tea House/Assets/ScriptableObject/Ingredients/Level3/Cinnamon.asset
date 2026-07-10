@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Cinnamon
   mPrefab: {fileID: 2148563111807763822, guid: 6a10cee2743f9fc49b35e384018c6c1d, type: 3}
-  mIsUnlocked: 1
+  mIsUnlocked: 0
+  sprite: {fileID: 21300000, guid: 52e1f342605989040814c4dc49207013, type: 3}
+  infoPage: {fileID: 21300000, guid: f5c08026d9ecab74f8aaf199b8c9114d, type: 3}
   mStats:
   - mStatVar: 0
     mValueVar: 2
@@ -31,6 +33,7 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 1
   mPrice: 3
+  mInfosPage: {fileID: 0}
   mIngredientGrab: {fileID: 0}
   mAmountJar1: {fileID: 2228715544752922258, guid: f81808a33dbfa5f4997a3352598c9b79, type: 3}
   mAmountJar2: {fileID: 5113334274895614552, guid: 5ff7cef58841f1541aef179ac413af74, type: 3}

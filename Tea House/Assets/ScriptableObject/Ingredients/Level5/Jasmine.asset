@@ -15,6 +15,8 @@ MonoBehaviour:
   mName: Jasmine
   mPrefab: {fileID: 7587948154604308548, guid: f23ec614fcb6578459eb0f7cb3a1ff7f, type: 3}
   mIsUnlocked: 1
+  sprite: {fileID: 21300000, guid: 35db5a89787c3dc4099c634f5d7e01dc, type: 3}
+  infoPage: {fileID: 21300000, guid: bb43d67da69e12f42bb1b35c2b6708ed, type: 3}
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -31,6 +33,7 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 2
   mPrice: 7
+  mInfosPage: {fileID: 0}
   mIngredientGrab: {fileID: 0}
   mAmountJar1: {fileID: 6799881361010892946, guid: fae281ed2d82b3341af50ce8c49b3363, type: 3}
   mAmountJar2: {fileID: 8594055693139799737, guid: b014c9cd75c0d254b854f5ac1a852b33, type: 3}

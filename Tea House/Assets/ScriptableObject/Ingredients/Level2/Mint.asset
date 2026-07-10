@@ -15,6 +15,8 @@ MonoBehaviour:
   mName: Mint
   mPrefab: {fileID: 2086405798350031596, guid: a6b9b8b42c0914942b1ba417d72aeea7, type: 3}
   mIsUnlocked: 1
+  sprite: {fileID: 21300000, guid: 24b3960a20891b7458b65e6451fafaa0, type: 3}
+  infoPage: {fileID: 21300000, guid: e9a151f966ce5124092eca4717446277, type: 3}
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -31,6 +33,7 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 0
   mPrice: 9
+  mInfosPage: {fileID: 0}
   mIngredientGrab: {fileID: 0}
   mAmountJar1: {fileID: 3361823228832995955, guid: 8c9aeb812261a3449ab135fca15abf18, type: 3}
   mAmountJar2: {fileID: 5044555026525103796, guid: 3c38be8068eb333409adfddc278bc844, type: 3}

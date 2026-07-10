@@ -15,6 +15,8 @@ MonoBehaviour:
   mName: Dried Orange
   mPrefab: {fileID: 1169831623523084331, guid: e130eb29afc0a3d479330e798ad35ba1, type: 3}
   mIsUnlocked: 1
+  sprite: {fileID: 21300000, guid: e93656b0a0220a24885a413379f2cb4e, type: 3}
+  infoPage: {fileID: 21300000, guid: b551168e21d288144b042e2ea14fccb1, type: 3}
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -31,6 +33,7 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 0
   mPrice: 5
+  mInfosPage: {fileID: 0}
   mIngredientGrab: {fileID: 0}
   mAmountJar1: {fileID: 1875786729671370868, guid: 25f800c524f78e84280658f98cd4d58d, type: 3}
   mAmountJar2: {fileID: 2358351959534723861, guid: d1e4c7847f95d3046acb2c7153e9a2f0, type: 3}
