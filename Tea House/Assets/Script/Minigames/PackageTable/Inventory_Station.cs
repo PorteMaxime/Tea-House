@@ -42,7 +42,7 @@ public class Inventory_Station : MonoBehaviour
     public PackageScript GetPackage(Mail orderMail)
     {
         if(orderMail.mIsPrinted == false) return null;
-
+        RefreshPackage();
         foreach(PackageScript package in mPackages)
         {
             if(package.mTargetMail == orderMail)

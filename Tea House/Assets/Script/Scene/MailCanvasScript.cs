@@ -153,7 +153,7 @@ public class MailCanvasScript : MonoBehaviour
     {
         mMailSystem.ChangeOrderState(mSelectedMail.Item1, Order.State.Accepted);
 
-        Debug.Log(mSelectedMail.Item1.mOrder);
+        //Debug.Log(mSelectedMail.Item1.mOrder);
 
         CreateOrderPrefab(mSelectedMail.Item1);
 
@@ -283,8 +283,8 @@ public class MailCanvasScript : MonoBehaviour
         float mult = (result / maxObtainable * 0.5f) + 1f; // TODO: Adjust with right win multipliers (0.25f)
         winnedMoney *= mult;
         
-        Debug.Log(package.mTargetMail.mOrder);
-        Debug.Log(result + " | " + maxObtainable + " | " + mult + " | " + winnedMoney);
+        // Debug.Log(package.mTargetMail.mOrder);
+        // Debug.Log(result + " | " + maxObtainable + " | " + mult + " | " + winnedMoney);
 
         string score = "TOTAL SCORE: ";
         float stars = Mathf.Round(((float)result / (float)maxObtainable) * 3f);

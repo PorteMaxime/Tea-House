@@ -7,27 +7,28 @@ using UnityEngine.UI;
 
 public class PackageInventory_UIManager : MonoBehaviour
 {
+    [System.Serializable]
     public class UI_Slot
     {
         #region Usage Icon
         static public Color usedColor = Color.gray;
         static public Color unusedColor = Color.white;
-        public Image mUsedIcon = null;
+        [SerializeField]public Image mUsedIcon = null;
         #endregion
 
         #region Usage Text
         static public string unusedText = "Unused";
-        public TextMeshProUGUI mOrderName = null;
+        [SerializeField]public TextMeshProUGUI mOrderName = null;
         #endregion
 
         #region To Computer Button
-        public UnityAction mToComputerListener = null;
-        public Button mToComputerButton = null;
+        [SerializeField]public UnityAction mToComputerListener = null;
+        [SerializeField]public Button mToComputerButton = null;
         #endregion
 
         #region Throw Button
-        public UnityAction mThrowListener = null;
-        public Button mThrowButton = null;
+        [SerializeField]public UnityAction mThrowListener = null;
+        [SerializeField]public Button mThrowButton = null;
         #endregion
 
         public UI_Slot(Transform slotTransform)

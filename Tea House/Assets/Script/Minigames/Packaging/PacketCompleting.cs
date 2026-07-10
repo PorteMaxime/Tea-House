@@ -140,9 +140,8 @@ public class PacketCompleting : IPackaging
             mLabelTrash.transform.GetChild(0).gameObject.SetActive(false);
             mLabelTrash.transform.GetChild(1).gameObject.SetActive(false);
         }
-        //Debug.Log("Labelled: " + mIsLabelled + " | Choosed: " + mIsChoosed + " | Filled: " + mIsFilled + " | Opened: " + mIsOpened);
-        if(mIsLabelled == true && mIsOpened == false)
-        {//  && mIsChoosed == true && mIsFilled == true
+        if(mIsLabelled == true && mIsOpened == false && mIsChoosed == true && mIsFilled == true)
+        {
             if(mIsExporting == true)
             {
                 mExport.transform.GetChild(0).gameObject.SetActive(false);
@@ -173,7 +172,7 @@ public class PacketCompleting : IPackaging
             else if(mLabelPrinted == true)
                 label = mMain.transform.Find("Printer/Label(Clone)");
 
-            mMain.mOutput.mTargetMail.mIsPrinted = true;
+            mMain.mOutput.mTargetMail.mIsPrinted = false;
             GameObject.Destroy(label.gameObject);
             mIsThrowing = false;
             mLabelPrinted = false;
@@ -184,8 +183,8 @@ public class PacketCompleting : IPackaging
     }
 
     public void ExportPackage()
-    {//  || mIsChoosed == false || mIsFilled == false
-        if(mIsLabelled == false || mIsOpened == true) return;
+    {
+        if(mIsLabelled == false || mIsOpened == true || mIsChoosed == false || mIsFilled == false) return;
 
         if(mIsExporting == true)
         {

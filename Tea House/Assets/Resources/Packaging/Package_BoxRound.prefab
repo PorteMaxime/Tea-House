@@ -198,6 +198,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -2816163257557301696, guid: 13752ff18fa8e8247b6f81d2f7ea2d7b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e571620bcbf62747897882da891acf4, type: 2}
     - target: {fileID: 919132149155446097, guid: 13752ff18fa8e8247b6f81d2f7ea2d7b, type: 3}
       propertyPath: m_Name
       value: Package_BoxRound
@@ -222,6 +226,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: PackageLid
       objectReference: {fileID: 0}
+    - target: {fileID: 5859641976498323360, guid: 13752ff18fa8e8247b6f81d2f7ea2d7b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e571620bcbf62747897882da891acf4, type: 2}
     - target: {fileID: 9037334301188813533, guid: 13752ff18fa8e8247b6f81d2f7ea2d7b, type: 3}
       propertyPath: m_Name
       value: Base

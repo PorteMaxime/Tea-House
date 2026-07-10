@@ -76,7 +76,7 @@ public class Order
     ///     0 sinon
     /// 2 point pour le prestige si pas de demande dans la commande => valeur max de prestige a 2
     /// 
-    public float EvaluateResult2(PackageScript suggestion, out float maxObtainable)
+    public float EvaluateResult(PackageScript suggestion, out float maxObtainable)
     {
         int evaluationLimit = mLimitHighAmount;
         maxObtainable = 0;
@@ -125,7 +125,7 @@ public class Order
 
         return totalResult > maxObtainable ? totalResult = maxObtainable : totalResult;
     }
-    public float EvaluateResult(PackageScript suggestion, out float maxObtainable)
+    public float EvaluateResult_Backup(PackageScript suggestion, out float maxObtainable)
     {
         int evaluationLimit = mLimitHighAmount;
         maxObtainable = 0;

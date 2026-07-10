@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PacketLabelPrinting : IPackaging
 {
@@ -107,7 +108,7 @@ public class PacketLabelPrinting : IPackaging
     {
         if (mSelectedOrderGo != null) mSelectedOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(false);
 
-        newOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(true);
+        //newOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(true);
         mSelectedOrderGo = newOrderGo;
     }
     public RenderTexture PrintLabel()
@@ -133,7 +134,8 @@ public class PacketLabelPrinting : IPackaging
             else if(item is IngredientData)
                 ingredients.Add((IngredientData)item);
         }
-        // TODO : Generate Texture with targetMail data => Remove Debug Data
+        if(baseData == null || ingredients.Count == 0) return null;
+
         return DynamicTextureManager.Generate(DynamicTextureManager.DynamicTexture.Label,
             targetMail.mPicture,
             targetMail.mName,
@@ -164,7 +166,7 @@ public class PacketLabelPrinting : IPackaging
 
     public void CreateLabel()
     {
-        if(mMain.mCompleting.mLabelPrinted == true) return;
+        if(mMain.mCompleting.mLabelPrinted == true || mMain.mOutput == null) return;
     
         RenderTexture labelTexture = PrintLabel();
         if(labelTexture == null) return;
@@ -179,10 +181,10 @@ public class PacketLabelPrinting : IPackaging
         mMain.mCompleting.mLabelPrinted = true;
 
         LinkMailToOutput();
-        string debug = $"{mMain.mOutput.mTargetMail.mIsPrinted} | ";
+        // string debug = $"{mMain.mOutput.mTargetMail.mIsPrinted} | ";
         mMain.mOutput.mTargetMail.mIsPrinted = true;
-        debug += $"{mMain.mOutput.mTargetMail.mIsPrinted}";
-        Debug.Log(debug);
+        // debug += $"{mMain.mOutput.mTargetMail.mIsPrinted}";
+        // Debug.Log(debug);
         
         
         mMain.StartCoroutine(SlideLabel(label, mLabelSpot.transform.position, mLabelSpot.transform.rotation, 5f));
