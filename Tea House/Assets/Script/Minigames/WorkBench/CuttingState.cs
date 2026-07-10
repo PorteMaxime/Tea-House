@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 using UnityEngine.InputSystem;
@@ -10,14 +11,14 @@ public class CuttingState : IWorkbench
     {
         mWorkbench = script;
 
-        //initialPosKnife = mWorkbench.mKnife.transform.position;
+        initialPosKnife = mWorkbench.mKnife.transform.position;
         initialRotKnife = mWorkbench.mKnife.transform.rotation;
     }
 
     Vector3 initialPosCam;
     Quaternion initialRotCam;
-    Vector3 initialPosKnife;
-    Quaternion initialRotKnife;
+    public Vector3 initialPosKnife;
+    public Quaternion initialRotKnife;
 
     int posValidZone;
     int dir = -1;
@@ -36,6 +37,10 @@ public class CuttingState : IWorkbench
 
         mWorkbench.mCameraDepth.LerpingCamera(mWorkbench.mCameraPosCuttingBoard.transform.position, mWorkbench.mCameraPosCuttingBoard.transform.rotation, 0.5f);
 
+        mWorkbench.currentItemG.GetComponent<MeshFilter>().mesh = mWorkbench.mCurrentItem.mCuttingBoardIngredient.GetComponent<MeshFilter>().sharedMesh;
+        //mWorkbench.currentItemG.GetComponent<BoxCollider>().isTrigger = true;
+        
+        //mWorkbench.currentItemG.transform.position = mWorkbench.posIngredientGrab.position;
         mWorkbench.currentItemG.transform.position = mWorkbench.mCuttingBoard.transform.position;
     }
     public void OnUpdate()
@@ -75,17 +80,15 @@ public class CuttingState : IWorkbench
 
         if(nbCutPoint == 4)
         {
-
             mWorkbench.currentItemG.GetComponent<MeshFilter>().mesh = mWorkbench.mCurrentItem.mFragIngredient.GetComponent<MeshFilter>().sharedMesh;
-
             nbCutPoint = 0;
             isItemCut = true;
             mWorkbench.canPutInMixture = true;
             cuttingPointIndex = 0;
             canGrabItem = true;
 
-            mWorkbench.mKnife.transform.localPosition = initialPosKnife;
-            mWorkbench.mKnife.transform.rotation = initialRotKnife;
+            //mWorkbench.mKnife.transform.localPosition = initialPosKnife;
+            //mWorkbench.mKnife.transform.rotation = initialRotKnife;
 
             mWorkbench.stateMachine.ChangeState(mWorkbench.selectItemState);
         }

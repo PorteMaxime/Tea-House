@@ -89,8 +89,11 @@ public class BruisingState : IWorkbench
             }
             if (bottomMortar == 4)
             {
-                fragIngredient = mWorkbench.InstantiateGameObject(mWorkbench.mCurrentItem.mFragIngredient, mWorkbench.mMortarBowl.transform.position + ingredientPosOffset, mWorkbench.mMortarBowl);
-                fragIngredient.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+                /*---*/
+                fragIngredient = mWorkbench.InstantiateGameObject(mWorkbench.mCurrentItem.mFragIngredient, mWorkbench.mMortarBowl.transform.position, mWorkbench.mMortarBowl);
+                //fragIngredient.transform.localScale = new Vector3(1f, 1f, 1f);
+                //
+
                 mWorkbench.mBruiseIngrdient = mWorkbench.mCurrentItem;
                 mWorkbench.DestroyCurrentIngredient();
                 mItemBruised = true;
@@ -134,8 +137,10 @@ public class BruisingState : IWorkbench
                 fragIngredient.GetComponent<Rigidbody>().useGravity = true;
                 fragIngredient.GetComponent<Rigidbody>().isKinematic = false;
 
+                /*---*/
                 fragIngredient.transform.SetParent(mWorkbench.mMixtureBowl.transform);
-                fragIngredient.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
+                //fragIngredient.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
+                //
             }
             if (timerChangeState > 1f)
             {
