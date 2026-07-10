@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c1ca02648c86548bbd1f4f8434a12b, type: 3}
+  m_Name: Definitive 2
+  m_EditorClassIdentifier: Assembly-CSharp::MailPreset
+  mName: 
+  mData:
+  - mStatVar: 0
+    mValueVar: 3
+  - mStatVar: 1
+    mValueVar: 0
+  - mStatVar: 2
+    mValueVar: 0
+  - mStatVar: 3
+    mValueVar: 0
+  - mStatVar: 4
+    mValueVar: 3
+  - mStatVar: 5
+    mValueVar: 0
+  - mStatVar: 6
+    mValueVar: 0
+  mText: 'Hi hun
+
+
+    Sleep''s been rough these past few days, y''got anything
+    that''d calm my nerves ? The stronger, the better ! I''d rather have it taste
+    sweet and feel warm, if you can.
+
+    Oh, and if you could get it ready in like
+    4 days tops, that''d be just lovely !
+
+    
+
+    Take care'
+  mDuration: 4
+  mPresetLevel: 2
