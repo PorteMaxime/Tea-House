@@ -280,11 +280,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8942047391176033606, guid: 0a951a409213101409900dbdcc41c459, type: 3}
   m_PrefabInstance: {fileID: 7778896174472154821}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &188505690 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3259539951687222664, guid: 0a951a409213101409900dbdcc41c459, type: 3}
-  m_PrefabInstance: {fileID: 7778896174472154821}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &219230984 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3807418820913744295, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
@@ -388,6 +383,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11daa6917cb05db48a14b89c2ead749f, type: 3}
+--- !u!1 &439511934 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 262528765659690956, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+  m_PrefabInstance: {fileID: 7778896174472154821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &625804976 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5456073389569016149, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
@@ -1271,7 +1271,7 @@ PrefabInstance:
     - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
       propertyPath: mMailImageProfile
       value: 
-      objectReference: {fileID: 188505690}
+      objectReference: {fileID: 439511934}
     - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
       propertyPath: mOrdersScrollView
       value: 
@@ -1280,6 +1280,10 @@ PrefabInstance:
       propertyPath: mCanvasMailContent
       value: 
       objectReference: {fileID: 1399115514}
+    - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mOrderImageProfile
+      value: 
+      objectReference: {fileID: 1011861131}
     - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
       propertyPath: mCanvasFiltersPopup
       value: 
@@ -1402,6 +1406,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   interactiveArea: {fileID: 1353101761}
   sitExtraDelay: 6
+--- !u!1 &1011861131 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5062094136433379097, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+  m_PrefabInstance: {fileID: 7778896174472154821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1018908271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3019,6 +3028,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
+      propertyPath: mStopTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612942682925555968, guid: f8c93b21b841aea48bb2cbc87206f6f6, type: 3}
       propertyPath: mMailSystem
       value: 
       objectReference: {fileID: 219230985}
@@ -3855,6 +3868,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c2e79278cb8252245b3ac2a989353ffe, type: 2}
+    - target: {fileID: 8057925258982331988, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8396826742923109605, guid: 0a951a409213101409900dbdcc41c459, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

@@ -109,7 +109,9 @@ public class DatabaseManager : MonoBehaviour
     {
         int currentDay = mDaylight.mCurrentDay;
 
-        List<Mail> toDelete = mMailSystem.mMails.Values.SelectMany(mails => mails).Where(mail => currentDay > mail.mSendDay + mail.mDuration).ToList();
+        List<Mail> toDelete = mMailSystem.mMails.Values.SelectMany(mails => mails).Where(mail => { return currentDay > mail.mSendDay + mail.mDuration; }).ToList();
+
+
 
         await Task.Run(() =>
         {

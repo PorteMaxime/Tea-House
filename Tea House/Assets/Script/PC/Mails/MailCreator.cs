@@ -7,7 +7,6 @@ public class MailCreator : MonoBehaviour
     [SerializeField] private Daylight mDaylight;
     [SerializeField] private DatabaseManager mDatabaseManager;
 
-    //[SerializeField] private List<MailPreset> mMailsPresets = new List<MailPreset>();
     private Dictionary<int, List<MailPreset>> mMailsPresets = new Dictionary<int, List<MailPreset>>();
 
     private Vector2Int mIngredientsAmount = new Vector2Int(1, 3);
@@ -16,7 +15,7 @@ public class MailCreator : MonoBehaviour
     private int mPresetProbability = 8;
     private int mTorrefiedProbability = 25;
 
-    // Informations pour cr�er les commandes
+    // Informations pour creer les commandes
     [SerializeField] public List<Sprite> mImages;
     Dictionary<string, List<string>> mMailRandomContent;
 
@@ -92,7 +91,7 @@ public class MailCreator : MonoBehaviour
         Sprite mailSprite = mImages[Random.Range(0, mImages.Count)];
         mail.mPicture = mailSprite;
         mail.mPictureName = mailSprite.name;
-        if (mail.mName == "")
+        if (mail.mName == "" || mail.mName == null)
             mail.mName = GetRandomValue("FirstName") + " " + GetRandomValue("LastName");
         mail.mSendDay = mDaylight.mCurrentDay + 1 + Random.Range(0, mCalendar.Length);
 

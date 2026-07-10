@@ -28,6 +28,7 @@ public class MailCanvasScript : MonoBehaviour
     [Header("Page Orders")]
 
     [SerializeField] private GameObject mOrderPrefab = null;
+    [SerializeField] private GameObject mOrderImageProfile;
     [SerializeField] private GameObject mOrdersScrollView;
     [SerializeField] private GameObject mOrdersScrollViewContent;
 
@@ -78,7 +79,7 @@ public class MailCanvasScript : MonoBehaviour
         if (!mMailsDictionary.ContainsKey(mail))
             return;
 
-        // Si le mail est d�j� s�lectionn�
+        // Si le mail est deja selectionne
         if (mSelectedMail != null && mail == mSelectedMail.Item1)
             return;
 
@@ -89,7 +90,7 @@ public class MailCanvasScript : MonoBehaviour
         if (temp != null && temp.gameObject.activeSelf == true)
             temp.gameObject.SetActive(false);
 
-        // Mise � jour informations mail
+        // Mise a jour informations mail
         mMailImageProfile.GetComponent<Image>().sprite = mail.mPicture;
         mMailTextSubject.GetComponent<Text>().text = mail.mText;
         mMailTextSender.GetComponent<Text>().text = mail.mName;
@@ -122,7 +123,7 @@ public class MailCanvasScript : MonoBehaviour
             prefabButton.GetComponent<Button>().onClick.AddListener(() => SelectMail(mail));
 
             // Image et texte
-            Transform prefabImage = prefabButton.transform.Find("ImageProfile");
+            Transform prefabImage = prefabButton.transform.Find("ImageProfileOutside/ImageProfile");
             if (prefabImage != null)
                 prefabImage.GetComponent<Image>().sprite = mail.mPicture;
 
@@ -175,8 +176,6 @@ public class MailCanvasScript : MonoBehaviour
 
     public void SelectOrder(Mail mail)
     {
-        Debug.Log("test");
-
         if (!mOrdersDictionary.ContainsKey(mail))
             return;
 
@@ -186,10 +185,9 @@ public class MailCanvasScript : MonoBehaviour
 
         mSelectedOrder = new Tuple<Mail, GameObject>(mail, mOrdersDictionary[mail]);
 
-        Transform temp = mCanvasOrderContent.transform.Find("ImageOrderContent");
-        //if (temp != null)
-        //temp.GetComponent<Image>(); // changer image
-        temp = mCanvasOrderContent.transform.Find("TextMailContent");
+        mOrderImageProfile.GetComponent<Image>().sprite = mail.mPicture;
+
+        Transform temp = mCanvasOrderContent.transform.Find("TextMailContent");
         if (temp != null)
             temp.GetComponent<Text>().text = mail.mText;
 

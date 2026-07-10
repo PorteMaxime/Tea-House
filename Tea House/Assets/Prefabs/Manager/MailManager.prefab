@@ -60,16 +60,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MailCreator
   mDaylight: {fileID: 0}
+  mDatabaseManager: {fileID: 0}
   mImages:
-  - {fileID: 21300000, guid: fc3375a342626b84b854fbc2b83f43b3, type: 3}
-  - {fileID: 21300000, guid: f76adcedca9e2584db14b9d22a418989, type: 3}
-  - {fileID: 21300000, guid: 6168bc0706358cf41896d7a20d8f052d, type: 3}
-  mFirstNames:
-  - "pr\xE9nom 1"
-  - "pr\xE9nom 2"
-  mLastNames:
-  - 'nom 1 '
-  - nom 2
+  - {fileID: 21300000, guid: 48a6785d242920d4fb2478eeecf5d14e, type: 3}
+  - {fileID: 21300000, guid: da4d3462163e5fe49a2e12c40379198f, type: 3}
+  - {fileID: 21300000, guid: 202cc8e8d3df0754a8297bf3a16477a2, type: 3}
+  - {fileID: 21300000, guid: 24fef823a5460b64a9cb5fb108b1ef23, type: 3}
+  - {fileID: 21300000, guid: 3d40cf79de963a54d9434789a0ddd9ce, type: 3}
+  - {fileID: 21300000, guid: 175b30ddffac30b4ca8aaca436325c9c, type: 3}
+  - {fileID: 21300000, guid: 946420ccd175d7a4994db132906aec71, type: 3}
+  - {fileID: 21300000, guid: be1c513d91f06194383f5a33dac72e83, type: 3}
+  - {fileID: 21300000, guid: 52ed9bb3a2c6ecd4d8097aede976ca29, type: 3}
+  - {fileID: 21300000, guid: bbeb1513c26f24247a96c260019037d5, type: 3}
+  - {fileID: 21300000, guid: 21141f4949f082c48bb1a75f8daa848d, type: 3}
+  - {fileID: 21300000, guid: 302e581a9d49a6a43bf50aea7373078a, type: 3}
+  - {fileID: 21300000, guid: 421f787bfe9385e4c8de9d45aabb6c2a, type: 3}
+  - {fileID: 21300000, guid: b04d54c16c2dc91459bba88e9b50158d, type: 3}
+  - {fileID: 21300000, guid: 655ba278ae77d7246a7230994bc32a96, type: 3}
 --- !u!114 &1524140342625153491
 MonoBehaviour:
   m_ObjectHideFlags: 0
