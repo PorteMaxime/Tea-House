@@ -14,7 +14,8 @@ scopes = {
 	"picker_item_size.00000000" = "1"
 	"picker_inspector.00000000" = "0"
 	"OpenInspectorPreview.66F56946" = "0"
-	"currentGroup.66F56946" = "all"
+	"currentGroup.66F56946" = "menu"
+	"last_search.66F56946" = "skybox"
 }
 providers = {
 	asset = {
@@ -71,6 +72,10 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"s"
+	"di"
+	"b"
+	"Lightmap"
 ]
 searchItemFavorites = [
 ]
@@ -87,4 +92,4 @@ helperWidgetCurrentArea = "all"
 disabledIndexers = ""
 minIndexVariations = 2
 findProviderIndexHelper = true
-itemIconSize = 32
+itemIconSize = 1
