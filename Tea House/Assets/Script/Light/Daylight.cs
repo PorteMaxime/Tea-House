@@ -23,6 +23,7 @@ public class Daylight : MonoBehaviour
 
     [SerializeField] private MailSystem mMailSystem;
     [SerializeField] private MailCreator mMailCreator;
+    [SerializeField] private MailCanvasScript mMailCanvasScript;
 
     [SerializeField] private DatabaseManager mDatabaseManager;
 
@@ -103,6 +104,15 @@ public class Daylight : MonoBehaviour
     {
         mCurrentPhase = phase;
         mCurrentPhaseLength = mPhases[phase];
+
+        if (mCurrentPhase == Phase.Overtime)
+            mMailCanvasScript.ToggleSendButtonInteractable(false);
+        else
+        {
+            Tuple<Mail, GameObject> selectedOrder = mMailCanvasScript.mSelectedOrder;
+            if (selectedOrder != null)
+                mMailCanvasScript.ToggleSendButtonInteractable(selectedOrder.Item1.mOrder.mState == Order.State.Accepted ? true : false);
+        }
     }
 
     public string GetInGameTime()

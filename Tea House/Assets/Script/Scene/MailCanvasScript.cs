@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static Daylight;
 
 public class MailCanvasScript : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class MailCanvasScript : MonoBehaviour
     [SerializeField] private Text mTextOrderContent;
     [SerializeField] private Button mSendButtonOrderContent;
 
-    private Tuple<Mail, GameObject> mSelectedOrder = null;
+    public Tuple<Mail, GameObject> mSelectedOrder = null;
     public Dictionary<Mail, GameObject> mOrdersDictionary = new Dictionary<Mail, GameObject>();
 
     [SerializeField] private GameObject mFilterPrefab = null;
@@ -192,7 +193,7 @@ public class MailCanvasScript : MonoBehaviour
         mTextOrderContent.text = mail.mText;
 
         // Active ou desactive le bouton "envoyer"
-        mSendButtonOrderContent.interactable = mail.mOrder.mState == Order.State.Accepted ? true : false;
+        mSendButtonOrderContent.interactable = mail.mOrder.mState == Order.State.Accepted && mMailSystem.mDaylight.mCurrentPhase != Phase.Overtime ? true : false;
 
         ToggleOrderContent(true);
     }
@@ -201,6 +202,11 @@ public class MailCanvasScript : MonoBehaviour
     {
         ToggleOrderContent(false);
         mSelectedOrder = null;
+    }
+
+    public void ToggleSendButtonInteractable(bool interactable)
+    {
+        mSendButtonOrderContent.interactable = interactable;
     }
 
     public void ToggleOrderContent(bool active)
@@ -253,7 +259,7 @@ public class MailCanvasScript : MonoBehaviour
         if (temp != null)
             temp.GetComponent<Text>().text = mail.mOrder.mState.ToString();
 
-        mSendButtonOrderContent.interactable = mail.mOrder.mState == Order.State.Accepted ? true : false;
+        mSendButtonOrderContent.interactable = (mail.mOrder.mState == Order.State.Accepted ? true : false);
 
         UpdateOrdersVisibility();
     }
@@ -321,9 +327,6 @@ public class MailCanvasScript : MonoBehaviour
         else if (mCurrentFilters.Contains(state))
         {
             mCurrentFilters.Remove(state);
-
-            if (mSelectedOrder != null && !mCurrentFilters.Contains(mSelectedOrder.Item1.mOrder.mState))
-                DeSelectOrder();
         }
 
         UpdateOrdersVisibility();
@@ -331,21 +334,17 @@ public class MailCanvasScript : MonoBehaviour
 
     private void UpdateOrdersVisibility()
     {
-        bool isMailInFilter = false;
 
         foreach (Mail mail in mOrdersDictionary.Keys)
         {
             if (mCurrentFilters.Contains(mail.mOrder.mState))
-            {
-                isMailInFilter = true;
                 mOrdersDictionary[mail].SetActive(true);
-            }
             else
                 mOrdersDictionary[mail].SetActive(false);
         }
 
-        if (!isMailInFilter)
-            DeSelectMail();
+        if (mSelectedOrder != null && !mCurrentFilters.Contains(mSelectedOrder.Item1.mOrder.mState))
+            DeSelectOrder();
     }
 
     #endregion Filters
