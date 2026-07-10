@@ -53,7 +53,7 @@ public class MailCreator : MonoBehaviour
 
     public void CreateMail()
     {
-        Mail mail;
+        Mail mail = null;
 
         // Si preset mail
         if (Random.Range(0, 101) <= mPresetProbability && mMailsPresets.Count > 0)
@@ -66,12 +66,14 @@ public class MailCreator : MonoBehaviour
                 if (pair.Key <= playerLevel)
                     availableMails.AddRange(pair.Value);
 
-            mail = availableMails[Random.Range(0, availableMails.Count)].CreateMail();
-
-
-            CreateMailData(mail);
+            if (availableMails.Count > 0)
+            {
+                mail = availableMails[Random.Range(0, availableMails.Count)].CreateMail();
+                CreateMailData(mail);
+            }
         }
-        else
+
+        if (mail == null)
         {
             mail = new Mail();
 
