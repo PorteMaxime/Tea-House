@@ -124,13 +124,15 @@ public class MailCreator : MonoBehaviour
         int forWhenRand = Random.Range(0, 5);
         if (forWhenRand <= 1)
         {
+            // Version courte
             mail.mText += GetRandomValue("Reason") + ".\n";
-            mail.mText = Regex.Replace(mail.mText, @"\{long\([^)]*\)\}", "");
+            mail.mText = Regex.Replace(mail.mText, @"\{long\((.*?)\)\}", "");
         }
         else
         {
+            // Version longue
             mail.mText += GetRandomValue("Reason") + " " + GetRandomValue("Day+" + mail.mDuration.ToString()) + ".\n";
-            mail.mText = Regex.Replace(mail.mText, @"\{long\(\)\}", "");
+            mail.mText = Regex.Replace(mail.mText, @"\{long\((.*?)\)\}", "$1");
         }
 
         // Ingredients
