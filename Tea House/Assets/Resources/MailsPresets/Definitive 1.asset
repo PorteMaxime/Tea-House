@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c1ca02648c86548bbd1f4f8434a12b, type: 3}
   m_Name: Definitive 1
   m_EditorClassIdentifier: Assembly-CSharp::MailPreset
-  mName: xX_SpicedTea_Xx
+  mName: Super Spice
   mData:
   - mStatVar: 0
     mValueVar: 5
@@ -28,15 +28,16 @@ MonoBehaviour:
     mValueVar: 1
   - mStatVar: 6
     mValueVar: 0
-  mText: 'Hey !
+  mText: 'Hey, it''s me, Super Spice !
+
 
     I need some tea, in at max 5 days.
 
-    I want something spicy,
-    like, really spicy !
+    I
+    want something spicy, like, really spicy !
 
-    And I also want to get a tiiiny bit of tanginess. But
-    the spicyness is the most important thing !
+    And I also want to get a tiiiny
+    bit of tanginess. But the spicyness is the most important thing !
 
 
     Bye.'

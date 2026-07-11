@@ -12,33 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c1ca02648c86548bbd1f4f8434a12b, type: 3}
   m_Name: Definitive 3
   m_EditorClassIdentifier: Assembly-CSharp::MailPreset
-  mName: xX_SpicedTea_Xx
+  mName: 
   mData:
   - mStatVar: 0
-    mValueVar: 5
+    mValueVar: 0
   - mStatVar: 1
     mValueVar: 0
   - mStatVar: 2
     mValueVar: 0
   - mStatVar: 3
-    mValueVar: 0
+    mValueVar: 3
   - mStatVar: 4
     mValueVar: 0
   - mStatVar: 5
-    mValueVar: 1
+    mValueVar: 3
   - mStatVar: 6
     mValueVar: 0
-  mText: 'Hey !
+  mText: 'Hi,
 
-    I need some tea, in at max 5 days.
+    
 
-    I want something spicy,
-    like, really spicy !
+    I need to crunch some numbers and meet a deadline in about
+    3 days, you got anything that''d give me enough energy to keep me awake through
+    an all-nighter ? Make it tangy while you''re at it, that''d be nice.
 
-    And I also want to get a tiiiny bit of tanginess. But
-    the spicyness is the most important thing !
+    
 
-
-    Bye.'
-  mDuration: 5
+    Thanks
+    in advance.'
+  mDuration: 3
   mPresetLevel: 1

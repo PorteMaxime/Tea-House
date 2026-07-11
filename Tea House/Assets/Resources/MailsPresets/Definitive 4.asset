@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c1ca02648c86548bbd1f4f8434a12b, type: 3}
+  m_Name: Definitive 4
+  m_EditorClassIdentifier: Assembly-CSharp::MailPreset
+  mName: 
+  mData:
+  - mStatVar: 0
+    mValueVar: 3
+  - mStatVar: 1
+    mValueVar: 0
+  - mStatVar: 2
+    mValueVar: 0
+  - mStatVar: 3
+    mValueVar: 0
+  - mStatVar: 4
+    mValueVar: 0
+  - mStatVar: 5
+    mValueVar: 3
+  - mStatVar: 6
+    mValueVar: 0
+  mText: "Hello dear...\r\n\r\nI just came back from a trip in Antarctic and now-
+    I caught a little cold haha you get it? Because it\u2019s cold there-\r\nAnyway.
+    I need a hot and sour drink so I can get better, please !\r\nI really need it
+    tomorrow max.\r\n\r\nSee you soon !"
+  mDuration: 1
+  mPresetLevel: 3
