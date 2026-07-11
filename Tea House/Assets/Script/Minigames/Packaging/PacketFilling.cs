@@ -2,7 +2,6 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System;
 
@@ -115,7 +114,7 @@ public class PacketFilling : IPackaging
             {
                 mDragAndDrop.StopDragging();
                 mFillingCoroutine = mMain.StartCoroutine(FillPackage(mBowl, Quaternion.Euler(130f, 0, 0), 1f));
-                mMain.mOutput.AddStat(mMixture);
+                mMain.mOutput.AddIngredient(mMixture);
                 mMain.mCompleting.mIsFilled = true;
                 mMain.mCompleting.mIsChoosed = true;
             }
@@ -129,6 +128,11 @@ public class PacketFilling : IPackaging
     {
         mFunnel.SetActive(true);
         mFunnel.transform.position = new Vector3(mMain.mOutputGO.transform.position.x, mMain.mOutputGO.transform.Find("LabelPlace").transform.position.y, mMain.mOutputGO.transform.position.z);
+        
+        bowl.transform.position = new Vector3(
+            bowl.transform.position.x,
+            mMain.mOutputGO.transform.position.y + (mFunnel.GetComponent<MeshCollider>().bounds.extents.y + bowl.GetComponent<MeshCollider>().bounds.extents.y * 1.25f) * 2f,
+            bowl.transform.position.z);
         Tuple<BoxCollider, MeshCollider> packageColliders = new Tuple<BoxCollider, MeshCollider>(mMain.mOutputGO.transform.GetChild(0).GetComponent<BoxCollider>(), mMain.mOutputGO.transform.GetChild(0).GetComponent<MeshCollider>());
         packageColliders.Item1.enabled = false;
         packageColliders.Item2.enabled = true;
@@ -175,7 +179,7 @@ public class PacketFilling : IPackaging
         foreach(Rigidbody rb in childRBs)
             rb.transform.parent = null;
 
-        yield return new WaitForSeconds(5f);
+        yield return mMain.StartCoroutine(DeleteExcessFragment(childRBs, 5f));
 
         // Disable Physic
         bowl.transform.rotation = targetRotation;
@@ -189,5 +193,22 @@ public class PacketFilling : IPackaging
 
         mFillingCoroutine = null;
         mMain.mStateMachine.SwitchState(mMain.mCompleting);
+    }
+
+    IEnumerator DeleteExcessFragment(List<Rigidbody> fragmentRBs, float duration)
+    {
+        float currentTime = 0f;
+        WorkingPoint wp = mFunnel.transform.Find("WorkingPoint").GetComponent<WorkingPoint>();
+
+        while(currentTime < duration)
+        {
+            foreach(Rigidbody rb in fragmentRBs)
+            {
+                if(wp.IsColliding(rb.gameObject))
+                    rb.gameObject.SetActive(false);
+            }
+            currentTime += Time.deltaTime;
+            yield return 0f;
+        }
     }
 }

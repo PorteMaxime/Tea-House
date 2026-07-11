@@ -32,6 +32,8 @@ public class ItemData : ScriptableObject
 
     public bool mIsUnlocked;
 
+    public Sprite sprite;
+    public Sprite infoPage;
     public enum Stat
     {
         Warmth,
@@ -77,4 +79,6 @@ public class ItemData : ScriptableObject
 
         return (int)opposites[stat];
     }
+
+    public GameObject mInfosPage;
 }

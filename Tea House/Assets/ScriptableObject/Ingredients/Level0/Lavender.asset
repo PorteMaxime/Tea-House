@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Lavender
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   mName: Lavender
-  mPrefab: {fileID: 5637038462160063318, guid: 28c2809efc23cc14cbdfef3c8debe4fd, type: 3}
   mIcon: {fileID: 21300000, guid: 86c1190388d5a2846aeca5f15b070ba6, type: 3}
+  mPrefab: {fileID: 443525240605445967, guid: 72d6b9fc363c15e41a0761944ac067f5, type: 3}
   mIsUnlocked: 1
+  sprite: {fileID: 21300000, guid: bde075fb45ed20e4098c913ec2a2f0de, type: 3}
+  infoPage: {fileID: 21300000, guid: 4ee8b16fb59de014e8f2f82aab3acc97, type: 3}
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -32,10 +34,12 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 0
   mPrice: 15
+  mInfosPage: {fileID: 0}
   mIngredientGrab: {fileID: 0}
   mAmountJar1: {fileID: 5486132186296425149, guid: 71e8ef13099c2ea41b0becaee5ea166d, type: 3}
   mAmountJar2: {fileID: 2239751761719933281, guid: 7b405ddf176b5944f8e23c74bcdd7c49, type: 3}
   mAmountJar3: {fileID: 5763111021785460518, guid: 0096340d60a725c4ea68e4c8f9edfd1b, type: 3}
-  mFragIngredient: {fileID: 0}
-  mFragGrab: {fileID: 0}
+  mFragIngredient: {fileID: 1064822467224113163, guid: 5263bbaf95dc0204e8366014c12e6768, type: 3}
+  mFragGrab: {fileID: 4515559405829578807, guid: b2a4a8e6c0d8fe34587e6e984434fd99, type: 3}
+  mCuttingBoardIngredient: {fileID: 2026889042933448359, guid: e02813a86994cb548947a0e322cddcc8, type: 3}
   mType: 2

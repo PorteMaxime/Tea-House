@@ -21,18 +21,17 @@ public class PlayerLevel : MonoBehaviour
         {
             level++;
             xpAmount -= xpNextLevel;
+            CheckLevel();
         }
-
-        CheckLevel();
     }
     public void CheckLevel()
     {
         if(level == 1)
         {
-            Debug.Log("test");
+            //Debug.Log("test");
             foreach(ItemData item in itemLevel1)
             {
-                Debug.Log(item.name);
+                //Debug.Log(item.name);
                 item.mIsUnlocked = true;
             }
         }

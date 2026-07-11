@@ -16,6 +16,8 @@ MonoBehaviour:
   mPrefab: {fileID: 6133319570607198218, guid: c74e23ca4ca2fb34db704c22e369582b, type: 3}
   mIcon: {fileID: 21300000, guid: 45b48a486b7355e43b8ed367e64ef403, type: 3}
   mIsUnlocked: 1
+  sprite: {fileID: 21300000, guid: 304100929c5c29d4bb7f7da158cb3fe8, type: 3}
+  infoPage: {fileID: 21300000, guid: 8d7004ca6ae6ed745a54440d8d7e6d59, type: 3}
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -32,10 +34,12 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 0
   mPrice: 20
+  mInfosPage: {fileID: 0}
   mIngredientGrab: {fileID: 0}
   mAmountJar1: {fileID: 5958749855929363553, guid: c57f8caa38fb55d448aab931a11edfdd, type: 3}
   mAmountJar2: {fileID: 2636758757040711856, guid: 21b7a3b2ef855d345a225476c6beb10b, type: 3}
   mAmountJar3: {fileID: 920412604985868399, guid: ba18ae0ace9bd35449db842218e61b11, type: 3}
-  mFragIngredient: {fileID: 5751624520261658230, guid: e28547dafb66c734497b4843e818907e, type: 3}
+  mFragIngredient: {fileID: 42267721204071101, guid: 3da0e57d9cf61c840a14c14e23f6cb4a, type: 3}
   mFragGrab: {fileID: 8942966808197605246, guid: 0962fd8fdd6305d4bae7d91944045e31, type: 3}
+  mCuttingBoardIngredient: {fileID: 2197827303854084500, guid: a89856050264a394b86b159913f4fba4, type: 3}
   mType: 2

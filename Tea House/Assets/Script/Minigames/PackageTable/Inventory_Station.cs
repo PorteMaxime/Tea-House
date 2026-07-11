@@ -37,10 +37,12 @@ public class Inventory_Station : MonoBehaviour
     {
         mPackages.Add(package);
         mPackInv.AddPackage(package);
-        mUI.AddPackage(package);
+        mUI.RefreshPackage();
     }
     public PackageScript GetPackage(Mail orderMail)
     {
+        if(orderMail.mIsPrinted == false) return null;
+        RefreshPackage();
         foreach(PackageScript package in mPackages)
         {
             if(package.mTargetMail == orderMail)
@@ -49,10 +51,17 @@ public class Inventory_Station : MonoBehaviour
         return null;
     }
 
-    private void RefreshPackage()
+    public void RefreshPackage()
     {
-        mPackInv.RefreshPackage();
+        mPackages.RemoveAll(pack => pack == null);        
         mUI.RefreshPackage();
+        mPackInv.RefreshPackage();
         mLastPackageNumber = mPackages.Count;
+    }
+
+    public void RemovePackage(PackageScript package)
+    {
+        mPackages.Remove(package);
+        RefreshPackage();
     }
 }

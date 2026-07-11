@@ -98,11 +98,11 @@ public class CameraController : MonoBehaviour
         {
         case CameraStates.Orbital:
             mPlayerInputComponent.mCanMove = true;
-                mPlayerSkinnedRenderComponent.enabled = true;
+            mPlayerSkinnedRenderComponent.enabled = true;
             break;
         case CameraStates.Zoom:
             mPlayerInputComponent.mCanMove = false;
-                mPlayerSkinnedRenderComponent.enabled = false;
+            mPlayerSkinnedRenderComponent.enabled = false;
             break;
         }
     }

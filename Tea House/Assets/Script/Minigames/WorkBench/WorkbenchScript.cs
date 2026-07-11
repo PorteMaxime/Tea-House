@@ -16,7 +16,8 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mMixtureBowlPackagingPos;
     public InteractiveAreaScript mInteractiveArea;
 
-    public GameObject mCameraPosPackaging;
+    public InteractiveAreaScript mPackagingIArea;
+    //public GameObject mCameraPosPackaging;
     public GameObject mCameraPosCuttingBoard;
 
     public GameObject mMortarBowl;
@@ -192,10 +193,13 @@ public class WorkbenchScript : MonoBehaviour
             mKnife.transform.position = Vector3.Lerp(positionOrigine, targetPosition, elapsedTime / duration);
             yield return 0;
         }
-        mKnife.transform.position = targetPosition;
+        //mKnife.transform.position = targetPosition;
 
-        if(cuttingPointIndex != mCuttingPoints.Count - 1)
+        if (cuttingPointIndex != mCuttingPoints.Count - 1)
             mCuttingPanel.SetActive(true);
+
+        mKnife.transform.position = cuttingState.initialPosKnife;
+        mKnife.transform.rotation = cuttingState.initialRotKnife;
     }
     public void PutInMixtureBoawl()
     {
@@ -235,6 +239,7 @@ public class WorkbenchScript : MonoBehaviour
             }
 
         }
+
         mMixture.Add(mCurrentItem);
         DestroyCurrentIngredient();
         blendingState.isEmpty = false;

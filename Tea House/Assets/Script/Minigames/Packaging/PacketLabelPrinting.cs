@@ -1,8 +1,10 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Emit;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PacketLabelPrinting : IPackaging
 {
@@ -53,19 +55,24 @@ public class PacketLabelPrinting : IPackaging
         mDepthView.GoTo(mPrinterViewPoint.transform);
         InputManager.Get().mPlayerInteract.Player.Open.Disable();
 
+        List<Mail> toRemove = new List<Mail>();
         foreach (Mail mail in mOrders.Keys)
         {
-            if (mail.mOrder.mState != Order.State.Accepted)
+            if(mail == null) mOrders.Remove(mail);
+            if (mail.mOrder.mState != Order.State.Accepted || mail.mIsPrinted == true)
             {
                 GameObject.Destroy(mOrders[mail]);
-                mOrders.Remove(mail);
+                toRemove.Add(mail);
             }
         }
+        foreach(Mail remove in toRemove)
+            mOrders.Remove(remove);
 
         List<Mail> mails =  mMain.mMailSystem.GetMailsOfState(Order.State.Accepted);
         foreach (Mail mail in mails)
         {
-            if(mail.mIsPrinted == true) continue;
+            if(mail.mIsPrinted == true)
+                continue;
             if (mOrders.ContainsKey(mail) == false)
                 mOrders.Add(mail, mPrinterScript.CreateButton(mail));
         }
@@ -101,7 +108,7 @@ public class PacketLabelPrinting : IPackaging
     {
         if (mSelectedOrderGo != null) mSelectedOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(false);
 
-        newOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(true);
+        //newOrderGo.transform.Find("Order_SelectionRect").gameObject.SetActive(true);
         mSelectedOrderGo = newOrderGo;
     }
     public RenderTexture PrintLabel()
@@ -127,7 +134,8 @@ public class PacketLabelPrinting : IPackaging
             else if(item is IngredientData)
                 ingredients.Add((IngredientData)item);
         }
-        // TODO : Generate Texture with targetMail data => Remove Debug Data
+        if(baseData == null || ingredients.Count == 0) return null;
+
         return DynamicTextureManager.Generate(DynamicTextureManager.DynamicTexture.Label,
             targetMail.mPicture,
             targetMail.mName,
@@ -158,7 +166,7 @@ public class PacketLabelPrinting : IPackaging
 
     public void CreateLabel()
     {
-        if(mMain.mCompleting.mLabelPrinted == true) return;
+        if(mMain.mCompleting.mLabelPrinted == true || mMain.mOutput == null) return;
     
         RenderTexture labelTexture = PrintLabel();
         if(labelTexture == null) return;
@@ -172,7 +180,11 @@ public class PacketLabelPrinting : IPackaging
         mMain.mLabelling.mLabelGo = label;
         mMain.mCompleting.mLabelPrinted = true;
 
+        LinkMailToOutput();
+        // string debug = $"{mMain.mOutput.mTargetMail.mIsPrinted} | ";
         mMain.mOutput.mTargetMail.mIsPrinted = true;
+        // debug += $"{mMain.mOutput.mTargetMail.mIsPrinted}";
+        // Debug.Log(debug);
         
         
         mMain.StartCoroutine(SlideLabel(label, mLabelSpot.transform.position, mLabelSpot.transform.rotation, 5f));

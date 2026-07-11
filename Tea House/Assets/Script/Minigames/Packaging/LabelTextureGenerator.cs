@@ -26,10 +26,10 @@ public class LabelTextureGenerator : AbstractDynamicTextureGenerator
 
     public override RenderTexture Generate(params object[] args)
     {            
-        Debug.Log((args[0] is Sprite == false) + " | " + (args[1] is string == false) + " | " +
-            (args[2] is BaseData == false) + " | " +
-            (args[3] is IngredientData == false && args[3] != null) + " | " + (args[4] is IngredientData == false && args[4] != null) + " | " + (args[5] is IngredientData == false && args[5] != null)
-            );
+        // Debug.Log((args[0] is Sprite == false) + " | " + (args[1] is string == false) + " | " +
+        //     (args[2] is BaseData == false) + " | " +
+        //     (args[3] is IngredientData == false && args[3] != null) + " | " + (args[4] is IngredientData == false && args[4] != null) + " | " + (args[5] is IngredientData == false && args[5] != null)
+        //     );
         // Is there enough parameters ? (6)
         if(args.Length <= 5 || args.Length > 6) return null;
         // Are they of the right type ?
