@@ -4893,11 +4893,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4a3456cda7c7446987081ed70de3c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TablePanel
---- !u!1 &1669419516 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4999223791274200108, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
-  m_PrefabInstance: {fileID: 6781908833951815434}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1718805485 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2735390859510243914, guid: 50a3db14c6011904f9a38a277e9508c0, type: 3}
@@ -5763,7 +5758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2093939688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7010,6 +7005,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7093684300674247594, guid: 9f9592c75549a2d4ea28093ec2abfbd3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7058,7 +7057,7 @@ PrefabInstance:
     - target: {fileID: 4515451851522425227, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
       propertyPath: mMixtureBowlPackagingPos
       value: 
-      objectReference: {fileID: 1669419516}
+      objectReference: {fileID: 0}
     - target: {fileID: 7134307763927755503, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
       propertyPath: m_Name
       value: P_WorkBench
