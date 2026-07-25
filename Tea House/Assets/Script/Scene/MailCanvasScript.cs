@@ -275,8 +275,7 @@ public class MailCanvasScript : MonoBehaviour
             return; // Not completed
         }
         package.MakeTotal();
-        
-        // TODO: Consequences of completion
+
         float result = package.mTargetMail.mOrder.EvaluateResult(package, out float maxObtainable); // Add Prestige
         float winnedMoney = 0;
         foreach(ItemData item in package.mIngredients)

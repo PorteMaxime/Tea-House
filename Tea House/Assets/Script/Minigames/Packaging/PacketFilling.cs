@@ -129,10 +129,12 @@ public class PacketFilling : IPackaging
         mFunnel.SetActive(true);
         mFunnel.transform.position = new Vector3(mMain.mOutputGO.transform.position.x, mMain.mOutputGO.transform.Find("LabelPlace").transform.position.y, mMain.mOutputGO.transform.position.z);
         
+        bowl.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         bowl.transform.position = new Vector3(
             bowl.transform.position.x,
             mMain.mOutputGO.transform.position.y + (mFunnel.GetComponent<MeshCollider>().bounds.extents.y + bowl.GetComponent<MeshCollider>().bounds.extents.y * 1.25f) * 2f,
-            bowl.transform.position.z);
+            mFunnel.GetComponent<MeshRenderer>().bounds.min.z);
+        bowl.transform.localPosition -= new Vector3(0, 0, 0.0003f);
         Tuple<BoxCollider, MeshCollider> packageColliders = new Tuple<BoxCollider, MeshCollider>(mMain.mOutputGO.transform.GetChild(0).GetComponent<BoxCollider>(), mMain.mOutputGO.transform.GetChild(0).GetComponent<MeshCollider>());
         packageColliders.Item1.enabled = false;
         packageColliders.Item2.enabled = true;

@@ -160,9 +160,14 @@ public class PacketCompleting : IPackaging
         }
     }
 
-    public void ThrowLabel()
+    public void ThrowLabel(bool toDo)
     {
         if(mIsLabelled == false && mLabelPrinted == false) return;
+        if(toDo == false)
+        {
+            mIsThrowing = false;
+            return;
+        }
 
         if(mIsThrowing == true)
         {
@@ -182,9 +187,14 @@ public class PacketCompleting : IPackaging
             mIsThrowing = true;
     }
 
-    public void ExportPackage()
+    public void ExportPackage(bool toDo)
     {
         if(mIsLabelled == false || mIsOpened == true || mIsChoosed == false || mIsFilled == false) return;
+        if(toDo == false)
+        {
+            mIsExporting = false;
+            return;
+        }
 
         if(mIsExporting == true)
         {

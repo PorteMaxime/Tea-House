@@ -170,7 +170,7 @@ public class PacketLabelPrinting : IPackaging
     
         RenderTexture labelTexture = PrintLabel();
         if(labelTexture == null) return;
-        
+
         GameObject label = GameObject.Instantiate(mLabelGoPrefab);
         label.transform.parent = mPrinterScript.gameObject.transform;
         label.transform.localRotation = Quaternion.identity;
