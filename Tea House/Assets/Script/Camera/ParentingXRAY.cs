@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ParentingXRAY : MonoBehaviour
 {
-    [SerializeField] private GameObject[] mChilds;
+    [SerializeField] private GameObject[] mChilds = { };
     private bool mIsShown = false;
 
     private GameObject mCamera = null;
@@ -29,8 +29,11 @@ public class ParentingXRAY : MonoBehaviour
 
     private void Show(bool toShow)
     {
-        foreach(GameObject child in mChilds)
-            Show(toShow, child);
+        foreach (GameObject child in mChilds)
+            if (child != null)
+                Show(toShow, child);
+            else
+                Debug.Log("La liste \"mChilds\" d'un script ParentingXRAY contient un element non défini");
         
         Show(toShow, transform.gameObject);
         
