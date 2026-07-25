@@ -4,7 +4,6 @@ using UnityEngine;
 public class Clock : MonoBehaviour
 {
     [SerializeField] private Daylight mDaylight;
-    [SerializeField] private Quaternion test = Quaternion.Euler(0, 0, 90);
 
     GameObject mHours;
     GameObject mMinutes;
