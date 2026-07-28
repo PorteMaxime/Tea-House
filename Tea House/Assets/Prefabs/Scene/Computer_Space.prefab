@@ -754,6 +754,7 @@ MonoBehaviour:
   canIntercat: 0
   isUsing: 0
   isSliding: 0
+  hideMainPanel: 1
   interactWithCamera: 1
 --- !u!1 &8677996225616948089
 GameObject:
@@ -918,6 +919,14 @@ PrefabInstance:
       propertyPath: interactionScript
       value: 
       objectReference: {fileID: 7492699539916286042}
+    - target: {fileID: 6250668055221369199, guid: ed483142892e71a4789fb3527ca1a10a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6250668055221369199, guid: ed483142892e71a4789fb3527ca1a10a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6313513779979370723, guid: ed483142892e71a4789fb3527ca1a10a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -925,6 +934,18 @@ PrefabInstance:
     - target: {fileID: 6754817440511792797, guid: ed483142892e71a4789fb3527ca1a10a, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MailCanvasScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861655069694664099, guid: ed483142892e71a4789fb3527ca1a10a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861655069694664099, guid: ed483142892e71a4789fb3527ca1a10a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861655069694664099, guid: ed483142892e71a4789fb3527ca1a10a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7289758237084379483, guid: ed483142892e71a4789fb3527ca1a10a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

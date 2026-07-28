@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class InteractiveAreaScript : MonoBehaviour
@@ -9,25 +8,38 @@ public class InteractiveAreaScript : MonoBehaviour
     [SerializeField] public bool canIntercat = false;
     [SerializeField] public bool isUsing = false;
     [SerializeField] public bool isSliding = false;
+    [SerializeField] public bool hideMainPanel = false;
 
     private CameraController mCameraController = null;
     private Camera_InteractionHighlight mCameraInteractionMod = null;
     private CameraDragAndDrop mDragAndDrop = null;
     private Camera_DepthView mCameraDepthMod = null;
     public bool interactWithCamera = true;
+
+    private Transform mCameraMovePoint = null;
+
+    private GameObject mMainPanel;
+
     private void Awake()
     {
         inputInteract = InputManager.Get().mPlayerInteract;
         mPlayer = GameObject.FindGameObjectWithTag("Player");
+
+        mCameraMovePoint = transform.Find("CameraMovePoint").transform;
+
+        mMainPanel = GameObject.FindGameObjectWithTag("MainPanel");
     }
+    
     private void OnEnable()
     {
         inputInteract.Player.Open.Enable();
     }
+
     private void OnDisable()
     {
         inputInteract.Player.Open.Disable();
     }
+
     void Start()
     {
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -36,6 +48,7 @@ public class InteractiveAreaScript : MonoBehaviour
         mCameraDepthMod = mCameraController.GetControllerMod<Camera_DepthView>();
         mDragAndDrop = mCameraController.GetControllerMod<CameraDragAndDrop>();
     }
+
     void Update()
     {
         if (canIntercat)
@@ -55,11 +68,13 @@ public class InteractiveAreaScript : MonoBehaviour
     {
         if(interactWithCamera)
         {
-            mCameraDepthMod.GoTo(transform.Find("CameraMovePoint").transform);
+            mCameraDepthMod.GoTo(mCameraMovePoint);
             mCameraController.SetState(CameraController.CameraStates.Zoom);
         }
 
         isUsing = true;
+        if (hideMainPanel == true)
+            mMainPanel.SetActive(false);
     }
 
     public void Quit()
@@ -73,6 +88,8 @@ public class InteractiveAreaScript : MonoBehaviour
         mDragAndDrop.StopDragging();
 
         isUsing = false;
+        if (hideMainPanel == true)
+            mMainPanel.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)

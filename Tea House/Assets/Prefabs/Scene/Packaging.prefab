@@ -2095,6 +2095,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.007949591
       objectReference: {fileID: 0}
+    - target: {fileID: 1198734934147458040, guid: 2219444268af1184b95f38eef75a1202, type: 3}
+      propertyPath: hideMainPanel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1740590134153999139, guid: 2219444268af1184b95f38eef75a1202, type: 3}
       propertyPath: m_Name
       value: InteractiveArea

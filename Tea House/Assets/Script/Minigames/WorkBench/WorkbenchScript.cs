@@ -44,7 +44,6 @@ public class WorkbenchScript : MonoBehaviour
     public GameObject mQteCursor;
 
     public GameObject mPanelSwap;
-    public GameObject mMainPanel;
     public GameObject mCuttingPanel;
 
     public GameObject mSpoon;
@@ -89,7 +88,6 @@ public class WorkbenchScript : MonoBehaviour
     {
         if (mInteractiveArea.isUsing)
         {
-            mMainPanel.SetActive(false);
             if (Mouse.current.position.ReadValue().y >= Screen.height - upPan && cameraLookUp == false)
             {
                 Quaternion targetRotation = mCameraController.transform.rotation * Quaternion.Euler(-5f, 0f, 0f);
@@ -108,11 +106,6 @@ public class WorkbenchScript : MonoBehaviour
 
             stateMachine.Update();
         }
-        else
-        {
-            mMainPanel.SetActive(true);
-        }
-
     }
 
     public void AddItemToMixture(IngredientItem item)

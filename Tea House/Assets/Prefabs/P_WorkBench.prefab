@@ -2606,7 +2606,6 @@ MonoBehaviour:
   mQteValideZone: {fileID: 0}
   mQteCursor: {fileID: 0}
   mPanelSwap: {fileID: 0}
-  mMainPanel: {fileID: 0}
   mCuttingPanel: {fileID: 0}
   mSpoon: {fileID: 4502457631132018972}
   MixtureBowlCollider: {fileID: 2204961395864239172}
@@ -3714,6 +3713,10 @@ PrefabInstance:
     - target: {fileID: 622494620589274323, guid: 2219444268af1184b95f38eef75a1202, type: 3}
       propertyPath: m_Center.z
       value: -7.02815e-16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198734934147458040, guid: 2219444268af1184b95f38eef75a1202, type: 3}
+      propertyPath: hideMainPanel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1740590134153999139, guid: 2219444268af1184b95f38eef75a1202, type: 3}
       propertyPath: m_Name
