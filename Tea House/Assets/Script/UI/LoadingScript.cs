@@ -64,6 +64,9 @@ public class LoadingScript : MonoBehaviour
     {
         mDaylight.mStopTime = true;
 
+        InputManager.Get().mPlayerInteract.Disable();
+        InputManager.Get().mPlayerMovement.Disable();
+
         mLoadingState = LoadingState.FadeInBackground;
         while (mCanvasGroupBackground.alpha < 1f)
         {
@@ -104,5 +107,8 @@ public class LoadingScript : MonoBehaviour
         mShowScores = false;
         mDaylight.mStopTime = false;
         gameObject.SetActive(false);
+
+        InputManager.Get().mPlayerInteract.Enable();
+        InputManager.Get().mPlayerMovement.Enable();
     }
 }
