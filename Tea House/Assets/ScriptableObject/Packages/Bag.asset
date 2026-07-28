@@ -16,6 +16,8 @@ MonoBehaviour:
   mPrefab: {fileID: 0}
   mIcon: {fileID: 21300000, guid: 5bf5fb509cc1df348a27f82727377a9a, type: 3}
   mIsUnlocked: 1
+  sprite: {fileID: 0}
+  infoPage: {fileID: 21300000, guid: c191ab8ba32a9084f88e75a8cee4ede4, type: 3}
   mStats:
   - mStatVar: 0
     mValueVar: 0
@@ -32,3 +34,4 @@ MonoBehaviour:
   - mStatVar: 6
     mValueVar: 0
   mPrice: 10
+  mInfosPage: {fileID: 0}
