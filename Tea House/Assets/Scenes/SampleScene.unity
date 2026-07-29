@@ -1641,6 +1641,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 30175070508809531, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 267416618023335430, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -1730,7 +1734,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3325640392052662699, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
+    - {fileID: 30175070508809531, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
