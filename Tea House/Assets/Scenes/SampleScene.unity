@@ -1649,6 +1649,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 649483187758095393, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
+      propertyPath: mDaylight
+      value: 
+      objectReference: {fileID: 1435202341}
     - target: {fileID: 3826198980629853728, guid: 572f6e46cda606c4cb5bcbab7388df46, type: 3}
       propertyPath: mDaylight
       value: 
@@ -2950,6 +2954,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6009134182090178327, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009134182090178327, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6283583072819492474, guid: 0a951a409213101409900dbdcc41c459, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2984,6 +2996,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6542273456299723649, guid: 0a951a409213101409900dbdcc41c459, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6580296148876958554, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6580296148876958554, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6580296148876958554, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7043320101743067941, guid: 0a951a409213101409900dbdcc41c459, type: 3}

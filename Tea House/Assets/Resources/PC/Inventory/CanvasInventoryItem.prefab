@@ -323,7 +323,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &5399887206223670084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,8 +409,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 94d730621e30ade42b430c3954584df3, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: ce2fa17a14a4d284a829a87008912c53, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: ce2fa17a14a4d284a829a87008912c53, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 94d730621e30ade42b430c3954584df3, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 94d730621e30ade42b430c3954584df3, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: ce2fa17a14a4d284a829a87008912c53, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b9d1e4646ee2d2e4aad3fc2c90176385, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

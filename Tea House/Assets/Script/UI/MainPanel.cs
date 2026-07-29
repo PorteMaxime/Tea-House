@@ -10,6 +10,8 @@ public class MainPanel : MonoBehaviour
     private int newMailsCount = 0;
     [SerializeField] private GameObject mImageNewMail;
 
+    [SerializeField] private GameObject mPauseMenu;
+
     private Daylight mDayLight;
     private void Start()
     {
@@ -38,5 +40,10 @@ public class MainPanel : MonoBehaviour
 
         if (newMailsCount <= 0)
             mImageNewMail.SetActive(false);
+    }
+
+    public void ShowPauseMenu()
+    {
+        mPauseMenu.SetActive(true);
     }
 }
