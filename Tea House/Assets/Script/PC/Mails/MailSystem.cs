@@ -11,6 +11,7 @@ public class MailSystem : MonoBehaviour
     private Order.State[] mExpiringMailsStates = { Order.State.InBox, Order.State.Accepted };
 
     [SerializeField] public Daylight mDaylight;
+    [SerializeField] public MainPanel mMainPanel;
 
     MailCreator mMailCreator;
     MailCanvasScript mMailCanvasScript;
@@ -116,6 +117,9 @@ public class MailSystem : MonoBehaviour
             return;
 
         mMails[newState].Add(mail);
+
+        if (mail.mOrder.mState == Order.State.InBox && mail.mIsRead == true)
+            mMainPanel.RemoveNewMail();
 
         if (mMails[mail.mOrder.mState].Contains(mail))
             mMails[mail.mOrder.mState].Remove(mail);

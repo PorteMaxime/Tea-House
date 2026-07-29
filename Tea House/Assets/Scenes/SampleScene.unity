@@ -1329,6 +1329,10 @@ PrefabInstance:
       propertyPath: mDaylight
       value: 
       objectReference: {fileID: 1435202341}
+    - target: {fileID: 7744142355494125791, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
+      propertyPath: mMainPanel
+      value: 
+      objectReference: {fileID: 8237692798764379880}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2922,7 +2926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5407814192574764945, guid: 0a951a409213101409900dbdcc41c459, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 10080.002
+      value: 0.0005365373
       objectReference: {fileID: 0}
     - target: {fileID: 5480889255643011875, guid: 0a951a409213101409900dbdcc41c459, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target

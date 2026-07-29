@@ -15,7 +15,7 @@ MonoBehaviour:
   mName: Dried Berries
   mPrefab: {fileID: 6493873279887380395, guid: 8310c6307127a7349b72cd8d15da42f8, type: 3}
   mIcon: {fileID: 21300000, guid: 3567a3dc21b0fd848acb7be3e6bf8265, type: 3}
-  mIsUnlocked: 1
+  mIsUnlocked: 0
   sprite: {fileID: 21300000, guid: 628a0c0fd84d268469f621435a262aa4, type: 3}
   infoPage: {fileID: 21300000, guid: 6b433b811390c1945bd90e7180fc0638, type: 3}
   mStats:

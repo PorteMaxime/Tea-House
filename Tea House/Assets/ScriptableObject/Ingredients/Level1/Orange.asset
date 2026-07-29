@@ -15,7 +15,7 @@ MonoBehaviour:
   mName: Dried Orange
   mPrefab: {fileID: 1169831623523084331, guid: e130eb29afc0a3d479330e798ad35ba1, type: 3}
   mIcon: {fileID: 21300000, guid: 9948b128c9758b34883aae4c795bf685, type: 3}
-  mIsUnlocked: 1
+  mIsUnlocked: 0
   sprite: {fileID: 21300000, guid: e93656b0a0220a24885a413379f2cb4e, type: 3}
   infoPage: {fileID: 21300000, guid: b551168e21d288144b042e2ea14fccb1, type: 3}
   mStats:

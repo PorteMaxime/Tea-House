@@ -832,12 +832,12 @@ GameObject:
   - component: {fileID: 7513538394573863200}
   - component: {fileID: 8238121349654578743}
   m_Layer: 5
-  m_Name: FeedBack
+  m_Name: ImageNewMail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6653229480133462444
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2157,6 +2157,7 @@ MonoBehaviour:
   mMoneyAmount: {fileID: 785856931840162935}
   mTimer: {fileID: 6799780412025495193}
   mNote: {fileID: 0}
+  mImageNewMail: {fileID: 2318957500171686157}
 --- !u!1 &7705267517121135365
 GameObject:
   m_ObjectHideFlags: 0

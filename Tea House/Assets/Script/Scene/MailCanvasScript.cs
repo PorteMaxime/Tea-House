@@ -100,6 +100,12 @@ public class MailCanvasScript : MonoBehaviour
         mTextMailContent.GetComponent<Text>().text = mail.mText;
 
         ToggleMailContent(true);
+
+        if (mail.mIsRead == false)
+        {
+            mail.mIsRead = true;
+            mMailSystem.mMainPanel.RemoveNewMail();
+        }
     }
 
     public void DeSelectMail()
@@ -135,8 +141,16 @@ public class MailCanvasScript : MonoBehaviour
                 prefabText.GetComponent<Text>().text = mail.mText;
 
             // image non lu
-
+            if (mail.mIsRead == true)
+            {
+                Transform prefabNotRead = prefabButton.transform.Find("ImageNotRead");
+                if (prefabNotRead != null)
+                    prefabNotRead.gameObject.SetActive(false);
+            }
         }
+
+        if (mail.mIsRead == false)
+            mMailSystem.mMainPanel.AddNewMail();
 
         mMailsDictionary.Add(mail, prefab);
     }

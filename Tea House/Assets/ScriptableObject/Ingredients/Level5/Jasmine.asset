@@ -15,7 +15,7 @@ MonoBehaviour:
   mName: Jasmine
   mPrefab: {fileID: 7587948154604308548, guid: f23ec614fcb6578459eb0f7cb3a1ff7f, type: 3}
   mIcon: {fileID: 21300000, guid: 9e8998f2d1454474fb931f5118f03d57, type: 3}
-  mIsUnlocked: 1
+  mIsUnlocked: 0
   sprite: {fileID: 21300000, guid: 35db5a89787c3dc4099c634f5d7e01dc, type: 3}
   infoPage: {fileID: 21300000, guid: bb43d67da69e12f42bb1b35c2b6708ed, type: 3}
   mStats:

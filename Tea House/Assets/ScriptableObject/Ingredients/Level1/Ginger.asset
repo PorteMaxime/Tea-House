@@ -15,7 +15,7 @@ MonoBehaviour:
   mName: Ginger
   mPrefab: {fileID: 1572811026207813877, guid: cccc2e77ac847e040a7490e3b1fa8085, type: 3}
   mIcon: {fileID: 21300000, guid: e911c888fdc5b4b4899e35829fbbbfba, type: 3}
-  mIsUnlocked: 1
+  mIsUnlocked: 0
   sprite: {fileID: 21300000, guid: 10964b91664908646a73f43e5780b258, type: 3}
   infoPage: {fileID: 21300000, guid: ff82251955fbb6148916005081b797df, type: 3}
   mStats:

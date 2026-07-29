@@ -31,6 +31,9 @@ public class Mail
     [Column("expiration")]
     public float mExpiration { get; set; }
 
+    [Column("isRead")]
+    public bool mIsRead { get; set; } = false;
+
     public Order mOrder;
 
     [HideInInspector] public bool mIsPrinted = false;
