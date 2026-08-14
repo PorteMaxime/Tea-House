@@ -327,6 +327,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1360379395090381376, guid: 0a951a409213101409900dbdcc41c459, type: 3}
   m_PrefabInstance: {fileID: 7778896174472154821}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &329816796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3099094707043028547, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+  m_PrefabInstance: {fileID: 7778896174472154821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &360885333 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5360738359446324481, guid: 670f3aa72ac771b4a9f5f673b187cb83, type: 3}
@@ -1204,7 +1209,7 @@ PrefabInstance:
     - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
       propertyPath: mMailTextSender
       value: 
-      objectReference: {fileID: 1413371010}
+      objectReference: {fileID: 329816796}
     - target: {fileID: 1524140342625153491, guid: 6aa8c05d0a191cf449e633f709af216c, type: 3}
       propertyPath: mMailTextSubject
       value: 
@@ -1398,11 +1403,6 @@ GameObject:
 --- !u!1 &1399115514 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1042645779079259055, guid: 0a951a409213101409900dbdcc41c459, type: 3}
-  m_PrefabInstance: {fileID: 7778896174472154821}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1413371010 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5967255269966231296, guid: 0a951a409213101409900dbdcc41c459, type: 3}
   m_PrefabInstance: {fileID: 7778896174472154821}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1435202341 stripped
@@ -3094,6 +3094,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButtonHome
       objectReference: {fileID: 0}
+    - target: {fileID: 7483064356113668128, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7492699539916286042, guid: 0a951a409213101409900dbdcc41c459, type: 3}
       propertyPath: hideMainPanel
       value: 1
@@ -3152,6 +3156,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8585657291801750481, guid: 0a951a409213101409900dbdcc41c459, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594477666775190487, guid: 0a951a409213101409900dbdcc41c459, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8895679032786708201, guid: 0a951a409213101409900dbdcc41c459, type: 3}
